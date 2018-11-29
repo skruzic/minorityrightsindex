@@ -1,12 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Http\Requests\CampaignRequest;
+use App\Http\Resources\CampaignResource;
 use Illuminate\Http\Request;
-use App\Models\Campaign, App\Models\Question;
+use App\Models\Campaign;
+use Auth;
+use App\Http\Controllers\Controller;
 
-class QuestionsController extends Controller
+class CampaignController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +18,7 @@ class QuestionsController extends Controller
      */
     public function index()
     {
-        $questions = Question::all();
-
-        return view('admin.questions.index')->with(['questions' => $questions]);
+        return CampaignResource::collection(Campaign::all());
     }
 
     /**
@@ -27,9 +28,7 @@ class QuestionsController extends Controller
      */
     public function create()
     {
-        $campaigns = Campaign::all();
-
-        return view('admin.questions.create', ['campaigns' => $campaigns]);
+        return view('admin.campaign.create');
     }
 
     /**
@@ -39,12 +38,12 @@ class QuestionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CampaignRequest $request)
     {
-        $input = $request->all();
-        //$input['questions'] = serialize($request->questions);
-        //$input['options'] = serialize($request->options);
-        Question::create($input);
+        $input            = $request->all();
+        $input['user_id'] = Auth::id();
+
+        Campaign::create($input);
 
         return redirect()->back();
     }
@@ -58,7 +57,9 @@ class QuestionsController extends Controller
      */
     public function show($id)
     {
-        //
+        $campaign = Campaign::find($id);
+
+        return view('admin.campaign.view')->with('campaign', $campaign);
     }
 
     /**

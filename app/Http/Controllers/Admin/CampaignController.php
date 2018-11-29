@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\CampaignRequest;
+use App\Http\Resources\CampaignResource;
 use Illuminate\Http\Request;
 use App\Models\Campaign;
 use Auth;
@@ -20,6 +21,8 @@ class CampaignController extends Controller
         $campaigns = Campaign::all();
 
         return view('admin.campaign.index')->with(['campaigns' => $campaigns]);
+
+        //return CampaignResource::collection(Campaign::all());
     }
 
     /**

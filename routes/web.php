@@ -12,12 +12,13 @@
 */
 
 Route::get('/', function () {
+    //return new \App\Http\Resources\CampaignResource::collection(App\Models\Campaign::all());
     return view('welcome');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/admin', 'HomeController@index')->name('home');
 
 Route::resources([
     'admin/campaign' => 'Admin\CampaignController',

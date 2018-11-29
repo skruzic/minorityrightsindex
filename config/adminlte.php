@@ -85,7 +85,7 @@ return [
     |
     */
 
-    'dashboard_url' => 'home',
+    'dashboard_url' => 'admin',
 
     'logout_url' => 'logout',
 
@@ -114,11 +114,11 @@ return [
             'url'  => 'admin/campaign',
         ],
         [
-            'text'        => 'Pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'file',
-            'label'       => 4,
-            'label_color' => 'success',
+            'text'        => 'Questions',
+            'url'         => 'admin/question',
+            'icon'        => 'question',
+            //'label'       => 4,
+            //'label_color' => 'success',
         ],
         'ACCOUNT SETTINGS',
         [

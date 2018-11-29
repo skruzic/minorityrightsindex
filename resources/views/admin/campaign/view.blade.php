@@ -35,7 +35,7 @@
                                         @endforeach
                                     </ul>
                                 </td>
-                                <td>{{ $question->order }}</td>
+                                <td>{{ $question->pivot->order }}</td>
                                 <td></td>
                             </tr>
                         @endforeach

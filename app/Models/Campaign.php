@@ -15,6 +15,6 @@ class Campaign extends Model
 
     public function questions()
     {
-        return $this->hasMany(Question::class)->orderBy('order');
+        return $this->belongsToMany(Question::class)->using(CampaignQuestion::class)->withPivot('order');
     }
 }
