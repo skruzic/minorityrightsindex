@@ -20,7 +20,7 @@
                             <td>{{ $question }}</td>
                             @foreach($q->options as $option)
                                 <!--<td><input type="{{ $q->type }}"></td>-->
-                                <td>{{ Form::{$q->type}('TEST', 'TEST') }}</td>
+                                <td>{{ Form::input($q->type, 'q'.$q->pivot->id) }}</td>
                             @endforeach
                         </tr>
                     @endforeach
