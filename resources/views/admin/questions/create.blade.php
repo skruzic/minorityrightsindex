@@ -13,14 +13,14 @@
         <div class="box-body">
             <form method="post" action="{{ route('question.store') }}">
                 {{ csrf_field() }}
-                <div class="form-group">
+                <!--<div class="form-group">
                     <label for="campaign_id">Campaign</label>
                     <select class="form-control">
                         @foreach ($campaigns as $campaign)
                             <option value="{{ $campaign->id }}">{{ $campaign->title }}</option>
                         @endforeach
                     </select>
-                </div>
+                </div>-->
                 <div class="form-group">
                     <label for="type">Type</label>
                     <select class="form-control" name="type">

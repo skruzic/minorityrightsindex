@@ -20,7 +20,16 @@ Auth::routes();
 
 Route::get('/admin', 'HomeController@index')->name('home');
 
-Route::resources([
+/*Route::resources([
     'admin/campaign' => 'Admin\CampaignController',
     'admin/question' => 'Admin\QuestionsController',
-]);
+]);*/
+
+Route::prefix('admin')->group(function () {
+    Route::resources([
+        'campaign' => 'Admin\CampaignController',
+        'question' => 'Admin\QuestionsController',
+    ]);
+});
+
+Route::get('campaign/{id}', 'CampaignController@show');

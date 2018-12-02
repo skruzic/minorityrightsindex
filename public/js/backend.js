@@ -1,13 +1,13 @@
 $(document).ready(function () {
     $('#addQuestionField').click(function () {
-        var lastField = $('#questions div:last');
-        var intId = (lastField && lastField.length && lastField.data('idx') + 1) || 1;
+        let lastField = $('#questions div:last');
+        let intId = (lastField && lastField.length && lastField.data('idx') + 1) || 1;
 
-        var fieldWrapper = $('<div class="form-group" id="questionField" + intId + "/>"');
+        let fieldWrapper = $('<div class="form-group" id="questionField" />');
         fieldWrapper.data('idx', intId);
 
-        var fName = $("<input type=\"text\" class=\"form-control\" name=\"questions[]\" />");
-        var removeButton = $("<input type=\"button\" class=\"remove\" value=\"-\" />");
+        let fName = $("<input type=\"text\" class=\"form-control\" name=\"questions[]\" />");
+        let removeButton = $("<input type=\"button\" class=\"remove\" value=\"-\" />");
         removeButton.click(function () {
             $(this).parent().remove();
         });
@@ -17,14 +17,14 @@ $(document).ready(function () {
     });
 
     $('#addOptionField').click(function () {
-        var lastField = $('#options div:last');
-        var intId = (lastField && lastField.length && lastField.data('idx') + 1) || 1;
+        let lastField = $('#options div:last');
+        let intId = (lastField && lastField.length && lastField.data('idx') + 1) || 1;
 
-        var fieldWrapper = $('<div class="form-group" id="optionField" + intId + "/>"');
+        let fieldWrapper = $('<div class="form-group" id="optionField" />');
         fieldWrapper.data('idx', intId);
 
-        var fName = $("<input type=\"text\" class=\"form-control\" name=\"options[]\" />");
-        var removeButton = $("<input type=\"button\" class=\"remove\" value=\"-\" />");
+        let fName = $("<input type=\"text\" class=\"form-control\" name=\"options[]\" />");
+        let removeButton = $("<input type=\"button\" class=\"remove\" value=\"-\" />");
         removeButton.click(function () {
             $(this).parent().remove();
         });
@@ -32,4 +32,9 @@ $(document).ready(function () {
         fieldWrapper.append(removeButton);
         $("#options").append(fieldWrapper);
     });
+
+    /**
+     * Prikazuje select elemente kao select2
+     */
+    $('select').select2();
 });

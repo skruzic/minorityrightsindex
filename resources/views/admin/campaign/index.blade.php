@@ -24,6 +24,7 @@
                             <td>{{ $campaign->updated_at }}</td>
                             <td>
                                 <a href="{{ route('campaign.show', $campaign->id) }}" class="btn btn-default btn-xs"><i class="fa fa-search"></i> View</a>
+                                <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trashphp"></i> Delete</a>
                             </td>
                         </tr>
                     @endforeach

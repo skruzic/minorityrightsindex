@@ -23,14 +23,14 @@
                                 <td>{{ $question->type }}</td>
                                 <td>
                                     <ul>
-                                    @foreach (unserialize($question->questions) as $q)
+                                    @foreach ($question->questions as $q)
                                         <li>{{ $q }}</li>
                                     @endforeach
                                     </ul>
                                 </td>
                                 <td>
                                     <ul>
-                                        @foreach (unserialize($question->options) as $opt)
+                                        @foreach ($question->options as $opt)
                                             <li>{{ $opt }}</li>
                                         @endforeach
                                     </ul>
