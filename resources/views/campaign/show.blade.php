@@ -7,7 +7,25 @@
         @if (count($q->questions)==1)
 
         @else
-
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <th>&nbsp;</th>
+                    @foreach($q->options as $option)
+                        <th>{{ $option }}</th>
+                    @endforeach
+                </thead>
+                <tbody>
+                    @foreach($q->questions as $question)
+                        <tr>
+                            <td>{{ $question }}</td>
+                            @foreach($q->options as $option)
+                                <!--<td><input type="{{ $q->type }}"></td>-->
+                                <td>{{ Form::{$q->type}('TEST', 'TEST') }}</td>
+                            @endforeach
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         @endif
     @endforeach
 

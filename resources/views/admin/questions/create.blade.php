@@ -24,8 +24,8 @@
                 <div class="form-group">
                     <label for="type">Type</label>
                     <select class="form-control" name="type">
-                        <option value="choice">Choice</option>
-                        <option value="multiple_choice">Multiple choice</option>
+                        <option value="radio">Choice</option>
+                        <option value="checkbox">Multiple choice</option>
                         <option value="text">Text</option>
                     </select>
                 </div>
