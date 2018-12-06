@@ -13,8 +13,13 @@ class Campaign extends Model
         return $this->belongsTo(\App\User::class);
     }
 
-    public function questions()
+    /*public function questions()
     {
         return $this->belongsToMany(Question::class)->using(CampaignQuestion::class)->withPivot(['id', 'order']);
+    }*/
+
+    public function sections()
+    {
+        return $this->hasMany(Section::class);
     }
 }
