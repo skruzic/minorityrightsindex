@@ -15,6 +15,8 @@ class CreateSectionsTable extends Migration
     {
         Schema::create('sections', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('title');
+            $table->text('description')->nullable();
             $table->integer('campaign_id')->unsigned()->index();
             $table->integer('order')->default('1');
             $table->timestamps();

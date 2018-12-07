@@ -27,8 +27,9 @@ Route::get('/admin', 'HomeController@index')->name('home');
 
 Route::prefix('admin')->group(function () {
     Route::resources([
-        'campaign' => 'Admin\CampaignController',
-        'question' => 'Admin\QuestionsController',
+        'campaign'    => 'Admin\CampaignController',
+        'question'    => 'Admin\QuestionsController',
+        'optiongroup' => 'Admin\OptionGroupsController',
     ]);
 });
 

@@ -20,6 +20,6 @@ class Campaign extends Model
 
     public function sections()
     {
-        return $this->hasMany(Section::class);
+        return $this->hasMany(Section::class)->orderBy('sections.order');
     }
 }

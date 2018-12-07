@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\CampaignRequest;
-use App\Http\Resources\CampaignResource;
+use App\Models\OptionGroup;
 use Illuminate\Http\Request;
-use App\Models\Campaign;
-use Auth;
 use App\Http\Controllers\Controller;
 
-class CampaignController extends Controller
+class OptionGroupsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,11 +15,9 @@ class CampaignController extends Controller
      */
     public function index()
     {
-        $campaigns = Campaign::all();
+        $ogs = OptionGroup::all();
 
-        return view('admin.campaign.index')->with(['campaigns' => $campaigns]);
-
-        //return CampaignResource::collection(Campaign::all());
+        return view('admin.option_groups.index')->with('ogs', $ogs);
     }
 
     /**
@@ -32,7 +27,7 @@ class CampaignController extends Controller
      */
     public function create()
     {
-        return view('admin.campaign.create');
+        return view('admin.option_groups.create');
     }
 
     /**
@@ -42,12 +37,11 @@ class CampaignController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(CampaignRequest $request)
+    public function store(Request $request)
     {
-        $input            = $request->all();
-        $input['user_id'] = Auth::id();
+        $input = $request->all();
 
-        Campaign::create($input);
+        OptionGroup::create($input);
 
         return redirect()->back();
     }
@@ -61,9 +55,9 @@ class CampaignController extends Controller
      */
     public function show($id)
     {
-        $campaign = Campaign::find($id);
+        $og = OptionGroup::find($id);
 
-        return view('admin.campaign.show')->with('campaign', $campaign);
+        return view('admin.option_groups.show')->with('og', $og);
     }
 
     /**

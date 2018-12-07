@@ -120,6 +120,10 @@ return [
             //'label'       => 4,
             //'label_color' => 'success',
         ],
+        [
+            'text' => 'Options',
+            'url' => 'admin/optiongroup'
+        ],
         'ACCOUNT SETTINGS',
         [
             'text' => 'Profile',

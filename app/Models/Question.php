@@ -14,13 +14,19 @@ class Question extends Model
         'options'   => 'array',
     ];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function campaigns()
+    /*public function campaigns()
     {
         return $this->belongsToMany(Campaign::class)->using(CampaignQuestion::class);
+    }*/
+
+    public function type()
+    {
+        return $this->belongsTo(QuestionType::class, 'question_type_id');
     }
+
+    public function options()
+    {
+        return $this->belongsTo(OptionGroup::class, 'option_group_id');
+    }
+
 }

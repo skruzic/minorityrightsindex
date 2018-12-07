@@ -19,7 +19,7 @@
                 <tbody>
                     @foreach ($questions as $question)
                         <tr>
-                            <td>{{ $question->type }}</td>
+                            <td>{{ $question->type->display }}</td>
                             <td>
                                 <ul>
                                     @foreach ($question->questions as $q)
@@ -27,11 +27,7 @@
                                     @endforeach
                                 </ul>
                             </td>
-                            <td>
-                                @foreach ($question->options as $opt)
-                                    <li>{{ $opt }}</li>
-                                @endforeach
-                            </td>
+                            <td>{{ $question->options->name }}</td>
                             <td>
                                 <a href="#" class="btn btn-default btn-xs"><i class="fa fa-search"></i> View</a>
                             </td>
