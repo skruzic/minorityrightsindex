@@ -13,35 +13,27 @@
         <div class="box-body">
             <form method="post" action="{{ route('question.store') }}">
                 {{ csrf_field() }}
-                <!--<div class="form-group">
-                    <label for="campaign_id">Campaign</label>
-                    <select class="form-control">
-                        @foreach ($campaigns as $campaign)
-                            <option value="{{ $campaign->id }}">{{ $campaign->title }}</option>
-                        @endforeach
-                    </select>
-                </div>-->
                 <div class="form-group">
                     <label for="type">Type</label>
-                    <select class="form-control" name="type">
-                        <option value="radio">Choice</option>
-                        <option value="checkbox">Multiple choice</option>
-                        <option value="text">Text</option>
+                    <select class="form-control" name="question_type_id">
+                        <option></option>
+                        @foreach ($types as $type)
+                            <option value="{{ $type->id }}">{{ $type->display }}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div>
-                    <input type="button" id="addQuestionField" value="Create field">
-                    <label for="">Questions</label>
-                    <fieldset id="questions">
-
-                    </fieldset>
+                    <label for="question">Question</label>
+                    <input type="text" name="question" class="form-control">
                 </div>
                 <div class="form-group">
-                    <input type="button" id="addOptionField" value="Create field">
-                    <label for="options">Options</label>
-                    <fieldset id="options">
-
-                    </fieldset>
+                    <label for="option_group">Options</label>
+                    <select name="option_group_id" class="form-control">
+                        <option></option>
+                        @foreach ($ogs as $og)
+                            <option value="{{ $og->id }}">{{ $og->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <input type="submit" class="btn btn-success" value="Save">
             </form>

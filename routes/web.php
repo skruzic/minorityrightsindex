@@ -30,7 +30,12 @@ Route::prefix('admin')->group(function () {
         'campaign'    => 'Admin\CampaignController',
         'question'    => 'Admin\QuestionsController',
         'optiongroup' => 'Admin\OptionGroupsController',
+        //'section'     => 'Admin\SectionsController',
     ]);
+
+    Route::resource('campaign.section', 'Admin\SectionsController', ['except' => 'index']);
+    //Route::get('section/{campaign_id}', 'Admin\SectionsController@show')->name('section.show');
 });
 
-Route::get('campaign/{id}', 'CampaignController@show');
+//Route::get('admin/section/{campaign_id}', 'Admin\SectionsController@index')->name('admin.section.index');
+Route::get('campaign/{slug}', 'CampaignController@show');

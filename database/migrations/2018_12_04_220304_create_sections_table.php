@@ -18,7 +18,7 @@ class CreateSectionsTable extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->integer('campaign_id')->unsigned()->index();
-            $table->integer('order')->default('1');
+            $table->integer('order')->unsigned()->default('1');
             $table->timestamps();
         });
     }

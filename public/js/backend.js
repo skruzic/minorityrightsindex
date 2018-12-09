@@ -36,5 +36,13 @@ $(document).ready(function () {
     /**
      * Prikazuje select elemente kao select2
      */
-    $('select').select2();
+    $('select').select2({
+        placeholder: 'Select an option',
+        allowClear: true
+    });
+
+    $('#sectionQuestions').select2({
+        placeholder: 'Select one or more questions',
+
+    })
 });

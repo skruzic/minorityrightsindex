@@ -17,7 +17,7 @@ class CreateSectionQuestionsTable extends Migration
             $table->increments('id');
             $table->integer('section_id')->unsigned()->index();
             $table->integer('question_id')->unsigned()->index();
-            $table->integer('order')->nullable();
+            $table->integer('order')->unsigned()->default('1');
             $table->timestamps();
         });
     }

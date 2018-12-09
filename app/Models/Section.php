@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Section extends Model
 {
-    protected $fillable = ['campaign_id', 'order'];
+    protected $fillable = ['title', 'description', 'campaign_id', 'order'];
 
     public function questions()
     {
         return $this->belongsToMany(Question::class,
-            'section_questions')->using(SectionQuestion::class)->withPivot(['id', 'order']);
+            'section_questions')->using(SectionQuestion::class)->withPivot(['id', 'order'])->withTimestamps();
     }
 }

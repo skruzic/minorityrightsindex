@@ -13,13 +13,23 @@ class QuestionTypesTableSeeder extends Seeder
     public function run()
     {
         QuestionType::create([
-            'name' => 'choice',
+            'name'    => 'radio',
             'display' => 'Choice',
         ]);
 
         QuestionType::create([
-            'name' => 'multiple_choice',
-            'display' => 'Multiple choice'
+            'name'    => 'checkbox',
+            'display' => 'Multiple choice',
+        ]);
+
+        QuestionType::create([
+            'name'    => 'text',
+            'display' => 'Text',
+        ]);
+
+        QuestionType::create([
+            'name'    => 'textarea',
+            'display' => 'Text area',
         ]);
     }
 }

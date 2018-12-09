@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\QuestionType;
+use App\Models\Campaign;
+use App\Models\Section;
+use App\Models\Question;
 use Illuminate\Http\Request;
-use App\Models\Campaign, App\Models\Question, App\Models\OptionGroup;
+use App\Http\Controllers\Controller;
 
-class QuestionsController extends Controller
+class SectionsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +17,8 @@ class QuestionsController extends Controller
      */
     public function index()
     {
-        $questions = Question::all();
-
-        return view('admin.questions.index', ['questions' => $questions]);
+        //dump($campaign_id);
+        dump('TEST');
     }
 
     /**
@@ -26,12 +26,11 @@ class QuestionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($campaign_id)
     {
-        $types = QuestionType::all();
-        $ogs   = OptionGroup::all();
+        $questions = Question::all();
 
-        return view('admin.questions.create', ['types' => $types, 'ogs' => $ogs]);
+        return view('admin.sections.create', ['campaign_id' => $campaign_id, 'questions' => $questions]);
     }
 
     /**
@@ -41,12 +40,21 @@ class QuestionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($campaign_id, Request $request)
     {
-        $input = $request->all();
-        Question::create($input);
+        //dump($request->all());
 
-        return redirect()->back();
+        $input = $request->all();
+        $input['campaign_id'] = $campaign_id;
+
+        $s = Section::create($input);
+
+        foreach ($input['questions'] as $qid) {
+            $question = Question::find($qid);
+            $s->questions()->attach($question);
+        }
+
+        return redirect()->route('campaign.show', $campaign_id);
     }
 
     /**
@@ -56,9 +64,12 @@ class QuestionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($campaign_id, $id)
     {
-        //
+        $campaign = Campaign::findOrFail($campaign_id);
+        $section  = Section::findOrFail($id);
+
+        return view('admin.sections.show', ['campaign' => $campaign, 'section' => $section]);
     }
 
     /**

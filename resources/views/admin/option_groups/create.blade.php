@@ -15,7 +15,7 @@
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" class="form-control">
+                    <input type="text" name="name" class="form-control">
                 </div>
                 <div class="form-group">
                     <input type="button" id="addOptionField" value="Create option">

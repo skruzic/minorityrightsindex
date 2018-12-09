@@ -4,7 +4,7 @@
     <div class="box box-solid box-default">
         <div class="box-header with-border">
             <h1 class="box-title">Questions</h1>
-            <a href="{{ route('campaign.create') }}" class="btn btn-success"><i class="fa fa-plus"></i> Add new question</a>
+            <a href="{{ route('question.create') }}" class="btn btn-success"><i class="fa fa-plus"></i> Add new question</a>
         </div>
 
         <div class="box-body">
@@ -20,14 +20,14 @@
                     @foreach ($questions as $question)
                         <tr>
                             <td>{{ $question->type->display }}</td>
+                            <td>{{ $question->question }}</td>
                             <td>
-                                <ul>
-                                    @foreach ($question->questions as $q)
-                                        <li>{{ $q }}</li>
-                                    @endforeach
-                                </ul>
+                                @if (!is_null($question->options))
+                                    {{ $question->options->name }}
+                                @else
+
+                                @endif
                             </td>
-                            <td>{{ $question->options->name }}</td>
                             <td>
                                 <a href="#" class="btn btn-default btn-xs"><i class="fa fa-search"></i> View</a>
                             </td>

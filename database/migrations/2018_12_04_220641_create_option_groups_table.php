@@ -17,7 +17,6 @@ class CreateOptionGroupsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->text('description')->nullable();
-            //$table->text('options');
             $table->text('options');
             $table->timestamps();
         });
