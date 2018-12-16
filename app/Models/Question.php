@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
-    protected $fillable = ['question_type_id', 'question', 'option_group_id'];
+
+    protected $fillable = ['type', 'question', 'option_group_id'];
 
     protected $casts = [
         'questions' => 'array',
@@ -19,10 +19,10 @@ class Question extends Model
         return $this->belongsToMany(Campaign::class)->using(CampaignQuestion::class);
     }*/
 
-    public function type()
+    /*public function type()
     {
         return $this->belongsTo(QuestionType::class, 'question_type_id');
-    }
+    }*/
 
     public function options()
     {

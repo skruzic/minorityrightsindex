@@ -15,10 +15,10 @@
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="type">Type</label>
-                    <select class="form-control" name="question_type_id">
+                    <select class="form-control" name="type">
                         <option></option>
-                        @foreach ($types as $type)
-                            <option value="{{ $type->id }}">{{ $type->display }}</option>
+                        @foreach ($types as $key=>$value)
+                            <option value="{{ $key }}">{{ $value }}</option>
                         @endforeach
                     </select>
                 </div>

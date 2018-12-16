@@ -28,7 +28,8 @@ class QuestionsController extends Controller
      */
     public function create()
     {
-        $types = QuestionType::all();
+        //$types = QuestionType::all();
+        $types = Question::getEnum('type');
         $ogs   = OptionGroup::all();
 
         return view('admin.questions.create', ['types' => $types, 'ogs' => $ogs]);
@@ -44,6 +45,7 @@ class QuestionsController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
+        //dump($input);
         Question::create($input);
 
         return redirect()->back();

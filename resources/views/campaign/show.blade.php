@@ -3,30 +3,29 @@
 @section('content')
     <h1>{{ $campaign->title }}</h1>
 
-    @foreach ($campaign->questions as $q)
-        @if (count($q->questions)==1)
+    @foreach ($campaign->sections as $section)
+        <h3>Sekcija: {{ $section->title }}</h3>
+        <p>{{ $section->description }}</p>
+        <h4>Pitanja:</h4>
 
-        @else
-            <table class="table table-striped table-bordered">
-                <thead>
-                    <th>&nbsp;</th>
-                    @foreach($q->options as $option)
-                        <th>{{ $option }}</th>
-                    @endforeach
-                </thead>
-                <tbody>
-                    @foreach($q->questions as $question)
-                        <tr>
-                            <td>{{ $question }}</td>
-                            @foreach($q->options as $option)
-                                <!--<td><input type="{{ $q->type }}"></td>-->
-                                <td>{{ Form::input($q->type, 'q'.$q->pivot->id) }}</td>
-                            @endforeach
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        @endif
+        @foreach($section->questions as $q)
+            @switch($q->type)
+                @case(0)
+                    @include('campaign.text', ['q'=>$q])
+                    @break
+                @case(1)
+                    @include('campaign.textarea',['q'=>$q])
+                    @break
+                @case(2)
+                    @include('campaign.radio', ['q'=>$q])
+                    @break
+                @case(3)
+                    @include('campaign.checkbox', ['q'=>$q])
+                    @break
+                @case(4)
+                Za napraviti
+            @endswitch
+        @endforeach
     @endforeach
 
 @endsection

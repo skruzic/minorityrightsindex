@@ -19,7 +19,7 @@
                 <tbody>
                     @foreach ($questions as $question)
                         <tr>
-                            <td>{{ $question->type->display }}</td>
+                            <td>{{ \App\Enums\QuestionType::getDescription($question->type) }}</td>
                             <td>{{ $question->question }}</td>
                             <td>
                                 @if (!is_null($question->options))

@@ -11,8 +11,6 @@ class CampaignController extends Controller
     {
         $campaign  = Campaign::find($id);
 
-        //dump($campaign->questions);
-
         return view('campaign.show')->with(['campaign' => $campaign]);
     }
 }

@@ -18,7 +18,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/admin', 'HomeController@index')->name('home');
+//Route::get('/admin', 'HomeController@index')->name('home');
 
 /*Route::resources([
     'admin/campaign' => 'Admin\CampaignController',
@@ -26,6 +26,8 @@ Route::get('/admin', 'HomeController@index')->name('home');
 ]);*/
 
 Route::prefix('admin')->group(function () {
+    Route::get('/', 'HomeController@index')->name('home');
+
     Route::resources([
         'campaign'    => 'Admin\CampaignController',
         'question'    => 'Admin\QuestionsController',
@@ -37,5 +39,4 @@ Route::prefix('admin')->group(function () {
     //Route::get('section/{campaign_id}', 'Admin\SectionsController@show')->name('section.show');
 });
 
-//Route::get('admin/section/{campaign_id}', 'Admin\SectionsController@index')->name('admin.section.index');
-Route::get('campaign/{slug}', 'CampaignController@show');
+Route::get('campaign/{id}', 'CampaignController@show');

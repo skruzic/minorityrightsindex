@@ -38,27 +38,6 @@ namespace App{
 
 namespace App\Models{
 /**
- * App\Models\QuestionType
- *
- * @property int $id
- * @property string $name
- * @property string $display
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\QuestionType newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\QuestionType newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\QuestionType query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\QuestionType whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\QuestionType whereDisplay($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\QuestionType whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\QuestionType whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\QuestionType whereUpdatedAt($value)
- */
-	class QuestionType extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
  * App\Models\Campaign
  *
  * @property int $id
@@ -87,13 +66,12 @@ namespace App\Models{
  * App\Models\Question
  *
  * @property int $id
- * @property int $question_type_id
+ * @property string $type
  * @property string $question
  * @property int|null $option_group_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\OptionGroup|null $options
- * @property-read \App\Models\QuestionType $type
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question query()
@@ -101,7 +79,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereOptionGroupId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereQuestion($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereQuestionTypeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereUpdatedAt($value)
  */
 	class Question extends \Eloquent {}
@@ -114,7 +92,7 @@ namespace App\Models{
  * @property int $id
  * @property int $section_id
  * @property int $question_id
- * @property int|null $order
+ * @property int $order
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\SectionQuestion newModelQuery()
@@ -141,6 +119,7 @@ namespace App\Models{
  * @property int $order
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Campaign $campaign
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Question[] $questions
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Section newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Section newQuery()

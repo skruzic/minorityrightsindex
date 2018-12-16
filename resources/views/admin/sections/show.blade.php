@@ -21,7 +21,7 @@
                         @foreach ($section->questions as $question)
                             <tr>
                                 <td>{{ $question->question }}</td>
-                                <td>{{ $question->type->display }}</td>
+                                <td>{{ $question->type }}</td>
                                 <td><input type="text" value="{{ $question->pivot->order }}"></td>
                             </tr>
                         @endforeach
