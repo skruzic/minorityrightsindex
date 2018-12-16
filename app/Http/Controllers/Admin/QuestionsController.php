@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\QuestionType;
+use App\Enums\QuestionType;
 use Illuminate\Http\Request;
 use App\Models\Campaign, App\Models\Question, App\Models\OptionGroup;
 
@@ -29,7 +29,7 @@ class QuestionsController extends Controller
     public function create()
     {
         //$types = QuestionType::all();
-        $types = Question::getEnum('type');
+        $types = QuestionType::toArray();
         $ogs   = OptionGroup::all();
 
         return view('admin.questions.create', ['types' => $types, 'ogs' => $ogs]);

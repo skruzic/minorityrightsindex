@@ -16,4 +16,15 @@ final class QuestionType extends Enum
     {
         return str_replace('_', ' ', title_case(self::getKey($value)));
     }
+
+    public static function toArray(): array
+    {
+        $arr =  array_flip(parent::toArray());
+
+        foreach ($arr as $key=>$value) {
+            $arr[$key] = self::getDescription($key);
+        }
+
+        return $arr;
+    }
 }

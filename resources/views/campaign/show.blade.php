@@ -7,7 +7,7 @@
         <h3>Sekcija: {{ $section->title }}</h3>
         <p>{{ $section->description }}</p>
         <h4>Pitanja:</h4>
-
+        {{ dump($section->questions) }}
         @foreach($section->questions as $q)
             @switch($q->type)
                 @case(0)
