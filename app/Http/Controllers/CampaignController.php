@@ -7,10 +7,14 @@ use App\Models\Campaign;
 
 class CampaignController extends Controller
 {
-    public function show($id)
+    public function fill($id)
     {
         $campaign  = Campaign::find($id);
 
-        return view('campaign.show')->with(['campaign' => $campaign]);
+        return view('campaign.fill')->with(['campaign' => $campaign]);
+    }
+
+    public function save(Request $request) {
+        dump($request->all());
     }
 }

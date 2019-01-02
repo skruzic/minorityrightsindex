@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\API;
 
-use App\Models\OptionGroup;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Campaign, App\Models\Section;
 
-class OptionGroupsController extends Controller
+class CampaignsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,19 +15,7 @@ class OptionGroupsController extends Controller
      */
     public function index()
     {
-        $ogs = OptionGroup::all();
-
-        return view('admin.option_groups.index')->with('ogs', $ogs);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('admin.option_groups.create');
+        return response()->json(Campaign::all());
     }
 
     /**
@@ -39,39 +27,25 @@ class OptionGroupsController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->all();
-
-        $input['options'] = array_combine($input['numvals'], $input['options']);
-
-        OptionGroup::create($input);
-
-        return redirect()->back();
+        dump($request->all());
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param  Campaign $campaign
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Campaign $campaign)
     {
-        $og = OptionGroup::find($id);
-
-        return view('admin.option_groups.show')->with('og', $og);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return response()->json($campaign->with(['sections' => function($query) {
+            $query->with(['questions' => function($query) {
+                $query->with('children');
+                $query->with('options');
+                $query->where('parent_id', null);
+            }]);
+        }])->where('id', $campaign->id)->first());
     }
 
     /**

@@ -15,7 +15,6 @@ class Section extends Model
 
     public function questions()
     {
-        return $this->belongsToMany(Question::class,
-            'section_questions')->using(SectionQuestion::class)->withPivot(['id', 'order'])->withTimestamps();
+        return $this->hasMany(Question::class)->orderBy('order');
     }
 }

@@ -10,5 +10,6 @@ $factory->define(Question::class, function (Faker $faker) {
         'type'            => $faker->numberBetween(0, 3),
         'question'        => $faker->sentence,
         'option_group_id' => 1,
+        'section_id'      => $faker->numberBetween(1, 5),
     ];
 });

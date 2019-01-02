@@ -17,7 +17,6 @@ class SectionsController extends Controller
      */
     public function index()
     {
-        //dump($campaign_id);
         dump('TEST');
     }
 
@@ -28,9 +27,7 @@ class SectionsController extends Controller
      */
     public function create($campaign_id)
     {
-        $questions = Question::all();
-
-        return view('admin.sections.create', ['campaign_id' => $campaign_id, 'questions' => $questions]);
+        return view('admin.sections.create', ['campaign_id' => $campaign_id]);
     }
 
     /**
@@ -44,15 +41,15 @@ class SectionsController extends Controller
     {
         //dump($request->all());
 
-        $input = $request->all();
+        $input                = $request->all();
         $input['campaign_id'] = $campaign_id;
 
         $s = Section::create($input);
 
-        foreach ($input['questions'] as $qid) {
+        /*foreach ($input['questions'] as $qid) {
             $question = Question::find($qid);
             $s->questions()->attach($question);
-        }
+        }*/
 
         return redirect()->route('campaign.show', $campaign_id);
     }
@@ -66,8 +63,8 @@ class SectionsController extends Controller
      */
     public function show($campaign_id, $id)
     {
-        $campaign = Campaign::findOrFail($campaign_id);
         $section  = Section::findOrFail($id);
+        $campaign = $section->campaign;
 
         return view('admin.sections.show', ['campaign' => $campaign, 'section' => $section]);
     }

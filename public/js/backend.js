@@ -23,11 +23,13 @@ $(document).ready(function () {
         let fieldWrapper = $('<div class="form-group" id="optionField" />');
         fieldWrapper.data('idx', intId);
 
-        let fName = $("<input type=\"text\" class=\"form-control\" name=\"options[]\" />");
+        let numVal = $("<input type=\"number\" class=\"form-control\" name=\"numvals[]\" placeholder=\"Numeric value\">");
+        let fName = $("<input type=\"text\" class=\"form-control\" name=\"options[]\" placeholder=\"Textual value\" />");
         let removeButton = $("<input type=\"button\" class=\"remove\" value=\"-\" />");
         removeButton.click(function () {
             $(this).parent().remove();
         });
+        fieldWrapper.append(numVal);
         fieldWrapper.append(fName);
         fieldWrapper.append(removeButton);
         $("#options").append(fieldWrapper);
@@ -43,6 +45,5 @@ $(document).ready(function () {
 
     $('#sectionQuestions').select2({
         placeholder: 'Select one or more questions',
-
     })
 });

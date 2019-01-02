@@ -66,46 +66,32 @@ namespace App\Models{
  * App\Models\Question
  *
  * @property int $id
- * @property string $type
+ * @property int $section_id
+ * @property int|null $parent_id
+ * @property int $type
  * @property string $question
  * @property int|null $option_group_id
+ * @property int $order
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Question[] $children
  * @property-read \App\Models\OptionGroup|null $options
+ * @property-read \App\Models\Question|null $parent
+ * @property-read \App\Models\Section $section
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question query()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereOptionGroupId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereOrder($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereParentId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereQuestion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereSectionId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereUpdatedAt($value)
  */
 	class Question extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
- * App\Models\SectionQuestion
- *
- * @property int $id
- * @property int $section_id
- * @property int $question_id
- * @property int $order
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\SectionQuestion newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\SectionQuestion newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\SectionQuestion query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\SectionQuestion whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\SectionQuestion whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\SectionQuestion whereOrder($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\SectionQuestion whereQuestionId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\SectionQuestion whereSectionId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\SectionQuestion whereUpdatedAt($value)
- */
-	class SectionQuestion extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -121,6 +107,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Campaign $campaign
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Question[] $questions
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Section hasChildren()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Section newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Section newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Section query()

@@ -16,3 +16,15 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+/*Route::group(['middleware' => 'auth:api'], function() {
+    Route::resource('campaign', '')
+});*/
+
+Route::middleware('auth:api')->prefix('admin')->group(function() {
+    Route::resource('campaign', 'API\CampaignsController');
+
+});
+
+// Kampanje
+Route::apiResource('campaign', 'API\CampaignsController');

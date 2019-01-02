@@ -11,10 +11,10 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     //return new \App\Http\Resources\CampaignResource::collection(App\Models\Campaign::all());
     return view('welcome');
-});
+});*/
 
 Auth::routes();
 
@@ -30,13 +30,17 @@ Route::prefix('admin')->group(function () {
 
     Route::resources([
         'campaign'    => 'Admin\CampaignController',
-        'question'    => 'Admin\QuestionsController',
+        //'question'    => 'Admin\QuestionsController',
         'optiongroup' => 'Admin\OptionGroupsController',
         //'section'     => 'Admin\SectionsController',
     ]);
 
     Route::resource('campaign.section', 'Admin\SectionsController', ['except' => 'index']);
+    Route::resource('campaign.section.question', 'Admin\QuestionsController');
+    //Route::resource('campaign.section.questiongroup', 'Admin\QuestionGroupsController');
     //Route::get('section/{campaign_id}', 'Admin\SectionsController@show')->name('section.show');
 });
 
-Route::get('campaign/{id}', 'CampaignController@show');
+//Route::get('campaign/{id}', 'CampaignController@fill');
+//Route::post('campaign', 'CampaignController@save')->name('campaign.save');
+Route::get('/{any}', 'SinglePageController')->where('any', '.*');

@@ -1,8 +1,42 @@
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import VueFormWizard from 'vue-form-wizard'
+import 'vue-form-wizard/dist/vue-form-wizard.min.css'
 
-/**
- * First, we will load all of this project's Javascript utilities and other
- * dependencies. Then, we will be ready to develop a robust and powerful
- * application frontend using useful Laravel and JavaScript libraries.
- */
+// Komponente
+import {FormWizard, TabContent} from 'vue-form-wizard'
+//import TabContent from './components/TabContent'
+import Question from './components/Question'
+import RadioQuestion from './components/RadioQuestion'
+import CheckboxQuestion from './components/CheckboxQuestion'
+import PanelQuestion from './components/PanelQuestion'
 
-require('./bootstrap');
+Vue.use(VueRouter);
+Vue.use(VueFormWizard)
+
+import App from './views/App'
+import Campaign from './views/Campaign'
+
+//Vue.component('tab-content', TabContent);
+Vue.component('question', Question);
+Vue.component('radio-question', RadioQuestion);
+Vue.component('checkbox-question', CheckboxQuestion);
+Vue.component('panel-question', PanelQuestion);
+
+
+const router = new VueRouter({
+    mode: 'history',
+    routes: [
+        {
+            path: '/campaign/:id',
+            name: 'home',
+            component: Campaign,
+        }
+    ]
+});
+
+const app = new Vue({
+    el: '#app',
+    components: {App},
+    router
+});

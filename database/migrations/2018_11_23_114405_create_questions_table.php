@@ -16,10 +16,13 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->increments('id');
-            //$table->integer('question_type_id')->unsigned()->index();
+            $table->integer('section_id')->unsigned();
+            $table->integer('parent_id')->unsigned()->nullable();
             $table->tinyInteger('type')->unsigned()->default(QuestionType::TEXT);
-            $table->text('question');
+            //$table->text('question');
+            $table->mediumText('question');
             $table->integer('option_group_id')->unsigned()->nullable();
+            $table->integer('order')->unsigned()->default(99);
             $table->timestamps();
         });
     }
