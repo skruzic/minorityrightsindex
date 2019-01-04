@@ -10773,6 +10773,185 @@ module.exports = g;
 
 /***/ }),
 /* 3 */
+/***/ (function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function(useSourceMap) {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		return this.map(function (item) {
+			var content = cssWithMappingToString(item, useSourceMap);
+			if(item[2]) {
+				return "@media " + item[2] + "{" + content + "}";
+			} else {
+				return content;
+			}
+		}).join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+	var content = item[1] || '';
+	var cssMapping = item[3];
+	if (!cssMapping) {
+		return content;
+	}
+
+	if (useSourceMap && typeof btoa === 'function') {
+		var sourceMapping = toComment(cssMapping);
+		var sourceURLs = cssMapping.sources.map(function (source) {
+			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
+		});
+
+		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+	}
+
+	return [content].join('\n');
+}
+
+// Adapted from convert-source-map (MIT)
+function toComment(sourceMap) {
+	// eslint-disable-next-line no-undef
+	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+
+	return '/*# ' + data + ' */';
+}
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+/* globals __VUE_SSR_CONTEXT__ */
+
+// this module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle
+
+module.exports = function normalizeComponent (
+  rawScriptExports,
+  compiledTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier /* server only */
+) {
+  var esModule
+  var scriptExports = rawScriptExports = rawScriptExports || {}
+
+  // ES6 modules interop
+  var type = typeof rawScriptExports.default
+  if (type === 'object' || type === 'function') {
+    esModule = rawScriptExports
+    scriptExports = rawScriptExports.default
+  }
+
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (compiledTemplate) {
+    options.render = compiledTemplate.render
+    options.staticRenderFns = compiledTemplate.staticRenderFns
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = injectStyles
+  }
+
+  if (hook) {
+    var functional = options.functional
+    var existing = functional
+      ? options.render
+      : options.beforeCreate
+    if (!functional) {
+      // inject component registration as beforeCreate hook
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    } else {
+      // register for functioal component in vue file
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return existing(h, context)
+      }
+    }
+  }
+
+  return {
+    esModule: esModule,
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10874,185 +11053,6 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 module.exports = defaults;
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function(useSourceMap) {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		return this.map(function (item) {
-			var content = cssWithMappingToString(item, useSourceMap);
-			if(item[2]) {
-				return "@media " + item[2] + "{" + content + "}";
-			} else {
-				return content;
-			}
-		}).join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-	var content = item[1] || '';
-	var cssMapping = item[3];
-	if (!cssMapping) {
-		return content;
-	}
-
-	if (useSourceMap && typeof btoa === 'function') {
-		var sourceMapping = toComment(cssMapping);
-		var sourceURLs = cssMapping.sources.map(function (source) {
-			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
-		});
-
-		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-	}
-
-	return [content].join('\n');
-}
-
-// Adapted from convert-source-map (MIT)
-function toComment(sourceMap) {
-	// eslint-disable-next-line no-undef
-	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-
-	return '/*# ' + data + ' */';
-}
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports) {
-
-/* globals __VUE_SSR_CONTEXT__ */
-
-// this module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle
-
-module.exports = function normalizeComponent (
-  rawScriptExports,
-  compiledTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier /* server only */
-) {
-  var esModule
-  var scriptExports = rawScriptExports = rawScriptExports || {}
-
-  // ES6 modules interop
-  var type = typeof rawScriptExports.default
-  if (type === 'object' || type === 'function') {
-    esModule = rawScriptExports
-    scriptExports = rawScriptExports.default
-  }
-
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (compiledTemplate) {
-    options.render = compiledTemplate.render
-    options.staticRenderFns = compiledTemplate.staticRenderFns
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = injectStyles
-  }
-
-  if (hook) {
-    var functional = options.functional
-    var existing = functional
-      ? options.render
-      : options.beforeCreate
-    if (!functional) {
-      // inject component registration as beforeCreate hook
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    } else {
-      // register for functioal component in vue file
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return existing(h, context)
-      }
-    }
-  }
-
-  return {
-    esModule: esModule,
-    exports: scriptExports,
-    options: options
-  }
-}
-
 
 /***/ }),
 /* 6 */
@@ -35797,7 +35797,7 @@ module.exports = __webpack_require__(19);
 var utils = __webpack_require__(0);
 var bind = __webpack_require__(8);
 var Axios = __webpack_require__(21);
-var defaults = __webpack_require__(3);
+var defaults = __webpack_require__(5);
 
 /**
  * Create an instance of Axios
@@ -35880,7 +35880,7 @@ function isSlowBuffer (obj) {
 "use strict";
 
 
-var defaults = __webpack_require__(3);
+var defaults = __webpack_require__(5);
 var utils = __webpack_require__(0);
 var InterceptorManager = __webpack_require__(30);
 var dispatchRequest = __webpack_require__(31);
@@ -36419,7 +36419,7 @@ module.exports = InterceptorManager;
 var utils = __webpack_require__(0);
 var transformData = __webpack_require__(32);
 var isCancel = __webpack_require__(11);
-var defaults = __webpack_require__(3);
+var defaults = __webpack_require__(5);
 var isAbsoluteURL = __webpack_require__(33);
 var combineURLs = __webpack_require__(34);
 
@@ -36684,7 +36684,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(60)
 }
-var Component = __webpack_require__(5)(
+var Component = __webpack_require__(4)(
   /* script */
   __webpack_require__(62),
   /* template */
@@ -36696,7 +36696,7 @@ var Component = __webpack_require__(5)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/var/www/cedimstudies/resources/assets/js/components/RadioQuestion.vue"
+Component.options.__file = "/Applications/XAMPP/xamppfiles/htdocs/cedimstudies/resources/assets/js/components/RadioQuestion.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] RadioQuestion.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -36728,7 +36728,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(64)
 }
-var Component = __webpack_require__(5)(
+var Component = __webpack_require__(4)(
   /* script */
   __webpack_require__(66),
   /* template */
@@ -36740,7 +36740,7 @@ var Component = __webpack_require__(5)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/var/www/cedimstudies/resources/assets/js/components/CheckboxQuestion.vue"
+Component.options.__file = "/Applications/XAMPP/xamppfiles/htdocs/cedimstudies/resources/assets/js/components/CheckboxQuestion.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] CheckboxQuestion.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -36768,7 +36768,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(41);
-module.exports = __webpack_require__(82);
+module.exports = __webpack_require__(87);
 
 
 /***/ }),
@@ -50726,7 +50726,7 @@ if(false) {
 /* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(4)(false);
+exports = module.exports = __webpack_require__(3)(false);
 // imports
 
 
@@ -51199,7 +51199,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(51)
 }
-var Component = __webpack_require__(5)(
+var Component = __webpack_require__(4)(
   /* script */
   __webpack_require__(54),
   /* template */
@@ -51211,7 +51211,7 @@ var Component = __webpack_require__(5)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/var/www/cedimstudies/resources/assets/js/components/Question.vue"
+Component.options.__file = "/Applications/XAMPP/xamppfiles/htdocs/cedimstudies/resources/assets/js/components/Question.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Question.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -51264,7 +51264,7 @@ if(false) {
 /* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(4)(false);
+exports = module.exports = __webpack_require__(3)(false);
 // imports
 
 
@@ -51453,7 +51453,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(56)
 }
-var Component = __webpack_require__(5)(
+var Component = __webpack_require__(4)(
   /* script */
   __webpack_require__(58),
   /* template */
@@ -51465,7 +51465,7 @@ var Component = __webpack_require__(5)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/var/www/cedimstudies/resources/assets/js/components/TextQuestion.vue"
+Component.options.__file = "/Applications/XAMPP/xamppfiles/htdocs/cedimstudies/resources/assets/js/components/TextQuestion.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] TextQuestion.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -51518,7 +51518,7 @@ if(false) {
 /* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(4)(false);
+exports = module.exports = __webpack_require__(3)(false);
 // imports
 
 
@@ -51613,7 +51613,7 @@ if(false) {
 /* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(4)(false);
+exports = module.exports = __webpack_require__(3)(false);
 // imports
 
 
@@ -51754,7 +51754,7 @@ if(false) {
 /* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(4)(false);
+exports = module.exports = __webpack_require__(3)(false);
 // imports
 
 
@@ -52118,7 +52118,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(70)
 }
-var Component = __webpack_require__(5)(
+var Component = __webpack_require__(4)(
   /* script */
   __webpack_require__(72),
   /* template */
@@ -52130,7 +52130,7 @@ var Component = __webpack_require__(5)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/var/www/cedimstudies/resources/assets/js/components/PanelQuestion.vue"
+Component.options.__file = "/Applications/XAMPP/xamppfiles/htdocs/cedimstudies/resources/assets/js/components/PanelQuestion.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] PanelQuestion.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -52183,7 +52183,7 @@ if(false) {
 /* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(4)(false);
+exports = module.exports = __webpack_require__(3)(false);
 // imports
 
 
@@ -52274,7 +52274,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(5)(
+var Component = __webpack_require__(4)(
   /* script */
   __webpack_require__(75),
   /* template */
@@ -52286,7 +52286,7 @@ var Component = __webpack_require__(5)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/var/www/cedimstudies/resources/assets/js/views/App.vue"
+Component.options.__file = "/Applications/XAMPP/xamppfiles/htdocs/cedimstudies/resources/assets/js/views/App.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] App.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -52420,11 +52420,11 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(78)
 }
-var Component = __webpack_require__(5)(
+var Component = __webpack_require__(4)(
   /* script */
   __webpack_require__(80),
   /* template */
-  __webpack_require__(81),
+  __webpack_require__(86),
   /* styles */
   injectStyle,
   /* scopeId */
@@ -52432,7 +52432,7 @@ var Component = __webpack_require__(5)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/var/www/cedimstudies/resources/assets/js/views/Campaign.vue"
+Component.options.__file = "/Applications/XAMPP/xamppfiles/htdocs/cedimstudies/resources/assets/js/views/Campaign.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Campaign.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -52485,7 +52485,7 @@ if(false) {
 /* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(4)(false);
+exports = module.exports = __webpack_require__(3)(false);
 // imports
 
 
@@ -52501,7 +52501,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Example__ = __webpack_require__(85);
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Example__ = __webpack_require__(81);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Example___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Example__);
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
@@ -52590,69 +52590,16 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 /* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "flex-center position-ref"
-  }, [_c('div', {
-    staticClass: "content"
-  }, [_c('form', {
-    staticClass: "m-b-md",
-    on: {
-      "submit": function($event) {
-        $event.preventDefault();
-        return _vm.submit($event)
-      }
-    }
-  }, [_c('form-wizard', {
-    attrs: {
-      "title": _vm.campaign.title,
-      "subtitle": "",
-      "nextButtonText": "Dalje",
-      "finishButtonText": "Kraj",
-      "shape": "tab"
-    },
-    on: {
-      "on-complete": _vm.submit
-    }
-  }, _vm._l((_vm.campaign.sections), function(section) {
-    return _c('tab-content', {
-      key: section.id,
-      attrs: {
-        "section": section
-      }
-    }, [_c('section', [_c('h3', [_vm._v(_vm._s(section.title))]), _vm._v(" "), _c('p', [_vm._v(_vm._s(section.description))]), _vm._v(" "), _c('Example')], 1)])
-  }))], 1)])])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-6eaadc05", module.exports)
-  }
-}
-
-/***/ }),
-/* 82 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 83 */,
-/* 84 */,
-/* 85 */
-/***/ (function(module, exports, __webpack_require__) {
-
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(86)
+  __webpack_require__(82)
 }
-var Component = __webpack_require__(5)(
+var Component = __webpack_require__(4)(
   /* script */
-  __webpack_require__(88),
+  __webpack_require__(84),
   /* template */
-  __webpack_require__(89),
+  __webpack_require__(85),
   /* styles */
   injectStyle,
   /* scopeId */
@@ -52660,7 +52607,7 @@ var Component = __webpack_require__(5)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/var/www/cedimstudies/resources/assets/js/components/Example.vue"
+Component.options.__file = "/Applications/XAMPP/xamppfiles/htdocs/cedimstudies/resources/assets/js/components/Example.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Example.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -52684,13 +52631,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 86 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(87);
+var content = __webpack_require__(83);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -52710,21 +52657,21 @@ if(false) {
 }
 
 /***/ }),
-/* 87 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(4)(false);
+exports = module.exports = __webpack_require__(3)(false);
 // imports
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 88 */
+/* 84 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -52754,21 +52701,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             items: [{ id: 1, question: 'Question #1' }, { id: 2, question: 'Question #2' }, { id: 3, question: 'Question #3' }, { id: 4, question: 'Question #4' }, { id: 5, question: 'Question #5' }],
-            options: [1, 2, 3, 4, 5],
+            options: [{ id: 1, text: 'Option #1' }, { id: 2, text: 'Option #2' }, { id: 3, text: 'Option #3' }, { id: 4, text: 'Option #4' }, { id: 5, text: 'Option #5' }],
             values: {}
         };
     }
 });
 
 /***/ }),
-/* 89 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', [_c('table', {
     staticClass: "table table-striped"
   }, [_c('thead', [_c('th'), _vm._v(" "), _vm._l((_vm.options), function(opt) {
-    return _c('th', [_vm._v(_vm._s(opt))])
+    return _c('th', [_vm._v(_vm._s(opt.text))])
   })], 2), _vm._v(" "), _c('tbody', _vm._l((_vm.items), function(item, index) {
     return _c('tr', [_c('td', [_vm._v(_vm._s(item.question))]), _vm._v(" "), _vm._l((_vm.options), function(opt) {
       return _c('td', {
@@ -52816,6 +52763,39 @@ if (false) {
      require("vue-hot-reload-api").rerender("data-v-45be0cb6", module.exports)
   }
 }
+
+/***/ }),
+/* 86 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "flex-center position-ref"
+  }, [_c('div', {
+    staticClass: "content"
+  }, [_c('form', {
+    staticClass: "m-b-md",
+    on: {
+      "submit": function($event) {
+        $event.preventDefault();
+        return _vm.submit($event)
+      }
+    }
+  }, [_c('Example')], 1)])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-6eaadc05", module.exports)
+  }
+}
+
+/***/ }),
+/* 87 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

@@ -3,7 +3,7 @@
         <table class="table table-striped">
             <thead>
                 <th></th>
-                <th v-for="opt in options">{{ opt }}</th>
+                <th v-for="opt in options">{{ opt.text }}</th>
             </thead>
             <tbody>
                 <tr v-for="(item, index) in items">
@@ -29,7 +29,13 @@
                     {id: 4, question: 'Question #4'},
                     {id: 5, question: 'Question #5'},
                 ],
-                options: [1, 2, 3, 4, 5],
+                options: [
+                    {id: 1, text: 'Option #1'},
+                    {id: 2, text: 'Option #2'},
+                    {id: 3, text: 'Option #3'},
+                    {id: 4, text: 'Option #4'},
+                    {id: 5, text: 'Option #5'}
+                ],
                 values: {}
             }
         }
