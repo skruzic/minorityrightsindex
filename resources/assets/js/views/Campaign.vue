@@ -5,7 +5,7 @@
                 <!--<h1 class="title m-b-md">{{ campaign.title }}</h1>-->
 
                 <!--<tab-content v-for="section in campaign.sections" :key="section.id" :section="section"></tab-content>-->
-                <!--<form-wizard :title="campaign.title" subtitle="" nextButtonText="Dalje" finishButtonText="Kraj"
+                <form-wizard :title="campaign.title" subtitle="" nextButtonText="Dalje" finishButtonText="Kraj"
                              shape="tab" @on-complete="submit">
                     <tab-content v-for="section in campaign.sections" :key="section.id" :section="section">
                         <section>
@@ -15,8 +15,8 @@
                                       :question="question" v-model="fields['question-'+question.id]"></question>
                         </section>
                     </tab-content>
-                </form-wizard>-->
-                <Example></Example>
+                </form-wizard>
+                <!--<Example></Example>-->
 
             </form>
         </div>
@@ -25,6 +25,7 @@
 
 <script>
     import Example from "../components/Example";
+
     export default {
         name: "campaign",
         components: {Example},
@@ -42,17 +43,23 @@
         },
         methods: {
             submit() {
-                let toSubmit = this.flatten(this.fields);
+                let toSubmit = {
+                    campaign: this.campaign.id,
+                    data: this.flatten(this.fields)
+                };
+                    //this.flatten(this.fields);
+                //console.log(toSubmit);
 
-                /*axios.post('http://cedim.local/api/campaign', this.fields).then(response => {
+                axios.post('http://cedim.local/api/campaign', toSubmit).then(response => {
                     console.log(response);
-                })*/
-
-                console.log(toSubmit);
+                }).catch(function (error) {
+                    console.log(error);
+                })
             },
             handleInput(payload) {
                 //this.fields.push(payload);
                 //console.log(payload);
+                //
             },
             flatten(ob) {
                 let toReturn = {};

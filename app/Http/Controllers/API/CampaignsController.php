@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Campaign, App\Models\Section;
+use App\Models\Campaign, App\Models\Answer;
 
 class CampaignsController extends Controller
 {
@@ -27,7 +27,16 @@ class CampaignsController extends Controller
      */
     public function store(Request $request)
     {
-        return response()->json($request->all(), 200);
+        $input = $request->all();
+
+        /*Answer::create([
+            'campaign_id' => $input['campaign'],
+            'data' => $input['data']
+        ]);*/
+
+        dump($input);
+
+        //return response()->json('successfull', 200);
     }
 
     /**

@@ -94,7 +94,7 @@
                 type: Object
             },
             value: {
-                type: [Array, String, Number]
+                type: [Array, String, Number, Object]
             }
         },
         data() {

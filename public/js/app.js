@@ -36696,7 +36696,7 @@ var Component = __webpack_require__(4)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/Applications/XAMPP/xamppfiles/htdocs/cedimstudies/resources/assets/js/components/RadioQuestion.vue"
+Component.options.__file = "/var/www/cedimstudies/resources/assets/js/components/RadioQuestion.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] RadioQuestion.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -36740,7 +36740,7 @@ var Component = __webpack_require__(4)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/Applications/XAMPP/xamppfiles/htdocs/cedimstudies/resources/assets/js/components/CheckboxQuestion.vue"
+Component.options.__file = "/var/www/cedimstudies/resources/assets/js/components/CheckboxQuestion.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] CheckboxQuestion.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -51211,7 +51211,7 @@ var Component = __webpack_require__(4)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/Applications/XAMPP/xamppfiles/htdocs/cedimstudies/resources/assets/js/components/Question.vue"
+Component.options.__file = "/var/www/cedimstudies/resources/assets/js/components/Question.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Question.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -51415,7 +51415,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             type: Object
         },
         value: {
-            type: [Array, String, Number]
+            type: [Array, String, Number, Object]
         }
     },
     data: function data() {
@@ -51465,7 +51465,7 @@ var Component = __webpack_require__(4)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/Applications/XAMPP/xamppfiles/htdocs/cedimstudies/resources/assets/js/components/TextQuestion.vue"
+Component.options.__file = "/var/www/cedimstudies/resources/assets/js/components/TextQuestion.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] TextQuestion.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -52130,7 +52130,7 @@ var Component = __webpack_require__(4)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/Applications/XAMPP/xamppfiles/htdocs/cedimstudies/resources/assets/js/components/PanelQuestion.vue"
+Component.options.__file = "/var/www/cedimstudies/resources/assets/js/components/PanelQuestion.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] PanelQuestion.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -52286,7 +52286,7 @@ var Component = __webpack_require__(4)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/Applications/XAMPP/xamppfiles/htdocs/cedimstudies/resources/assets/js/views/App.vue"
+Component.options.__file = "/var/www/cedimstudies/resources/assets/js/views/App.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] App.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -52432,7 +52432,7 @@ var Component = __webpack_require__(4)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/Applications/XAMPP/xamppfiles/htdocs/cedimstudies/resources/assets/js/views/Campaign.vue"
+Component.options.__file = "/var/www/cedimstudies/resources/assets/js/views/Campaign.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Campaign.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -52490,7 +52490,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*.full-height {\n    height: 100vh;\n}\n\n.flex-center {\n    align-items: center;\n    display: flex;\n    justify-content: center;\n}\n\n.position-ref {\n    position: relative;\n}\n\n.top-right {\n    position: absolute;\n    right: 10px;\n    top: 18px;\n}\n\n.content {\n    text-align: center;\n}\n\n.title {\n    font-size: 60px;\n}\n\n.links > a {\n    color: #636b6f;\n    padding: 0 25px;\n    font-size: 12px;\n    font-weight: 600;\n    letter-spacing: .1rem;\n    text-decoration: none;\n    text-transform: uppercase;\n}\n\n.m-b-md {\n    margin-bottom: 30px;\n    color: #000000;\n}*/\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*.full-height {\n    height: 100vh;\n}\n\n.flex-center {\n    align-items: center;\n    display: flex;\n    justify-content: center;\n}\n\n.position-ref {\n    position: relative;\n}\n\n.top-right {\n    position: absolute;\n    right: 10px;\n    top: 18px;\n}\n\n.content {\n    text-align: center;\n}\n\n.title {\n    font-size: 60px;\n}\n\n.links > a {\n    color: #636b6f;\n    padding: 0 25px;\n    font-size: 12px;\n    font-weight: 600;\n    letter-spacing: .1rem;\n    text-decoration: none;\n    text-transform: uppercase;\n}\n\n.m-b-md {\n    margin-bottom: 30px;\n    color: #000000;\n}*/\n", ""]);
 
 // exports
 
@@ -52532,6 +52532,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "campaign",
     components: { Example: __WEBPACK_IMPORTED_MODULE_0__components_Example___default.a },
@@ -52551,17 +52552,23 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     },
     methods: {
         submit: function submit() {
-            var toSubmit = this.flatten(this.fields);
+            var toSubmit = {
+                campaign: this.campaign.id,
+                data: this.flatten(this.fields)
+            };
+            //this.flatten(this.fields);
+            //console.log(toSubmit);
 
-            /*axios.post('http://cedim.local/api/campaign', this.fields).then(response => {
+            axios.post('http://cedim.local/api/campaign', toSubmit).then(function (response) {
                 console.log(response);
-            })*/
-
-            console.log(toSubmit);
+            }).catch(function (error) {
+                console.log(error);
+            });
         },
         handleInput: function handleInput(payload) {
             //this.fields.push(payload);
             //console.log(payload);
+            //
         },
         flatten: function flatten(ob) {
             var toReturn = {};
@@ -52607,7 +52614,7 @@ var Component = __webpack_require__(4)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/Applications/XAMPP/xamppfiles/htdocs/cedimstudies/resources/assets/js/components/Example.vue"
+Component.options.__file = "/var/www/cedimstudies/resources/assets/js/components/Example.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Example.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -52781,7 +52788,39 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         return _vm.submit($event)
       }
     }
-  }, [_c('Example')], 1)])])
+  }, [_c('form-wizard', {
+    attrs: {
+      "title": _vm.campaign.title,
+      "subtitle": "",
+      "nextButtonText": "Dalje",
+      "finishButtonText": "Kraj",
+      "shape": "tab"
+    },
+    on: {
+      "on-complete": _vm.submit
+    }
+  }, _vm._l((_vm.campaign.sections), function(section) {
+    return _c('tab-content', {
+      key: section.id,
+      attrs: {
+        "section": section
+      }
+    }, [_c('section', [_c('h3', [_vm._v(_vm._s(section.title))]), _vm._v(" "), _c('p', [_vm._v(_vm._s(section.description))]), _vm._v(" "), _vm._l((section.questions), function(question) {
+      return _c('question', {
+        key: question.id,
+        attrs: {
+          "question": question
+        },
+        model: {
+          value: (_vm.fields['question-' + question.id]),
+          callback: function($$v) {
+            _vm.$set(_vm.fields, 'question-' + question.id, $$v)
+          },
+          expression: "fields['question-'+question.id]"
+        }
+      })
+    })], 2)])
+  }))], 1)])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
