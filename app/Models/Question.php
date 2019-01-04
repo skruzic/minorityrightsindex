@@ -49,6 +49,10 @@ class Question extends Model
         return count($this->parent) > 0;
     }
 
+    public function withChildren() {
+        return $this->children()->union($this);
+    }
+
     /*
      * Scopes
      */

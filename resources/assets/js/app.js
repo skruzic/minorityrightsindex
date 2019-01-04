@@ -1,11 +1,14 @@
-import Vue from 'vue'
+require('./bootstrap');
+
+window.Vue = require('vue');
+
+//import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueFormWizard from 'vue-form-wizard'
 import 'vue-form-wizard/dist/vue-form-wizard.min.css'
 
 // Komponente
 import {FormWizard, TabContent} from 'vue-form-wizard'
-//import TabContent from './components/TabContent'
 import Question from './components/Question'
 import RadioQuestion from './components/RadioQuestion'
 import CheckboxQuestion from './components/CheckboxQuestion'

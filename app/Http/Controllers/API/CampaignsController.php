@@ -27,7 +27,7 @@ class CampaignsController extends Controller
      */
     public function store(Request $request)
     {
-        dump($request->all());
+        return response()->json($request->all(), 200);
     }
 
     /**
