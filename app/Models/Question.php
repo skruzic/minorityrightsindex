@@ -10,17 +10,11 @@ class Question extends Model
 {
     use CrudTrait;
 
-    protected $fillable = ['section_id', 'parent_id', 'type', 'title', 'question', 'option_group_id', 'order'];
+    protected $fillable = ['section_id', 'parent_id', 'type', 'title', 'question', 'option_group_id'];
 
-    /*public function campaigns()
-    {
-        return $this->belongsToMany(Campaign::class)->using(CampaignQuestion::class);
-    }*/
-
-    /*public function type()
-    {
-        return $this->belongsTo(QuestionType::class, 'question_type_id');
-    }*/
+    /*
+     * Relationships
+     */
 
     public function options()
     {
@@ -30,6 +24,11 @@ class Question extends Model
     public function section()
     {
         return $this->belongsTo(Section::class);
+    }
+
+    public function campaign()
+    {
+        return $this->belongsTo(Campaign::class);
     }
 
     public function children()

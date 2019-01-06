@@ -8,6 +8,7 @@ use Backpack\CRUD\app\Http\Controllers\CrudController;
 use App\Http\Requests\QuestionRequest as StoreRequest;
 use App\Http\Requests\QuestionRequest as UpdateRequest;
 use App\Helpers\PanelImporter;
+use App\Models\Section;
 
 /**
  * Class SectionQuestionCrudController
@@ -20,6 +21,9 @@ class SectionQuestionCrudController extends QuestionCrudController
     {
         parent::setup();
 
+        // Debug
+
+
         $campaign_id = \Route::current()->parameter('campaign_id');
         $section_id  = \Route::current()->parameter('section_id');
 
@@ -27,14 +31,22 @@ class SectionQuestionCrudController extends QuestionCrudController
 
         $this->crud->addClause('where', 'section_id', $section_id);
 
+
+
         $this->crud->setHeading('Questions in Section #'.$section_id.' in Campaign #'.$campaign_id, 'index');
 
         $this->crud->addFields([
             [
                 'name'  => 'section_id',
                 'label' => 'Section',
-                'type'  => 'hidden',
-                'value' => $section_id,
+                'type'  => 'select2_grouped',
+                //'value' => $section_id,
+                'entity' => 'section',
+                'attribute' => 'title',
+                //'model' => 'App\Models\Section',
+                'group_by' => 'campaign',
+                'group_by_attribute' => 'title',
+                'group_by_relationship_back' => 'sections'
             ],
             [
                 'name' => 'csv',
@@ -42,12 +54,22 @@ class SectionQuestionCrudController extends QuestionCrudController
                 'type' => 'upload',
                 'upload'=> true,
                 'disk' => 'uploads',
-            ]
+            ],
         ]);
 
         $this->crud->allowAccess('create');
         $this->crud->allowAccess('reorder');
         $this->crud->enableReorder('question', 2);
+
+        // Debug
+        //dump($this->crud);
+        $entity_model = $this->crud->getRelationModel('section', - 1);
+        //$group_by_model = (new $entity_model)->{'campaign'}()->getRelated();
+        //$categories = $group_by_model::has('sections')->get();
+
+        \Log::info($entity_model);
+        //\Log::info($group_by_model);
+        //\Log::info($categories);
     }
 
     public function store(StoreRequest $request)
