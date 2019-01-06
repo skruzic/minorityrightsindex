@@ -48,7 +48,7 @@
                     data: this.flatten(this.fields)
                 };
                     //this.flatten(this.fields);
-                //console.log(toSubmit);
+                console.log(toSubmit);
 
                 axios.post('http://cedim.local/api/campaign', toSubmit).then(response => {
                     console.log(response);

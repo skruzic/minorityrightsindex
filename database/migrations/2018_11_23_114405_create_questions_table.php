@@ -18,11 +18,14 @@ class CreateQuestionsTable extends Migration
             $table->increments('id');
             $table->integer('section_id')->unsigned();
             $table->integer('parent_id')->unsigned()->nullable();
+            $table->integer('lft')->unsigned();
+            $table->integer('rgt')->unsigned();
+            $table->integer('depth')->unsigned();
+            $table->string('title')->nullable();
             $table->tinyInteger('type')->unsigned()->default(QuestionType::TEXT);
             //$table->text('question');
             $table->mediumText('question');
             $table->integer('option_group_id')->unsigned()->nullable();
-            $table->integer('order')->unsigned()->default(99);
             $table->timestamps();
         });
     }

@@ -11,6 +11,8 @@ final class QuestionType extends Enum
     const CHOICE = 2;
     const MULTIPLE_CHOICE = 3;
     const PANEL = 4;
+    const RADIO_ARRAY = 5;
+    const CHECKBOX_ARRAY = 6;
 
     public static function getDescription($value): string
     {

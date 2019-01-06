@@ -12,7 +12,6 @@
                       @input="onInput($event)"></textarea>
         </div>
         <div v-else-if="question.type === 2">
-            <!--<radio-question :question="question"></radio-question>-->
             <div class="form-group" v-if="question.children.length === 0">
                 <label>{{ question.question }}</label>
                 <label class="radio-inline" v-for="(opt,num) in question.options.options">
@@ -64,7 +63,6 @@
                     <tr v-for="(child, index) in question.children" @multiple="multiple">
                         <td>{{ child.question }}</td>
                         <td class="checkbox-inline" v-for="(opt,num) in question.options.options">
-                            {{ child.id }}
                             <input type="checkbox" :value="num" :name="'question-'+child.id" v-model="selectFields" @change="onCheckboxInput($event)">
                         </td>
                     </tr>
@@ -72,9 +70,56 @@
             </table>
         </div>
         <!-- End checkbox -->
+
+        <!-- Panel -->
         <div v-else-if="question.type === 4">
             <panel-question :question="question"></panel-question>
         </div>
+        <!-- End panel -->
+
+        <!-- Choice array -->
+        <div v-else-if="question.type === 5">
+            <div class="form-group">
+                <label>{{ question.question}}</label>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <th></th>
+                    <th v-for="opt in JSON.parse(question.options.options)">{{ opt.text }}</th>
+                </thead>
+                <tbody>
+                    <tr v-for="child in question.children">
+                        <td>{{ child.question }}</td>
+                        <td class="radio-inline" v-for="opt in JSON.parse(question.options.options)">
+                            <input type="radio" :value="opt.num" :name="'question-'+child.id" v-model="fields['question-'+child.id]" @input="onRadioInput">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- End choice array -->
+
+        <!-- Checkbox array -->
+        <div v-else-if="question.type === 6">
+            <div class="form-group">
+                <label>{{ question.question}}</label>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <th></th>
+                    <th v-for="opt in JSON.parse(question.options.options)">{{ opt.text }}</th>
+                </thead>
+                <tbody>
+                    <tr v-for="child in question.children" @multiple="multiple">
+                        <td>{{ child.question }}</td>
+                        <td class="checkbox-inline" v-for="opt in JSON.parse(question.options.options)">
+                            <input type="checkbox" :value="opt.num" :name="'question-'+child.id" v-model="selectFields" @change="onCheckboxInput($event)">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- End checkbox array -->
     </div>
 </template>
 

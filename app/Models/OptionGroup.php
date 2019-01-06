@@ -2,13 +2,12 @@
 
 namespace App\Models;
 
+use Backpack\CRUD\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class OptionGroup extends Model
 {
-    protected $fillable = ['name', 'description', 'options'];
+    use CrudTrait;
 
-    protected $casts = [
-        'options' => 'array',
-    ];
+    protected $fillable = ['name', 'description', 'options'];
 }

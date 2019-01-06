@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use Backpack\CRUD\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Campaign extends Model
 {
+    use CrudTrait;
+
     protected $fillable = ['title', 'description', 'user_id'];
 
     public function user()
@@ -21,5 +24,9 @@ class Campaign extends Model
     public function sections()
     {
         return $this->hasMany(Section::class)->orderBy('sections.order');
+    }
+
+    public function answers() {
+        return $this->hasMany(Answer::class);
     }
 }

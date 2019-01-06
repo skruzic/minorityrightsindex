@@ -29,14 +29,12 @@ class CampaignsController extends Controller
     {
         $input = $request->all();
 
-        /*Answer::create([
+        Answer::create([
             'campaign_id' => $input['campaign'],
-            'data' => $input['data']
-        ]);*/
+            'data' => json_encode($input['data']),
+        ]);
 
-        dump($input);
-
-        //return response()->json('successfull', 200);
+        return response()->json('success', 200);
     }
 
     /**

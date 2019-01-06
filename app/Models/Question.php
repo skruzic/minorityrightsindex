@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use Backpack\CRUD\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use App\Enums\QuestionType;
 
 class Question extends Model
 {
-    protected $fillable = ['parent_id', 'type', 'question', 'option_group_id', 'order'];
+    use CrudTrait;
+
+    protected $fillable = ['section_id', 'parent_id', 'type', 'title', 'question', 'option_group_id', 'order'];
 
     /*public function campaigns()
     {

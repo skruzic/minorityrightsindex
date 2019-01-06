@@ -16,7 +16,7 @@
     return view('welcome');
 });*/
 
-Auth::routes();
+//Auth::routes();
 
 //Route::get('/admin', 'HomeController@index')->name('home');
 
@@ -25,21 +25,18 @@ Auth::routes();
     'admin/question' => 'Admin\QuestionsController',
 ]);*/
 
-Route::prefix('admin')->group(function () {
+/*Route::prefix('admin')->group(function () {
     Route::get('/', 'HomeController@index')->name('home');
+    Route::resource('user', 'Admin\UsersController');
 
     Route::resources([
         'campaign'    => 'Admin\CampaignController',
-        //'question'    => 'Admin\QuestionsController',
         'optiongroup' => 'Admin\OptionGroupsController',
-        //'section'     => 'Admin\SectionsController',
     ]);
 
     Route::resource('campaign.section', 'Admin\SectionsController', ['except' => 'index']);
     Route::resource('campaign.section.question', 'Admin\QuestionsController');
-    //Route::resource('campaign.section.questiongroup', 'Admin\QuestionGroupsController');
-    //Route::get('section/{campaign_id}', 'Admin\SectionsController@show')->name('section.show');
-});
+});*/
 
 //Route::get('campaign/{id}', 'CampaignController@fill');
 //Route::post('campaign', 'CampaignController@save')->name('campaign.save');

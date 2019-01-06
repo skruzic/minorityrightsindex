@@ -38,6 +38,28 @@ namespace App{
 
 namespace App\Models{
 /**
+ * App\Models\Answer
+ *
+ * @property int $id
+ * @property int $campaign_id
+ * @property string|null $data
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Campaign $campaign
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Answer newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Answer newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Answer query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Answer whereCampaignId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Answer whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Answer whereData($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Answer whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Answer whereUpdatedAt($value)
+ */
+	class Answer extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Campaign
  *
  * @property int $id
@@ -46,6 +68,7 @@ namespace App\Models{
  * @property int $user_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Answer[] $answers
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Section[] $sections
  * @property-read \App\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Campaign newModelQuery()
@@ -90,8 +113,34 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereSectionId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question withoutChildren()
  */
 	class Question extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\User
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $email
+ * @property string $password
+ * @property string|null $remember_token
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereUpdatedAt($value)
+ */
+	class User extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -107,7 +156,6 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Campaign $campaign
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Question[] $questions
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Section hasChildren()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Section newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Section newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Section query()
@@ -120,6 +168,32 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Section whereUpdatedAt($value)
  */
 	class Section extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\BackpackUser
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $email
+ * @property string $password
+ * @property string|null $remember_token
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BackpackUser newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BackpackUser newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BackpackUser query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BackpackUser whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BackpackUser whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BackpackUser whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BackpackUser whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BackpackUser wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BackpackUser whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BackpackUser whereUpdatedAt($value)
+ */
+	class BackpackUser extends \Eloquent {}
 }
 
 namespace App\Models{
