@@ -88,12 +88,13 @@
                     <th v-for="opt in JSON.parse(question.options.options)">{{ opt.text }}</th>
                 </thead>
                 <tbody>
-                    <tr v-for="child in question.children">
+                    <!--<tr v-for="child in question.children">
                         <td>{{ child.question }}</td>
                         <td class="radio-inline" v-for="opt in JSON.parse(question.options.options)">
                             <input type="radio" :value="opt.num" :name="'question-'+child.id" v-model="fields['question-'+child.id]" @input="onRadioInput">
                         </td>
-                    </tr>
+                    </tr>-->
+                    <RadioQuestion v-model="fields['question-'+child.id]" v-for="child in question.children" :key="child.id" :question="child" :options="JSON.parse(question.options.options)" @input="onRadioInput" />
                 </tbody>
             </table>
         </div>

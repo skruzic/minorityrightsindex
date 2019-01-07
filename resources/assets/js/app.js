@@ -10,7 +10,6 @@ import 'vue-form-wizard/dist/vue-form-wizard.min.css'
 // Komponente
 import {FormWizard, TabContent} from 'vue-form-wizard'
 import Question from './components/Question'
-import RadioQuestion from './components/RadioQuestion'
 import PanelQuestion from './components/PanelQuestion'
 
 Vue.use(VueRouter);
@@ -21,7 +20,6 @@ import Campaign from './views/Campaign'
 
 //Vue.component('tab-content', TabContent);
 Vue.component('question', Question);
-Vue.component('radio-question', RadioQuestion);
 //Vue.component('checkbox-question', CheckboxQuestion);
 Vue.component('panel-question', PanelQuestion);
 

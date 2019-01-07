@@ -36740,14 +36740,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_form_wizard_dist_vue_form_wizard_min_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vue_form_wizard_dist_vue_form_wizard_min_css__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Question__ = __webpack_require__(49);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Question___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_Question__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_RadioQuestion__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_RadioQuestion___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_RadioQuestion__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_PanelQuestion__ = __webpack_require__(69);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_PanelQuestion___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_PanelQuestion__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__views_App__ = __webpack_require__(74);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__views_App___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__views_App__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__views_Campaign__ = __webpack_require__(77);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__views_Campaign___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__views_Campaign__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_PanelQuestion__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_PanelQuestion___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_PanelQuestion__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__views_App__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__views_App___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__views_App__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__views_Campaign__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__views_Campaign___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__views_Campaign__);
 __webpack_require__(14);
 
 window.Vue = __webpack_require__(41);
@@ -36762,7 +36760,6 @@ window.Vue = __webpack_require__(41);
 
 
 
-
 Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]);
 Vue.use(__WEBPACK_IMPORTED_MODULE_1_vue_form_wizard___default.a);
 
@@ -36771,22 +36768,21 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_1_vue_form_wizard___default.a);
 
 //Vue.component('tab-content', TabContent);
 Vue.component('question', __WEBPACK_IMPORTED_MODULE_3__components_Question___default.a);
-Vue.component('radio-question', __WEBPACK_IMPORTED_MODULE_4__components_RadioQuestion___default.a);
 //Vue.component('checkbox-question', CheckboxQuestion);
-Vue.component('panel-question', __WEBPACK_IMPORTED_MODULE_5__components_PanelQuestion___default.a);
+Vue.component('panel-question', __WEBPACK_IMPORTED_MODULE_4__components_PanelQuestion___default.a);
 
 var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
     mode: 'history',
     routes: [{
         path: '/campaign/:id',
         name: 'home',
-        component: __WEBPACK_IMPORTED_MODULE_7__views_Campaign___default.a
+        component: __WEBPACK_IMPORTED_MODULE_6__views_Campaign___default.a
     }]
 });
 
 var app = new Vue({
     el: '#app',
-    components: { App: __WEBPACK_IMPORTED_MODULE_6__views_App___default.a },
+    components: { App: __WEBPACK_IMPORTED_MODULE_5__views_App___default.a },
     router: router
 });
 
@@ -51353,7 +51349,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -51403,6 +51399,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__RadioQuestion___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__RadioQuestion__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__MultipleCheckboxes__ = __webpack_require__(63);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__MultipleCheckboxes___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__MultipleCheckboxes__);
+//
 //
 //
 //
@@ -51749,7 +51746,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -51769,32 +51766,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: "radio-question",
-    props: ['question']
+    name: "RadioQuestion",
+    props: ['question', 'options'],
+    data: function data() {
+        return {
+            radioValue: 0
+        };
+    },
+
+    methods: {
+        updateValue: function updateValue() {
+            this.$emit('input', this.radioValue);
+        }
+    }
 });
 
 /***/ }),
@@ -51802,50 +51788,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [(_vm.question.children.length == 0) ? _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', [_vm._v(_vm._s(_vm.question.question))]), _vm._v(" "), _vm._l((_vm.question.options.options), function(opt, num) {
-    return _c('label', {
-      staticClass: "radio-inline"
-    }, [_c('input', {
-      attrs: {
-        "type": "radio"
-      },
-      domProps: {
-        "value": num
-      }
-    }), _vm._v(_vm._s(opt) + "\n        ")])
-  })], 2) : _c('table', {
-    staticClass: "table table-striped"
-  }, [_c('thead', [_c('th'), _vm._v(" "), _vm._l((_vm.question.options.options), function(opt) {
-    return _c('th', [_vm._v(_vm._s(opt))])
-  })], 2), _vm._v(" "), _c('tbody', [_c('tr', [_c('td', [_vm._v(_vm._s(_vm.question.question))]), _vm._v(" "), _vm._l((_vm.question.options.options), function(opt, num) {
+  return _c('tr', [_c('td', [_vm._v(_vm._s(_vm.question.question))]), _vm._v(" "), _vm._l((_vm.options), function(option) {
     return _c('td', {
       staticClass: "radio-inline"
     }, [_c('input', {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: (_vm.radioValue),
+        expression: "radioValue"
+      }],
+      key: option.num,
       attrs: {
         "type": "radio",
         "name": 'question-' + _vm.question.id
       },
       domProps: {
-        "value": num
+        "value": option.num,
+        "checked": _vm._q(_vm.radioValue, option.num)
+      },
+      on: {
+        "input": _vm.updateValue,
+        "change": function($event) {
+          _vm.radioValue = option.num
+        }
       }
     })])
-  })], 2), _vm._v(" "), _vm._l((_vm.question.children), function(child) {
-    return _c('tr', [_c('td', [_vm._v(_vm._s(child.question))]), _vm._v(" "), _vm._l((_vm.question.options.options), function(opt, num) {
-      return _c('td', {
-        staticClass: "radio-inline"
-      }, [_c('input', {
-        attrs: {
-          "type": "radio",
-          "name": 'question-' + child.id
-        },
-        domProps: {
-          "value": num
-        }
-      })])
-    })], 2)
-  })], 2)])])
+  })], 2)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -52267,33 +52236,24 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('thead', [_c('th'), _vm._v(" "), _vm._l((JSON.parse(_vm.question.options.options)), function(opt) {
     return _c('th', [_vm._v(_vm._s(opt.text))])
   })], 2), _vm._v(" "), _c('tbody', _vm._l((_vm.question.children), function(child) {
-    return _c('tr', [_c('td', [_vm._v(_vm._s(child.question))]), _vm._v(" "), _vm._l((JSON.parse(_vm.question.options.options)), function(opt) {
-      return _c('td', {
-        staticClass: "radio-inline"
-      }, [_c('input', {
-        directives: [{
-          name: "model",
-          rawName: "v-model",
-          value: (_vm.fields['question-' + child.id]),
-          expression: "fields['question-'+child.id]"
-        }],
-        attrs: {
-          "type": "radio",
-          "name": 'question-' + child.id
+    return _c('RadioQuestion', {
+      key: child.id,
+      attrs: {
+        "question": child,
+        "options": JSON.parse(_vm.question.options.options)
+      },
+      on: {
+        "input": _vm.onRadioInput
+      },
+      model: {
+        value: (_vm.fields['question-' + child.id]),
+        callback: function($$v) {
+          _vm.$set(_vm.fields, 'question-' + child.id, $$v)
         },
-        domProps: {
-          "value": opt.num,
-          "checked": _vm._q(_vm.fields['question-' + child.id], opt.num)
-        },
-        on: {
-          "input": _vm.onRadioInput,
-          "change": function($event) {
-            _vm.$set(_vm.fields, 'question-' + child.id, opt.num)
-          }
-        }
-      })])
-    })], 2)
-  }), 0)])]) : (_vm.question.type === 6) ? _c('div', [_c('div', {
+        expression: "fields['question-'+child.id]"
+      }
+    })
+  }), 1)])]) : (_vm.question.type === 6) ? _c('div', [_c('div', {
     staticClass: "form-group"
   }, [_c('label', [_vm._v(_vm._s(_vm.question.question))])]), _vm._v(" "), _c('table', {
     staticClass: "table table-striped"
