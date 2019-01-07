@@ -110,12 +110,13 @@
                     <th v-for="opt in JSON.parse(question.options.options)">{{ opt.text }}</th>
                 </thead>
                 <tbody>
-                    <tr v-for="child in question.children" @multiple="multiple">
+                    <!--<tr v-for="child in question.children" @multiple="multiple">
                         <td>{{ child.question }}</td>
                         <td class="checkbox-inline" v-for="(opt,index) in JSON.parse(question.options.options)">
                             <input type="checkbox" :id="child.id" :value="opt.num" v-model="fields['question-'+child.id]" @change="onCheckboxInput($event)">
                         </td>
-                    </tr>
+                    </tr>-->
+                    <MultipleCheckboxes v-model="fields['question-'+child.id]" v-for="child in question.children" :key="child.id" :question="child" :options="JSON.parse(question.options.options)" @input="onRadioInput"/>
                 </tbody>
             </table>
         </div>
@@ -127,12 +128,12 @@
 <script>
     import TextQuestion from './TextQuestion'
     import RadioQuestion from "./RadioQuestion";
-    import CheckboxQuestion from "./CheckboxQuestion";
+    import MultipleCheckboxes from "./MultipleCheckboxes";
 
     export default {
         name: "question",
         //components: {CheckboxQuestion, RadioQuestion},
-        components: {TextQuestion, RadioQuestion, CheckboxQuestion},
+        components: {TextQuestion, RadioQuestion, MultipleCheckboxes},
         //props: ['question', 'value'],
         props: {
             question: {
@@ -157,7 +158,7 @@
             },
             onCheckboxInput(event) {
                 //this.fields.push(event.target.value);
-                //this.$emit('input', this.fields);
+                this.$emit('input', this.fields);
                 //console.log(event.target.name);
 
             }
