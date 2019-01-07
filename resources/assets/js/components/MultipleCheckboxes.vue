@@ -16,6 +16,9 @@
                 selectValue: this.value || []
             }
         },
+        updated() {
+            this.$emit('input', this.selectValue)
+        },
         methods: {
             updateValue() {
                 this.$emit('input', this.selectValue)

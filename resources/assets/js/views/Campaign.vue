@@ -85,7 +85,7 @@
 </script>
 
 <style scoped>
-    /*.full-height {
+    .full-height {
         height: 100vh;
     }
 
@@ -126,5 +126,5 @@
     .m-b-md {
         margin-bottom: 30px;
         color: #000000;
-    }*/
+    }
 </style>
