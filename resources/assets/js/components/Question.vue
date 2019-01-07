@@ -112,8 +112,8 @@
                 <tbody>
                     <tr v-for="child in question.children" @multiple="multiple">
                         <td>{{ child.question }}</td>
-                        <td class="checkbox-inline" v-for="opt in JSON.parse(question.options.options)">
-                            <input type="checkbox" :value="opt.num" :name="'question-'+child.id" v-model="selectFields" @change="onCheckboxInput($event)">
+                        <td class="checkbox-inline" v-for="(opt,index) in JSON.parse(question.options.options)">
+                            <input type="checkbox" :id="child.id" :value="opt.num" v-model="fields['question-'+child.id]" @change="onCheckboxInput($event)">
                         </td>
                     </tr>
                 </tbody>
@@ -158,6 +158,8 @@
             onCheckboxInput(event) {
                 //this.fields.push(event.target.value);
                 //this.$emit('input', this.fields);
+                //console.log(event.target.name);
+
             }
         },
         computed: {

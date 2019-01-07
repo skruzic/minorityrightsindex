@@ -51400,7 +51400,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -51611,6 +51611,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         onCheckboxInput: function onCheckboxInput(event) {
             //this.fields.push(event.target.value);
             //this.$emit('input', this.fields);
+            //console.log(event.target.name);
+
         }
     },
     computed: {
@@ -52319,39 +52321,39 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       on: {
         "multiple": _vm.multiple
       }
-    }, [_c('td', [_vm._v(_vm._s(child.question))]), _vm._v(" "), _vm._l((JSON.parse(_vm.question.options.options)), function(opt) {
+    }, [_c('td', [_vm._v(_vm._s(child.question))]), _vm._v(" "), _vm._l((JSON.parse(_vm.question.options.options)), function(opt, index) {
       return _c('td', {
         staticClass: "checkbox-inline"
       }, [_c('input', {
         directives: [{
           name: "model",
           rawName: "v-model",
-          value: (_vm.selectFields),
-          expression: "selectFields"
+          value: (_vm.fields['question-' + child.id]),
+          expression: "fields['question-'+child.id]"
         }],
         attrs: {
           "type": "checkbox",
-          "name": 'question-' + child.id
+          "id": child.id
         },
         domProps: {
           "value": opt.num,
-          "checked": Array.isArray(_vm.selectFields) ? _vm._i(_vm.selectFields, opt.num) > -1 : (_vm.selectFields)
+          "checked": Array.isArray(_vm.fields['question-' + child.id]) ? _vm._i(_vm.fields['question-' + child.id], opt.num) > -1 : (_vm.fields['question-' + child.id])
         },
         on: {
           "change": [function($event) {
-            var $$a = _vm.selectFields,
+            var $$a = _vm.fields['question-' + child.id],
               $$el = $event.target,
               $$c = $$el.checked ? (true) : (false);
             if (Array.isArray($$a)) {
               var $$v = opt.num,
                 $$i = _vm._i($$a, $$v);
               if ($$el.checked) {
-                $$i < 0 && (_vm.selectFields = $$a.concat([$$v]))
+                $$i < 0 && (_vm.$set(_vm.fields, 'question-' + child.id, $$a.concat([$$v])))
               } else {
-                $$i > -1 && (_vm.selectFields = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+                $$i > -1 && (_vm.$set(_vm.fields, 'question-' + child.id, $$a.slice(0, $$i).concat($$a.slice($$i + 1))))
               }
             } else {
-              _vm.selectFields = $$c
+              _vm.$set(_vm.fields, 'question-' + child.id, $$c)
             }
           }, function($event) {
             _vm.onCheckboxInput($event)
