@@ -14,10 +14,14 @@ class OptionsTableSeeder extends Seeder
     public function run()
     {
         $oid = OptionGroup::create([
-            'name' => 'Skala 1 do 5',
-            'options' => ['1','2','3','4','5'],
+            'name'    => 'Skala 1 do 5',
+            'options' => [
+                ['num' => 1, 'text' => 'Uopće se ne slažem'],
+                ['num' => 2, 'text' => 'Ne slažem se'],
+                ['num' => 3, 'text' => 'Niti se slažem, niti se ne slažem'],
+                ['num' => 4, 'text' => 'Slažem se'],
+                ['num' => 5, 'text' => 'Apsolutno se slažem'],
+            ],
         ]);
-
-        //$oid->save();
     }
 }

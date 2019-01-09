@@ -37,9 +37,12 @@
             }
         },
         mounted: function () {
-            $.get('http://cedim.local/api/campaign/' + this.$route.params.id).always((response) => {
+            /*$.get('http://cedim.local/api/campaign/' + this.$route.params.id).always((response) => {
                 this.campaign = response
-            });
+            });*/
+            axios.get('http://cedim.local/api/campaign/' + this.$route.params.id).then(response => {
+                this.campaign = response.data;
+            })
         },
         methods: {
             submit() {

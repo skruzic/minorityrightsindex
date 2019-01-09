@@ -10,7 +10,20 @@ class Question extends Model
 {
     use CrudTrait;
 
-    protected $fillable = ['section_id', 'parent_id', 'type', 'title', 'question', 'option_group_id'];
+    protected $fillable = [
+        'section_id',
+        'parent_id',
+        'type',
+        'title',
+        'question',
+        'panel',
+        'extras',
+        'option_group_id',
+    ];
+
+    protected $fakeColumns = ['extras'];
+
+    protected $casts = ['extras'];
 
     /*
      * Relationships
@@ -51,7 +64,8 @@ class Question extends Model
         return count($this->parent) > 0;
     }
 
-    public function withChildren() {
+    public function withChildren()
+    {
         return $this->children()->union($this);
     }
 

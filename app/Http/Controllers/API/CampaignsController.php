@@ -51,6 +51,7 @@ class CampaignsController extends Controller
                 $query->with('children');
                 $query->with('options');
                 $query->where('parent_id', null);
+                $query->orderBy('lft');
             }]);
         }])->where('id', $campaign->id)->first());
     }

@@ -28,7 +28,7 @@ class QuestionRequest extends FormRequest
         return [
             // 'name' => 'required|min:5|max:255'
             'type'     => 'required',
-            'question' => 'required_unless:type,4',
+            'question' => 'required',
             'csv'    => 'required_if:type,4|file',
         ];
     }

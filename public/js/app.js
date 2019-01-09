@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 39);
+/******/ 	return __webpack_require__(__webpack_require__.s = 38);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -11074,7 +11074,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(52)
+var listToStyles = __webpack_require__(51)
 
 /*
 type StyleObject = {
@@ -36679,66 +36679,22 @@ module.exports = function spread(callback) {
 /* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(59)
-}
-var Component = __webpack_require__(4)(
-  /* script */
-  __webpack_require__(61),
-  /* template */
-  __webpack_require__(62),
-  /* styles */
-  injectStyle,
-  /* scopeId */
-  "data-v-6613077c",
-  /* moduleIdentifier (server only) */
-  null
-)
-Component.options.__file = "/var/www/cedimstudies/resources/assets/js/components/RadioQuestion.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] RadioQuestion.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6613077c", Component.options)
-  } else {
-    hotAPI.reload("data-v-6613077c", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 39 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(40);
+__webpack_require__(39);
 module.exports = __webpack_require__(87);
 
 
 /***/ }),
-/* 40 */
+/* 39 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_router__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_router__ = __webpack_require__(43);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_form_wizard__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_form_wizard___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_form_wizard__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_form_wizard_dist_vue_form_wizard_min_css__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_form_wizard_dist_vue_form_wizard_min_css__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_form_wizard_dist_vue_form_wizard_min_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vue_form_wizard_dist_vue_form_wizard_min_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Question__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Question__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Question___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_Question__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_PanelQuestion__ = __webpack_require__(69);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_PanelQuestion___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_PanelQuestion__);
@@ -36748,7 +36704,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__views_Campaign___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__views_Campaign__);
 __webpack_require__(14);
 
-window.Vue = __webpack_require__(41);
+window.Vue = __webpack_require__(40);
 
 //import Vue from 'vue'
 
@@ -36769,7 +36725,8 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_1_vue_form_wizard___default.a);
 //Vue.component('tab-content', TabContent);
 Vue.component('question', __WEBPACK_IMPORTED_MODULE_3__components_Question___default.a);
 //Vue.component('checkbox-question', CheckboxQuestion);
-Vue.component('panel-question', __WEBPACK_IMPORTED_MODULE_4__components_PanelQuestion___default.a);
+//Vue.component('panel-question', PanelQuestion);
+
 
 var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
     mode: 'history',
@@ -36787,7 +36744,7 @@ var app = new Vue({
 });
 
 /***/ }),
-/* 41 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47881,10 +47838,10 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(42).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(41).setImmediate))
 
 /***/ }),
-/* 42 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !== "undefined" && global) ||
@@ -47940,7 +47897,7 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(43);
+__webpack_require__(42);
 // On some exotic environments, it's not clear which object `setimmediate` was
 // able to install onto.  Search each possibility in the same order as the
 // `setimmediate` library.
@@ -47954,7 +47911,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ }),
-/* 43 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -48147,7 +48104,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(13)))
 
 /***/ }),
-/* 44 */
+/* 43 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -50772,13 +50729,13 @@ if (inBrowser && window.Vue) {
 
 
 /***/ }),
-/* 45 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(46);
+var content = __webpack_require__(45);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -50786,7 +50743,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(47)(content, options);
+var update = __webpack_require__(46)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -50803,7 +50760,7 @@ if(false) {
 }
 
 /***/ }),
-/* 46 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(3)(false);
@@ -50817,7 +50774,7 @@ exports.push([module.i, ".vue-form-wizard .wizard-btn{display:inline-block;margi
 
 
 /***/ }),
-/* 47 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -50863,7 +50820,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(48);
+var	fixUrls = __webpack_require__(47);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -51176,7 +51133,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 48 */
+/* 47 */
 /***/ (function(module, exports) {
 
 
@@ -51271,17 +51228,17 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 49 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(50)
+  __webpack_require__(49)
 }
 var Component = __webpack_require__(4)(
   /* script */
-  __webpack_require__(53),
+  __webpack_require__(52),
   /* template */
   __webpack_require__(68),
   /* styles */
@@ -51315,13 +51272,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 50 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(51);
+var content = __webpack_require__(50);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -51341,7 +51298,7 @@ if(false) {
 }
 
 /***/ }),
-/* 51 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(3)(false);
@@ -51349,13 +51306,13 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 52 */
+/* 51 */
 /***/ (function(module, exports) {
 
 /**
@@ -51388,17 +51345,19 @@ module.exports = function listToStyles (parentId, list) {
 
 
 /***/ }),
-/* 53 */
+/* 52 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__TextQuestion__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__TextQuestion__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__TextQuestion___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__TextQuestion__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__RadioQuestion__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__RadioQuestion__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__RadioQuestion___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__RadioQuestion__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__MultipleCheckboxes__ = __webpack_require__(63);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__MultipleCheckboxes___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__MultipleCheckboxes__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PanelQuestion__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PanelQuestion___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__PanelQuestion__);
 //
 //
 //
@@ -51491,42 +51450,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 
 
@@ -51535,7 +51459,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "question",
     //components: {CheckboxQuestion, RadioQuestion},
-    components: { TextQuestion: __WEBPACK_IMPORTED_MODULE_0__TextQuestion___default.a, RadioQuestion: __WEBPACK_IMPORTED_MODULE_1__RadioQuestion___default.a, MultipleCheckboxes: __WEBPACK_IMPORTED_MODULE_2__MultipleCheckboxes___default.a },
+    components: { TextQuestion: __WEBPACK_IMPORTED_MODULE_0__TextQuestion___default.a, RadioQuestion: __WEBPACK_IMPORTED_MODULE_1__RadioQuestion___default.a, MultipleCheckboxes: __WEBPACK_IMPORTED_MODULE_2__MultipleCheckboxes___default.a, PanelQuestion: __WEBPACK_IMPORTED_MODULE_3__PanelQuestion___default.a },
     //props: ['question', 'value'],
     props: {
         question: {
@@ -51573,19 +51497,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 54 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(55)
+  __webpack_require__(54)
 }
 var Component = __webpack_require__(4)(
   /* script */
-  __webpack_require__(57),
+  __webpack_require__(56),
   /* template */
-  __webpack_require__(58),
+  __webpack_require__(57),
   /* styles */
   injectStyle,
   /* scopeId */
@@ -51617,13 +51541,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 55 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(56);
+var content = __webpack_require__(55);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -51643,7 +51567,7 @@ if(false) {
 }
 
 /***/ }),
-/* 56 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(3)(false);
@@ -51657,7 +51581,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 
 /***/ }),
-/* 57 */
+/* 56 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -51681,7 +51605,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 58 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -51710,6 +51634,50 @@ if (false) {
      require("vue-hot-reload-api").rerender("data-v-76ee06f0", module.exports)
   }
 }
+
+/***/ }),
+/* 58 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(59)
+}
+var Component = __webpack_require__(4)(
+  /* script */
+  __webpack_require__(61),
+  /* template */
+  __webpack_require__(62),
+  /* styles */
+  injectStyle,
+  /* scopeId */
+  "data-v-6613077c",
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/var/www/cedimstudies/resources/assets/js/components/RadioQuestion.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] RadioQuestion.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-6613077c", Component.options)
+  } else {
+    hotAPI.reload("data-v-6613077c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
 
 /***/ }),
 /* 59 */
@@ -52027,9 +51995,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.onInput($event)
       }
     }
-  })]) : (_vm.question.type === 2) ? _c('div', [(_vm.question.children.length === 0) ? _c('div', {
+  })]) : (_vm.question.type === 2) ? _c('div', [_c('div', {
     staticClass: "form-group"
-  }, [_c('label', [_vm._v(_vm._s(_vm.question.question))]), _vm._v(" "), _vm._l((_vm.question.options.options), function(opt, num) {
+  }, [_c('label', [_vm._v(_vm._s(_vm.question.question))]), _vm._v(" "), _vm._l((JSON.parse(_vm.question.options.options)), function(opt) {
     return _c('label', {
       staticClass: "radio-inline"
     }, [_c('input', {
@@ -52037,73 +52005,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "type": "radio"
       },
       domProps: {
-        "value": num
+        "value": opt.num
       },
       on: {
         "input": function($event) {
           _vm.onInput($event)
         }
       }
-    }), _vm._v(_vm._s(opt) + "\n            ")])
-  })], 2) : _c('table', {
-    staticClass: "table table-striped"
-  }, [_c('thead', [_c('th'), _vm._v(" "), _vm._l((_vm.question.options.options), function(opt) {
-    return _c('th', [_vm._v(_vm._s(opt))])
-  })], 2), _vm._v(" "), _c('tbody', [_c('tr', [_c('td', [_vm._v(_vm._s(_vm.question.question))]), _vm._v(" "), _vm._l((_vm.question.options.options), function(opt, num) {
-    return _c('td', {
-      staticClass: "radio-inline"
-    }, [_c('input', {
-      directives: [{
-        name: "model",
-        rawName: "v-model",
-        value: (_vm.fields['question-' + _vm.question.id]),
-        expression: "fields['question-'+question.id]"
-      }],
-      attrs: {
-        "type": "radio",
-        "name": 'question-' + _vm.question.id
-      },
-      domProps: {
-        "value": num,
-        "checked": _vm._q(_vm.fields['question-' + _vm.question.id], num)
-      },
-      on: {
-        "input": _vm.onRadioInput,
-        "change": function($event) {
-          _vm.$set(_vm.fields, 'question-' + _vm.question.id, num)
-        }
-      }
-    })])
-  })], 2), _vm._v(" "), _vm._l((_vm.question.children), function(child) {
-    return _c('tr', [_c('td', [_vm._v(_vm._s(child.question))]), _vm._v(" "), _vm._l((_vm.question.options.options), function(opt, num) {
-      return _c('td', {
-        staticClass: "radio-inline"
-      }, [_c('input', {
-        directives: [{
-          name: "model",
-          rawName: "v-model",
-          value: (_vm.fields['question-' + child.id]),
-          expression: "fields['question-'+child.id]"
-        }],
-        attrs: {
-          "type": "radio",
-          "name": 'question-' + child.id
-        },
-        domProps: {
-          "value": num,
-          "checked": _vm._q(_vm.fields['question-' + child.id], num)
-        },
-        on: {
-          "input": _vm.onRadioInput,
-          "change": function($event) {
-            _vm.$set(_vm.fields, 'question-' + child.id, num)
-          }
-        }
-      })])
-    })], 2)
-  })], 2)])]) : (_vm.question.type === 3) ? _c('div', [(_vm.question.children.length === 0) ? _c('div', {
+    }), _vm._v(_vm._s(opt.text) + "\n            ")])
+  })], 2)]) : (_vm.question.type === 3) ? _c('div', [_c('div', {
     staticClass: "form-group"
-  }, [_c('label', [_vm._v(_vm._s(_vm.question.question))]), _vm._v(" "), _vm._l((_vm.question.options.options), function(opt, num) {
+  }, [_c('label', [_vm._v(_vm._s(_vm.question.question))]), _vm._v(" "), _vm._l((JSON.parse(_vm.question.options.options)), function(opt) {
     return _c('label', {
       staticClass: "checkbox-inline"
     }, [_c('input', {
@@ -52117,8 +52029,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "type": "checkbox"
       },
       domProps: {
-        "value": num,
-        "checked": Array.isArray(_vm.fields['question-' + _vm.question.id]) ? _vm._i(_vm.fields['question-' + _vm.question.id], num) > -1 : (_vm.fields['question-' + _vm.question.id])
+        "value": opt.num,
+        "checked": Array.isArray(_vm.fields['question-' + _vm.question.id]) ? _vm._i(_vm.fields['question-' + _vm.question.id], opt.num) > -1 : (_vm.fields['question-' + _vm.question.id])
       },
       on: {
         "change": [function($event) {
@@ -52126,7 +52038,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             $$el = $event.target,
             $$c = $$el.checked ? (true) : (false);
           if (Array.isArray($$a)) {
-            var $$v = num,
+            var $$v = opt.num,
               $$i = _vm._i($$a, $$v);
             if ($$el.checked) {
               $$i < 0 && (_vm.$set(_vm.fields, 'question-' + _vm.question.id, $$a.concat([$$v])))
@@ -52138,94 +52050,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           }
         }, _vm.onCheckboxInput]
       }
-    }), _vm._v(_vm._s(opt) + "\n            ")])
-  })], 2) : _c('table', {
-    staticClass: "table table-striped"
-  }, [_c('thead', [_c('th'), _vm._v(" "), _vm._l((_vm.question.options.options), function(opt) {
-    return _c('th', [_vm._v(_vm._s(opt))])
-  })], 2), _vm._v(" "), _c('tbody', [_c('tr', [_c('td', [_vm._v(_vm._s(_vm.question.question))]), _vm._v(" "), _vm._l((_vm.question.options.options), function(opt, num) {
-    return _c('td', {
-      staticClass: "checkbox-inline"
-    }, [_c('input', {
-      directives: [{
-        name: "model",
-        rawName: "v-model",
-        value: (_vm.fields['question-' + _vm.question.id]),
-        expression: "fields['question-'+question.id]"
-      }],
-      attrs: {
-        "type": "checkbox",
-        "name": 'question-' + _vm.question.id
-      },
-      domProps: {
-        "value": num,
-        "checked": Array.isArray(_vm.fields['question-' + _vm.question.id]) ? _vm._i(_vm.fields['question-' + _vm.question.id], num) > -1 : (_vm.fields['question-' + _vm.question.id])
-      },
-      on: {
-        "change": [function($event) {
-          var $$a = _vm.fields['question-' + _vm.question.id],
-            $$el = $event.target,
-            $$c = $$el.checked ? (true) : (false);
-          if (Array.isArray($$a)) {
-            var $$v = num,
-              $$i = _vm._i($$a, $$v);
-            if ($$el.checked) {
-              $$i < 0 && (_vm.$set(_vm.fields, 'question-' + _vm.question.id, $$a.concat([$$v])))
-            } else {
-              $$i > -1 && (_vm.$set(_vm.fields, 'question-' + _vm.question.id, $$a.slice(0, $$i).concat($$a.slice($$i + 1))))
-            }
-          } else {
-            _vm.$set(_vm.fields, 'question-' + _vm.question.id, $$c)
-          }
-        }, _vm.onCheckboxInput]
-      }
-    })])
-  })], 2), _vm._v(" "), _vm._l((_vm.question.children), function(child, index) {
-    return _c('tr', {
-      on: {
-        "multiple": _vm.multiple
-      }
-    }, [_c('td', [_vm._v(_vm._s(child.question))]), _vm._v(" "), _vm._l((_vm.question.options.options), function(opt, num) {
-      return _c('td', {
-        staticClass: "checkbox-inline"
-      }, [_c('input', {
-        directives: [{
-          name: "model",
-          rawName: "v-model",
-          value: (_vm.selectFields),
-          expression: "selectFields"
-        }],
-        attrs: {
-          "type": "checkbox",
-          "name": 'question-' + child.id
-        },
-        domProps: {
-          "value": num,
-          "checked": Array.isArray(_vm.selectFields) ? _vm._i(_vm.selectFields, num) > -1 : (_vm.selectFields)
-        },
-        on: {
-          "change": [function($event) {
-            var $$a = _vm.selectFields,
-              $$el = $event.target,
-              $$c = $$el.checked ? (true) : (false);
-            if (Array.isArray($$a)) {
-              var $$v = num,
-                $$i = _vm._i($$a, $$v);
-              if ($$el.checked) {
-                $$i < 0 && (_vm.selectFields = $$a.concat([$$v]))
-              } else {
-                $$i > -1 && (_vm.selectFields = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
-              }
-            } else {
-              _vm.selectFields = $$c
-            }
-          }, function($event) {
-            _vm.onCheckboxInput($event)
-          }]
-        }
-      })])
-    })], 2)
-  })], 2)])]) : (_vm.question.type === 4) ? _c('div', [_c('panel-question', {
+    }), _vm._v(_vm._s(opt.text) + "\n            ")])
+  })], 2)]) : (_vm.question.type === 4) ? _c('div', [_c('PanelQuestion', {
     attrs: {
       "question": _vm.question
     }
@@ -52366,7 +52192,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -52398,7 +52224,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: "panel-question",
+    name: "PanelQuestion",
     props: ['question'],
     methods: {
         handleClick: function handleClick(event) {
@@ -52408,6 +52234,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 return text === 'Otvori' ? 'Zatvori' : 'Otvori';
             });
             //btn.prev().toggleClass('d-none');
+        }
+    },
+    computed: {
+        parsedPanel: function parsedPanel() {
+            return JSON.parse(this.question.panel);
         }
     }
 });
@@ -52422,9 +52253,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "table table-striped"
   }, [_c('thead', {
     staticClass: "thead-dark"
-  }, _vm._l((JSON.parse(_vm.question.question)['header']), function(th) {
+  }, _vm._l((JSON.parse(_vm.question.panel)['header']), function(th) {
     return _c('th', [_vm._v(_vm._s(th))])
-  }), 0), _vm._v(" "), _c('tbody', _vm._l((JSON.parse(_vm.question.question)['body']), function(tr, key) {
+  }), 0), _vm._v(" "), _c('tbody', _vm._l((JSON.parse(_vm.question.panel)['body']), function(tr, key) {
     return _c('tr', [_c('th', [_vm._v(_vm._s(key))]), _vm._v(" "), _vm._l((tr), function(td) {
       return _c('td', [_c('span', {
         staticClass: "d-none"
@@ -52679,7 +52510,7 @@ exports.push([module.i, "\n.full-height[data-v-6eaadc05] {\n    height: 100vh;\n
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Example__ = __webpack_require__(81);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Example__ = __webpack_require__(81);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Example___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Example__);
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
@@ -52724,8 +52555,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     mounted: function mounted() {
         var _this = this;
 
-        $.get('http://cedim.local/api/campaign/' + this.$route.params.id).always(function (response) {
-            _this.campaign = response;
+        /*$.get('http://cedim.local/api/campaign/' + this.$route.params.id).always((response) => {
+            this.campaign = response
+        });*/
+        axios.get('http://cedim.local/api/campaign/' + this.$route.params.id).then(function (response) {
+            _this.campaign = response.data;
         });
     },
     methods: {
@@ -52769,7 +52603,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         }
     }
 });
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
 /* 81 */

@@ -1,10 +1,10 @@
 <template>
     <table class="table table-striped">
         <thead class="thead-dark">
-            <th v-for="th in JSON.parse(question.question)['header']">{{ th }}</th>
+            <th v-for="th in JSON.parse(question.panel)['header']">{{ th }}</th>
         </thead>
         <tbody>
-            <tr v-for="(tr, key) in JSON.parse(question.question)['body']">
+            <tr v-for="(tr, key) in JSON.parse(question.panel)['body']">
                 <th>{{ key }}</th>
                 <td v-for="td in tr">
                     <span class="d-none">{{ td }}</span>
@@ -19,7 +19,7 @@
 
 <script>
     export default {
-        name: "panel-question",
+        name: "PanelQuestion",
         props: ['question'],
         methods: {
             handleClick: function (event) {
@@ -29,6 +29,11 @@
                     return text === 'Otvori' ? 'Zatvori' : 'Otvori';
                 });
                 //btn.prev().toggleClass('d-none');
+            }
+        },
+        computed: {
+            parsedPanel() {
+                return JSON.parse(this.question.panel);
             }
         }
     }

@@ -11,69 +11,33 @@
             <textarea :name="'question-'+question.id" class="form-control" :value="value"
                       @input="onInput($event)"></textarea>
         </div>
+
+        <!-- Radio -->
         <div v-else-if="question.type === 2">
-            <div class="form-group" v-if="question.children.length === 0">
+            <div class="form-group">
                 <label>{{ question.question }}</label>
-                <label class="radio-inline" v-for="(opt,num) in question.options.options">
-                    <input type="radio" :value="num" @input="onInput($event)">{{ opt }}
+                <label class="radio-inline" v-for="opt in JSON.parse(question.options.options)">
+                    <input type="radio" :value="opt.num" @input="onInput($event)">{{ opt.text }}
                 </label>
             </div>
-            <table class="table table-striped" v-else>
-                <thead>
-                    <th></th>
-                    <th v-for="opt in question.options.options">{{ opt }}</th>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{{ question.question }}</td>
-                        <td class="radio-inline" v-for="(opt,num) in question.options.options">
-                            <input type="radio" :value="num" :name="'question-'+question.id" v-model="fields['question-'+question.id]" @input="onRadioInput">
-                        </td>
-                    </tr>
-                    <tr v-for="child in question.children">
-                        <td>{{ child.question }}</td>
-                        <td class="radio-inline" v-for="(opt,num) in question.options.options">
-                            <input type="radio" :value="num" :name="'question-'+child.id" v-model="fields['question-'+child.id]" @input="onRadioInput">
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
         </div>
+        <!-- End radio -->
+
         <!-- Checkbox -->
         <div v-else-if="question.type === 3">
-            <!--<checkbox-question :question="question"></checkbox-question>-->
-            <div class="form-group" v-if="question.children.length === 0">
+            <div class="form-group">
                 <label>{{ question.question }}</label>
-                <label class="checkbox-inline" v-for="(opt,num) in question.options.options">
-                    <input type="checkbox" :value="num" v-model="fields['question-'+question.id]" @change="onCheckboxInput">{{ opt }}
+                <label class="checkbox-inline" v-for="opt in JSON.parse(question.options.options)">
+                    <input type="checkbox" :value="opt.num" v-model="fields['question-'+question.id]" @change="onCheckboxInput">{{ opt.text }}
                 </label>
             </div>
-            <table class="table table-striped" v-else>
-                <thead>
-                    <th></th>
-                    <th v-for="opt in question.options.options">{{ opt }}</th>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{{ question.question }}</td>
-                        <td class="checkbox-inline" v-for="(opt,num) in question.options.options">
-                            <input type="checkbox" :value="num" :name="'question-'+question.id" v-model="fields['question-'+question.id]" @change="onCheckboxInput">
-                        </td>
-                    </tr>
-                    <tr v-for="(child, index) in question.children" @multiple="multiple">
-                        <td>{{ child.question }}</td>
-                        <td class="checkbox-inline" v-for="(opt,num) in question.options.options">
-                            <input type="checkbox" :value="num" :name="'question-'+child.id" v-model="selectFields" @change="onCheckboxInput($event)">
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
         </div>
         <!-- End checkbox -->
 
         <!-- Panel -->
         <div v-else-if="question.type === 4">
-            <panel-question :question="question"></panel-question>
+            <!--<panel-question :question="question"></panel-question>-->
+            <PanelQuestion :question="question"></PanelQuestion>
         </div>
         <!-- End panel -->
 
@@ -128,13 +92,14 @@
 
 <script>
     import TextQuestion from './TextQuestion'
-    import RadioQuestion from "./RadioQuestion";
-    import MultipleCheckboxes from "./MultipleCheckboxes";
+    import RadioQuestion from './RadioQuestion';
+    import MultipleCheckboxes from './MultipleCheckboxes';
+    import PanelQuestion from './PanelQuestion';
 
     export default {
         name: "question",
         //components: {CheckboxQuestion, RadioQuestion},
-        components: {TextQuestion, RadioQuestion, MultipleCheckboxes},
+        components: {TextQuestion, RadioQuestion, MultipleCheckboxes, PanelQuestion},
         //props: ['question', 'value'],
         props: {
             question: {

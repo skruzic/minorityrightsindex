@@ -89,6 +89,28 @@ class QuestionCrudController extends CrudController
             ],
         ]);
 
+        $this->crud->addFields([
+            [
+                'name'  => 'section_id',
+                'label' => 'Section',
+                'type'  => 'select2_grouped',
+                //'value' => $section_id,
+                'entity' => 'section',
+                'attribute' => 'title',
+                //'model' => 'App\Models\Section',
+                'group_by' => 'campaign',
+                'group_by_attribute' => 'title',
+                'group_by_relationship_back' => 'sections'
+            ],
+            [
+                'name' => 'csv',
+                'label' => 'Panel',
+                'type' => 'upload',
+                'upload'=> true,
+                'disk' => 'uploads',
+            ],
+        ]);
+
         // add asterisk for fields that are required in QuestionRequest
         $this->crud->setRequiredFields(StoreRequest::class, 'create');
         $this->crud->setRequiredFields(UpdateRequest::class, 'edit');

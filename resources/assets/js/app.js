@@ -21,7 +21,7 @@ import Campaign from './views/Campaign'
 //Vue.component('tab-content', TabContent);
 Vue.component('question', Question);
 //Vue.component('checkbox-question', CheckboxQuestion);
-Vue.component('panel-question', PanelQuestion);
+//Vue.component('panel-question', PanelQuestion);
 
 
 const router = new VueRouter({

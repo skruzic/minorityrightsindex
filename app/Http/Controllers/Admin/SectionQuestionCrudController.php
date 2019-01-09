@@ -21,8 +21,6 @@ class SectionQuestionCrudController extends QuestionCrudController
     {
         parent::setup();
 
-        // Debug
-
 
         $campaign_id = \Route::current()->parameter('campaign_id');
         $section_id  = \Route::current()->parameter('section_id');
@@ -30,6 +28,8 @@ class SectionQuestionCrudController extends QuestionCrudController
         $this->crud->setRoute('admin/campaign/'.$campaign_id.'/section/'.$section_id.'/question');
 
         $this->crud->addClause('where', 'section_id', $section_id);
+
+        $this->crud->orderBy('lft');
 
 
 
@@ -46,7 +46,8 @@ class SectionQuestionCrudController extends QuestionCrudController
                 //'model' => 'App\Models\Section',
                 'group_by' => 'campaign',
                 'group_by_attribute' => 'title',
-                'group_by_relationship_back' => 'sections'
+                'group_by_relationship_back' => 'sections',
+                'value' => $section_id
             ],
             [
                 'name' => 'csv',
@@ -60,21 +61,10 @@ class SectionQuestionCrudController extends QuestionCrudController
         $this->crud->allowAccess('create');
         $this->crud->allowAccess('reorder');
         $this->crud->enableReorder('question', 2);
-
-        // Debug
-        //dump($this->crud);
-        $entity_model = $this->crud->getRelationModel('section', - 1);
-        //$group_by_model = (new $entity_model)->{'campaign'}()->getRelated();
-        //$categories = $group_by_model::has('sections')->get();
-
-        \Log::info($entity_model);
-        //\Log::info($group_by_model);
-        //\Log::info($categories);
     }
 
     public function store(StoreRequest $request)
-    {
-        $input = $request->all();
+    {You don’t need json filter, this simply works:
         if ($request->hasFile('csv')) {
 
             $file = $request->file('csv');
@@ -83,16 +73,29 @@ class SectionQuestionCrudController extends QuestionCrudController
             //$csv = PanelImporter::import($file);
             $csv = (new PanelImporter($file))->import();
 
-            $input['question'] = json_encode($csv, JSON_UNESCAPED_UNICODE);
+            $panel = json_encode($csv);
+
+            $request->request->add(['panel' => $panel]);
         }
-        // your additional operations before save here
-        $request->replace($input);
 
         return parent::storeCrud($request);
     }
 
     public function update(UpdateRequest $request)
     {
-        return parent::updateCrud();
+        if ($request->hasFile('csv')) {
+
+            $file = $request->file('csv');
+
+            // Obrada CSV filea
+            //$csv = PanelImporter::import($file);
+            $csv = (new PanelImporter($file))->import();
+
+            $panel = json_encode($csv);
+
+            $request->request->add(['panel' => $panel]);
+        }
+
+        return parent::updateCrud($request);
     }
 }
