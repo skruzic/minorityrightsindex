@@ -1,8 +1,9 @@
 <template>
-    <div class="form-group">
+    <!--<div class="form-group">
         <label>{{ question.question }}</label>
         <input type="text" :name="'question-'+question.id" class="form-control" :value="value" @input="onInput($event)">
-    </div>
+    </div>-->
+
 </template>
 
 <script>

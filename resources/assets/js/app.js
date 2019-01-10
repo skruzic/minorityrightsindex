@@ -6,14 +6,15 @@ window.Vue = require('vue');
 import VueRouter from 'vue-router'
 import VueFormWizard from 'vue-form-wizard'
 import 'vue-form-wizard/dist/vue-form-wizard.min.css'
+import BootstrapVue from 'bootstrap-vue'
 
 // Komponente
 import {FormWizard, TabContent} from 'vue-form-wizard'
 import Question from './components/Question'
-import PanelQuestion from './components/PanelQuestion'
 
 Vue.use(VueRouter);
-Vue.use(VueFormWizard)
+Vue.use(VueFormWizard);
+Vue.use(BootstrapVue);
 
 import App from './views/App'
 import Campaign from './views/Campaign'

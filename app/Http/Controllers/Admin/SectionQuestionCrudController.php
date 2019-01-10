@@ -63,8 +63,7 @@ class SectionQuestionCrudController extends QuestionCrudController
         $this->crud->enableReorder('question', 2);
     }
 
-    public function store(StoreRequest $request)
-    {You don’t need json filter, this simply works:
+    public function store(StoreRequest $request) {
         if ($request->hasFile('csv')) {
 
             $file = $request->file('csv');
