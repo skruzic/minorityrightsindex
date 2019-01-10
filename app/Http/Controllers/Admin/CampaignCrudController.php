@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 
+use App\Models\Campaign;
+
 // VALIDATION: change the requests to match your own file names if you need form validation
 use App\Http\Requests\CampaignRequest as StoreRequest;
 use App\Http\Requests\CampaignRequest as UpdateRequest;
@@ -80,6 +82,9 @@ class CampaignCrudController extends CrudController
         $this->crud->setRequiredFields(UpdateRequest::class, 'edit');
 
         $this->crud->addButtonFromView('line', 'campaign_sections', 'campaign_sections', 'beginning');
+
+        // Dozvola za kloniranje
+        $this->crud->allowAccess('clone');
     }
 
     public function store(StoreRequest $request)
@@ -98,5 +103,12 @@ class CampaignCrudController extends CrudController
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
         return $redirect_location;
+    }
+
+    public function clone($id) {
+        $this->crud->hasAccessOrFail('clone');
+        $this->crud->setOperation('clone');
+
+        $clone = Campaign::find($id)->replicate();
     }
 }

@@ -67,17 +67,20 @@ class QuestionCrudController extends CrudController
                 'name'  => 'title',
                 'label' => 'Kod',
                 'type'  => 'text',
+                'tab' => 'General'
             ],
             [
                 'name'  => 'question',
                 'label' => 'Question',
                 'type'  => 'text',
+                'tab' => 'General'
             ],
             [
                 'name'    => 'type',
                 'label'   => 'Type',
                 'type'    => 'select2_from_array',
                 'options' => QuestionType::toArray(),
+                'tab' => 'General'
             ],
             [
                 'name'      => 'option_group_id',
@@ -86,6 +89,7 @@ class QuestionCrudController extends CrudController
                 'entity'    => 'options',
                 'attribute' => 'name',
                 'model'     => 'App\Models\OptionGroup',
+                'tab' => 'General'
             ],
         ]);
 
@@ -100,7 +104,8 @@ class QuestionCrudController extends CrudController
                 //'model' => 'App\Models\Section',
                 'group_by' => 'campaign',
                 'group_by_attribute' => 'title',
-                'group_by_relationship_back' => 'sections'
+                'group_by_relationship_back' => 'sections',
+                'tab' => 'General'
             ],
             [
                 'name' => 'csv',
@@ -108,6 +113,7 @@ class QuestionCrudController extends CrudController
                 'type' => 'upload',
                 'upload'=> true,
                 'disk' => 'uploads',
+                'tab' => 'General'
             ],
         ]);
 

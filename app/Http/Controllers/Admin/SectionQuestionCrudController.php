@@ -32,29 +32,52 @@ class SectionQuestionCrudController extends QuestionCrudController
         $this->crud->orderBy('lft');
 
 
-
         $this->crud->setHeading('Questions in Section #'.$section_id.' in Campaign #'.$campaign_id, 'index');
 
         $this->crud->addFields([
             [
-                'name'  => 'section_id',
-                'label' => 'Section',
-                'type'  => 'select2_grouped',
+                'name'                       => 'section_id',
+                'label'                      => 'Section',
+                'type'                       => 'select2_grouped',
                 //'value' => $section_id,
-                'entity' => 'section',
-                'attribute' => 'title',
+                'entity'                     => 'section',
+                'attribute'                  => 'title',
                 //'model' => 'App\Models\Section',
-                'group_by' => 'campaign',
-                'group_by_attribute' => 'title',
+                'group_by'                   => 'campaign',
+                'group_by_attribute'         => 'title',
                 'group_by_relationship_back' => 'sections',
-                'value' => $section_id
+                'value'                      => $section_id,
+                'tab'                        => 'General',
             ],
             [
-                'name' => 'csv',
-                'label' => 'Panel',
-                'type' => 'upload',
-                'upload'=> true,
-                'disk' => 'uploads',
+                'name'   => 'csv',
+                'label'  => 'Panel',
+                'type'   => 'upload',
+                'upload' => true,
+                'disk'   => 'uploads',
+                'tab'    => 'Panel Properties',
+            ],
+            [
+                'name'  => 'dynamic',
+                'label' => 'Dynamic',
+                'type'  => 'checkbox',
+                'fake'  => true,
+                'tab'   => 'Panel Properties',
+            ],
+            [
+                'name'  => 'timeout',
+                'label' => 'Timeout (s)',
+                'type'  => 'number',
+                'fake'  => true,
+                'tab'   => 'Panel Properties',
+            ],
+            [
+                'name'    => 'batch_size',
+                'label'   => 'Batch size',
+                'type'    => 'number',
+                'default' => 5,
+                'fake'    => true,
+                'tab'     => 'Panel Properties',
             ],
         ]);
 
@@ -63,7 +86,8 @@ class SectionQuestionCrudController extends QuestionCrudController
         $this->crud->enableReorder('question', 2);
     }
 
-    public function store(StoreRequest $request) {
+    public function store(StoreRequest $request)
+    {
         if ($request->hasFile('csv')) {
 
             $file = $request->file('csv');
