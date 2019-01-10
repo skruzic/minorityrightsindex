@@ -23,7 +23,7 @@ class OptionGroupCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
         $this->crud->setModel('App\Models\OptionGroup');
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/optiongroup');
+        $this->crud->setRoute(config('backpack.base.route_prefix').'/optiongroup');
         $this->crud->setEntityNameStrings('option group', 'option groups');
 
         /*
@@ -36,48 +36,48 @@ class OptionGroupCrudController extends CrudController
         //$this->crud->setFromDb();
         $this->crud->addColumns([
             [
-                'name' => 'name',
+                'name'  => 'name',
                 'label' => 'Name',
-                'type' => 'text'
+                'type'  => 'text',
             ],
             [
-                'name' => 'description',
+                'name'  => 'description',
                 'label' => 'Description',
-                'type' => 'text'
+                'type'  => 'text',
             ],
             [
-                'name' => 'options',
-                'label' => 'Options',
-                'type' => 'table',
+                'name'    => 'options',
+                'label'   => 'Options',
+                'type'    => 'table',
                 'columns' => [
-                    'num' => 'Numeric value',
-                    'text' => 'Display text'
+                    'num'  => 'Numeric value',
+                    'text' => 'Display text',
                 ],
-            ]
+            ],
         ]);
 
         $this->crud->addFields([
             [
-                'name' => 'name',
+                'name'  => 'name',
                 'label' => 'Name',
-                'type' => 'text'
+                'type'  => 'text',
             ],
             [
-                'name' => 'description',
+                'name'  => 'description',
                 'label' => 'Description',
-                'type' => 'text'
+                'type'  => 'text',
             ],
             [
-                'name' => 'options',
-                'label' => 'Options',
-                'type' => 'table',
+                'name'            => 'options',
+                'label'           => 'Options',
+                'type'            => 'table',
                 'entity_singular' => 'option',
-                'columns' => [
-                    'num' => 'Numeric value',
-                    'text' => 'Display text'
+                'columns'         => [
+                    'value' => 'Numeric value',
+                    'text'  => 'Display text',
                 ],
-                'min' => 2
-            ]
+                'min'             => 2,
+            ],
         ]);
 
         // add asterisk for fields that are required in OptionGroupRequest

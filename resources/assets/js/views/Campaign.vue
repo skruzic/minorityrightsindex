@@ -24,11 +24,11 @@
 </template>
 
 <script>
-    import Example from "../components/Example";
+    import Question from '../components/Question'
 
     export default {
         name: "campaign",
-        components: {Example},
+        components: {Question},
         props: ['id'],
         data: function () {
             return {
@@ -88,7 +88,7 @@
 </script>
 
 <style scoped>
-    .full-height {
+    /*.full-height {
         height: 100vh;
     }
 
@@ -129,5 +129,5 @@
     .m-b-md {
         margin-bottom: 30px;
         color: #000000;
-    }
+    }*/
 </style>

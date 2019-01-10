@@ -6,17 +6,17 @@
         </td>
     </tr>-->
     <b-form-group :label="question.question">
-        <b-form-radio-group v-model="selected" :options="options" stacked @input="updateValue"></b-form-radio-group>
+        <b-form-checkbox-group  v-model="selected" :options="options" stacked @input="updateValue"/>
     </b-form-group>
 </template>
 
 <script>
     export default {
-        name: "RadioQuestion",
+        name: "CheckboxQuestion",
         props: ['question', 'options', 'value'],
         data() {
             return {
-                selected: this.value || 0
+                selected: this.value || []
             }
         },
         methods: {

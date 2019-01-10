@@ -19,12 +19,6 @@ Vue.use(BootstrapVue);
 import App from './views/App'
 import Campaign from './views/Campaign'
 
-//Vue.component('tab-content', TabContent);
-Vue.component('question', Question);
-//Vue.component('checkbox-question', CheckboxQuestion);
-//Vue.component('panel-question', PanelQuestion);
-
-
 const router = new VueRouter({
     mode: 'history',
     routes: [
