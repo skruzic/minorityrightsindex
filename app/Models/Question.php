@@ -23,7 +23,7 @@ class Question extends Model
 
     protected $fakeColumns = ['extras'];
 
-    protected $casts = ['extras'];
+    protected $casts = ['extras' => 'array'];
 
     /*
      * Relationships
