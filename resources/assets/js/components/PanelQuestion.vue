@@ -29,13 +29,13 @@
                     return text === 'Otvori' ? 'Zatvori' : 'Otvori';
                 });
                 //btn.prev().toggleClass('d-none');
-            }
+            },
         },
         computed: {
             parsedPanel() {
                 return JSON.parse(this.question.panel);
             }
-        }
+        },
     }
 </script>
 
