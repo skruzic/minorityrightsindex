@@ -44,7 +44,7 @@
         <div v-else-if="question.type === 4">
             <!--<panel-question :question="question"></panel-question>-->
             <PanelQuestion :question="question" v-if="question.extras.dynamic === '0'"></PanelQuestion>
-            <DynamicPanel :panel="question.panel" v-else></DynamicPanel>
+            <DynamicPanel :panel="question.panel" :batch_size="question.extras.batch_size" :timeout="question.extras.timeout" v-else></DynamicPanel>
         </div>
         <!-- End panel -->
 

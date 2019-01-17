@@ -10,4 +10,6 @@ class OptionGroup extends Model
     use CrudTrait;
 
     protected $fillable = ['name', 'description', 'options'];
+
+    protected $casts = ['options' => 'array'];
 }

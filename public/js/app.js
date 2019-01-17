@@ -68924,7 +68924,7 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -68943,10 +68943,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "DynamicPanel",
-    props: ['panel'],
+    props: ['panel', 'batch_size', 'timeout'],
     data: function data() {
         return {
             counter: 0
@@ -68954,26 +68964,52 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     computed: {
-        current: function current() {
-            return this.body[this.counter];
+        current_items: function current_items() {
+            return this.body.slice(this.counter, this.counter + this.batch_size);
         },
         body: function body() {
-            var body = JSON.parse(this.panel)['body'];
-            return Object.values(body);
+            //let body = Object.values(JSON.parse(this.panel)['body']);
+            var body = Object.entries(JSON.parse(this.panel)['body']);
+            var ret = [];
+            var index = 0;
+            body.forEach(function (el) {
+                var question = el[0];
+                var keys = Object.keys(el[1]);
+                var values = Object.values(el[1]);
+                for (var i = 0; i < keys.length; i++) {
+                    ret.push({ id: index, 'question': question, 'key': keys[i], 'value': values[i] });
+                    index++;
+                }
+            });
+            //return Object.values(body);
+            //console.log(ret);
+            return this.shuffle(ret);
         }
     },
     methods: {
-        shuffle: function shuffle(array) {}
+        shuffle: function shuffle(array) {
+            for (var i = array.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var _ref = [array[j], array[i]];
+                array[i] = _ref[0];
+                array[j] = _ref[1];
+            }
+
+            return array;
+        }
     },
     mounted: function mounted() {
+        this.batch_size = parseInt(this.batch_size);
+        this.timeout = parseInt(this.timeout);
+
         this.$nextTick(function () {
             var _this = this;
 
             window.setInterval(function () {
                 if (_this.counter < _this.body.length - 1) {
-                    _this.counter++;
+                    _this.counter += parseInt(_this.batch_size);
                 }
-            }, 2000);
+            }, this.timeout * 1000);
         });
     }
 });
@@ -68983,11 +69019,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "card"
-  }, [_c('div', {
-    staticClass: "card-body"
-  }, [_vm._v("\n        " + _vm._s(_vm.current) + "\n    ")])])
+  return _c('div', _vm._l((_vm.current_items), function(item) {
+    return _c('b-card', {
+      key: item.id,
+      attrs: {
+        "title": item.question
+      }
+    }, [_c('h5', {
+      staticClass: "card-title"
+    }, [_vm._v(_vm._s(item.key))]), _vm._v(" "), _c('p', {
+      staticClass: "card-text"
+    }, [_vm._v(_vm._s(item.value))])])
+  }), 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -69052,7 +69095,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }) : _c('DynamicPanel', {
     attrs: {
-      "panel": _vm.question.panel
+      "panel": _vm.question.panel,
+      "batch_size": _vm.question.extras.batch_size,
+      "timeout": _vm.question.extras.timeout
     }
   })], 1) : (_vm.question.type === 5) ? _c('div', [_c('div', {
     staticClass: "form-group"
