@@ -43,7 +43,8 @@
         <!-- Panel -->
         <div v-else-if="question.type === 4">
             <!--<panel-question :question="question"></panel-question>-->
-            <PanelQuestion :question="question"></PanelQuestion>
+            <PanelQuestion :question="question" v-if="question.extras.dynamic === '0'"></PanelQuestion>
+            <DynamicPanel :panel="question.panel" v-else></DynamicPanel>
         </div>
         <!-- End panel -->
 
@@ -106,11 +107,12 @@
     import CheckboxQuestion from './CheckboxQuestion'
     import MultipleCheckboxes from './MultipleCheckboxes';
     import PanelQuestion from './PanelQuestion';
+    import DynamicPanel from "./DynamicPanel";
 
     export default {
         name: "question",
         //components: {CheckboxQuestion, RadioQuestion},
-        components: {TextQuestion, RadioQuestion, CheckboxQuestion, MultipleCheckboxes, PanelQuestion},
+        components: {DynamicPanel, TextQuestion, RadioQuestion, CheckboxQuestion, MultipleCheckboxes, PanelQuestion},
         //props: ['question', 'value'],
         props: {
             question: {

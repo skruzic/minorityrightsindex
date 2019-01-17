@@ -29,21 +29,23 @@ class PanelImporter
         $records = $reader->getRecords();
 
         foreach ($records as $offset => $record) {
-            $keys = array_keys($record);
+            $keys   = array_keys($record);
             $values = array_values($record);
 
-            //$questions[] = $values[0];
-            //array_shift($values);
+            // Uklanjam prvi element
+            array_shift($keys);
             $question = array_shift($values);
 
-            $this->data[$question] = $values;
+            //$this->data[$question] = $values;
+
+            $this->data[$question] = array_combine($keys, $values);
         }
     }
 
     public function import()
     {
         $table['header'] = $this->header;
-        $table['body'] = $this->data;
+        $table['body']   = $this->data;
 
         return $table;
     }
