@@ -22,8 +22,9 @@
                 </label>
             </div>
         </div>-->
-        <RadioQuestion v-else-if="question.type === 2" :question="question" :options="JSON.parse(question.options.options)"
-                       v-model="fields['question-'+question.id]" @input="onInput"/>
+        <RadioQuestion v-else-if="question.type === 2" :question="question"
+                       :options="question.options.options" v-model="fields['question-'+question.id]"
+                       @input="onInput"/>
         <!-- End radio -->
 
         <!-- Checkbox -->
@@ -36,16 +37,16 @@
                 </label>
             </div>
         </div>-->
-        <CheckboxQuestion v-else-if="question.type === 3" :question="question" :options="JSON.parse(question.options.options)"
+        <CheckboxQuestion v-else-if="question.type === 3" :question="question"
+                          :options="question.options.options"
                           v-model="fields['question-'+question.id]" @input="onInput"/>
         <!-- End checkbox -->
 
         <!-- Panel -->
-        <div v-else-if="question.type === 4">
-            <!--<panel-question :question="question"></panel-question>-->
+        <!--<div v-else-if="question.type === 4">
             <PanelQuestion :question="question" v-if="question.extras.dynamic === '0'"></PanelQuestion>
             <DynamicPanel :panel="question.panel" :batch_size="question.extras.batch_size" :timeout="question.extras.timeout" v-else></DynamicPanel>
-        </div>
+        </div>-->
         <!-- End panel -->
 
         <!-- Choice array -->
@@ -56,46 +57,49 @@
             <table class="table table-striped">
                 <thead>
                     <th></th>
-                    <th v-for="opt in JSON.parse(question.options.options)">{{ opt.text }}</th>
+                    <th v-for="opt in question.options.options">{{ opt.text }}</th>
                 </thead>
                 <tbody>
-                    <!--<tr v-for="child in question.children">
+                    <!--<RadioQuestion v-model="fields['question-'+child.id]" v-for="child in question.children"
+                                   :key="child.id" :question="child" :options="question.options.options"
+                                   @input="onRadioInput"/>-->
+                    <tr v-for="child in question.children" :key="child.id">
                         <td>{{ child.question }}</td>
-                        <td class="radio-inline" v-for="opt in JSON.parse(question.options.options)">
-                            <input type="radio" :value="opt.num" :name="'question-'+child.id" v-model="fields['question-'+child.id]" @input="onRadioInput">
+                        <td v-for="opt in question.options.options">
+                            <input type="radio" :value="opt.value" v-model="fields['question-'+child.id]"
+                                   @change="onRadioInput"/>
                         </td>
-                    </tr>-->
-                    <RadioQuestion v-model="fields['question-'+child.id]" v-for="child in question.children"
-                                   :key="child.id" :question="child" :options="JSON.parse(question.options.options)"
-                                   @input="onRadioInput"/>
+                    </tr>
                 </tbody>
             </table>
         </div>
         <!-- End choice array -->
 
         <!-- Checkbox array -->
-        <div v-else-if="question.type === 6">
+        <!--<div v-else-if="question.type === 6">
             <div class="form-group">
                 <label>{{ question.question}}</label>
             </div>
             <table class="table table-striped">
                 <thead>
                     <th></th>
-                    <th v-for="opt in JSON.parse(question.options.options)">{{ opt.text }}</th>
+                    <th v-for="opt in question.options.options">{{ opt.text }}</th>
                 </thead>
                 <tbody>
-                    <!--<tr v-for="child in question.children" @multiple="multiple">
-                        <td>{{ child.question }}</td>
-                        <td class="checkbox-inline" v-for="(opt,index) in JSON.parse(question.options.options)">
-                            <input type="checkbox" :id="child.id" :value="opt.num" v-model="fields['question-'+child.id]" @change="onCheckboxInput($event)">
-                        </td>
-                    </tr>-->
-                    <MultipleCheckboxes v-model="fields['question-'+child.id]" v-for="child in question.children"
+                    !--<MultipleCheckboxes v-model="fields['question-'+child.id]" v-for="child in question.children"
                                         :key="child.id" :question="child"
-                                        :options="JSON.parse(question.options.options)" @input="onRadioInput"/>
+                                        :options="JSON.parse(question.options.options)" @input="onRadioInput"/>--
+                    <tr v-for="child in question.children" :key="child.id">
+                        <td>{{ child.question }}</td>
+                        <td v-for="opt in question.options.options">
+                            <input type="checkbox" :value="opt.value" v-model="fields['question-'+child.id]"
+                                   @change="onRadioInput"/>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
-        </div>
+        </div>-->
+        <CheckboxArray v-else-if="question.type === 6" :question="question"/>
         <!-- End checkbox array -->
     </div>
 </template>
@@ -108,11 +112,14 @@
     import MultipleCheckboxes from './MultipleCheckboxes';
     import PanelQuestion from './PanelQuestion';
     import DynamicPanel from "./DynamicPanel";
+    import CheckboxArray from "./CheckboxArray";
 
     export default {
         name: "question",
         //components: {CheckboxQuestion, RadioQuestion},
-        components: {DynamicPanel, TextQuestion, RadioQuestion, CheckboxQuestion, MultipleCheckboxes, PanelQuestion},
+        components: {
+            CheckboxArray,
+            DynamicPanel, TextQuestion, RadioQuestion, CheckboxQuestion, MultipleCheckboxes, PanelQuestion},
         //props: ['question', 'value'],
         props: {
             question: {

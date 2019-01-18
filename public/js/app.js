@@ -67837,7 +67837,7 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -67893,6 +67893,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__PanelQuestion___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__PanelQuestion__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DynamicPanel__ = __webpack_require__(251);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DynamicPanel___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__DynamicPanel__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__CheckboxArray__ = __webpack_require__(268);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__CheckboxArray___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__CheckboxArray__);
 //
 //
 //
@@ -67996,6 +67998,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+
 
 
 
@@ -68007,7 +68014,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "question",
     //components: {CheckboxQuestion, RadioQuestion},
-    components: { DynamicPanel: __WEBPACK_IMPORTED_MODULE_5__DynamicPanel___default.a, TextQuestion: __WEBPACK_IMPORTED_MODULE_0__TextQuestion___default.a, RadioQuestion: __WEBPACK_IMPORTED_MODULE_1__RadioQuestion___default.a, CheckboxQuestion: __WEBPACK_IMPORTED_MODULE_2__CheckboxQuestion___default.a, MultipleCheckboxes: __WEBPACK_IMPORTED_MODULE_3__MultipleCheckboxes___default.a, PanelQuestion: __WEBPACK_IMPORTED_MODULE_4__PanelQuestion___default.a },
+    components: {
+        CheckboxArray: __WEBPACK_IMPORTED_MODULE_6__CheckboxArray___default.a,
+        DynamicPanel: __WEBPACK_IMPORTED_MODULE_5__DynamicPanel___default.a, TextQuestion: __WEBPACK_IMPORTED_MODULE_0__TextQuestion___default.a, RadioQuestion: __WEBPACK_IMPORTED_MODULE_1__RadioQuestion___default.a, CheckboxQuestion: __WEBPACK_IMPORTED_MODULE_2__CheckboxQuestion___default.a, MultipleCheckboxes: __WEBPACK_IMPORTED_MODULE_3__MultipleCheckboxes___default.a, PanelQuestion: __WEBPACK_IMPORTED_MODULE_4__PanelQuestion___default.a },
     //props: ['question', 'value'],
     props: {
         question: {
@@ -68282,7 +68291,7 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -68293,6 +68302,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -68333,8 +68343,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('b-form-radio-group', {
     attrs: {
-      "options": _vm.options,
-      "stacked": ""
+      "options": _vm.options
     },
     on: {
       "input": _vm.updateValue
@@ -68486,8 +68495,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('b-form-checkbox-group', {
     attrs: {
-      "options": _vm.options,
-      "stacked": ""
+      "options": _vm.options
     },
     on: {
       "input": _vm.updateValue
@@ -68924,7 +68932,7 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -68965,7 +68973,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     computed: {
         current_items: function current_items() {
-            return this.body.slice(this.counter, this.counter + this.batch_size);
+            var from = this.counter;
+            var to = this.counter + parseInt(this.batch_size);
+            return this.body.slice(from, to);
         },
         body: function body() {
             //let body = Object.values(JSON.parse(this.panel)['body']);
@@ -69062,7 +69072,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }) : (_vm.question.type === 2) ? _c('RadioQuestion', {
     attrs: {
       "question": _vm.question,
-      "options": JSON.parse(_vm.question.options.options)
+      "options": _vm.question.options.options
     },
     on: {
       "input": _vm.onInput
@@ -69077,7 +69087,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }) : (_vm.question.type === 3) ? _c('CheckboxQuestion', {
     attrs: {
       "question": _vm.question,
-      "options": JSON.parse(_vm.question.options.options)
+      "options": _vm.question.options.options
     },
     on: {
       "input": _vm.onInput
@@ -69089,65 +69099,42 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       expression: "fields['question-'+question.id]"
     }
-  }) : (_vm.question.type === 4) ? _c('div', [(_vm.question.extras.dynamic === '0') ? _c('PanelQuestion', {
+  }) : (_vm.question.type === 5) ? _c('div', [_c('div', {
+    staticClass: "form-group"
+  }, [_c('label', [_vm._v(_vm._s(_vm.question.question))])]), _vm._v(" "), _c('table', {
+    staticClass: "table table-striped"
+  }, [_c('thead', [_c('th'), _vm._v(" "), _vm._l((_vm.question.options.options), function(opt) {
+    return _c('th', [_vm._v(_vm._s(opt.text))])
+  })], 2), _vm._v(" "), _c('tbody', _vm._l((_vm.question.children), function(child) {
+    return _c('tr', {
+      key: child.id
+    }, [_c('td', [_vm._v(_vm._s(child.question))]), _vm._v(" "), _vm._l((_vm.question.options.options), function(opt) {
+      return _c('td', [_c('input', {
+        directives: [{
+          name: "model",
+          rawName: "v-model",
+          value: (_vm.fields['question-' + child.id]),
+          expression: "fields['question-'+child.id]"
+        }],
+        attrs: {
+          "type": "radio"
+        },
+        domProps: {
+          "value": opt.value,
+          "checked": _vm._q(_vm.fields['question-' + child.id], opt.value)
+        },
+        on: {
+          "change": [function($event) {
+            _vm.$set(_vm.fields, 'question-' + child.id, opt.value)
+          }, _vm.onRadioInput]
+        }
+      })])
+    })], 2)
+  }), 0)])]) : (_vm.question.type === 6) ? _c('CheckboxArray', {
     attrs: {
       "question": _vm.question
     }
-  }) : _c('DynamicPanel', {
-    attrs: {
-      "panel": _vm.question.panel,
-      "batch_size": _vm.question.extras.batch_size,
-      "timeout": _vm.question.extras.timeout
-    }
-  })], 1) : (_vm.question.type === 5) ? _c('div', [_c('div', {
-    staticClass: "form-group"
-  }, [_c('label', [_vm._v(_vm._s(_vm.question.question))])]), _vm._v(" "), _c('table', {
-    staticClass: "table table-striped"
-  }, [_c('thead', [_c('th'), _vm._v(" "), _vm._l((JSON.parse(_vm.question.options.options)), function(opt) {
-    return _c('th', [_vm._v(_vm._s(opt.text))])
-  })], 2), _vm._v(" "), _c('tbody', _vm._l((_vm.question.children), function(child) {
-    return _c('RadioQuestion', {
-      key: child.id,
-      attrs: {
-        "question": child,
-        "options": JSON.parse(_vm.question.options.options)
-      },
-      on: {
-        "input": _vm.onRadioInput
-      },
-      model: {
-        value: (_vm.fields['question-' + child.id]),
-        callback: function($$v) {
-          _vm.$set(_vm.fields, 'question-' + child.id, $$v)
-        },
-        expression: "fields['question-'+child.id]"
-      }
-    })
-  }), 1)])]) : (_vm.question.type === 6) ? _c('div', [_c('div', {
-    staticClass: "form-group"
-  }, [_c('label', [_vm._v(_vm._s(_vm.question.question))])]), _vm._v(" "), _c('table', {
-    staticClass: "table table-striped"
-  }, [_c('thead', [_c('th'), _vm._v(" "), _vm._l((JSON.parse(_vm.question.options.options)), function(opt) {
-    return _c('th', [_vm._v(_vm._s(opt.text))])
-  })], 2), _vm._v(" "), _c('tbody', _vm._l((_vm.question.children), function(child) {
-    return _c('MultipleCheckboxes', {
-      key: child.id,
-      attrs: {
-        "question": child,
-        "options": JSON.parse(_vm.question.options.options)
-      },
-      on: {
-        "input": _vm.onRadioInput
-      },
-      model: {
-        value: (_vm.fields['question-' + child.id]),
-        callback: function($$v) {
-          _vm.$set(_vm.fields, 'question-' + child.id, $$v)
-        },
-        expression: "fields['question-'+child.id]"
-      }
-    })
-  }), 1)])]) : _vm._e()], 1)
+  }) : _vm._e()], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -69547,6 +69534,140 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 266 */,
+/* 267 */,
+/* 268 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(269)
+}
+var Component = __webpack_require__(13)(
+  /* script */
+  __webpack_require__(271),
+  /* template */
+  __webpack_require__(272),
+  /* styles */
+  injectStyle,
+  /* scopeId */
+  "data-v-524b1451",
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/var/www/cedimstudies/resources/assets/js/components/CheckboxArray.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] CheckboxArray.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-524b1451", Component.options)
+  } else {
+    hotAPI.reload("data-v-524b1451", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 269 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(270);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(16)("37f838cc", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-524b1451\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./CheckboxArray.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-524b1451\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./CheckboxArray.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 270 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(7)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 271 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: "CheckboxArray",
+    props: ['question']
+});
+
+/***/ }),
+/* 272 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function(){},staticRenderFns:[]}
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-524b1451", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

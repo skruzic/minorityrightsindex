@@ -27,7 +27,9 @@
         },
         computed: {
             current_items() {
-                return this.body.slice(this.counter, this.counter + this.batch_size);
+                const from = this.counter;
+                const to = this.counter + parseInt(this.batch_size);
+                return this.body.slice(from, to);
             },
             body() {
                 //let body = Object.values(JSON.parse(this.panel)['body']);

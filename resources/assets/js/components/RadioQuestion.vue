@@ -6,7 +6,8 @@
         </td>
     </tr>-->
     <b-form-group :label="question.question">
-        <b-form-radio-group v-model="selected" :options="options" stacked @input="updateValue"></b-form-radio-group>
+        <b-form-radio-group v-model="selected" :options="options" @input="updateValue">
+        </b-form-radio-group>
     </b-form-group>
 </template>
 

@@ -6,7 +6,7 @@
         </td>
     </tr>-->
     <b-form-group :label="question.question">
-        <b-form-checkbox-group  v-model="selected" :options="options" stacked @input="updateValue"/>
+        <b-form-checkbox-group  v-model="selected" :options="options" @input="updateValue"/>
     </b-form-group>
 </template>
 

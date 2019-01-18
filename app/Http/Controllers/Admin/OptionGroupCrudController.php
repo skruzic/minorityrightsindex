@@ -45,15 +45,15 @@ class OptionGroupCrudController extends CrudController
                 'label' => 'Description',
                 'type'  => 'text',
             ],
-            /*[
+            [
                 'name'    => 'options',
                 'label'   => 'Options',
                 'type'    => 'table',
                 'columns' => [
-                    'num'  => 'Numeric value',
-                    'text' => 'Display text',
+                    'value' => 'Numeric value',
+                    'text'  => 'Display text',
                 ],
-            ],*/
+            ],
         ]);
 
         $this->crud->addFields([
