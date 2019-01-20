@@ -1,15 +1,15 @@
-<template>Radio Button questions display as a single column of data.
+<template>
     <div>
-        <label>{{ question.question}}</label>
-        <!--<table class="table table-striped">
+        <label>{{ question.question }}</label>
+        <table class="table table-striped">
             <thead>
                 <th></th>
                 <th v-for="opt in question.options.options">{{ opt.text }}</th>
             </thead>
             <tbody>
-                --<MultipleCheckboxes v-model="fields['question-'+child.id]" v-for="child in question.children"
+                <MultipleCheckboxes v-model="fields['question-'+child.id]" v-for="child in question.children"
                                     :key="child.id" :question="child"
-                                    :options="JSON.parse(question.options.options)" @input="onRadioInput"/>-
+                                    :options="options" @input="onRadioInput"/>
                 <tr v-for="child in question.children" :key="child.id">
                     <td>{{ child.question }}</td>
                     <td v-for="opt in question.options.options">
@@ -18,14 +18,14 @@
                     </td>
                 </tr>
             </tbody>
-        </table>-->
+        </table>
     </div>
 </template>
 
 <script>
     export default {
         name: "CheckboxArray",
-        props: ['question']
+        props: ['question', 'options']
     }
 </script>
 

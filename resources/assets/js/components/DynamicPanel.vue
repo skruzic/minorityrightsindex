@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-observe-visibility="visibilityChanged">
         <!--<div class="card" v-for="item in current_items">
             <div class="card-header">
                 {{ item.question }}
@@ -19,16 +19,28 @@
 <script>
     export default {
         name: "DynamicPanel",
-        props: ['panel', 'batch_size', 'timeout'],
+        //props: ['panel', 'batch_size', 'timeout'],
+        props: {
+            panel: {
+                type: String
+            },
+            batch_size: {
+                type: Number
+            },
+            timeout: {
+                type: Number
+            }
+        },
         data() {
             return {
-                counter: 0
+                counter: 0,
+                isVisible: false
             }
         },
         computed: {
             current_items() {
                 const from = this.counter;
-                const to = this.counter + parseInt(this.batch_size);
+                const to = this.counter + this.batch_size;
                 return this.body.slice(from, to);
             },
             body() {
@@ -58,20 +70,38 @@
                 }
 
                 return array;
+            },
+            visibilityChanged (isVisible, entry) {
+
+                this.isVisible = isVisible;
+
+                /*this.$nextTick(function () {
+                    window.setInterval(() => {
+                        if (this.counter < this.body.length - 1) {
+                            this.counter += this.batch_size;
+                        }
+                    }, this.timeout * 1000);
+                });*/
+                setInterval(function() {
+                    if (this.counter < this.body.length - 1) {
+                        this.counter += this.batch_size;
+                    }
+                    console.log('SAD');
+                }, this.timeout * 1000);
             }
         },
         mounted() {
-            this.batch_size = parseInt(this.batch_size);
-            this.timeout = parseInt(this.timeout);
+            //this.batch_size = this.batch_size;
+            //this.timeout = this.timeout;
 
-            this.$nextTick(function () {
+            /*this.$nextTick(function () {
                 window.setInterval(() => {
                     if (this.counter < this.body.length - 1) {
-                        this.counter += parseInt(this.batch_size);
+                        this.counter += this.batch_size;
                     }
                 }, this.timeout * 1000);
-            });
-        }
+            });*/
+        },
     }
 </script>
 

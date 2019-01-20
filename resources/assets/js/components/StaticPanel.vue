@@ -9,7 +9,7 @@
                 <td v-for="td in tr">
                     <span class="d-none">{{ td }}</span>
                     <div class="d-block">
-                        <button class="btn btn-outline-primary" @click="handleClick">Otvori</button>
+                        <button class="btn btn-outline-primary" @click.prevent="handleClick">Otvori</button>
                     </div>
                 </td>
             </tr>
@@ -19,16 +19,22 @@
 
 <script>
     export default {
-        name: "PanelQuestion",
-        props: ['question'],
+        name: "StaticPanel",
+        props: ['question', 'timeout'],
         methods: {
             handleClick: function (event) {
                 let btn = $(event.target);
                 btn.parent().prev().toggleClass('d-none');
-                btn.text(function(i,text) {
+                /*btn.text(function(i,text) {
                     return text === 'Otvori' ? 'Zatvori' : 'Otvori';
-                });
-                //btn.prev().toggleClass('d-none');
+                });*/
+
+                // Sakrij botun
+                btn.toggleClass('d-none');
+
+                setTimeout(function() {
+                    btn.parent().prev().toggleClass('d-none');
+                }, this.timeout*1000);
             },
         },
         computed: {

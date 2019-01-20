@@ -43,10 +43,12 @@
         <!-- End checkbox -->
 
         <!-- Panel -->
-        <!--<div v-else-if="question.type === 4">
-            <PanelQuestion :question="question" v-if="question.extras.dynamic === '0'"></PanelQuestion>
-            <DynamicPanel :panel="question.panel" :batch_size="question.extras.batch_size" :timeout="question.extras.timeout" v-else></DynamicPanel>
-        </div>-->
+        <div v-else-if="question.type === 4">
+            <StaticPanel :question="question" :timeout="question.extras.timeout"
+                         v-if="question.extras.dynamic === '0'" />
+            <DynamicPanel :panel="question.panel" :batch_size="parseInt(question.extras.batch_size)"
+                          :timeout="parseInt(question.extras.timeout)" v-else />
+        </div>
         <!-- End panel -->
 
         <!-- Choice array -->
@@ -76,7 +78,7 @@
         <!-- End choice array -->
 
         <!-- Checkbox array -->
-        <!--<div v-else-if="question.type === 6">
+        <div v-else-if="question.type === 6">
             <div class="form-group">
                 <label>{{ question.question}}</label>
             </div>
@@ -86,9 +88,9 @@
                     <th v-for="opt in question.options.options">{{ opt.text }}</th>
                 </thead>
                 <tbody>
-                    !--<MultipleCheckboxes v-model="fields['question-'+child.id]" v-for="child in question.children"
+                    <!--<MultipleCheckboxes v-model="fields['question-'+child.id]" v-for="child in question.children"
                                         :key="child.id" :question="child"
-                                        :options="JSON.parse(question.options.options)" @input="onRadioInput"/>--
+                                        :options="question.options.options" @input="onRadioInput"/>-->
                     <tr v-for="child in question.children" :key="child.id">
                         <td>{{ child.question }}</td>
                         <td v-for="opt in question.options.options">
@@ -98,8 +100,8 @@
                     </tr>
                 </tbody>
             </table>
-        </div>-->
-        <CheckboxArray v-else-if="question.type === 6" :question="question"/>
+        </div>
+        <!--<CheckboxArray v-else-if="question.type === 6" :question="question" :options="question.options.options"/>-->
         <!-- End checkbox array -->
     </div>
 </template>
@@ -110,7 +112,7 @@
     import RadioQuestion from './RadioQuestion';
     import CheckboxQuestion from './CheckboxQuestion'
     import MultipleCheckboxes from './MultipleCheckboxes';
-    import PanelQuestion from './PanelQuestion';
+    import StaticPanel from './StaticPanel';
     import DynamicPanel from "./DynamicPanel";
     import CheckboxArray from "./CheckboxArray";
 
@@ -119,7 +121,8 @@
         //components: {CheckboxQuestion, RadioQuestion},
         components: {
             CheckboxArray,
-            DynamicPanel, TextQuestion, RadioQuestion, CheckboxQuestion, MultipleCheckboxes, PanelQuestion},
+            DynamicPanel, TextQuestion, RadioQuestion, CheckboxQuestion, MultipleCheckboxes, StaticPanel
+        },
         //props: ['question', 'value'],
         props: {
             question: {
@@ -152,7 +155,7 @@
                 this.$emit('input', this.fields);
                 //console.log(event.target.name);
             }
-        }
+        },
     }
 </script>
 
