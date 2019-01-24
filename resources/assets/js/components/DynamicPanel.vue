@@ -34,7 +34,7 @@
         data() {
             return {
                 counter: 0,
-                isVisible: false
+                isVisible: false,
             }
         },
         computed: {
@@ -72,22 +72,16 @@
                 return array;
             },
             visibilityChanged (isVisible, entry) {
-
                 this.isVisible = isVisible;
 
-                /*this.$nextTick(function () {
-                    window.setInterval(() => {
-                        if (this.counter < this.body.length - 1) {
-                            this.counter += this.batch_size;
-                        }
-                    }, this.timeout * 1000);
-                });*/
-                setInterval(function() {
+                /*setInterval(function() {
                     if (this.counter < this.body.length - 1) {
                         this.counter += this.batch_size;
                     }
                     console.log('SAD');
-                }, this.timeout * 1000);
+                }, this.timeout * 1000);*/
+
+
             }
         },
         mounted() {

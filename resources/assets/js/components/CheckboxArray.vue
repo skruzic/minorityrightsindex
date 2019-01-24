@@ -25,7 +25,7 @@
 <script>
     export default {
         name: "CheckboxArray",
-        props: ['question', 'options']
+        props: ['question', 'options'],
     }
 </script>
 

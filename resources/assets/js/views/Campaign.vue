@@ -5,7 +5,7 @@
                 <!--<h1 class="title m-b-md">{{ campaign.title }}</h1>-->
 
                 <!--<tab-content v-for="section in campaign.sections" :key="section.id" :section="section"></tab-content>-->
-                <form-wizard :title="campaign.title" subtitle="" nextButtonText="Dalje" finishButtonText="Kraj"
+                <form-wizard :title="campaign.title" subtitle="" nextButtonText="Dalje" finishButtonText="Kraaj"
                              shape="tab" @on-complete="submit">
                     <tab-content v-for="section in campaign.sections" :key="section.id" :section="section">
                         <section>

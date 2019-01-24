@@ -22,6 +22,9 @@
             onInput() {
                 this.$emit('input', this.value)
             }
+        },
+        mounted() {
+            this.$emit('input', this.value);
         }
     }
 </script>
