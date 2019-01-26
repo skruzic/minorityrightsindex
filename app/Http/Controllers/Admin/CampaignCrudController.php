@@ -26,7 +26,7 @@ class CampaignCrudController extends CrudController
         */
         $this->crud->setModel('App\Models\Campaign');
         $this->crud->setRoute(config('backpack.base.route_prefix').'/campaign');
-        $this->crud->setEntityNameStrings('campaign', 'campaigns');
+        $this->crud->setEntityNameStrings(__('admin.campaign'), __('admin.campaigns'));
 
         /*
         |--------------------------------------------------------------------------
@@ -39,12 +39,12 @@ class CampaignCrudController extends CrudController
         $this->crud->addColumns([
             [
                 'name'  => 'title',
-                'label' => 'Title',
+                'label' => __('admin.title'),
                 'type'  => 'text',
             ],
             [
                 'name'  => 'description',
-                'label' => 'Description',
+                'label' => __('admin.description'),
                 'type'  => 'text',
             ],
             [
@@ -60,12 +60,12 @@ class CampaignCrudController extends CrudController
         $this->crud->addFields([
             [
                 'name'  => 'title',
-                'label' => 'Title',
+                'label' => __('admin.title'),
                 'type'  => 'text',
             ],
             [
                 'name'  => 'description',
-                'label' => 'Description',
+                'label' => __('admin.description'),
                 'type'  => 'textarea',
             ],
             [
@@ -105,7 +105,8 @@ class CampaignCrudController extends CrudController
         return $redirect_location;
     }
 
-    public function clone($id) {
+    public function clone($id)
+    {
         $this->crud->hasAccessOrFail('clone');
         $this->crud->setOperation('clone');
 

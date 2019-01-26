@@ -14,20 +14,20 @@ return [
     */
 
     // Forms
-    'save_action_save_and_new' => 'Save and new item',
-    'save_action_save_and_edit' => 'Save and edit this item',
-    'save_action_save_and_back' => 'Save and back',
+    'save_action_save_and_new' => 'Spremi i dodaj novi zapis',
+    'save_action_save_and_edit' => 'Spremi i uredi ovaj zapis',
+    'save_action_save_and_back' => 'Spremi i povratak na prethodnu',
     'save_action_changed_notification' => 'Default behaviour after saving has been changed.',
 
     // Create form
-    'add'                 => 'Add',
-    'back_to_all'         => 'Back to all ',
-    'cancel'              => 'Cancel',
-    'add_a_new'           => 'Add a new ',
+    'add'                 => 'Dodaj',
+    'back_to_all'         => 'Povratak na sve ',
+    'cancel'              => 'Poništi',
+    'add_a_new'           => 'Dodaj novi ',
 
     // Edit form
-    'edit'                 => 'Edit',
-    'save'                 => 'Save',
+    'edit'                 => 'Uredi',
+    'save'                 => 'Spremi',
 
     // Revisions
     'revisions'            => 'Revisions',
@@ -46,10 +46,10 @@ return [
     'language'          => 'Language',
 
     // CRUD table view
-    'all'                       => 'All ',
+    'all'                       => 'Sve ',
     'in_the_database'           => 'in the database',
-    'list'                      => 'List',
-    'actions'                   => 'Actions',
+    'list'                      => 'Popis',
+    'actions'                   => 'Akcije',
     'preview'                   => 'Preview',
     'delete'                    => 'Delete',
     'admin'                     => 'Admin',
@@ -82,15 +82,15 @@ return [
 
         // DataTables translation
         'emptyTable'     => 'No data available in table',
-        'info'           => 'Showing _START_ to _END_ of _TOTAL_ entries',
+        'info'           => 'Prikazujem od _START_ do _END_ od ukupno _TOTAL_ zapisa',
         'infoEmpty'      => 'Showing 0 to 0 of 0 entries',
         'infoFiltered'   => '(filtered from _MAX_ total entries)',
         'infoPostFix'    => '',
         'thousands'      => ',',
-        'lengthMenu'     => '_MENU_ records per page',
+        'lengthMenu'     => '_MENU_ zapisa po stranici',
         'loadingRecords' => 'Loading...',
         'processing'     => 'Processing...',
-        'search'         => 'Search: ',
+        'search'         => 'Pretraga: ',
         'zeroRecords'    => 'No matching records found',
         'paginate'       => [
             'first'    => 'First',

@@ -1,14 +1,5 @@
 <template>
-    <div v-observe-visibility="visibilityChanged">
-        <!--<div class="card" v-for="item in current_items">
-            <div class="card-header">
-                {{ item.question }}
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">{{ item.key }}</h5>
-                <p class="card-text">{{ item.value }}</p>
-            </div>
-        </div>-->
+    <div>
         <b-card :title="item.question" v-for="item in current_items" :key="item.id">
             <h5 class="card-title">{{ item.key }}</h5>
             <p class="card-text">{{ item.value }}</p>
@@ -17,9 +8,11 @@
 </template>
 
 <script>
+    import inViewport from 'vue-in-viewport-mixin';
+
     export default {
         name: "DynamicPanel",
-        //props: ['panel', 'batch_size', 'timeout'],
+        mixins: [inViewport],
         props: {
             panel: {
                 type: String
@@ -29,12 +22,18 @@
             },
             timeout: {
                 type: Number
+            },
+            active_tab_index: {
+                type: Number
+            },
+            section_index: {
+                type: Number
             }
         },
         data() {
             return {
                 counter: 0,
-                isVisible: false,
+                is_ran: false,
             }
         },
         computed: {
@@ -60,7 +59,7 @@
                 //return Object.values(body);
                 //console.log(ret);
                 return this.shuffle(ret);
-            }
+            },
         },
         methods: {
             shuffle(array) {
@@ -71,31 +70,40 @@
 
                 return array;
             },
-            visibilityChanged (isVisible, entry) {
-                this.isVisible = isVisible;
+            loop_items() {
+                if (!this.is_ran) {
+                    this.is_ran = !this.is_ran;
 
-                /*setInterval(function() {
-                    if (this.counter < this.body.length - 1) {
-                        this.counter += this.batch_size;
-                    }
-                    console.log('SAD');
-                }, this.timeout * 1000);*/
+                    this.$nextTick(function () {
+                        window.setInterval(() => {
+                            if (this.counter < this.body.length - 1) {
+                                this.counter++;
+                                this.counter += parseInt(this.batch_size);
+                            }
 
-
+                        }, this.timeout * 1000);
+                    });
+                }
             }
         },
         mounted() {
-            //this.batch_size = this.batch_size;
-            //this.timeout = this.timeout;
-
             /*this.$nextTick(function () {
                 window.setInterval(() => {
-                    if (this.counter < this.body.length - 1) {
-                        this.counter += this.batch_size;
-                    }
-                }, this.timeout * 1000);
+                    let a = 0;
+                }, 2000);
             });*/
         },
+        updated() {
+            console.log('updated');
+        },
+        watch: {
+            active_tab_index: function (val, old) {
+                if (val === this.section_index) {
+                    this.loop_items();
+                }
+
+            }
+        }
     }
 </script>
 

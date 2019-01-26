@@ -1,7 +1,7 @@
 <template>
     <div>
         <TextQuestion v-if="[0,1].includes(question.type)" :question="question"
-                      v-model="fields['question-'+question.id]" @input="onInput"/>
+                      v-model="fields[question.title]" @input="onInput"/>
         <!--<div v-if="question.type === 0">
             <label>{{ question.question }}</label>
             <input type="text" :name="'question-'+question.id" class="form-control" :value="value"
@@ -23,7 +23,7 @@
             </div>
         </div>-->
         <RadioQuestion v-else-if="question.type === 2" :question="question"
-                       :options="question.options.options" v-model="fields['question-'+question.id]"
+                       :options="question.options.options" v-model="fields[question.title]"
                        @input="onInput"/>
         <!-- End radio -->
 
@@ -39,7 +39,7 @@
         </div>-->
         <CheckboxQuestion v-else-if="question.type === 3" :question="question"
                           :options="question.options.options"
-                          v-model="fields['question-'+question.id]" @input="onInput"/>
+                          v-model="fields[question.title]" @input="onInput"/>
         <!-- End checkbox -->
 
         <!-- Panel -->
@@ -47,7 +47,7 @@
             <StaticPanel :question="question" :timeout="question.extras.timeout"
                          v-if="question.extras.dynamic === '0'" />
             <DynamicPanel :panel="question.panel" :batch_size="parseInt(question.extras.batch_size)"
-                          :timeout="parseInt(question.extras.timeout)" v-else />
+                          :timeout="parseInt(question.extras.timeout)" v-else :active_tab_index="activeTabIndex" :section_index="sectionIndex"/>
         </div>
         <!-- End panel -->
 
@@ -62,13 +62,10 @@
                     <th v-for="opt in question.options.options">{{ opt.text }}</th>
                 </thead>
                 <tbody>
-                    <!--<RadioQuestion v-model="fields['question-'+child.id]" v-for="child in question.children"
-                                   :key="child.id" :question="child" :options="question.options.options"
-                                   @input="onRadioInput"/>-->
                     <tr v-for="child in question.children" :key="child.id">
                         <td>{{ child.question }}</td>
                         <td v-for="opt in question.options.options">
-                            <input type="radio" :value="opt.value" v-model="fields['question-'+child.id]"
+                            <input type="radio" :value="opt.value" v-model="fields[child.title]"
                                    @change="onRadioInput"/>
                         </td>
                     </tr>
@@ -128,9 +125,12 @@
             question: {
                 type: Object
             },
-            /*value: {
-                type: [Array, String, Number, Object]
-            }*/
+            activeTabIndex: {
+                type: Number
+            },
+            sectionIndex: {
+                type: Number
+            }
         },
         data() {
             return {
@@ -154,7 +154,11 @@
                 //this.fields.push(event.target.value);
                 this.$emit('input', this.fields);
                 //console.log(event.target.name);
+            },
+            active_tab() {
+                return this.activeTabIndex === this.sectionIndex;
             }
+
         },
     }
 </script>

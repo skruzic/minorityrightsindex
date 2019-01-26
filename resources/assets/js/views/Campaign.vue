@@ -5,17 +5,27 @@
                 <!--<h1 class="title m-b-md">{{ campaign.title }}</h1>-->
 
                 <!--<tab-content v-for="section in campaign.sections" :key="section.id" :section="section"></tab-content>-->
-                <form-wizard :title="campaign.title" subtitle="" nextButtonText="Dalje" finishButtonText="Kraaj"
-                             shape="tab" @on-complete="submit">
-                    <tab-content v-for="section in campaign.sections" :key="section.id" :section="section">
+                <form-wizard :title="campaign.title" subtitle="" nextButtonText="Dalje" finishButtonText="Kraj"
+                             shape="tab" @on-complete="submit" @on-change="setTabIndex">
+                    <tab-content v-for="(section, index) in campaign.sections" :key="section.id" :section="section">
                         <section>
                             <h3>{{ section.title }}</h3>
                             <p>{{ section.description }}</p>
                             <question v-for="question in section.questions" :key="question.id"
-                                      :question="question" v-model="fields['question-'+question.id]"></question>
+                                      :question="question" :activeTabIndex="activeTabIndex" :sectionIndex="index" v-model="fields['question-'+question.id]"></question>
                         </section>
                     </tab-content>
                 </form-wizard>
+                <!--<b-tabs @input="setTabIndex">
+                    <b-tab :title="section.title" v-for="(section, index) in campaign.sections" :key="section.id" :section="section">
+                        <section>
+                            <h3>{{ section.title }}</h3>
+                            <p>{{ section.description }}</p>
+                            <question v-for="question in section.questions" :key="question.id"
+                                      :question="question" :activeTabIndex="activeTabIndex" :sectionIndex="index" v-model="fields['question-'+question.id]"></question>
+                        </section>
+                    </b-tab>
+                </b-tabs>-->
                 <!--<Example></Example>-->
 
             </form>
@@ -33,7 +43,8 @@
         data: function () {
             return {
                 campaign: [],
-                fields: {}
+                fields: {},
+                activeTabIndex: 0
             }
         },
         mounted: function () {
@@ -82,7 +93,10 @@
                     }
                 }
                 return toReturn;
-            }
+            },
+            setTabIndex(prev, next) {
+                this.activeTabIndex = next;
+            },
         }
     }
 </script>
