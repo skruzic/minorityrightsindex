@@ -112,8 +112,8 @@ class CampaignCrudController extends CrudController
         $this->crud->hasAccessOrFail('clone');
         $this->crud->setOperation('clone');
 
-        $clone = $model->replicate();
-        $clone->title = $model->title . ' (klon)';
+        $clone        = $model->replicate();
+        $clone->title = $model->title.' (klon)';
         $clone->push();
 
 
@@ -122,12 +122,15 @@ class CampaignCrudController extends CrudController
             $clone->sections()->save($section_clone);
 
             foreach ($section->questions as $question) {
-                $question_clone = $question->replicate();
-                $section_clone->questions()->save($question_clone);
+                if ( ! isset($question->parent_id)) {
+                    $question_clone = $question->replicate();
+                    $section_clone->questions()->save($question_clone);
 
-                foreach ($question->children as $child) {
-                    $child_clone = $child->replicate();
-                    $question_clone->children()->save($child_clone);
+                    foreach ($question->children as $child) {
+                        $child_clone            = $child->replicate();
+                        $child_clone->parent_id = $question_clone->id;
+                        $question_clone->children()->save($child_clone);
+                    }
                 }
             }
         }

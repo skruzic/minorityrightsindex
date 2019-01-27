@@ -6,48 +6,6 @@ use Backpack\CRUD\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use App\Enums\QuestionType;
 
-/**
- * App\Models\Question
- *
- * @property int $id
- * @property int $section_id
- * @property int|null $parent_id
- * @property int $lft
- * @property int $rgt
- * @property int $depth
- * @property string|null $title
- * @property int $type
- * @property string $question
- * @property string|null $panel
- * @property array|null $extras
- * @property int|null $option_group_id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Campaign $campaign
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Question[] $children
- * @property-read \App\Models\OptionGroup|null $options
- * @property-read \App\Models\Question|null $parent
- * @property-read \App\Models\Section $section
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereDepth($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereExtras($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereLft($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereOptionGroupId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question wherePanel($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereParentId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereQuestion($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereRgt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereSectionId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereTitle($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question withoutChildren()
- * @mixin \Eloquent
- */
 class Question extends Model
 {
     use CrudTrait;
