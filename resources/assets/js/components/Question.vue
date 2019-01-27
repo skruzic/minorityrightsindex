@@ -1,42 +1,17 @@
 <template>
     <div>
+        <!-- Text and Textarea -->
         <TextQuestion v-if="[0,1].includes(question.type)" :question="question"
                       v-model="fields[question.title]" @input="onInput"/>
-        <!--<div v-if="question.type === 0">
-            <label>{{ question.question }}</label>
-            <input type="text" :name="'question-'+question.id" class="form-control" :value="value"
-                   @input="onInput($event)">
-        </div>-->
-        <!--<div v-else-if="question.type === 1">
-            <label>{{ question.question }}</label>
-            <textarea :name="'question-'+question.id" class="form-control" :value="value"
-                      @input="onTextInput($event)"></textarea>
-        </div>-->
+        <!-- End text and textarea -->
 
         <!-- Radio -->
-        <!--<div v-else-if="question.type === 2">
-            <div class="form-group">
-                <label>{{ question.question }}</label>
-                <label class="radio-inline" v-for="opt in JSON.parse(question.options.options)">
-                    <input type="radio" :value="opt.num" @input="onInput($event)">{{ opt.text }}
-                </label>
-            </div>
-        </div>-->
         <RadioQuestion v-else-if="question.type === 2" :question="question"
                        :options="question.options.options" v-model="fields[question.title]"
                        @input="onInput"/>
         <!-- End radio -->
 
         <!-- Checkbox -->
-        <!--<div v-else-if="question.type === 3">
-            <div class="form-group">
-                <label>{{ question.question }}</label>
-                <label class="checkbox-inline" v-for="opt in JSON.parse(question.options.options)">
-                    <input type="checkbox" :value="opt.num" v-model="fields['question-'+question.id]"
-                           @change="onCheckboxInput">{{ opt.text }}
-                </label>
-            </div>
-        </div>-->
         <CheckboxQuestion v-else-if="question.type === 3" :question="question"
                           :options="question.options.options"
                           v-model="fields[question.title]" @input="onInput"/>
@@ -45,32 +20,27 @@
         <!-- Panel -->
         <div v-else-if="question.type === 4">
             <StaticPanel :question="question" :timeout="question.extras.timeout"
-                         v-if="question.extras.dynamic === '0'" />
+                         v-if="question.extras.dynamic === '0'"/>
             <DynamicPanel :panel="question.panel" :batch_size="parseInt(question.extras.batch_size)"
-                          :timeout="parseInt(question.extras.timeout)" v-else :active_tab_index="activeTabIndex" :section_index="sectionIndex"/>
+                          :timeout="parseInt(question.extras.timeout)" v-else :active_tab_index="activeTabIndex"
+                          :section_index="sectionIndex"/>
         </div>
         <!-- End panel -->
 
         <!-- Choice array -->
         <div v-else-if="question.type === 5">
-            <div class="form-group">
+            <div>
                 <label>{{ question.question}}</label>
             </div>
-            <table class="table table-striped">
-                <thead>
-                    <th></th>
-                    <th v-for="opt in question.options.options">{{ opt.text }}</th>
-                </thead>
-                <tbody>
-                    <tr v-for="child in question.children" :key="child.id">
-                        <td>{{ child.question }}</td>
-                        <td v-for="opt in question.options.options">
-                            <input type="radio" :value="opt.value" v-model="fields[child.title]"
-                                   @change="onRadioInput"/>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="wrapper">
+                <div class="grid-header">
+                    <div class="header-item"></div>
+                    <div class="header-item" v-for="opt in question.options.options">{{ opt.text }}</div>
+                </div>
+                <LikertRadioQuestion :question="child" :options="question.options.options"
+                                     v-model="fields[child.title]" v-for="child in question.children" :key="child.id"
+                                     @input="onRadioInput"/>
+            </div>
         </div>
         <!-- End choice array -->
 
@@ -112,13 +82,16 @@
     import StaticPanel from './StaticPanel';
     import DynamicPanel from "./DynamicPanel";
     import CheckboxArray from "./CheckboxArray";
+    import LikertRadioQuestion from "./LikertRadioQuestion";
+
 
     export default {
         name: "question",
         //components: {CheckboxQuestion, RadioQuestion},
         components: {
             CheckboxArray,
-            DynamicPanel, TextQuestion, RadioQuestion, CheckboxQuestion, MultipleCheckboxes, StaticPanel
+            DynamicPanel, TextQuestion, RadioQuestion, CheckboxQuestion, MultipleCheckboxes, StaticPanel,
+            LikertRadioQuestion
         },
         //props: ['question', 'value'],
         props: {
@@ -158,11 +131,28 @@
             active_tab() {
                 return this.activeTabIndex === this.sectionIndex;
             }
-
         },
     }
 </script>
 
 <style scoped>
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+    }
 
+    .grid-header{
+        display: flex;
+        align-items: flex-end;
+    }
+
+    .header-item {
+        width:100px;
+        text-align:center;
+        /*   border:1px solid transparent; */
+    }
+
+    .header-item:nth-child(1) {
+        width:180px;
+    }
 </style>

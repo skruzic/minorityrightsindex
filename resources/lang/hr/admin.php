@@ -8,10 +8,14 @@
 
 return [
     // Osnovno
-    'title'       => 'Naslov',
-    'description' => 'Opis',
+    'title'             => 'Naslov',
+    'description'       => 'Opis',
+    'clone'             => 'Kloniraj',
 
     // Kampanja
-    'campaign'    => 'kampanja',
-    'campaigns'   => 'kampanje',
+    'campaign'          => 'kampanja',
+    'campaigns'         => 'kampanje',
+    'relation_sections' => 'Vidi sekcije',
+
+    // Sekcija
 ];

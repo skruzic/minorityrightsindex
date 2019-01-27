@@ -107,9 +107,29 @@ class CampaignCrudController extends CrudController
 
     public function clone($id)
     {
+        $model = Campaign::find($id);
+
         $this->crud->hasAccessOrFail('clone');
         $this->crud->setOperation('clone');
 
-        $clone = Campaign::find($id)->replicate();
+        $clone = $model->replicate();
+        $clone->title = $model->title . ' (klon)';
+        $clone->push();
+
+
+        foreach ($model->sections as $section) {
+            $section_clone = $section->replicate();
+            $clone->sections()->save($section_clone);
+
+            foreach ($section->questions as $question) {
+                $question_clone = $question->replicate();
+                $section_clone->questions()->save($question_clone);
+
+                foreach ($question->children as $child) {
+                    $child_clone = $child->replicate();
+                    $question_clone->children()->save($child_clone);
+                }
+            }
+        }
     }
 }

@@ -1,20 +1,20 @@
 <template>
-    <!--<tr>
-        <td>{{ question.question }}</td>
-        <td class="radio-inline" v-for="option in options">
-            <input type="radio" :key="option.num" :value="option.num" :name="'question-'+question.id" v-model="radioValue" @input="updateValue">
-        </td>
-    </tr>-->
-    <b-form-group :label="question.question">
-        <b-form-radio-group v-model="selected" :options="options" @input="updateValue">
-        </b-form-radio-group>
-    </b-form-group>
+    <div>
+        <b-form-group :label="question.question">
+            <b-form-radio-group v-model="selected" :options="options" @input="updateValue">
+            </b-form-radio-group>
+        </b-form-group>
+    </div>
 </template>
 
 <script>
     export default {
         name: "RadioQuestion",
-        props: ['question', 'options', 'value'],
+        //props: ['question', 'options', 'value', 'likert'],
+        props: {
+            question: Object,
+            options: Array,
+        },
         data() {
             return {
                 selected: this.value || 0
