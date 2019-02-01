@@ -14,11 +14,39 @@ use League\Csv\Writer;
 
 class AnswerExporter
 {
-    public function __construct()
-    {
-        $id = 1;
-        $model = Answer::whereCampaignId($id)->get();
+    protected $headers;
+    protected $data;
 
-        \Log::info($model);
+    public function __construct($id)
+    {
+        //$id = 1;
+        $models = Answer::whereCampaignId($id)->get();
+
+        // Vadim header
+        $this->headers = array_keys(json_decode(json_decode($models[0], true)['data'], true));
+
+        foreach ($models as $model) {
+            $model_array = json_decode($model, true);
+            $data        = json_decode($model_array['data'], true);
+            foreach ($data as $key => $value) {
+                if (is_array($value)) {
+                    $flat = implode(',', $value);
+                    $data[$key] = $flat;
+                }
+            }
+            $this->data[] = $data;
+        }
+
+        //\Log::info($this->data);
+    }
+
+    public function export()
+    {
+        $csv = Writer::createFromFileObject(new \SplTempFileObject());
+
+        $csv->insertOne($this->headers);
+        $csv->insertAll($this->data);
+
+        $csv->output('campaign.csv');
     }
 }

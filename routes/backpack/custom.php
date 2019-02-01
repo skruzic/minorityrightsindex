@@ -18,6 +18,7 @@ Route::group([
     Route::group(['prefix' => 'campaign/{campaign_id}'], function()
     {
         CRUD::resource('section', 'CampaignSectionCrudController');
+        Route::get('download', 'CampaignSectionCrudController@download');
 
         Route::group(['prefix' => 'section/{section_id}'], function()
         {

@@ -16,6 +16,7 @@ return [
     'campaign'          => 'kampanja',
     'campaigns'         => 'kampanje',
     'relation_sections' => 'Vidi sekcije',
+    'export_csv'        => 'Preuzmi odgovore',
 
     // Sekcija
 ];
