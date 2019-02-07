@@ -15983,6 +15983,7 @@ try {
 window.axios = __webpack_require__(38);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.baseURL = "http://cedim.local" + '/api/';
 
 /**
  * Next we will register the CSRF Token as a common header with Axios so that
@@ -70074,7 +70075,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         /*$.get('http://cedim.local/api/campaign/' + this.$route.params.id).always((response) => {
             this.campaign = response
         });*/
-        axios.get('http://cedim.local/api/campaign/' + this.$route.params.id).then(function (response) {
+        axios.get('campaign/' + this.$route.params.id).then(function (response) {
             _this.campaign = response.data;
         });
     },
@@ -70087,7 +70088,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             //this.flatten(this.fields);
             console.log(toSubmit);
 
-            axios.post('http://cedim.local/api/campaign', toSubmit).then(function (response) {
+            axios.post('campaign', toSubmit).then(function (response) {
                 console.log(response);
             }).catch(function (error) {
                 console.log(error);

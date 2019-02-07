@@ -51,7 +51,7 @@
             /*$.get('http://cedim.local/api/campaign/' + this.$route.params.id).always((response) => {
                 this.campaign = response
             });*/
-            axios.get('http://cedim.local/api/campaign/' + this.$route.params.id).then(response => {
+            axios.get('campaign/' + this.$route.params.id).then(response => {
                 this.campaign = response.data;
             })
         },
@@ -64,7 +64,7 @@
                     //this.flatten(this.fields);
                 console.log(toSubmit);
 
-                axios.post('http://cedim.local/api/campaign', toSubmit).then(response => {
+                axios.post('campaign', toSubmit).then(response => {
                     console.log(response);
                 }).catch(function (error) {
                     console.log(error);
