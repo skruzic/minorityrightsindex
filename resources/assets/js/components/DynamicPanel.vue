@@ -1,8 +1,13 @@
 <template>
     <div>
-        <b-card :title="item.question" v-for="item in current_items" :key="item.id">
+        <b-card :title="item.question" v-for="(item, index) in current_items" :key="item.id">
             <h5 class="card-title">{{ item.key }}</h5>
-            <p class="card-text">{{ item.value }}</p>
+            <div class="d-block">
+                <button class="btn btn-outline-primary" v-model="clicks"
+                        @click.prevent="handleClick($event, item.question, item.key)">Otvori
+                </button>
+            </div>
+            <p class="card-text d-none">{{ item.value }}</p>
         </b-card>
     </div>
 </template>
@@ -34,6 +39,7 @@
             return {
                 counter: 0,
                 is_ran: false,
+                clicks: [],
             }
         },
         computed: {
@@ -84,17 +90,23 @@
                         }, this.timeout * 1000);
                     });
                 }
-            }
+            },
+            handleClick: function (event, i, j) {
+                let btn = $(event.target);
+                btn.parent().next().toggleClass('d-none');
+
+                // Emitiram klik event s podacima
+                // Prvi broj je redak, drugi stupac
+                // Nulti redak ili stupac se smatraju pitanje, odnosno zaglavlje
+                this.clicks.push("(" + i + "-" + j + ")");
+                this.$emit('input', this.clicks);
+
+                // Sakrij botun
+                btn.toggleClass('d-none');
+            },
         },
         mounted() {
-            /*this.$nextTick(function () {
-                window.setInterval(() => {
-                    let a = 0;
-                }, 2000);
-            });*/
-        },
-        updated() {
-            console.log('updated');
+            this.$emit('input', this.clicks);
         },
         watch: {
             active_tab_index: function (val, old) {

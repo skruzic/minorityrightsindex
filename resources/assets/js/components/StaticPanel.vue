@@ -39,7 +39,7 @@
                 // Emitiram klik event s podacima
                 // Prvi broj je redak, drugi stupac
                 // Nulti redak ili stupac se smatraju pitanje, odnosno zaglavlje
-                this.clicks.push([i + 1, j + 1].join(','));
+                this.clicks.push("(" + i + "-" + j +")");
                 this.$emit('input', this.clicks);
 
                 // Sakrij botun
