@@ -42848,7 +42848,7 @@ var Component = __webpack_require__(9)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/home/stanko/web/cedimstudies/resources/assets/js/components/Question.vue"
+Component.options.__file = "/var/www/cedimstudies/resources/assets/js/components/Question.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Question.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -68055,7 +68055,7 @@ var Component = __webpack_require__(9)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/home/stanko/web/cedimstudies/resources/assets/js/components/TextQuestion.vue"
+Component.options.__file = "/var/www/cedimstudies/resources/assets/js/components/TextQuestion.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] TextQuestion.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -68217,7 +68217,7 @@ var Component = __webpack_require__(9)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/home/stanko/web/cedimstudies/resources/assets/js/components/RadioQuestion.vue"
+Component.options.__file = "/var/www/cedimstudies/resources/assets/js/components/RadioQuestion.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] RadioQuestion.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -68373,7 +68373,7 @@ var Component = __webpack_require__(9)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/home/stanko/web/cedimstudies/resources/assets/js/components/CheckboxQuestion.vue"
+Component.options.__file = "/var/www/cedimstudies/resources/assets/js/components/CheckboxQuestion.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] CheckboxQuestion.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -68528,7 +68528,7 @@ var Component = __webpack_require__(9)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/home/stanko/web/cedimstudies/resources/assets/js/components/MultipleCheckboxes.vue"
+Component.options.__file = "/var/www/cedimstudies/resources/assets/js/components/MultipleCheckboxes.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] MultipleCheckboxes.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -68699,7 +68699,7 @@ var Component = __webpack_require__(9)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/home/stanko/web/cedimstudies/resources/assets/js/components/StaticPanel.vue"
+Component.options.__file = "/var/www/cedimstudies/resources/assets/js/components/StaticPanel.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] StaticPanel.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -68757,7 +68757,7 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -68791,26 +68791,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "StaticPanel",
     props: ['question', 'timeout'],
+    data: function data() {
+        return {
+            clicks: []
+        };
+    },
+
     methods: {
-        handleClick: function handleClick(event) {
+        handleClick: function handleClick(event, i, j) {
             var btn = $(event.target);
             btn.parent().prev().toggleClass('d-none');
             /*btn.text(function(i,text) {
                 return text === 'Otvori' ? 'Zatvori' : 'Otvori';
             });*/
 
+            // Emitiram klik event s podacima
+            // Prvi broj je redak, drugi stupac
+            //this.$emit('click', [i, j]);
+            this.clicks.push([i, j].join(','));
+            this.$emit('input', this.clicks);
+
             // Sakrij botun
             btn.toggleClass('d-none');
 
-            setTimeout(function () {
-                btn.parent().prev().toggleClass('d-none');
-            }, this.timeout * 1000);
+            if (this.timeout > 0) {
+                setTimeout(function () {
+                    btn.parent().prev().toggleClass('d-none');
+                    btn.toggleClass('d-none');
+                }, this.timeout * 1000);
+            }
         }
     },
     computed: {
         parsedPanel: function parsedPanel() {
             return JSON.parse(this.question.panel);
         }
+    },
+    mounted: function mounted() {
+        this.$emit('input', this.clicks);
     }
 });
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(15)))
@@ -68826,8 +68844,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "thead-dark"
   }, _vm._l((JSON.parse(_vm.question.panel)['header']), function(th) {
     return _c('th', [_vm._v(_vm._s(th))])
-  }), 0), _vm._v(" "), _c('tbody', _vm._l((JSON.parse(_vm.question.panel)['body']), function(tr, key) {
-    return _c('tr', [_c('th', [_vm._v(_vm._s(key))]), _vm._v(" "), _vm._l((tr), function(td) {
+  }), 0), _vm._v(" "), _c('tbody', _vm._l((JSON.parse(_vm.question.panel)['body']), function(tr, key, i) {
+    return _c('tr', [_c('th', [_vm._v(_vm._s(key))]), _vm._v(" "), _vm._l((tr), function(td, key2, j) {
       return _c('td', [_c('span', {
         staticClass: "d-none"
       }, [_vm._v(_vm._s(td))]), _vm._v(" "), _c('div', {
@@ -68837,8 +68855,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         on: {
           "click": function($event) {
             $event.preventDefault();
-            return _vm.handleClick($event)
+            _vm.handleClick($event, i, j)
           }
+        },
+        model: {
+          value: (_vm.clicks),
+          callback: function($$v) {
+            _vm.clicks = $$v
+          },
+          expression: "clicks"
         }
       }, [_vm._v("Otvori")])])])
     })], 2)
@@ -68873,7 +68898,7 @@ var Component = __webpack_require__(9)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/home/stanko/web/cedimstudies/resources/assets/js/components/DynamicPanel.vue"
+Component.options.__file = "/var/www/cedimstudies/resources/assets/js/components/DynamicPanel.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] DynamicPanel.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -69295,7 +69320,7 @@ var Component = __webpack_require__(9)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/home/stanko/web/cedimstudies/resources/assets/js/components/CheckboxArray.vue"
+Component.options.__file = "/var/www/cedimstudies/resources/assets/js/components/CheckboxArray.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] CheckboxArray.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -69490,7 +69515,7 @@ var Component = __webpack_require__(9)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/home/stanko/web/cedimstudies/resources/assets/js/components/LikertRadioQuestion.vue"
+Component.options.__file = "/var/www/cedimstudies/resources/assets/js/components/LikertRadioQuestion.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] LikertRadioQuestion.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -69693,6 +69718,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "question": _vm.question,
       "timeout": _vm.question.extras.timeout
+    },
+    on: {
+      "input": _vm.onInput
+    },
+    model: {
+      value: (_vm.fields[_vm.question.title]),
+      callback: function($$v) {
+        _vm.$set(_vm.fields, _vm.question.title, $$v)
+      },
+      expression: "fields[question.title]"
     }
   }) : _c('DynamicPanel', {
     attrs: {
@@ -69801,7 +69836,7 @@ var Component = __webpack_require__(9)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/home/stanko/web/cedimstudies/resources/assets/js/views/App.vue"
+Component.options.__file = "/var/www/cedimstudies/resources/assets/js/views/App.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] App.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -69947,7 +69982,7 @@ var Component = __webpack_require__(9)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/home/stanko/web/cedimstudies/resources/assets/js/views/Campaign.vue"
+Component.options.__file = "/var/www/cedimstudies/resources/assets/js/views/Campaign.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Campaign.vue: functional components are not supported with templates, they should use render functions.")}
 

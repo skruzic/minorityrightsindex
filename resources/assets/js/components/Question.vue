@@ -20,7 +20,7 @@
         <!-- Panel -->
         <div v-else-if="question.type === 4">
             <StaticPanel :question="question" :timeout="question.extras.timeout"
-                         v-if="question.extras.dynamic === '0'"/>
+                         v-if="question.extras.dynamic === '0'" v-model="fields[question.title]" @input="onInput"/>
             <DynamicPanel :panel="question.panel" :batch_size="parseInt(question.extras.batch_size)"
                           :timeout="parseInt(question.extras.timeout)" v-else :active_tab_index="activeTabIndex"
                           :section_index="sectionIndex"/>
