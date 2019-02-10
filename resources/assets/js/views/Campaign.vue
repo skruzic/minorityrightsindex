@@ -2,9 +2,6 @@
     <div class="flex-center position-ref">
         <div class="content">
             <form class="m-b-md" @submit.prevent="submit">
-                <!--<h1 class="title m-b-md">{{ campaign.title }}</h1>-->
-
-                <!--<tab-content v-for="section in campaign.sections" :key="section.id" :section="section"></tab-content>-->
                 <form-wizard :title="campaign.title" subtitle="" nextButtonText="Dalje" finishButtonText="Kraj"
                              shape="tab" @on-complete="submit" @on-change="setTabIndex">
                     <tab-content v-for="(section, index) in campaign.sections" :key="section.id" :section="section">
@@ -16,18 +13,6 @@
                         </section>
                     </tab-content>
                 </form-wizard>
-                <!--<b-tabs @input="setTabIndex">
-                    <b-tab :title="section.title" v-for="(section, index) in campaign.sections" :key="section.id" :section="section">
-                        <section>
-                            <h3>{{ section.title }}</h3>
-                            <p>{{ section.description }}</p>
-                            <question v-for="question in section.questions" :key="question.id"
-                                      :question="question" :activeTabIndex="activeTabIndex" :sectionIndex="index" v-model="fields['question-'+question.id]"></question>
-                        </section>
-                    </b-tab>
-                </b-tabs>-->
-                <!--<Example></Example>-->
-
             </form>
         </div>
     </div>
@@ -144,4 +129,4 @@
         margin-bottom: 30px;
         color: #000000;
     }*/
-</style>
+</style>/

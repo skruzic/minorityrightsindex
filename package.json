@@ -13,7 +13,7 @@
         "cross-env": "^5.1",
         "laravel-mix": "^2.0",
         "lodash": "^4.17.4",
-        "vue": "^2.5.21"
+        "vue": "^2.6.4"
     },
     "dependencies": {
         "adminlte-vue": "^0.1.3",
@@ -25,6 +25,6 @@
         "vue-form-wizard": "^0.8.4",
         "vue-in-viewport-mixin": "^1.0.4",
         "vue-router": "^3.0.2",
-        "vue-template-compiler": "^2.5.21"
+        "vue-template-compiler": "^2.6.4"
     }
 }
