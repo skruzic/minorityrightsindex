@@ -9,8 +9,8 @@ import 'vue-form-wizard/dist/vue-form-wizard.min.css'
 import BootstrapVue from 'bootstrap-vue'
 
 // Komponente
-import {FormWizard, TabContent} from 'vue-form-wizard'
-import Question from './components/Question'
+/*import {FormWizard, TabContent} from 'vue-form-wizard'
+import Question from './components/Question'*/
 
 Vue.use(VueRouter);
 Vue.use(VueFormWizard);

@@ -1,24 +1,24 @@
 <template>
     <div>
         <!-- Text and Textarea -->
-        <TextQuestion v-if="[0,1].includes(question.type)" :question="question"
+        <TextQuestion v-if="[0,1].includes(type)" :question="question"
                       v-model="fields[question.title]" @input="onInput"/>
         <!-- End text and textarea -->
 
         <!-- Radio -->
-        <RadioQuestion v-else-if="question.type === 2" :question="question"
+        <RadioQuestion v-else-if="type === 2" :question="question"
                        :options="question.options.options" v-model="fields[question.title]"
                        @input="onInput"/>
         <!-- End radio -->
 
         <!-- Checkbox -->
-        <CheckboxQuestion v-else-if="question.type === 3" :question="question"
+        <CheckboxQuestion v-else-if="type === 3" :question="question"
                           :options="question.options.options"
                           v-model="fields[question.title]" @input="onInput"/>
         <!-- End checkbox -->
 
         <!-- Panel -->
-        <div v-else-if="question.type === 4">
+        <div v-else-if="type === 4">
             <StaticPanel :question="question" :timeout="question.extras.timeout"
                          v-if="question.extras.dynamic === '0'" v-model="fields[question.title]" @input="onInput"/>
             <DynamicPanel :panel="question.panel" :batch_size="parseInt(question.extras.batch_size)"
@@ -28,7 +28,7 @@
         <!-- End panel -->
 
         <!-- Choice array -->
-        <div v-else-if="question.type === 5">
+        <div v-else-if="type === 5">
             <div>
                 <label>{{ question.question}}</label>
             </div>
@@ -45,7 +45,7 @@
         <!-- End choice array -->
 
         <!-- Checkbox array -->
-        <div v-else-if="question.type === 6">
+        <div v-else-if="type === 6">
             <div class="form-group">
                 <label>{{ question.question}}</label>
             </div>
@@ -108,6 +108,11 @@
         data() {
             return {
                 fields: {}
+            }
+        },
+        computed: {
+            type() {
+                return Number(this.question.type);
             }
         },
         methods: {
