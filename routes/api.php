@@ -28,3 +28,4 @@ Route::middleware('auth:api')->prefix('admin')->group(function() {
 
 // Kampanje
 Route::apiResource('campaign', 'API\CampaignsController');
+Route::get('menu', 'API\MenuController');

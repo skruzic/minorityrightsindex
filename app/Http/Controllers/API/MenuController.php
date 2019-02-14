@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Backpack\MenuCRUD\app\Models\MenuItem;
 
 class MenuController extends Controller
 {
@@ -14,6 +15,6 @@ class MenuController extends Controller
      */
     public function __invoke()
     {
-        return response()->json();
+        return response()->json(MenuItem::all());
     }
 }

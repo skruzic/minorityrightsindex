@@ -1,6 +1,8 @@
 <template>
     <ul class="navbar-nav mr-auto">
-        <li>Test</li>
+        <li v-for="item in items">
+            <router-link :to="item.link">{{ item.name }}</router-link>
+        </li>
     </ul>
 </template>
 
@@ -12,12 +14,12 @@
                 items: []
             }
         },
-        created() {
+        mounted() {
             axios.get('menu').then(response => {
                 this.items = response.data;
-                console.log(response.data);
+                //console.log(this.items);
             });
-        }
+        },
     }
 </script>
 
