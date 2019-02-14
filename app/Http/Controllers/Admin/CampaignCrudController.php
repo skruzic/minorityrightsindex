@@ -49,7 +49,7 @@ class CampaignCrudController extends CrudController
             ],
             [
                 'name'      => 'user',
-                'label'     => 'User',
+                'label'     => __('admin.user'),
                 'type'      => 'select',
                 'entity'    => 'user',
                 'attribute' => 'name',

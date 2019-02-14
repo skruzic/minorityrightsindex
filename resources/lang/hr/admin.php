@@ -12,6 +12,8 @@ return [
     'description'       => 'Opis',
     'clone'             => 'Kloniraj',
 
+    // User
+
     // Kampanja
     'campaign'          => 'kampanja',
     'campaigns'         => 'kampanje',

@@ -9,7 +9,8 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto"></ul>
+                    <!--<ul class="navbar-nav mr-auto"></ul>-->
+                    <Navigation></Navigation>
 
                     <!-- Right Side Of Navbar -->
                     <!--<ul class="navbar-nav ml-auto">
@@ -30,8 +31,11 @@
 
 
 <script>
+    import Navigation from '../components/Navigation'
+
     export default {
         name: 'app',
+        components: {Navigation},
         data(){
             return {
                 isLoggedIn : null,

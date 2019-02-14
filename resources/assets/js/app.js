@@ -1,8 +1,10 @@
+import Home from "./components/Home";
+
 require('./bootstrap');
 
-//window.Vue = require('vue');
+window.Vue = require('vue');
 
-import Vue from 'vue/dist/vue.js'
+//import Vue from 'vue/dist/vue.js'
 import VueRouter from 'vue-router'
 import VueFormWizard from 'vue-form-wizard'
 import 'vue-form-wizard/dist/vue-form-wizard.min.css'
@@ -18,15 +20,21 @@ Vue.use(BootstrapVue);
 
 import App from './views/App'
 import Campaign from './views/Campaign'
+import Homepage from './components/Home'
 
 const router = new VueRouter({
     mode: 'history',
     routes: [
         {
-            path: '/campaign/:id',
+            path: '/',
             name: 'home',
+            component: Homepage
+        },
+        {
+            path: '/campaign/:id',
+            name: 'campaign',
             component: Campaign,
-        }
+        },
     ]
 });
 

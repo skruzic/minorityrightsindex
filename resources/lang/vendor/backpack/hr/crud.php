@@ -121,16 +121,16 @@ return [
         'update_success' => 'The item has been modified successfully.',
 
     // CRUD reorder view
-        'reorder'                      => 'Reorder',
-        'reorder_text'                 => 'Use drag&drop to reorder.',
-        'reorder_success_title'        => 'Done',
-        'reorder_success_message'      => 'Your order has been saved.',
-        'reorder_error_title'          => 'Error',
-        'reorder_error_message'        => 'Your order has not been saved.',
+        'reorder'                      => 'Promjena redosljeda',
+        'reorder_text'                 => 'Koristi drag&drop za promjenu redosljeda.',
+        'reorder_success_title'        => 'Kraj',
+        'reorder_success_message'      => 'Vaš redosljed je sačuvan.',
+        'reorder_error_title'          => 'Greška',
+        'reorder_error_message'        => 'Vaš redosljed nije sačuvan.',
 
     // CRUD yes/no
-        'yes' => 'Yes',
-        'no' => 'No',
+        'yes' => 'Da',
+        'no' => 'Ne',
 
     // CRUD filters navbar view
         'filters' => 'Filters',
@@ -143,12 +143,12 @@ return [
         'select_files' => 'Select files',
         'select_file' => 'Select file',
         'clear' => 'Clear',
-        'page_link' => 'Page link',
-        'page_link_placeholder' => 'http://example.com/your-desired-page',
-        'internal_link' => 'Internal link',
-        'internal_link_placeholder' => 'Internal slug. Ex: \'admin/page\' (no quotes) for \':url\'',
-        'external_link' => 'External link',
-        'choose_file' => 'Choose file',
+        'page_link' => 'Link na stranicu',
+        'page_link_placeholder' => 'http://primjer.com/vasa-stranica',
+        'internal_link' => 'Link na internu stranicu',
+        'internal_link_placeholder' => 'Interni slug. Npr: \'admin/page\'',
+        'external_link' => 'Link na vanjsku stranicu',
+        'choose_file' => 'Odaberi datoteku',
 
     //Table field
         'table_cant_add' => 'Cannot add new :entity',
