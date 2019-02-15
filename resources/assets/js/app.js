@@ -21,6 +21,7 @@ Vue.use(BootstrapVue);
 import App from './views/App'
 import Campaign from './views/Campaign'
 import Homepage from './components/Home'
+import CampaignFinish from './components/CampaignFinish'
 
 const router = new VueRouter({
     mode: 'history',
@@ -35,6 +36,11 @@ const router = new VueRouter({
             name: 'campaign',
             component: Campaign,
         },
+        {
+            path: '/campaign/finish',
+            name: 'campaign-finish',
+            component: CampaignFinish
+        }
     ]
 });
 

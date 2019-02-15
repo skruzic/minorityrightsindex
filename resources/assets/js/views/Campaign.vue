@@ -53,7 +53,9 @@
                     console.log(response);
                 }).catch(function (error) {
                     console.log(error);
-                })
+                });
+
+                this.$router.push({name: 'campaign-finish'});
             },
             handleInput(payload) {
                 //this.fields.push(payload);
