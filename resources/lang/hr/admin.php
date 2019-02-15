@@ -8,17 +8,22 @@
 
 return [
     // Osnovno
-    'title'             => 'Naslov',
-    'description'       => 'Opis',
-    'clone'             => 'Kloniraj',
+    'title'                => 'Naslov',
+    'description'          => 'Opis',
+    'clone'                => 'Kloniraj',
 
     // User
 
     // Kampanja
-    'campaign'          => 'kampanja',
-    'campaigns'         => 'kampanje',
-    'relation_sections' => 'Vidi sekcije',
-    'export_csv'        => 'Preuzmi odgovore',
+    'campaign'             => 'kampanja',
+    'campaigns'            => 'kampanje',
+    'relation_sections'    => 'Vidi sekcije',
+    'export_csv'           => 'Preuzmi odgovore',
 
     // Sekcija
+    'section'              => 'sekcija',
+    'sections'             => 'sekcije',
+    'sections_in_campaign' => 'Sekcije u kampanji #',
+    'relation_questions'   => 'Vidi pitanja',
+
 ];

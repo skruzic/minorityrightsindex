@@ -1,1 +1,1 @@
-<a href="{{ url($crud->route .'/'.$entry->getKey()) }}/question" class="btn btn-xs btn-default"><i class="fa fa-eye"></i> See Questions</a>
+<a href="{{ url($crud->route .'/'.$entry->getKey()) }}/question" class="btn btn-xs btn-default"><i class="fa fa-eye"></i> @lang('admin.relation_questions')</a>

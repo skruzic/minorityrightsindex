@@ -28,7 +28,7 @@ class CampaignSectionCrudController extends SectionCrudController
 
         $this->crud->removeColumn('campaign');
 
-        $this->crud->setHeading('Sections in Campaign #' . $campaign_id, 'index');
+        $this->crud->setHeading(__('admin.sections_in_campaign') . $campaign_id, 'index');
 
         $this->crud->allowAccess('reorder');
         $this->crud->enableReorder('title', 2);

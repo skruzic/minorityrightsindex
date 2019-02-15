@@ -23,8 +23,8 @@ class SectionCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
         $this->crud->setModel('App\Models\Section');
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/section');
-        $this->crud->setEntityNameStrings('section', 'sections');
+        $this->crud->setRoute(config('backpack.base.route_prefix').'/section');
+        $this->crud->setEntityNameStrings(__('admin.section'), __('admin.sections'));
 
         /*
         |--------------------------------------------------------------------------
@@ -36,44 +36,44 @@ class SectionCrudController extends CrudController
         //$this->crud->setFromDb();
         $this->crud->addColumns([
             [
-                'name' => 'title',
-                'label' => 'Title',
-                'type' => 'text'
+                'name'  => 'title',
+                'label' => __('admin.title'),
+                'type'  => 'text',
             ],
             [
-                'name' => 'description',
-                'label' => 'Description',
-                'type' => 'text'
+                'name'  => 'description',
+                'label' => __('admin.description'),
+                'type'  => 'text',
             ],
             [
-                'name' => 'campaign',
-                'label' => 'Campaign',
-                'type' => 'select',
-                'entity' => 'campaign',
+                'name'      => 'campaign',
+                'label'     => __('admin.campaign'),
+                'type'      => 'select',
+                'entity'    => 'campaign',
                 'attribute' => 'title',
-                'model' => 'App\Models\Campaign'
-            ]
+                'model'     => 'App\Models\Campaign',
+            ],
         ]);
 
         $this->crud->addFields([
             [
-                'name' => 'title',
+                'name'  => 'title',
                 'label' => 'Title',
-                'type' => 'text'
+                'type'  => 'text',
             ],
             [
-                'name' => 'description',
+                'name'  => 'description',
                 'label' => 'Description',
-                'type' => 'textarea'
+                'type'  => 'textarea',
             ],
             [
-                'name' => 'campaign_id',
-                'label' => 'Campaign',
-                'type' => 'select2',
-                'entity' => 'campaign',
+                'name'      => 'campaign_id',
+                'label'     => 'Campaign',
+                'type'      => 'select2',
+                'entity'    => 'campaign',
                 'attribute' => 'title',
-                'model' => 'App\Models\Campaign'
-            ]
+                'model'     => 'App\Models\Campaign',
+            ],
         ]);
 
         // add asterisk for fields that are required in SectionRequest
