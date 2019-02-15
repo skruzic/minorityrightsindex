@@ -5,11 +5,12 @@ namespace App\Models;
 use App\Helpers\AnswerExporter;
 use App\Helpers\PanelImporter;
 use Backpack\CRUD\CrudTrait;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 
 class Campaign extends Model
 {
-    use CrudTrait;
+    use CrudTrait, Sluggable;
 
     protected $fillable = ['title', 'description', 'user_id'];
 
@@ -31,6 +32,16 @@ class Campaign extends Model
     public function answers()
     {
         return $this->hasMany(Answer::class);
+    }
+
+    public function sluggable(): array
+    {
+        // TODO: Implement sluggable() method.
+        return [
+            'slug' => [
+                'source'=>'title'
+            ]
+        ];
     }
 
 
