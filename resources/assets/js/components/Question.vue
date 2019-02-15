@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- Text and Textarea -->
-        <TextQuestion v-if="[0,1].includes(type)" :question="question"
+        <TextQuestion v-if="[0,1].includes(type)" :question="question" :type="type"
                       v-model="fields[question.title]" @input="onInput"/>
         <!-- End text and textarea -->
 
