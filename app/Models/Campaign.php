@@ -44,5 +44,9 @@ class Campaign extends Model
         ];
     }
 
+    public function getRouteKeyName() {
+        return 'slug';
+    }
+
 
 }
