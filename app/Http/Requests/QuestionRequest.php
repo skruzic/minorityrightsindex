@@ -29,7 +29,7 @@ class QuestionRequest extends FormRequest
             // 'name' => 'required|min:5|max:255'
             'type'     => 'required',
             'question' => 'required',
-            'csv'    => 'required_if:type,4|file',
+            'csv'    => 'sometimes|required_if:type,4|file',
         ];
     }
 

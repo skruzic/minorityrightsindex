@@ -84,6 +84,9 @@ class SectionQuestionCrudController extends QuestionCrudController
         $this->crud->allowAccess('create');
         $this->crud->allowAccess('reorder');
         $this->crud->enableReorder('question', 2);
+
+        // Micem polje za upload CSV-a kod updejta (mjenjanja postavki)
+        $this->crud->removeField('csv', 'update');
     }
 
     public function store(StoreRequest $request)
@@ -106,7 +109,7 @@ class SectionQuestionCrudController extends QuestionCrudController
 
     public function update(UpdateRequest $request)
     {
-        if ($request->hasFile('csv')) {
+        /*if ($request->hasFile('csv')) {
 
             $file = $request->file('csv');
 
@@ -117,7 +120,7 @@ class SectionQuestionCrudController extends QuestionCrudController
             $panel = json_encode($csv);
 
             $request->request->add(['panel' => $panel]);
-        }
+        }*/
 
         return parent::updateCrud($request);
     }
