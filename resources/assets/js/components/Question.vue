@@ -45,7 +45,7 @@
         <!-- End choice array -->
 
         <!-- Checkbox array -->
-        <div v-else-if="type === 6">
+        <!--<div v-else-if="type === 6">
             <div class="form-group">
                 <label>{{ question.question}}</label>
             </div>
@@ -55,9 +55,6 @@
                     <th v-for="opt in question.options.options">{{ opt.text }}</th>
                 </thead>
                 <tbody>
-                    <!--<MultipleCheckboxes v-model="fields['question-'+child.id]" v-for="child in question.children"
-                                        :key="child.id" :question="child"
-                                        :options="question.options.options" @input="onRadioInput"/>-->
                     <tr v-for="child in question.children" :key="child.id">
                         <td>{{ child.question }}</td>
                         <td v-for="opt in question.options.options">
@@ -67,9 +64,15 @@
                     </tr>
                 </tbody>
             </table>
-        </div>
-        <!--<CheckboxArray v-else-if="question.type === 6" :question="question" :options="question.options.options"/>-->
+        </div>-->
         <!-- End checkbox array -->
+
+        <!-- Static text -->
+        <div v-else-if="type === 6">
+            <p>{{ question.question }}</p>
+        </div>
+
+        <!-- End static text -->
     </div>
 </template>
 

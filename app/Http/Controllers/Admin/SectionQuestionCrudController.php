@@ -80,7 +80,7 @@ class SectionQuestionCrudController extends CrudController
             [
                 'name'  => 'question',
                 'label' => 'Question',
-                'type'  => 'text',
+                'type'  => 'textarea',
                 'tab' => 'General'
             ],
             [

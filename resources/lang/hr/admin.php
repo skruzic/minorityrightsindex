@@ -11,12 +11,14 @@ return [
     'title'                => 'Naslov',
     'description'          => 'Opis',
     'clone'                => 'Kloniraj',
+    'users'                => 'Korisnici',
 
     // User
 
     // Kampanja
     'campaign'             => 'kampanja',
     'campaigns'            => 'kampanje',
+    'campaigns_sidebar'     => 'Kampanje',
     'relation_sections'    => 'Vidi sekcije',
     'export_csv'           => 'Preuzmi odgovore',
 

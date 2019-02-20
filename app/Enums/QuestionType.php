@@ -12,7 +12,8 @@ final class QuestionType extends Enum
     const MULTIPLE_CHOICE = 3;
     const PANEL = 4;
     const RADIO_ARRAY = 5;
-    const CHECKBOX_ARRAY = 6;
+    //const CHECKBOX_ARRAY = 6;
+    const STATIC_TEXT = 6;
 
     public static function getDescription($value): string
     {
@@ -21,9 +22,9 @@ final class QuestionType extends Enum
 
     public static function toArray(): array
     {
-        $arr =  array_flip(parent::toArray());
+        $arr = array_flip(parent::toArray());
 
-        foreach ($arr as $key=>$value) {
+        foreach ($arr as $key => $value) {
             $arr[$key] = self::getDescription($key);
         }
 
