@@ -13,7 +13,7 @@ Route::group([
 ], function () { // custom admin routes
     CRUD::resource('user', 'UserCrudController');
     CRUD::resource('campaign', 'CampaignCrudController');
-    CRUD::resource('section', 'SectionCrudController');
+    //CRUD::resource('section', 'SectionCrudController');
 
     Route::group(['prefix' => 'campaign/{campaign_id}'], function()
     {
@@ -28,6 +28,6 @@ Route::group([
 
 
 
-    CRUD::resource('question', 'QuestionCrudController');
+    //CRUD::resource('question', 'QuestionCrudController');
     CRUD::resource('optiongroup', 'OptionGroupCrudController');
 }); // this should be the absolute last line of this file

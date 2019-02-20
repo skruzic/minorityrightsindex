@@ -14,21 +14,81 @@ use App\Helpers\AnswerExporter;
  * @package App\Http\Controllers\Admin
  * @property-read CrudPanel $crud
  */
-class CampaignSectionCrudController extends SectionCrudController
+class CampaignSectionCrudController extends CrudController
 {
     public function setup()
     {
-        parent::setup();
-
+        /*
+        |--------------------------------------------------------------------------
+        | CrudPanel Basic Information
+        |--------------------------------------------------------------------------
+        */
         $campaign_id = \Route::current()->parameter('campaign_id');
-
+        $this->crud->setModel('App\Models\Section');
         $this->crud->setRoute('admin/campaign/'.$campaign_id.'/section');
+        $this->crud->setEntityNameStrings(__('admin.section'), __('admin.sections'));
 
         $this->crud->addClause('where', 'campaign_id', $campaign_id);
 
         $this->crud->removeColumn('campaign');
 
         $this->crud->setHeading(__('admin.sections_in_campaign') . $campaign_id, 'index');
+
+        /*
+        |--------------------------------------------------------------------------
+        | CrudPanel Configuration
+        |--------------------------------------------------------------------------
+        */
+
+        // TODO: remove setFromDb() and manually define Fields and Columns
+        //$this->crud->setFromDb();
+        $this->crud->addColumns([
+            [
+                'name'  => 'title',
+                'label' => __('admin.title'),
+                'type'  => 'text',
+            ],
+            [
+                'name'  => 'description',
+                'label' => __('admin.description'),
+                'type'  => 'text',
+            ],
+            [
+                'name'      => 'campaign',
+                'label'     => __('admin.campaign'),
+                'type'      => 'select',
+                'entity'    => 'campaign',
+                'attribute' => 'title',
+                'model'     => 'App\Models\Campaign',
+            ],
+        ]);
+
+        $this->crud->addFields([
+            [
+                'name'  => 'title',
+                'label' => 'Title',
+                'type'  => 'text',
+            ],
+            [
+                'name'  => 'description',
+                'label' => 'Description',
+                'type'  => 'textarea',
+            ],
+            [
+                'name'      => 'campaign_id',
+                'label'     => 'Campaign',
+                'type'      => 'select2',
+                'entity'    => 'campaign',
+                'attribute' => 'title',
+                'model'     => 'App\Models\Campaign',
+            ],
+        ]);
+
+        // add asterisk for fields that are required in SectionRequest
+        $this->crud->setRequiredFields(StoreRequest::class, 'create');
+        $this->crud->setRequiredFields(UpdateRequest::class, 'edit');
+
+        $this->crud->addButtonFromView('line', 'section_questions', 'section_questions', 'beginning');
 
         $this->crud->allowAccess('reorder');
         $this->crud->enableReorder('title', 2);
