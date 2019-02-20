@@ -48,6 +48,11 @@ class CampaignCrudController extends CrudController
                 'type'  => 'text',
             ],
             [
+                'name' => 'slug',
+                'label' => 'Slug',
+                'type' => 'text',
+            ],
+            [
                 'name'      => 'user',
                 'label'     => __('admin.user'),
                 'type'      => 'select',
