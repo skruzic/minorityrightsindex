@@ -93,6 +93,7 @@ class CampaignCrudController extends CrudController
 
         $this->crud->addButtonFromView('line', 'campaign_sections', 'campaign_sections', 'beginning');
         $this->crud->addButtonFromView('line', 'download_answers', 'export_csv', 'end');
+        $this->crud->addButtonFromView('line', 'campaign_view', 'campaign_view', 'end');
 
         // Dozvola za kloniranje
         $this->crud->allowAccess('clone');

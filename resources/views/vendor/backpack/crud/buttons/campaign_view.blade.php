@@ -1,0 +1,1 @@
+<a href="{{ url('campaign/'.$entry->slug) }}" class="btn btn-xs btn-default" target="_blank"><i class="fa fa-desktop"></i> @lang('admin.campaign_view')</a>

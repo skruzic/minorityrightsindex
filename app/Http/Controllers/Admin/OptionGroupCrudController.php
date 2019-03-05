@@ -24,7 +24,7 @@ class OptionGroupCrudController extends CrudController
         */
         $this->crud->setModel('App\Models\OptionGroup');
         $this->crud->setRoute(config('backpack.base.route_prefix').'/optiongroup');
-        $this->crud->setEntityNameStrings('option group', 'option groups');
+        $this->crud->setEntityNameStrings(__('admin.option_group'), __('admin.option_groups'));
 
         /*
         |--------------------------------------------------------------------------
@@ -37,21 +37,21 @@ class OptionGroupCrudController extends CrudController
         $this->crud->addColumns([
             [
                 'name'  => 'name',
-                'label' => 'Name',
+                'label' => __('admin.name'),
                 'type'  => 'text',
             ],
             [
                 'name'  => 'description',
-                'label' => 'Description',
+                'label' => __('admin.description'),
                 'type'  => 'text',
             ],
             [
                 'name'    => 'options',
-                'label'   => 'Options',
+                'label'   => __('admin.options'),
                 'type'    => 'table',
                 'columns' => [
-                    'value' => 'Numeric value',
-                    'text'  => 'Display text',
+                    'value' => __('admin.numval'),
+                    'text'  => __('admin.dispval'),
                 ],
             ],
         ]);
@@ -59,22 +59,22 @@ class OptionGroupCrudController extends CrudController
         $this->crud->addFields([
             [
                 'name'  => 'name',
-                'label' => 'Name',
+                'label' => __('admin.name'),
                 'type'  => 'text',
             ],
             [
                 'name'  => 'description',
-                'label' => 'Description',
+                'label' => __('admin.description'),
                 'type'  => 'text',
             ],
             [
                 'name'            => 'options',
-                'label'           => 'Options',
+                'label'           => __('admin.options'),
                 'type'            => 'table',
-                'entity_singular' => 'option',
+                'entity_singular' => __('admin.option'),
                 'columns'         => [
-                    'value' => 'Numeric value',
-                    'text'  => 'Display text',
+                    'value' => __('admin.numval'),
+                    'text'  => __('admin.dispval'),
                 ],
                 'min'             => 2,
             ],

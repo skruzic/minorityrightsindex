@@ -30,10 +30,14 @@ class SectionQuestionCrudController extends CrudController
         $section_id  = \Route::current()->parameter('section_id');
         $this->crud->setModel('App\Models\Question');
         $this->crud->setRoute('admin/campaign/'.$campaign_id.'/section/'.$section_id.'/question');
-        $this->crud->setEntityNameStrings('question', 'questions');
+        $this->crud->setEntityNameStrings(__('admin.question'), __('admin.questions'));
         $this->crud->addClause('where', 'section_id', $section_id);
         $this->crud->orderBy('lft');
-        $this->crud->setHeading('Questions in Section #'.$section_id.' in Campaign #'.$campaign_id, 'index');
+        $this->crud->setHeading(__('admin.questions_in_section',
+            ['section' => $section_id, 'campaign' => $campaign_id]), 'index');
+
+        // Botun za povratak na sekciju
+        $this->crud->addButtonFromView('top', 'campaign_sections', 'campaign_sections_question', 'end');
 
         /*
         |--------------------------------------------------------------------------
@@ -51,18 +55,18 @@ class SectionQuestionCrudController extends CrudController
             ],
             [
                 'name'  => 'question',
-                'label' => 'Question',
+                'label' => ucfirst(__('admin.question')),
                 'type'  => 'text',
             ],
             [
                 'name'    => 'type',
-                'label'   => 'Type',
+                'label'   => __('admin.type'),
                 'type'    => 'select_from_array',
                 'options' => QuestionType::toArray(),
             ],
             [
                 'name'      => 'options',
-                'label'     => 'Options',
+                'label'     => __('admin.options'),
                 'type'      => 'select',
                 'entity'    => 'options',
                 'attribute' => 'name',
@@ -75,51 +79,51 @@ class SectionQuestionCrudController extends CrudController
                 'name'  => 'title',
                 'label' => 'Kod',
                 'type'  => 'text',
-                'tab' => 'General'
+                'tab'   => __('admin.general_tab'),
             ],
             [
                 'name'  => 'question',
-                'label' => 'Question',
+                'label' => ucfirst(__('admin.question')),
                 'type'  => 'textarea',
-                'tab' => 'General'
+                'tab'   => __('admin.general_tab'),
             ],
             [
                 'name'    => 'type',
-                'label'   => 'Type',
+                'label'   => __('admin.type'),
                 'type'    => 'select2_from_array',
                 'options' => QuestionType::toArray(),
-                'tab' => 'General'
+                'tab'     => __('admin.general_tab'),
             ],
             [
                 'name'      => 'option_group_id',
-                'label'     => 'Options',
+                'label'     => __('admin.options'),
                 'type'      => 'select2',
                 'entity'    => 'options',
                 'attribute' => 'name',
                 'model'     => 'App\Models\OptionGroup',
-                'tab' => 'General'
+                'tab'       => __('admin.general_tab'),
             ],
-            [
-                'name'  => 'section_id',
-                'label' => 'Section',
-                'type'  => 'select2_grouped',
+            /*[
+                'name'                       => 'section_id',
+                'label'                      => __('admin.section'),
+                'type'                       => 'select2_grouped',
                 //'value' => $section_id,
-                'entity' => 'section',
-                'attribute' => 'title',
+                'entity'                     => 'section',
+                'attribute'                  => 'title',
                 //'model' => 'App\Models\Section',
-                'group_by' => 'campaign',
-                'group_by_attribute' => 'title',
+                'group_by'                   => 'campaign',
+                'group_by_attribute'         => 'title',
                 'group_by_relationship_back' => 'sections',
-                'tab' => 'General'
-            ],
-            [
-                'name' => 'csv',
-                'label' => 'Panel',
-                'type' => 'upload',
-                'upload'=> true,
-                'disk' => 'uploads',
-                'tab' => 'General'
-            ],
+                'tab'                        => __('admin.general_tab'),
+            ],*/
+            /*[
+                'name'   => 'csv',
+                'label'  => 'Panel',
+                'type'   => 'upload',
+                'upload' => true,
+                'disk'   => 'uploads',
+                'tab'    => __('admin.general_tab'),
+            ],*/
             [
                 'name'                       => 'section_id',
                 'label'                      => 'Section',
@@ -132,7 +136,7 @@ class SectionQuestionCrudController extends CrudController
                 'group_by_attribute'         => 'title',
                 'group_by_relationship_back' => 'sections',
                 'value'                      => $section_id,
-                'tab'                        => 'General',
+                'tab'                        => __('admin.general_tab'),
             ],
             [
                 'name'   => 'csv',
@@ -140,21 +144,21 @@ class SectionQuestionCrudController extends CrudController
                 'type'   => 'upload',
                 'upload' => true,
                 'disk'   => 'uploads',
-                'tab'    => 'Panel Properties',
+                'tab'    => __('admin.panel_tab'),
             ],
             [
                 'name'  => 'dynamic',
                 'label' => 'Dynamic',
                 'type'  => 'checkbox',
                 'fake'  => true,
-                'tab'   => 'Panel Properties',
+                'tab'    => __('admin.panel_tab'),
             ],
             [
                 'name'  => 'timeout',
                 'label' => 'Timeout (s)',
                 'type'  => 'number',
                 'fake'  => true,
-                'tab'   => 'Panel Properties',
+                'tab'    => __('admin.panel_tab'),
             ],
             [
                 'name'    => 'batch_size',
@@ -162,7 +166,7 @@ class SectionQuestionCrudController extends CrudController
                 'type'    => 'number',
                 'default' => 5,
                 'fake'    => true,
-                'tab'     => 'Panel Properties',
+                'tab'    => __('admin.panel_tab'),
             ],
         ]);
 
