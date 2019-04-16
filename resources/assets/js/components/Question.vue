@@ -69,7 +69,7 @@
 
         <!-- Static text -->
         <div v-else-if="type === 6">
-            <p class="col-form-label col-form-label-lg">{{ question.question }}</p>
+            <p class="col-form-label col-form-label-lg" v-html="question.question"></p>
         </div>
 
         <!-- End static text -->
