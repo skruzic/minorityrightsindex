@@ -29,6 +29,7 @@ class CampaignSectionCrudController extends CrudController
         $this->crud->setEntityNameStrings(__('admin.section'), __('admin.sections'));
 
         $this->crud->addClause('where', 'campaign_id', $campaign_id);
+	    $this->crud->orderBy( 'lft' );
 
         $this->crud->removeColumn('campaign');
 
