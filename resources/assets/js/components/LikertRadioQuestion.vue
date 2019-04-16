@@ -1,7 +1,7 @@
 <template>
     <div class="grid-row">
-        <div class="flex-item">
-            {{ question.question }}
+        <div class="flex-item" v-html="question.question">
+
         </div>
         <label for="" class="flex-item" v-for="opt in options">
             <input type="radio" :value="opt.value" v-model="selected" @change="updateValue" />

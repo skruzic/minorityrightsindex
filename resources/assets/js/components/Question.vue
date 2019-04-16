@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="question">
         <!-- Text and Textarea -->
         <TextQuestion v-if="[0,1].includes(type)" :question="question" :type="type"
                       v-model="fields[question.title]" @input="onInput"/>
@@ -30,7 +30,7 @@
         <!-- Choice array -->
         <div v-else-if="type === 5">
             <div>
-                <label>{{ question.question}}</label>
+                <label v-html="question.question" class="col-form-label col-form-label-lg"></label>
             </div>
             <div class="wrapper">
                 <div class="grid-header">
@@ -69,7 +69,7 @@
 
         <!-- Static text -->
         <div v-else-if="type === 6">
-            <p>{{ question.question }}</p>
+            <p class="col-form-label col-form-label-lg">{{ question.question }}</p>
         </div>
 
         <!-- End static text -->
@@ -162,5 +162,9 @@
 
     .header-item:nth-child(1) {
         width:180px;
+    }
+
+    .question {
+        margin-bottom: 50px;
     }
 </style>

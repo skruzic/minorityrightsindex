@@ -5,8 +5,8 @@
             <input type="radio" :key="option.num" :value="option.num" :name="'question-'+question.id" v-model="radioValue" @input="updateValue">
         </td>
     </tr>-->
-    <b-form-group :label="question.question">
-        <b-form-checkbox-group  v-model="selected" :options="options" @input="updateValue"/>
+    <b-form-group :label="question.question" label-size="lg">
+        <b-form-checkbox-group  v-model="selected" :options="options" @input="updateValue" stacked/>
     </b-form-group>
 </template>
 
