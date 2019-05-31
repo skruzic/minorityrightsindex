@@ -83,6 +83,7 @@
             },
             setTabIndex(prev, next) {
                 this.activeTabIndex = next;
+                window.scrollTo(0,0);
             },
         }
     }
