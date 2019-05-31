@@ -36,8 +36,6 @@ class AnswerExporter
             }
             $this->data[] = $data;
         }
-
-        //\Log::info($this->data);
     }
 
     public function export()

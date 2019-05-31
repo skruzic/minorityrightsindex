@@ -16,6 +16,8 @@ use App\Helpers\AnswerExporter;
  */
 class CampaignSectionCrudController extends CrudController
 {
+    protected $campaign_id;
+
     public function setup()
     {
         /*
@@ -23,17 +25,17 @@ class CampaignSectionCrudController extends CrudController
         | CrudPanel Basic Information
         |--------------------------------------------------------------------------
         */
-        $campaign_id = \Route::current()->parameter('campaign_id');
+        $this->campaign_id = \Route::current()->parameter('campaign_id');
         $this->crud->setModel('App\Models\Section');
-        $this->crud->setRoute('admin/campaign/'.$campaign_id.'/section');
+        $this->crud->setRoute('admin/campaign/'.$this->campaign_id.'/section');
         $this->crud->setEntityNameStrings(__('admin.section'), __('admin.sections'));
 
-        $this->crud->addClause('where', 'campaign_id', $campaign_id);
+        $this->crud->addClause('where', 'campaign_id', $this->campaign_id);
 	    $this->crud->orderBy( 'lft' );
 
         $this->crud->removeColumn('campaign');
 
-        $this->crud->setHeading(__('admin.sections_in_campaign') . $campaign_id, 'index');
+        $this->crud->setHeading(__('admin.sections_in_campaign') . $this->campaign_id, 'index');
 
         /*
         |--------------------------------------------------------------------------
@@ -107,15 +109,6 @@ class CampaignSectionCrudController extends CrudController
 
     public function download()
     {
-        $answers =  (new AnswerExporter($this->crud->getCurrentEntry()->id))->export();
-
-        //return response($answers)->download();
-
-        //return response()->download((new AnswerExporter($this->crud->getCurrentEntry()->id))->export());
-
-        /*return response()->streamDownload(function() {
-            $answers =  (new AnswerExporter($this->crud->getCurrentEntry()->id))->export();
-            echo $answers;
-        });*/
+        $answers =  (new AnswerExporter($this->campaign_id))->export();
     }
 }
