@@ -141,6 +141,7 @@ class CampaignCrudController extends CrudController
                     foreach ($question->children as $child) {
                         $child_clone            = $child->replicate();
                         $child_clone->parent_id = $question_clone->id;
+                        $child_clone->section_id = $section_clone->id;
                         $question_clone->children()->save($child_clone);
                     }
                 }
