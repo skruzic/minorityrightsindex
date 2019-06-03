@@ -12,7 +12,7 @@ class Campaign extends Model
 {
     use CrudTrait, Sluggable;
 
-    protected $fillable = ['title', 'description', 'user_id'];
+    protected $fillable = ['title', 'slug', 'description', 'user_id'];
 
     public function user()
     {
