@@ -15,7 +15,7 @@ final class QuestionType extends Enum
     //const CHECKBOX_ARRAY = 6;
     const StaticText = 6;
 
-    public static function asArray(): array
+    /*public static function asArray(): array
     {
         $arr = array_flip(parent::asArray());
 
@@ -24,5 +24,5 @@ final class QuestionType extends Enum
         }
 
         return $arr;
-    }
+    }*/
 }
