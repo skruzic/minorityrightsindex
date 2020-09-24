@@ -6,23 +6,18 @@ use BenSampo\Enum\Enum;
 
 final class QuestionType extends Enum
 {
-    const TEXT = 0;
-    const TEXT_AREA = 1;
-    const CHOICE = 2;
-    const MULTIPLE_CHOICE = 3;
-    const PANEL = 4;
-    const RADIO_ARRAY = 5;
+    const Text = 0;
+    const TextArea = 1;
+    const Choice = 2;
+    const MultipleChoice = 3;
+    const Panel = 4;
+    const RadioArray = 5;
     //const CHECKBOX_ARRAY = 6;
-    const STATIC_TEXT = 6;
+    const StaticText = 6;
 
-    public static function getDescription($value): string
+    public static function asArray(): array
     {
-        return str_replace('_', ' ', title_case(self::getKey($value)));
-    }
-
-    public static function toArray(): array
-    {
-        $arr = array_flip(parent::toArray());
+        $arr = array_flip(parent::asArray());
 
         foreach ($arr as $key => $value) {
             $arr[$key] = self::getDescription($key);

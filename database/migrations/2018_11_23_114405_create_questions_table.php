@@ -22,7 +22,7 @@ class CreateQuestionsTable extends Migration
             $table->integer('rgt')->unsigned();
             $table->integer('depth')->unsigned();
             $table->string('title')->nullable();
-            $table->tinyInteger('type')->unsigned()->default(QuestionType::TEXT);
+            $table->tinyInteger('type')->unsigned()->default(QuestionType::Text);
             $table->mediumText('question');
             $table->mediumText('panel')->nullable();
             $table->text('extras')->nullable();
