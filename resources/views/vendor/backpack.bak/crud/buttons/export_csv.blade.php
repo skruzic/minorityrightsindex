@@ -1,1 +1,0 @@
-<a href="{{ url($crud->route .'/'.$entry->getKey()) }}/download" class="btn btn-xs btn-default"><i class="fa fa-table"></i> @lang('admin.export_csv')</a>

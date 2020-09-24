@@ -1,1 +1,0 @@
-<a href="{{ url($crud->route .'/'.$entry->getKey()) }}/section" class="btn btn-xs btn-default"><i class="fa fa-eye"></i> @lang('admin.relation_sections')</a>
