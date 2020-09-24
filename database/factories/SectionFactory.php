@@ -8,6 +8,6 @@ $factory->define(Section::class, function (Faker $faker) {
         'campaign_id' => $faker->numberBetween(1, 10),
         'title'       => $faker->words(3, true),
         'description' => $faker->paragraphs(2, true),
-        'order'       => $faker->numberBetween(1, 20),
+        //'order'       => $faker->numberBetween(1, 20),
     ];
 });

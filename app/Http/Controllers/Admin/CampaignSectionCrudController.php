@@ -16,6 +16,12 @@ use App\Helpers\AnswerExporter;
  */
 class CampaignSectionCrudController extends CrudController
 {
+    use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\ReorderOperation;
+
     protected $campaign_id;
 
     public function setup()
@@ -31,11 +37,11 @@ class CampaignSectionCrudController extends CrudController
         $this->crud->setEntityNameStrings(__('admin.section'), __('admin.sections'));
 
         $this->crud->addClause('where', 'campaign_id', $this->campaign_id);
-	    $this->crud->orderBy( 'lft' );
+        $this->crud->orderBy('lft');
 
         $this->crud->removeColumn('campaign');
 
-        $this->crud->setHeading(__('admin.sections_in_campaign') . $this->campaign_id, 'index');
+        $this->crud->setHeading(__('admin.sections_in_campaign').$this->campaign_id, 'index');
 
         /*
         |--------------------------------------------------------------------------
@@ -93,8 +99,8 @@ class CampaignSectionCrudController extends CrudController
 
         $this->crud->addButtonFromView('line', 'section_questions', 'section_questions', 'beginning');
 
-        $this->crud->allowAccess('reorder');
-        $this->crud->enableReorder('title', 2);
+        //$this->crud->allowAccess('reorder');
+        //$this->crud->enableReorder('title', 2);
     }
 
     public function store(StoreRequest $request)
@@ -107,8 +113,14 @@ class CampaignSectionCrudController extends CrudController
         return parent::updateCrud();
     }
 
+    public function setupReorderOperation()
+    {
+        $this->crud->set('reorder.label', 'title');
+        $this->crud->set('reorder.max_lavel', 2);
+    }
+
     public function download()
     {
-        $answers =  (new AnswerExporter($this->campaign_id))->export();
+        $answers = (new AnswerExporter($this->campaign_id))->export();
     }
 }

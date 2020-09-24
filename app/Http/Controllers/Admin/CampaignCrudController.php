@@ -17,6 +17,11 @@ use App\Http\Requests\CampaignRequest as UpdateRequest;
  */
 class CampaignCrudController extends CrudController
 {
+    use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+
     public function setup()
     {
         /*
@@ -34,8 +39,6 @@ class CampaignCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
 
-        // TODO: remove setFromDb() and manually define Fields and Columns
-        //$this->crud->setFromDb();
         $this->crud->addColumns([
             [
                 'name'  => 'title',
@@ -99,22 +102,12 @@ class CampaignCrudController extends CrudController
         $this->crud->allowAccess('clone');
     }
 
-    public function store(StoreRequest $request)
-    {
-        // your additional operations before save here
-        $redirect_location = parent::storeCrud($request);
-        // your additional operations after save here
-        // use $this->data['entry'] or $this->crud->entry
-        return $redirect_location;
+    protected function setupCreateOperation() {
+        $this->crud->setValidation(StoreRequest::class);
     }
 
-    public function update(UpdateRequest $request)
-    {
-        // your additional operations before save here
-        $redirect_location = parent::updateCrud($request);
-        // your additional operations after save here
-        // use $this->data['entry'] or $this->crud->entry
-        return $redirect_location;
+    protected function setupUpdateOperation() {
+        $this->crud->setValidation(UpdateRequest::class);
     }
 
     public function clone($id)

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Helpers\AnswerExporter;
 use App\Helpers\PanelImporter;
-use Backpack\CRUD\CrudTrait;
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 

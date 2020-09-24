@@ -11,23 +11,23 @@ Route::group([
     'middleware' => ['web', config('backpack.base.middleware_key', 'admin')],
     'namespace'  => 'App\Http\Controllers\Admin',
 ], function () { // custom admin routes
-    CRUD::resource('user', 'UserCrudController');
-    CRUD::resource('campaign', 'CampaignCrudController');
+    Route::crud('user', 'UserCrudController');
+    Route::crud('campaign', 'CampaignCrudController');
     //CRUD::resource('section', 'SectionCrudController');
 
     Route::group(['prefix' => 'campaign/{campaign_id}'], function()
     {
-        CRUD::resource('section', 'CampaignSectionCrudController');
+        Route::crud('section', 'CampaignSectionCrudController');
         Route::get('download', 'CampaignSectionCrudController@download');
 
         Route::group(['prefix' => 'section/{section_id}'], function()
         {
-            CRUD::resource('question', 'SectionQuestionCrudController');
+            Route::crud('question', 'SectionQuestionCrudController');
         });
     });
 
 
 
     //CRUD::resource('question', 'QuestionCrudController');
-    CRUD::resource('optiongroup', 'OptionGroupCrudController');
+    Route::crud('optiongroup', 'OptionGroupCrudController');
 }); // this should be the absolute last line of this file
