@@ -2,7 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\Section;
+use App\Models\Campaign;
+use App\Models\OptionGroup;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Question;
 
@@ -12,7 +13,7 @@ class QuestionFactory extends Factory
 
     public function definition()
     {
-        $section_ids = Section::all()->pluck('id')->toArray();
+        $campaign_ids     = Campaign::all()->pluck('id')->toArray();
 
         return [
             //'campaign_id' => $faker->numberBetween(1, 10),
@@ -20,8 +21,7 @@ class QuestionFactory extends Factory
             'code'            => $this->faker->uuid,
             'type'            => $this->faker->numberBetween(0, 6),
             'text'            => $this->faker->sentence,
-            'option_group_id' => 1,
-            'section_id'      => $this->faker->randomElement($section_ids),
+            'campaign_id'     => $this->faker->randomElement($campaign_ids),
         ];
     }
 

@@ -10,6 +10,7 @@ use App\Http\Requests\OptionGroupRequest as StoreRequest;
 use App\Http\Requests\OptionGroupRequest as UpdateRequest;
 use Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+use Backpack\CRUD\app\Http\Controllers\Operations\InlineCreateOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
@@ -21,7 +22,7 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
  */
 class OptionGroupCrudController extends CrudController
 {
-    use ListOperation, CreateOperation, UpdateOperation, DeleteOperation;
+    use ListOperation, CreateOperation, UpdateOperation, DeleteOperation, InlineCreateOperation;
 
     public function setup()
     {
@@ -32,7 +33,7 @@ class OptionGroupCrudController extends CrudController
         */
         CRUD::setModel('App\Models\OptionGroup');
         CRUD::setRoute(config('backpack.base.route_prefix').'/optiongroup');
-        CRUD::setEntityNameStrings(__('admin.option_group'), __('admin.option_groups'));
+        CRUD::setEntityNameStrings('group', 'option groups');
     }
 
     protected function setupListOperation()
@@ -40,21 +41,21 @@ class OptionGroupCrudController extends CrudController
         CRUD::addColumns([
             [
                 'name'  => 'name',
-                'label' => __('admin.name'),
+                'label' => 'Group Name',
                 'type'  => 'text',
             ],
             [
                 'name'  => 'description',
-                'label' => __('admin.description'),
+                'label' => 'Description',
                 'type'  => 'text',
             ],
             [
                 'name'    => 'options',
-                'label'   => __('admin.options'),
+                'label'   => 'Options',
                 'type'    => 'table',
                 'columns' => [
-                    'value' => __('admin.numval'),
-                    'text'  => __('admin.dispval'),
+                    'value' => 'Numeric value',
+                    'text'  => 'UI Display value',
                 ],
             ],
         ]);
@@ -67,22 +68,22 @@ class OptionGroupCrudController extends CrudController
         CRUD::addFields([
             [
                 'name'  => 'name',
-                'label' => __('admin.name'),
+                'label' => 'Group Name',
                 'type'  => 'text',
             ],
             [
                 'name'  => 'description',
-                'label' => __('admin.description'),
+                'label' => 'Description',
                 'type'  => 'text',
             ],
             [
                 'name'            => 'options',
-                'label'           => __('admin.options'),
+                'label'           => 'Options',
                 'type'            => 'table',
-                'entity_singular' => __('admin.option'),
+                'entity_singular' => 'Option',
                 'columns'         => [
-                    'value' => __('admin.numval'),
-                    'text'  => __('admin.dispval'),
+                    'value' => 'Numeric value',
+                    'text'  => 'UI Display value',
                 ],
                 'min'             => 2,
             ],

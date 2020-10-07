@@ -3,46 +3,50 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\QuestionRequest;
+use App\Models\OptionGroup;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use App\Enums\QuestionType;
 use App\Helpers\PanelImporter;
-use App\Models\Section;
 use Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+use Backpack\CRUD\app\Http\Controllers\Operations\FetchOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\ReorderOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use PhpOption\Option;
 
 /**
- * Class SectionQuestionCrudController
+ * Class QuestionCrudController
  * @package App\Http\Controllers\Admin
  * @property-read CrudPanel $crud
  */
-class SectionQuestionCrudController extends CrudController
+class QuestionCrudController extends CrudController
 {
-    use ListOperation, CreateOperation, UpdateOperation, DeleteOperation, ReorderOperation;
+    use ListOperation, CreateOperation, UpdateOperation, DeleteOperation, ReorderOperation, FetchOperation;
 
     protected $campaign_id;
-    protected $section_id;
 
     public function setup()
     {
         $this->campaign_id = \Route::current()->parameter('campaign_id');
-        $this->section_id  = \Route::current()->parameter('section_id');
         CRUD::setModel('App\Models\Question');
-        CRUD::setRoute('admin/campaign/'.$this->campaign_id.'/section/'.$this->section_id.'/question');
-        CRUD::setEntityNameStrings(__('admin.question'), __('admin.questions'));
-        CRUD::addClause('where', 'section_id', $this->section_id);
+        CRUD::setRoute('admin/campaign/'.$this->campaign_id.'/question');
+        CRUD::setEntityNameStrings('question', 'questions');
+        CRUD::addClause('where', 'campaign_id', $this->campaign_id);
         CRUD::orderBy('lft');
-        CRUD::setHeading(__('admin.questions_in_section',
-            ['section' => $this->section_id, 'campaign' => $this->campaign_id]), 'index');
+        //CRUD::setHeading(__('admin.questions_in_section', ['campaign' => $this->campaign_id]), 'index');
 
         // Botun za povratak na sekciju
-        CRUD::addButtonFromView('top', 'campaign_sections', 'campaign_sections_question', 'end');
+        //CRUD::addButtonFromView('top', 'campaign_sections', 'campaign_sections_question', 'end');
 
         CRUD::allowAccess('reorder');
         CRUD::enableReorder('question', 2);
+    }
+
+    public function fetchOptionGroups()
+    {
+        return $this->fetch(OptionGroup::class);
     }
 
     protected function setupListOperation()
@@ -50,23 +54,23 @@ class SectionQuestionCrudController extends CrudController
         CRUD::addColumns([
             [
                 'name'  => 'code',
-                'label' => 'Kod',
+                'label' => 'Code',
                 'type'  => 'text',
             ],
             [
                 'name'  => 'text',
-                'label' => ucfirst(__('admin.question')),
+                'label' => 'Question text',
                 'type'  => 'text',
             ],
             [
                 'name'    => 'type',
-                'label'   => __('admin.type'),
+                'label'   => 'Type',
                 'type'    => 'select_from_array',
                 'options' => QuestionType::asSelectArray(),
             ],
             [
-                'name'      => 'options',
-                'label'     => __('admin.options'),
+                'name'      => 'optiongroup',
+                'label'     => 'Options',
                 'type'      => 'select',
                 'entity'    => 'options',
                 'attribute' => 'name',
@@ -82,67 +86,66 @@ class SectionQuestionCrudController extends CrudController
         CRUD::addFields([
             [
                 'name'  => 'code',
-                'label' => 'Kod',
+                'label' => 'Code',
                 'type'  => 'text',
-                'tab'   => __('admin.general_tab'),
+                'hint'  => 'Identification code and CSV column name for this question. Should be unique in the campaign.',
+                'tab'   => 'General',
             ],
             [
                 'name'  => 'text',
-                'label' => ucfirst(__('admin.question')),
-                //'type'  => 'summernote',
+                'label' => 'Question text',
                 'type'  => 'textarea',
-                'tab'   => __('admin.general_tab'),
+                'tab'   => 'General',
             ],
             [
                 'name'    => 'type',
-                'label'   => __('admin.type'),
+                'label'   => 'Type',
                 'type'    => 'select2_from_array',
                 'options' => QuestionType::asSelectArray(),
-                'tab'     => __('admin.general_tab'),
+                'tab'     => 'General',
             ],
             [
-                'name'      => 'option_group_id',
-                'label'     => __('admin.options'),
+                'name'   => 'option_group_id',
+                'label'  => 'Options',
+                'type'   => 'select2',
+                'entity' => 'optiongroup',
+                'model'  => OptionGroup::class,
+                'tab'    => 'General',
+            ],
+            [
+                'name'      => 'campaign_id',
+                'label'     => 'Campaign',
                 'type'      => 'select2',
-                'entity'    => 'options',
-                'attribute' => 'name',
-                'model'     => 'App\Models\OptionGroup',
-                'tab'       => __('admin.general_tab'),
+                'entity'    => 'campaign',
+                'attribute' => 'title',
+                'model'     => 'App\Models\Campaign',
+                'value'     => $this->campaign_id,
+                'tab'       => 'General',
             ],
-            [
-                'name'                       => 'section_id',
-                'label'                      => 'Section',
-                'type'                       => 'select2_grouped',
-                //'value' => $section_id,
-                'entity'                     => 'section',
-                'attribute'                  => 'title',
-                //'model' => 'App\Models\Section',
-                'group_by'                   => 'campaign',
-                'group_by_attribute'         => 'title',
-                'group_by_relationship_back' => 'sections',
-                'value'                      => $this->section_id,
-                'tab'                        => __('admin.general_tab'),
-            ],
+
             [
                 'name'   => 'conditions',
-                'label'  => 'Uvjeti',
+                'label'  => 'Conditionals',
                 'type'   => 'repeatable',
                 'fields' => [
                     [
                         'name'  => 'answer',
+                        'label' => 'Answer',
                         'type'  => 'text',
-                        'label' => 'Odgovor',
                     ],
                     [
-                        'name'      => 'next_question_id',
+                        'name'      => 'question_id',
                         'type'      => 'select2',
                         'entity'    => 'children',
                         'model'     => 'App\Models\Question',
                         'attribute' => 'text',
-                        'label'     => 'Sljedeće pitanje',
+                        'label'     => 'Skip to question',
+                        'options'   => function ($query) {
+                            return $query->where('campaign_id', $this->campaign_id)->get();
+                        },
                     ],
                 ],
-                'tab'    => 'Uvjeti',
+                'tab'    => 'Conditionals',
             ],
             [
                 'name'   => 'csv',
@@ -150,21 +153,26 @@ class SectionQuestionCrudController extends CrudController
                 'type'   => 'upload',
                 'upload' => true,
                 'disk'   => 'uploads',
-                'tab'    => __('admin.panel_tab'),
+                'tab'    => 'Panel settings',
             ],
             [
-                'name'  => 'dynamic',
-                'label' => 'Dynamic',
-                'type'  => 'checkbox',
-                'fake'  => true,
-                'tab'   => __('admin.panel_tab'),
+                'name'    => 'dynamic',
+                'label'   => 'Static or dynamic panel',
+                'type'    => 'radio',
+                'options' => [
+                    0 => 'Static',
+                    1 => 'Dynamic',
+                ],
+                'inline'  => true,
+                'fake'    => true,
+                'tab'     => 'Panel settings',
             ],
             [
                 'name'  => 'timeout',
                 'label' => 'Timeout (s)',
                 'type'  => 'number',
                 'fake'  => true,
-                'tab'   => __('admin.panel_tab'),
+                'tab'   => 'Panel settings',
             ],
             [
                 'name'    => 'batch_size',
@@ -172,7 +180,7 @@ class SectionQuestionCrudController extends CrudController
                 'type'    => 'number',
                 'default' => 5,
                 'fake'    => true,
-                'tab'     => __('admin.panel_tab'),
+                'tab'     => 'Panel settings',
             ],
         ]);
     }

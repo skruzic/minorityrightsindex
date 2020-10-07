@@ -31,7 +31,7 @@ class UserCrudController extends CrudController
         CRUD::addColumns([
             [
                 'name'  => 'name',
-                'label' => 'Ime',
+                'label' => 'Name',
                 'type'  => 'text',
             ],
             [
@@ -49,7 +49,7 @@ class UserCrudController extends CrudController
         CRUD::addFields([
             [
                 'name'  => 'name',
-                'label' => 'Ime',
+                'label' => 'Name',
                 'type'  => 'text',
             ],
             [
@@ -59,7 +59,7 @@ class UserCrudController extends CrudController
             ],
             [
                 'name'  => 'password',
-                'label' => 'Šifra',
+                'label' => 'Password',
                 'type'  => 'password',
             ],
         ]);

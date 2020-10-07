@@ -15,18 +15,14 @@ Route::group([
     Route::crud('campaign', 'CampaignCrudController');
     //CRUD::resource('section', 'SectionCrudController');
 
-    Route::group(['prefix' => 'campaign/{campaign_id}'], function()
-    {
+    Route::group(['prefix' => 'campaign/{campaign_id}'], function () {
         Route::crud('invite', 'InviteCrudController');
-        Route::crud('section', 'CampaignSectionCrudController');
-        Route::get('download', 'CampaignSectionCrudController@download');
+        //Route::crud('section', 'CampaignSectionCrudController');
+        //Route::get('download', 'CampaignSectionCrudController@download');
 
-        Route::group(['prefix' => 'section/{section_id}'], function()
-        {
-            Route::crud('question', 'SectionQuestionCrudController');
-        });
+
+        Route::crud('question', 'QuestionCrudController');
     });
-
 
 
     //CRUD::resource('question', 'QuestionCrudController');

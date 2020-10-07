@@ -16,7 +16,7 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            $table->integer('section_id')->unsigned();
+            $table->integer('campaign_id')->unsigned();
             $table->integer('parent_id')->unsigned()->nullable()->default(0);
             $table->integer('lft')->unsigned()->default(0);
             $table->integer('rgt')->unsigned()->default(0);
@@ -25,6 +25,7 @@ class CreateQuestionsTable extends Migration
             $table->tinyInteger('type')->unsigned()->default(QuestionType::Text);
             $table->mediumText('text');
             $table->mediumText('panel')->nullable();
+            $table->mediumText('conditions')->nullable();
             $table->text('extras')->nullable();
             $table->integer('option_group_id')->unsigned()->nullable();
             $table->timestamps();

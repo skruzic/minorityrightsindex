@@ -14,6 +14,6 @@ class QuestionsTableSeeder extends Seeder
      */
     public function run()
     {
-        Question::factory()->count(100)->create();
+        Question::factory()->count(50)->create();
     }
 }

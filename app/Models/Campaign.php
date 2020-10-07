@@ -21,9 +21,9 @@ class Campaign extends Model
         return $this->hasMany(Invite::class);
     }
 
-    public function sections()
+    public function questions()
     {
-        return $this->hasMany(Section::class)->orderBy('sections.lft');
+        return $this->hasMany(Question::class)->orderBy('questions.lft');
     }
 
     public function answers()

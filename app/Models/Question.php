@@ -12,32 +12,28 @@ class Question extends Model
     use HasFactory, CrudTrait;
 
     protected $fillable = [
-        'section_id',
+        'campaign_id',
         'parent_id',
         'type',
         'code',
         'text',
         'panel',
+        'conditions',
         'extras',
         'option_group_id',
     ];
 
     protected $fakeColumns = ['extras'];
 
-    protected $casts = ['extras' => 'array'];
+    protected $casts = ['conditions' => 'array', 'extras' => 'array'];
 
     /*
      * Relationships
      */
 
-    public function options()
+    public function optiongroup()
     {
         return $this->belongsTo(OptionGroup::class, 'option_group_id');
-    }
-
-    public function section()
-    {
-        return $this->belongsTo(Section::class);
     }
 
     public function campaign()

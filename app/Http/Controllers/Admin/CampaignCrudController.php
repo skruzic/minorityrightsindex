@@ -26,7 +26,7 @@ class CampaignCrudController extends CrudController
     {
         CRUD::setModel('App\Models\Campaign');
         CRUD::setRoute(config('backpack.base.route_prefix').'/campaign');
-        CRUD::setEntityNameStrings(__('admin.campaign'), __('admin.campaigns'));
+        CRUD::setEntityNameStrings('campaign', 'campaigns');
 
         //CRUD::addButtonFromView('line', 'campaign_sections', 'campaign_sections', 'beginning');
         CRUD::addButtonFromView('line', 'campaign_invites', 'campaign_invites');
@@ -39,27 +39,22 @@ class CampaignCrudController extends CrudController
         CRUD::addColumns([
             [
                 'name'    => 'title',
-                'label'   => __('admin.title'),
+                'label'   => 'Title',
                 'type'    => 'text',
                 'wrapper' => [
                     'href' => function ($crud, $column, $entry, $related_key) {
-                        return backpack_url('campaign/'.$entry->id.'/section');
+                        return backpack_url('campaign/'.$entry->id.'/question');
                     },
                 ],
             ],
             [
                 'name'  => 'description',
-                'label' => __('admin.description'),
-                'type'  => 'text',
-            ],
-            [
-                'name'  => 'slug',
-                'label' => 'Slug',
+                'label' => 'Description',
                 'type'  => 'text',
             ],
             [
                 'name'  => 'updated_at',
-                'label' => 'Zadnja promjena',
+                'label' => 'Last update',
                 'type'  => 'datetime',
             ],
         ]);
@@ -72,17 +67,18 @@ class CampaignCrudController extends CrudController
         CRUD::addFields([
             [
                 'name'  => 'title',
-                'label' => __('admin.title'),
+                'label' => 'Title',
                 'type'  => 'text',
             ],
             [
                 'name'  => 'slug',
                 'label' => 'Slug',
                 'type'  => 'text',
+                'hint'  => 'If left empty, it will be generated automatically',
             ],
             [
                 'name'  => 'description',
-                'label' => __('admin.description'),
+                'label' => 'Description',
                 'type'  => 'textarea',
             ],
             [
