@@ -1,9 +1,11 @@
 <?php
 
-use Illuminate\Database\Seeder;
-use App\Models\Section;
+namespace Database\Seeders;
 
-class SectionsTableSeeder extends Seeder
+use Illuminate\Database\Seeder;
+use App\Models\Campaign;
+
+class CampaignsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +14,6 @@ class SectionsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Section::class, 20)->create();
+        Campaign::factory()->count(3)->create();
     }
 }

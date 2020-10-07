@@ -2,221 +2,217 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\QuestionRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use App\Enums\QuestionType;
-
-// VALIDATION: change the requests to match your own file names if you need form validation
-use App\Http\Requests\QuestionRequest as StoreRequest;
-use App\Http\Requests\QuestionRequest as UpdateRequest;
 use App\Helpers\PanelImporter;
 use App\Models\Section;
+use Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+use Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+use Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
+use Backpack\CRUD\app\Http\Controllers\Operations\ReorderOperation;
+use Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
+use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 /**
  * Class SectionQuestionCrudController
  * @package App\Http\Controllers\Admin
  * @property-read CrudPanel $crud
  */
-class SectionQuestionCrudController extends CrudController {
-    use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+class SectionQuestionCrudController extends CrudController
+{
+    use ListOperation, CreateOperation, UpdateOperation, DeleteOperation, ReorderOperation;
 
-	public function setup() {
-		//parent::setup();
-		/*
-		|--------------------------------------------------------------------------
-		| CrudPanel Basic Information
-		|--------------------------------------------------------------------------
-		*/
-		$campaign_id = \Route::current()->parameter( 'campaign_id' );
-		$section_id  = \Route::current()->parameter( 'section_id' );
-		$this->crud->setModel( 'App\Models\Question' );
-		$this->crud->setRoute( 'admin/campaign/' . $campaign_id . '/section/' . $section_id . '/question' );
-		$this->crud->setEntityNameStrings( __( 'admin.question' ), __( 'admin.questions' ) );
-		$this->crud->addClause( 'where', 'section_id', $section_id );
-		$this->crud->orderBy( 'lft' );
-		$this->crud->setHeading( __( 'admin.questions_in_section',
-			[ 'section' => $section_id, 'campaign' => $campaign_id ] ), 'index' );
+    protected $campaign_id;
+    protected $section_id;
 
-		// Botun za povratak na sekciju
-		$this->crud->addButtonFromView( 'top', 'campaign_sections', 'campaign_sections_question', 'end' );
+    public function setup()
+    {
+        $this->campaign_id = \Route::current()->parameter('campaign_id');
+        $this->section_id  = \Route::current()->parameter('section_id');
+        CRUD::setModel('App\Models\Question');
+        CRUD::setRoute('admin/campaign/'.$this->campaign_id.'/section/'.$this->section_id.'/question');
+        CRUD::setEntityNameStrings(__('admin.question'), __('admin.questions'));
+        CRUD::addClause('where', 'section_id', $this->section_id);
+        CRUD::orderBy('lft');
+        CRUD::setHeading(__('admin.questions_in_section',
+            ['section' => $this->section_id, 'campaign' => $this->campaign_id]), 'index');
 
-		/*
-		|--------------------------------------------------------------------------
-		| CrudPanel Configuration
-		|--------------------------------------------------------------------------
-		*/
+        // Botun za povratak na sekciju
+        CRUD::addButtonFromView('top', 'campaign_sections', 'campaign_sections_question', 'end');
 
-		// TODO: remove setFromDb() and manually define Fields and Columns
-		//$this->crud->setFromDb();
-		$this->crud->addColumns( [
-			[
-				'name'  => 'title',
-				'label' => 'Kod',
-				'type'  => 'text',
-			],
-			[
-				'name'  => 'question',
-				'label' => ucfirst( __( 'admin.question' ) ),
-				'type'  => 'text',
-			],
-			[
-				'name'    => 'type',
-				'label'   => __( 'admin.type' ),
-				'type'    => 'select_from_array',
-				'options' => QuestionType::toArray(),
-			],
-			[
-				'name'      => 'options',
-				'label'     => __( 'admin.options' ),
-				'type'      => 'select',
-				'entity'    => 'options',
-				'attribute' => 'name',
-				'model'     => 'App\Models\OptionGroup',
-			],
-		] );
+        CRUD::allowAccess('reorder');
+        CRUD::enableReorder('question', 2);
+    }
 
-		$this->crud->addFields( [
-			[
-				'name'  => 'title',
-				'label' => 'Kod',
-				'type'  => 'text',
-				'tab'   => __( 'admin.general_tab' ),
-			],
-			[
-				'name'  => 'question',
-				'label' => ucfirst( __( 'admin.question' ) ),
-				//'type'  => 'textarea',
-				'type'  => 'summernote',
-				'tab'   => __( 'admin.general_tab' ),
-			],
-			[
-				'name'    => 'type',
-				'label'   => __( 'admin.type' ),
-				'type'    => 'select2_from_array',
-				'options' => QuestionType::toArray(),
-				'tab'     => __( 'admin.general_tab' ),
-			],
-			[
-				'name'      => 'option_group_id',
-				'label'     => __( 'admin.options' ),
-				'type'      => 'select2',
-				'entity'    => 'options',
-				'attribute' => 'name',
-				'model'     => 'App\Models\OptionGroup',
-				'tab'       => __( 'admin.general_tab' ),
-			],
-			/*[
-				'name'                       => 'section_id',
-				'label'                      => __('admin.section'),
-				'type'                       => 'select2_grouped',
-				//'value' => $section_id,
-				'entity'                     => 'section',
-				'attribute'                  => 'title',
-				//'model' => 'App\Models\Section',
-				'group_by'                   => 'campaign',
-				'group_by_attribute'         => 'title',
-				'group_by_relationship_back' => 'sections',
-				'tab'                        => __('admin.general_tab'),
-			],*/
-			/*[
-				'name'   => 'csv',
-				'label'  => 'Panel',
-				'type'   => 'upload',
-				'upload' => true,
-				'disk'   => 'uploads',
-				'tab'    => __('admin.general_tab'),
-			],*/
-			[
-				'name'                       => 'section_id',
-				'label'                      => 'Section',
-				'type'                       => 'select2_grouped',
-				//'value' => $section_id,
-				'entity'                     => 'section',
-				'attribute'                  => 'title',
-				//'model' => 'App\Models\Section',
-				'group_by'                   => 'campaign',
-				'group_by_attribute'         => 'title',
-				'group_by_relationship_back' => 'sections',
-				'value'                      => $section_id,
-				'tab'                        => __( 'admin.general_tab' ),
-			],
-			[
-				'name'   => 'csv',
-				'label'  => 'Panel',
-				'type'   => 'upload',
-				'upload' => true,
-				'disk'   => 'uploads',
-				'tab'    => __( 'admin.panel_tab' ),
-			],
-			[
-				'name'  => 'dynamic',
-				'label' => 'Dynamic',
-				'type'  => 'checkbox',
-				'fake'  => true,
-				'tab'   => __( 'admin.panel_tab' ),
-			],
-			[
-				'name'  => 'timeout',
-				'label' => 'Timeout (s)',
-				'type'  => 'number',
-				'fake'  => true,
-				'tab'   => __( 'admin.panel_tab' ),
-			],
-			[
-				'name'    => 'batch_size',
-				'label'   => 'Batch size',
-				'type'    => 'number',
-				'default' => 5,
-				'fake'    => true,
-				'tab'     => __( 'admin.panel_tab' ),
-			],
-		] );
+    protected function setupListOperation()
+    {
+        CRUD::addColumns([
+            [
+                'name'  => 'code',
+                'label' => 'Kod',
+                'type'  => 'text',
+            ],
+            [
+                'name'  => 'text',
+                'label' => ucfirst(__('admin.question')),
+                'type'  => 'text',
+            ],
+            [
+                'name'    => 'type',
+                'label'   => __('admin.type'),
+                'type'    => 'select_from_array',
+                'options' => QuestionType::asSelectArray(),
+            ],
+            [
+                'name'      => 'options',
+                'label'     => __('admin.options'),
+                'type'      => 'select',
+                'entity'    => 'options',
+                'attribute' => 'name',
+                'model'     => 'App\Models\OptionGroup',
+            ],
+        ]);
+    }
 
-		$this->crud->allowAccess( 'create' );
-		$this->crud->allowAccess( 'reorder' );
-		$this->crud->enableReorder( 'question', 2 );
+    protected function setupCreateOperation()
+    {
+        CRUD::setValidation(QuestionRequest::class);
 
-		// Micem polje za upload CSV-a kod updejta (mjenjanja postavki)
-		$this->crud->removeField( 'csv', 'update' );
+        CRUD::addFields([
+            [
+                'name'  => 'code',
+                'label' => 'Kod',
+                'type'  => 'text',
+                'tab'   => __('admin.general_tab'),
+            ],
+            [
+                'name'  => 'text',
+                'label' => ucfirst(__('admin.question')),
+                //'type'  => 'summernote',
+                'type'  => 'textarea',
+                'tab'   => __('admin.general_tab'),
+            ],
+            [
+                'name'    => 'type',
+                'label'   => __('admin.type'),
+                'type'    => 'select2_from_array',
+                'options' => QuestionType::asSelectArray(),
+                'tab'     => __('admin.general_tab'),
+            ],
+            [
+                'name'      => 'option_group_id',
+                'label'     => __('admin.options'),
+                'type'      => 'select2',
+                'entity'    => 'options',
+                'attribute' => 'name',
+                'model'     => 'App\Models\OptionGroup',
+                'tab'       => __('admin.general_tab'),
+            ],
+            [
+                'name'                       => 'section_id',
+                'label'                      => 'Section',
+                'type'                       => 'select2_grouped',
+                //'value' => $section_id,
+                'entity'                     => 'section',
+                'attribute'                  => 'title',
+                //'model' => 'App\Models\Section',
+                'group_by'                   => 'campaign',
+                'group_by_attribute'         => 'title',
+                'group_by_relationship_back' => 'sections',
+                'value'                      => $this->section_id,
+                'tab'                        => __('admin.general_tab'),
+            ],
+            [
+                'name'   => 'conditions',
+                'label'  => 'Uvjeti',
+                'type'   => 'repeatable',
+                'fields' => [
+                    [
+                        'name'  => 'answer',
+                        'type'  => 'text',
+                        'label' => 'Odgovor',
+                    ],
+                    [
+                        'name'      => 'next_question_id',
+                        'type'      => 'select2',
+                        'entity'    => 'children',
+                        'model'     => 'App\Models\Question',
+                        'attribute' => 'text',
+                        'label'     => 'Sljedeće pitanje',
+                    ],
+                ],
+                'tab'    => 'Uvjeti',
+            ],
+            [
+                'name'   => 'csv',
+                'label'  => 'Panel',
+                'type'   => 'upload',
+                'upload' => true,
+                'disk'   => 'uploads',
+                'tab'    => __('admin.panel_tab'),
+            ],
+            [
+                'name'  => 'dynamic',
+                'label' => 'Dynamic',
+                'type'  => 'checkbox',
+                'fake'  => true,
+                'tab'   => __('admin.panel_tab'),
+            ],
+            [
+                'name'  => 'timeout',
+                'label' => 'Timeout (s)',
+                'type'  => 'number',
+                'fake'  => true,
+                'tab'   => __('admin.panel_tab'),
+            ],
+            [
+                'name'    => 'batch_size',
+                'label'   => 'Batch size',
+                'type'    => 'number',
+                'default' => 5,
+                'fake'    => true,
+                'tab'     => __('admin.panel_tab'),
+            ],
+        ]);
+    }
 
-		// add asterisk for fields that are required in QuestionRequest
-		$this->crud->setRequiredFields( StoreRequest::class, 'create' );
-		$this->crud->setRequiredFields( UpdateRequest::class, 'edit' );
-	}
+    protected function setupUpdateOperation()
+    {
+        $this->setupCreateOperation();
 
-	public function store( StoreRequest $request ) {
-		if ( $request->hasFile( 'csv' ) ) {
+        // Micem polje za upload CSV-a kod updejta (mjenjanja postavki)
+        CRUD::removeField('csv');
+    }
 
-			$file = $request->file( 'csv' );
+    public function setupReorderOperation()
+    {
+        CRUD::set('reorder.label', 'text');
+        CRUD::set('reorder.max_lavel', 1);
+    }
 
-			// Obrada CSV filea
-			//$csv = PanelImporter::import($file);
-			$csv = ( new PanelImporter( $file ) )->import();
+    /*public function store()
+    {
+        CRUD::setOperationSetting('saveAllInputsExcept',
+            ['_token', '_method', 'http_referrer', 'current_tab', 'save_action']);
 
-			$panel = json_encode( $csv );
+        $request = CRUD::getRequest()->request;
 
-			$request->request->add( [ 'panel' => $panel ] );
-		}
+        if ($request->hasFile('csv')) {
 
-		return parent::storeCrud( $request );
-	}
+            $file = $request->file('csv');
 
-	public function update( UpdateRequest $request ) {
-		/*if ($request->hasFile('csv')) {
+            // Obrada CSV filea
+            //$csv = PanelImporter::import($file);
+            $csv = (new PanelImporter($file))->import();
 
-			$file = $request->file('csv');
+            $panel = json_encode($csv);
 
-			// Obrada CSV filea
-			//$csv = PanelImporter::import($file);
-			$csv = (new PanelImporter($file))->import();
+            $request->add(['panel' => $panel]);
+        }
 
-			$panel = json_encode($csv);
+        CRUD::setRequest($request);
 
-			$request->request->add(['panel' => $panel]);
-		}*/
-
-		return parent::updateCrud( $request );
-	}
+        return $this->traitStore();
+    }*/
 }

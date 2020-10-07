@@ -14,11 +14,11 @@ class CreateSectionsTable extends Migration
     public function up()
     {
         Schema::create('sections', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('parent_id')->unsigned()->nullable();
-            $table->integer('lft')->unsigned();
-            $table->integer('rgt')->unsigned();
-            $table->integer('depth')->unsigned();
+            $table->id();
+            $table->integer('parent_id')->unsigned()->nullable()->default(0);
+            $table->integer('lft')->unsigned()->default(0);
+            $table->integer('rgt')->unsigned()->default(0);
+            $table->integer('depth')->unsigned()->default(0);
             $table->string('title');
             $table->text('description')->nullable();
             $table->integer('campaign_id')->unsigned()->index();

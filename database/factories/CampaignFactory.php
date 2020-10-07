@@ -1,12 +1,20 @@
 <?php
 
-use Faker\Generator as Faker;
-use App\Models\Campaign;
+namespace Database\Factories;
 
-$factory->define(Campaign::class, function (Faker $faker) {
-    return [
-        'title' => $faker->words(3, true),
-        'description' => $faker->paragraph,
-        'user_id' => 1,
-    ];
-});
+use App\Models\Campaign;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class CampaignFactory extends Factory
+{
+    protected $model = Campaign::class;
+
+    public function definition()
+    {
+        return [
+            'title'       => $this->faker->sentence(3),
+            'slug'        => $this->faker->slug,
+            'description' => $this->faker->text,
+        ];
+    }
+}

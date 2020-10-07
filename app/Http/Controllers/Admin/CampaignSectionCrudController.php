@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\SectionRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
 use App\Http\Requests\SectionRequest as StoreRequest;
 use App\Http\Requests\SectionRequest as UpdateRequest;
 use App\Helpers\AnswerExporter;
+use Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+use Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+use Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
+use Backpack\CRUD\app\Http\Controllers\Operations\ReorderOperation;
+use Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
+use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 /**
  * Class campaignSectionCrudController
@@ -16,42 +23,32 @@ use App\Helpers\AnswerExporter;
  */
 class CampaignSectionCrudController extends CrudController
 {
-    use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\ReorderOperation;
+    use ListOperation, CreateOperation, UpdateOperation, DeleteOperation, ReorderOperation;
 
     protected $campaign_id;
 
     public function setup()
     {
-        /*
-        |--------------------------------------------------------------------------
-        | CrudPanel Basic Information
-        |--------------------------------------------------------------------------
-        */
         $this->campaign_id = \Route::current()->parameter('campaign_id');
-        $this->crud->setModel('App\Models\Section');
-        $this->crud->setRoute('admin/campaign/'.$this->campaign_id.'/section');
-        $this->crud->setEntityNameStrings(__('admin.section'), __('admin.sections'));
 
-        $this->crud->addClause('where', 'campaign_id', $this->campaign_id);
-        $this->crud->orderBy('lft');
+        CRUD::setModel('App\Models\Section');
+        CRUD::setRoute('admin/campaign/'.$this->campaign_id.'/section');
+        CRUD::setEntityNameStrings(__('admin.section'), __('admin.sections'));
 
-        $this->crud->removeColumn('campaign');
+        CRUD::addClause('where', 'campaign_id', $this->campaign_id);
+        CRUD::orderBy('lft');
 
-        $this->crud->setHeading(__('admin.sections_in_campaign').$this->campaign_id, 'index');
+        CRUD::setHeading(__('admin.sections_in_campaign').$this->campaign_id, 'index');
 
-        /*
-        |--------------------------------------------------------------------------
-        | CrudPanel Configuration
-        |--------------------------------------------------------------------------
-        */
+        CRUD::addButtonFromView('line', 'section_questions', 'section_questions', 'beginning');
 
-        // TODO: remove setFromDb() and manually define Fields and Columns
-        //$this->crud->setFromDb();
-        $this->crud->addColumns([
+        //$this->crud->allowAccess('reorder');
+        //$this->crud->enableReorder('title', 2);
+    }
+
+    protected function setupListOperation()
+    {
+        CRUD::addColumns([
             [
                 'name'  => 'title',
                 'label' => __('admin.title'),
@@ -62,17 +59,22 @@ class CampaignSectionCrudController extends CrudController
                 'label' => __('admin.description'),
                 'type'  => 'text',
             ],
-            [
+            /*[
                 'name'      => 'campaign',
                 'label'     => __('admin.campaign'),
                 'type'      => 'select',
                 'entity'    => 'campaign',
                 'attribute' => 'title',
                 'model'     => 'App\Models\Campaign',
-            ],
+            ],*/
         ]);
+    }
 
-        $this->crud->addFields([
+    protected function setupCreateOperation()
+    {
+        CRUD::setValidation(SectionRequest::class);
+
+        CRUD::addFields([
             [
                 'name'  => 'title',
                 'label' => 'Title',
@@ -90,33 +92,20 @@ class CampaignSectionCrudController extends CrudController
                 'entity'    => 'campaign',
                 'attribute' => 'title',
                 'model'     => 'App\Models\Campaign',
+                'default'   => $this->campaign_id,
             ],
         ]);
-
-        // add asterisk for fields that are required in SectionRequest
-        $this->crud->setRequiredFields(StoreRequest::class, 'create');
-        $this->crud->setRequiredFields(UpdateRequest::class, 'edit');
-
-        $this->crud->addButtonFromView('line', 'section_questions', 'section_questions', 'beginning');
-
-        //$this->crud->allowAccess('reorder');
-        //$this->crud->enableReorder('title', 2);
     }
 
-    public function store(StoreRequest $request)
+    protected function setupUpdateOperation()
     {
-        return parent::storeCrud();
-    }
-
-    public function update(UpdateRequest $request)
-    {
-        return parent::updateCrud();
+        $this->setupCreateOperation();
     }
 
     public function setupReorderOperation()
     {
-        $this->crud->set('reorder.label', 'title');
-        $this->crud->set('reorder.max_lavel', 2);
+        CRUD::set('reorder.label', 'title');
+        CRUD::set('reorder.max_lavel', 2);
     }
 
     public function download()

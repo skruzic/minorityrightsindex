@@ -7,22 +7,19 @@ use App\Helpers\PanelImporter;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 
 class Campaign extends Model
 {
-    use CrudTrait, Sluggable;
+    use HasFactory, CrudTrait, Sluggable;
 
-    protected $fillable = ['title', 'slug', 'description', 'user_id'];
+    protected $fillable = ['title', 'slug', 'description'];
 
-    public function user()
+    public function invites()
     {
-        return $this->belongsTo(\App\User::class);
+        return $this->hasMany(Invite::class);
     }
-
-    /*public function questions()
-    {
-        return $this->belongsToMany(Question::class)->using(CampaignQuestion::class)->withPivot(['id', 'order']);
-    }*/
 
     public function sections()
     {
@@ -39,12 +36,13 @@ class Campaign extends Model
         // TODO: Implement sluggable() method.
         return [
             'slug' => [
-                'source'=>'title'
-            ]
+                'source' => 'title',
+            ],
         ];
     }
 
-    public function getRouteKeyName() {
+    public function getRouteKeyName()
+    {
         return 'slug';
     }
 

@@ -15,15 +15,15 @@ class CreateQuestionsTable extends Migration
     public function up()
     {
         Schema::create('questions', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->integer('section_id')->unsigned();
-            $table->integer('parent_id')->unsigned()->nullable();
-            $table->integer('lft')->unsigned();
-            $table->integer('rgt')->unsigned();
-            $table->integer('depth')->unsigned();
-            $table->string('title')->nullable();
+            $table->integer('parent_id')->unsigned()->nullable()->default(0);
+            $table->integer('lft')->unsigned()->default(0);
+            $table->integer('rgt')->unsigned()->default(0);
+            $table->integer('depth')->unsigned()->default(0);
+            $table->string('code')->nullable();
             $table->tinyInteger('type')->unsigned()->default(QuestionType::Text);
-            $table->mediumText('question');
+            $table->mediumText('text');
             $table->mediumText('panel')->nullable();
             $table->text('extras')->nullable();
             $table->integer('option_group_id')->unsigned()->nullable();

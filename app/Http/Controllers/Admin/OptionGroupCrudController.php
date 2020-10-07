@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\OptionGroupRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
 use App\Http\Requests\OptionGroupRequest as StoreRequest;
 use App\Http\Requests\OptionGroupRequest as UpdateRequest;
+use Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+use Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+use Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
+use Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
+use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 /**
  * Class OptionGroupCrudController
@@ -15,10 +21,7 @@ use App\Http\Requests\OptionGroupRequest as UpdateRequest;
  */
 class OptionGroupCrudController extends CrudController
 {
-    use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+    use ListOperation, CreateOperation, UpdateOperation, DeleteOperation;
 
     public function setup()
     {
@@ -27,19 +30,14 @@ class OptionGroupCrudController extends CrudController
         | CrudPanel Basic Information
         |--------------------------------------------------------------------------
         */
-        $this->crud->setModel('App\Models\OptionGroup');
-        $this->crud->setRoute(config('backpack.base.route_prefix').'/optiongroup');
-        $this->crud->setEntityNameStrings(__('admin.option_group'), __('admin.option_groups'));
+        CRUD::setModel('App\Models\OptionGroup');
+        CRUD::setRoute(config('backpack.base.route_prefix').'/optiongroup');
+        CRUD::setEntityNameStrings(__('admin.option_group'), __('admin.option_groups'));
+    }
 
-        /*
-        |--------------------------------------------------------------------------
-        | CrudPanel Configuration
-        |--------------------------------------------------------------------------
-        */
-
-        // TODO: remove setFromDb() and manually define Fields and Columns
-        //$this->crud->setFromDb();
-        $this->crud->addColumns([
+    protected function setupListOperation()
+    {
+        CRUD::addColumns([
             [
                 'name'  => 'name',
                 'label' => __('admin.name'),
@@ -60,8 +58,13 @@ class OptionGroupCrudController extends CrudController
                 ],
             ],
         ]);
+    }
 
-        $this->crud->addFields([
+    protected function setupCreateOperation()
+    {
+        CRUD::setValidation(OptionGroupRequest::class);
+
+        CRUD::addFields([
             [
                 'name'  => 'name',
                 'label' => __('admin.name'),
@@ -84,27 +87,10 @@ class OptionGroupCrudController extends CrudController
                 'min'             => 2,
             ],
         ]);
-
-        // add asterisk for fields that are required in OptionGroupRequest
-        $this->crud->setRequiredFields(StoreRequest::class, 'create');
-        $this->crud->setRequiredFields(UpdateRequest::class, 'edit');
     }
 
-    public function store(StoreRequest $request)
+    protected function setupUpdateOperation()
     {
-        // your additional operations before save here
-        $redirect_location = parent::storeCrud($request);
-        // your additional operations after save here
-        // use $this->data['entry'] or $this->crud->entry
-        return $redirect_location;
-    }
-
-    public function update(UpdateRequest $request)
-    {
-        // your additional operations before save here
-        $redirect_location = parent::updateCrud($request);
-        // your additional operations after save here
-        // use $this->data['entry'] or $this->crud->entry
-        return $redirect_location;
+        $this->setupCreateOperation();
     }
 }

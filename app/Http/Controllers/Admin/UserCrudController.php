@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use Backpack\CRUD\app\Http\Controllers\CrudController;
-
-// VALIDATION: change the requests to match your own file names if you need form validation
-use App\Http\Requests\UserRequest as StoreRequest;
-use App\Http\Requests\UserRequest as UpdateRequest;
+use App\Http\Requests\UserRequest;
+use Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+use Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+use Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
+use Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
+use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 /**
  * Class UserCrudController
@@ -15,51 +17,56 @@ use App\Http\Requests\UserRequest as UpdateRequest;
  */
 class UserCrudController extends CrudController
 {
-    use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+    use ListOperation, CreateOperation, UpdateOperation, DeleteOperation;
 
     public function setup()
     {
-        /*
-        |--------------------------------------------------------------------------
-        | CrudPanel Basic Information
-        |--------------------------------------------------------------------------
-        */
-        $this->crud->setModel('App\Models\User');
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/user');
-        $this->crud->setEntityNameStrings('user', 'users');
-
-        /*
-        |--------------------------------------------------------------------------
-        | CrudPanel Configuration
-        |--------------------------------------------------------------------------
-        */
-
-        // TODO: remove setFromDb() and manually define Fields and Columns
-        $this->crud->setFromDb();
-
-        // add asterisk for fields that are required in UserRequest
-        $this->crud->setRequiredFields(StoreRequest::class, 'create');
-        $this->crud->setRequiredFields(UpdateRequest::class, 'edit');
+        CRUD::setModel('App\Models\User');
+        CRUD::setRoute(config('backpack.base.route_prefix').'/user');
+        CRUD::setEntityNameStrings('user', 'users');
     }
 
-    public function store(StoreRequest $request)
+    protected function setupListOperation()
     {
-        // your additional operations before save here
-        $redirect_location = parent::storeCrud($request);
-        // your additional operations after save here
-        // use $this->data['entry'] or $this->crud->entry
-        return $redirect_location;
+        CRUD::addColumns([
+            [
+                'name'  => 'name',
+                'label' => 'Ime',
+                'type'  => 'text',
+            ],
+            [
+                'name'  => 'email',
+                'label' => 'E-mail',
+                'type'  => 'email',
+            ],
+        ]);
     }
 
-    public function update(UpdateRequest $request)
+    protected function setupCreateOperation()
     {
-        // your additional operations before save here
-        $redirect_location = parent::updateCrud($request);
-        // your additional operations after save here
-        // use $this->data['entry'] or $this->crud->entry
-        return $redirect_location;
+        CRUD::setValidation(UserRequest::class);
+
+        CRUD::addFields([
+            [
+                'name'  => 'name',
+                'label' => 'Ime',
+                'type'  => 'text',
+            ],
+            [
+                'name'  => 'email',
+                'label' => 'E-mail',
+                'type'  => 'email',
+            ],
+            [
+                'name'  => 'password',
+                'label' => 'Šifra',
+                'type'  => 'password',
+            ],
+        ]);
+    }
+
+    protected function setupUpdateOperation()
+    {
+        $this->setupCreateOperation();
     }
 }

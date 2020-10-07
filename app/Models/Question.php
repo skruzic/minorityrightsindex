@@ -4,18 +4,19 @@ namespace App\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Enums\QuestionType;
 
 class Question extends Model
 {
-    use CrudTrait;
+    use HasFactory, CrudTrait;
 
     protected $fillable = [
         'section_id',
         'parent_id',
         'type',
-        'title',
-        'question',
+        'code',
+        'text',
         'panel',
         'extras',
         'option_group_id',

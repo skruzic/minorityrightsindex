@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Model
 {
@@ -19,7 +20,7 @@ class User extends Model
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = [];
+    protected $fillable = ['name', 'email', 'password'];
     // protected $hidden = [];
     // protected $dates = [];
 
@@ -52,4 +53,8 @@ class User extends Model
     | MUTATORS
     |--------------------------------------------------------------------------
     */
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = Hash::make($value);
+    }
 }

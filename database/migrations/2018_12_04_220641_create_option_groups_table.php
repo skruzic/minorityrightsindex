@@ -14,7 +14,7 @@ class CreateOptionGroupsTable extends Migration
     public function up()
     {
         Schema::create('option_groups', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('name');
             $table->text('description')->nullable();
             $table->text('options');

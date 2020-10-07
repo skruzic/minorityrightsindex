@@ -32,7 +32,7 @@ return [
 
     // Pitanje
     'question'               => 'pitanje',
-    'questions'               => 'Pitanja',
+    'questions'              => 'Pitanja',
     'type'                   => 'Vrsta',
     'relation_sections_back' => 'Nazad na sekcije',
     'questions_in_section'   => 'Pitanja u sekciji #:section u kampanji #:campaign',

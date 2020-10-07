@@ -10,33 +10,6 @@
  */
 
 
-namespace App{
-/**
- * App\User
- *
- * @property int $id
- * @property string $name
- * @property string $email
- * @property string $password
- * @property string|null $remember_token
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User wherePassword($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRememberToken($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUpdatedAt($value)
- * @mixin \Eloquent
- */
-	class User extends \Eloquent {}
-}
-
 namespace App\Models{
 /**
  * App\Models\Answer
@@ -47,16 +20,70 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Campaign $campaign
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Answer newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Answer newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Answer query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Answer whereCampaignId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Answer whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Answer whereData($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Answer whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Answer whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Answer newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Answer newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Answer query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Answer whereCampaignId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Answer whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Answer whereData($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Answer whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Answer whereUpdatedAt($value)
  */
 	class Answer extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Campaign
+ *
+ * @property int $id
+ * @property string $title
+ * @property string $slug
+ * @property string|null $description
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Answer[] $answers
+ * @property-read int|null $answers_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Section[] $sections
+ * @property-read int|null $sections_count
+ * @property-read \App\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|Campaign findSimilarSlugs($attribute, $config, $slug)
+ * @method static \Illuminate\Database\Eloquent\Builder|Campaign newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Campaign newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Campaign query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Campaign whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Campaign whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Campaign whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Campaign whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Campaign whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Campaign whereUpdatedAt($value)
+ */
+	class Campaign extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Invite
+ *
+ * @property int $id
+ * @property int $campaign_id
+ * @property string $email
+ * @property string $token
+ * @property int|null $page
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Invite newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Invite newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Invite query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Invite whereCampaignId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Invite whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Invite whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Invite whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Invite wherePage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Invite whereToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Invite whereUpdatedAt($value)
+ */
+	class Invite extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -69,17 +96,63 @@ namespace App\Models{
  * @property array $options
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OptionGroup newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OptionGroup newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OptionGroup query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OptionGroup whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OptionGroup whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OptionGroup whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OptionGroup whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OptionGroup whereOptions($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OptionGroup whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OptionGroup newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|OptionGroup newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|OptionGroup query()
+ * @method static \Illuminate\Database\Eloquent\Builder|OptionGroup whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OptionGroup whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OptionGroup whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OptionGroup whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OptionGroup whereOptions($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OptionGroup whereUpdatedAt($value)
  */
 	class OptionGroup extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Question
+ *
+ * @property int $id
+ * @property int $section_id
+ * @property int|null $parent_id
+ * @property int $lft
+ * @property int $rgt
+ * @property int $depth
+ * @property string|null $code
+ * @property int $type
+ * @property string $text
+ * @property string|null $panel
+ * @property array|null $extras
+ * @property int|null $option_group_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Campaign $campaign
+ * @property-read \Illuminate\Database\Eloquent\Collection|Question[] $children
+ * @property-read int|null $children_count
+ * @property-read \App\Models\OptionGroup|null $options
+ * @property-read Question|null $parent
+ * @property-read \App\Models\Section $section
+ * @method static \Illuminate\Database\Eloquent\Builder|Question newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Question newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Question query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Question whereCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Question whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Question whereDepth($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Question whereExtras($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Question whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Question whereLft($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Question whereOptionGroupId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Question wherePanel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Question whereParentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Question whereRgt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Question whereSectionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Question whereText($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Question whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Question whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Question withoutChildren()
+ */
+	class Question extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -98,19 +171,20 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Campaign $campaign
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Question[] $questions
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Section newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Section newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Section query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Section whereCampaignId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Section whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Section whereDepth($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Section whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Section whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Section whereLft($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Section whereParentId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Section whereRgt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Section whereTitle($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Section whereUpdatedAt($value)
+ * @property-read int|null $questions_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Section newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Section newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Section query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Section whereCampaignId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Section whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Section whereDepth($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Section whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Section whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Section whereLft($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Section whereParentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Section whereRgt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Section whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Section whereUpdatedAt($value)
  */
 	class Section extends \Eloquent {}
 }
@@ -126,23 +200,23 @@ namespace App\Models{
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User wherePassword($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereRememberToken($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|User query()
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  */
 	class User extends \Eloquent {}
 }
 
-namespace App\Models{
+namespace App{
 /**
- * App\Models\BackpackUser
+ * App\User
  *
  * @property int $id
  * @property string $name
@@ -152,88 +226,18 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BackpackUser newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BackpackUser newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BackpackUser query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BackpackUser whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BackpackUser whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BackpackUser whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BackpackUser whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BackpackUser wherePassword($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BackpackUser whereRememberToken($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BackpackUser whereUpdatedAt($value)
+ * @property-read int|null $notifications_count
+ * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|User query()
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  */
-	class BackpackUser extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
- * App\Models\Campaign
- *
- * @property int $id
- * @property string $title
- * @property string|null $description
- * @property int $user_id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Answer[] $answers
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Section[] $sections
- * @property-read \App\User $user
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Campaign newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Campaign newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Campaign query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Campaign whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Campaign whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Campaign whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Campaign whereTitle($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Campaign whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Campaign whereUserId($value)
- */
-	class Campaign extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
- * App\Models\Question
- *
- * @property int $id
- * @property int $section_id
- * @property int|null $parent_id
- * @property int $lft
- * @property int $rgt
- * @property int $depth
- * @property string|null $title
- * @property int $type
- * @property string $question
- * @property string|null $panel
- * @property array|null $extras
- * @property int|null $option_group_id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Campaign $campaign
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Question[] $children
- * @property-read \App\Models\OptionGroup|null $options
- * @property-read \App\Models\Question|null $parent
- * @property-read \App\Models\Section $section
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereDepth($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereExtras($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereLft($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereOptionGroupId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question wherePanel($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereParentId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereQuestion($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereRgt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereSectionId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereTitle($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question withoutChildren()
- */
-	class Question extends \Eloquent {}
+	class User extends \Eloquent {}
 }
 

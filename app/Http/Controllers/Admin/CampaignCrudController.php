@@ -2,48 +2,50 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\CampaignRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
+use Backpack\CRUD\app\Http\Controllers\Operations\CloneOperation;
+use Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+use Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+use Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
+use Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
+use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 use App\Models\Campaign;
-
-// VALIDATION: change the requests to match your own file names if you need form validation
-use App\Http\Requests\CampaignRequest as StoreRequest;
-use App\Http\Requests\CampaignRequest as UpdateRequest;
 
 /**
  * Class CampaignCrudController
  * @package App\Http\Controllers\Admin
- * @property-read CrudPanel $crud
+ * @property-read CrudPanel $crud`
  */
 class CampaignCrudController extends CrudController
 {
-    use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+    use ListOperation, CreateOperation, UpdateOperation, DeleteOperation, CloneOperation;
 
     public function setup()
     {
-        /*
-        |--------------------------------------------------------------------------
-        | CrudPanel Basic Information
-        |--------------------------------------------------------------------------
-        */
-        $this->crud->setModel('App\Models\Campaign');
-        $this->crud->setRoute(config('backpack.base.route_prefix').'/campaign');
-        $this->crud->setEntityNameStrings(__('admin.campaign'), __('admin.campaigns'));
+        CRUD::setModel('App\Models\Campaign');
+        CRUD::setRoute(config('backpack.base.route_prefix').'/campaign');
+        CRUD::setEntityNameStrings(__('admin.campaign'), __('admin.campaigns'));
 
-        /*
-        |--------------------------------------------------------------------------
-        | CrudPanel Configuration
-        |--------------------------------------------------------------------------
-        */
+        //CRUD::addButtonFromView('line', 'campaign_sections', 'campaign_sections', 'beginning');
+        CRUD::addButtonFromView('line', 'campaign_invites', 'campaign_invites');
+        CRUD::addButtonFromView('line', 'download_answers', 'export_csv', 'end');
+        //CRUD::addButtonFromView('line', 'campaign_view', 'campaign_view', 'end');
+    }
 
-        $this->crud->addColumns([
+    protected function setupListOperation()
+    {
+        CRUD::addColumns([
             [
-                'name'  => 'title',
-                'label' => __('admin.title'),
-                'type'  => 'text',
+                'name'    => 'title',
+                'label'   => __('admin.title'),
+                'type'    => 'text',
+                'wrapper' => [
+                    'href' => function ($crud, $column, $entry, $related_key) {
+                        return backpack_url('campaign/'.$entry->id.'/section');
+                    },
+                ],
             ],
             [
                 'name'  => 'description',
@@ -51,21 +53,23 @@ class CampaignCrudController extends CrudController
                 'type'  => 'text',
             ],
             [
-                'name' => 'slug',
+                'name'  => 'slug',
                 'label' => 'Slug',
-                'type' => 'text',
+                'type'  => 'text',
             ],
             [
-                'name'      => 'user',
-                'label'     => __('admin.user'),
-                'type'      => 'select',
-                'entity'    => 'user',
-                'attribute' => 'name',
-                'model'     => '\App\User',
+                'name'  => 'updated_at',
+                'label' => 'Zadnja promjena',
+                'type'  => 'datetime',
             ],
         ]);
+    }
 
-        $this->crud->addFields([
+    protected function setupCreateOperation()
+    {
+        CRUD::setValidation(CampaignRequest::class);
+
+        CRUD::addFields([
             [
                 'name'  => 'title',
                 'label' => __('admin.title'),
@@ -88,34 +92,19 @@ class CampaignCrudController extends CrudController
                 'value' => backpack_user()->id,
             ],
         ]);
-
-
-        // add asterisk for fields that are required in CampaignRequest
-        $this->crud->setRequiredFields(StoreRequest::class, 'create');
-        $this->crud->setRequiredFields(UpdateRequest::class, 'edit');
-
-        $this->crud->addButtonFromView('line', 'campaign_sections', 'campaign_sections', 'beginning');
-        $this->crud->addButtonFromView('line', 'download_answers', 'export_csv', 'end');
-        $this->crud->addButtonFromView('line', 'campaign_view', 'campaign_view', 'end');
-
-        // Dozvola za kloniranje
-        $this->crud->allowAccess('clone');
     }
 
-    protected function setupCreateOperation() {
-        $this->crud->setValidation(StoreRequest::class);
-    }
-
-    protected function setupUpdateOperation() {
-        $this->crud->setValidation(UpdateRequest::class);
+    protected function setupUpdateOperation()
+    {
+        $this->setupCreateOperation();
     }
 
     public function clone($id)
     {
         $model = Campaign::find($id);
 
-        $this->crud->hasAccessOrFail('clone');
-        $this->crud->setOperation('clone');
+        CRUD::hasAccessOrFail('clone');
+        CRUD::setOperation('clone');
 
         $clone        = $model->replicate();
         $clone->title = $model->title.' (klon)';
@@ -127,20 +116,18 @@ class CampaignCrudController extends CrudController
             $clone->sections()->save($section_clone);
 
             foreach ($section->questions as $question) {
-                if ( ! isset($question->parent_id)) {
-                    $question_clone = $question->replicate();
-                    $section_clone->questions()->save($question_clone);
+                //if ( ! isset($question->parent_id)) {
+                $question_clone = $question->replicate();
+                $section_clone->questions()->save($question_clone);
 
-                    foreach ($question->children as $child) {
-                        $child_clone            = $child->replicate();
-                        $child_clone->parent_id = $question_clone->id;
-                        $child_clone->section_id = $section_clone->id;
-                        $question_clone->children()->save($child_clone);
-                    }
+                foreach ($question->children as $child) {
+                    $child_clone             = $child->replicate();
+                    $child_clone->parent_id  = $question_clone->id;
+                    $child_clone->section_id = $section_clone->id;
+                    $question_clone->children()->save($child_clone);
                 }
+                //}
             }
         }
     }
-
-
 }
