@@ -38,6 +38,6 @@
     Route::resource('campaign.section.question', 'Admin\QuestionsController');
 });*/
 
-//Route::get('campaign/{id}', 'CampaignController@fill');
-//Route::post('campaign', 'CampaignController@save')->name('campaign.save');
-Route::get('/{any}', 'SinglePageController')->where('any', '.*');
+use App\Http\Controllers\SinglePageController;
+
+Route::get('/{any}', SinglePageController::class)->where('any', '^(?!api).*$');

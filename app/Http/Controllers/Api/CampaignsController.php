@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Campaign, App\Models\Answer;
+use App\Http\Resources\CampaignResource;
 
 class CampaignsController extends Controller
 {
@@ -21,7 +22,7 @@ class CampaignsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -31,7 +32,7 @@ class CampaignsController extends Controller
 
         Answer::create([
             'campaign_id' => $input['campaign'],
-            'data' => json_encode($input['data']),
+            'data'        => json_encode($input['data']),
         ]);
 
         return response()->json('success', 200);
@@ -40,27 +41,28 @@ class CampaignsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  Campaign $campaign
+     * @param  Campaign  $campaign
      *
      * @return \Illuminate\Http\Response
      */
     public function show(Campaign $campaign)
     {
-        return response()->json($campaign->with(['sections' => function($query) {
+        /*return response()->json($campaign->with(['sections' => function($query) {
             $query->with(['questions' => function($query) {
                 $query->with('children');
                 $query->with('options');
                 $query->where('parent_id', null);
                 $query->orderBy('lft');
             }]);
-        }])->where('id', $campaign->id)->first());
+        }])->where('id', $campaign->id)->first());*/
+        return new CampaignResource($campaign);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -72,7 +74,7 @@ class CampaignsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param  int  $id
      *
      * @return \Illuminate\Http\Response
      */

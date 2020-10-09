@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\CampaignsController;
+use App\Http\Controllers\Api\MenuController;
 use Illuminate\Http\Request;
 
 /*
@@ -21,11 +23,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     Route::resource('campaign', '')
 });*/
 
-Route::middleware('auth:api')->prefix('admin')->group(function() {
+/*Route::middleware('auth:api')->prefix('admin')->group(function() {
     Route::resource('campaign', 'API\CampaignsController');
-
-});
+});*/
 
 // Kampanje
-Route::apiResource('campaign', 'API\CampaignsController');
-Route::get('menu', 'API\MenuController');
+Route::apiResource('campaign', CampaignsController::class);
+Route::get('menu', MenuController::class);

@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import store from './app/store';
+import logger from 'redux-logger';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
-
-const App = () => <div>TEST</div>;
+import App from './containers/App';
 
 ReactDOM.render(
     <Provider store={store}>

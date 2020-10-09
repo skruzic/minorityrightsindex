@@ -9,7 +9,7 @@ class CampaignResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      *
      * @return array
      */
@@ -19,7 +19,7 @@ class CampaignResource extends JsonResource
             'id'          => $this->id,
             'title'       => $this->title,
             'description' => $this->description,
-            'user'        => $this->user->name,
+            'questions'   => QuestionResource::collection($this->questions),
         ];
     }
 }
