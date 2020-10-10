@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
+import { withStyles } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import { compose } from 'redux';
 import {
     fetchCampaignById,
-    selectCampaignById
+    selectCampaignById,
 } from '../slices/campaignsSlice';
+import Card from '@material-ui/core/Card';
 import RadioQuestion from '../components/RadioQuestion';
 import CheckboxQuestion from '../components/CheckboxQuestion';
 import TextQuestion from '../components/TextQuestion';
+import Question from '../components/Question';
+import Button from '@material-ui/core/Button';
 
 class Campaign extends Component {
     componentDidMount() {
@@ -19,76 +23,50 @@ class Campaign extends Component {
         console.log(formValues);
     }
 
-    renderQuestion(question) {
-        switch (question.type) {
-            case 0:
-            case 1:
-                return (
-                    <Field
-                        key={question.id}
-                        component={TextQuestion}
-                        name={question.code}
-                        text={question.text}
-                        questionType={question.type}
-                    />
-                );
-            case 2:
-                return (
-                    /*<Field
-                        key={question.id}
-                        component={RadioQuestion}
-                        name={question.code}
-                        text={question.text}
-                        options={question.optiongroup.options}
-                    />*/
-                    <Field
-                        key={question.id}
-                        component={RadioQuestion}
-                        name={question.code}
-                        text={question.text}
-                        options={question.optiongroup.options}
-                    />
-                );
-            case 3:
-                return (
-                    <Field
-                        key={question.id}
-                        component={CheckboxQuestion}
-                        name={question.code}
-                        text={question.text}
-                        options={question.optiongroup.options}
-                    />
-                );
-            case 4:
-                return null;
-            case 5:
-                return null;
-            case 6:
-                return null;
-            default:
-                return null;
-        }
-    }
-
     render() {
-        const { campaign, handleSubmit } = this.props;
+        const { campaign, handleSubmit, classes } = this.props;
 
         return (
             <form onSubmit={handleSubmit(this.onSubmit)}>
                 {campaign &&
-                    campaign.questions.map(q => this.renderQuestion(q))}
+                    campaign.questions.map((q) => (
+                        <Question key={q.id} question={q} />
+                    ))}
+                <Button
+                    variant="contained"
+                    color="primary"
+                    type="submit"
+                    className={classes.button}
+                >
+                    Save & continue later
+                </Button>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    type="submit"
+                    className={classes.button}
+                >
+                    Save & finish
+                </Button>
             </form>
         );
     }
 }
 
-const mapStateToProps = state => {
+const styles = (theme) => ({
+    button: {
+        marginLeft: theme.spacing(3),
+    },
+});
+
+const mapStateToProps = (state) => {
     return {
-        campaign: selectCampaignById(state, 6)
+        campaign: selectCampaignById(state, 6),
     };
 };
 
 export default compose(
+    withStyles(styles, { withTheme: true }),
     reduxForm({ form: 'campaignForm' }),
     connect(mapStateToProps, { fetchCampaignById })
 )(Campaign);

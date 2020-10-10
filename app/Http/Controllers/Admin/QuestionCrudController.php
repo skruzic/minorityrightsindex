@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\QuestionType;
 use App\Http\Requests\QuestionRequest;
 use App\Models\OptionGroup;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
-use App\Enums\QuestionType;
-use App\Helpers\PanelImporter;
 use Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\FetchOperation;
@@ -14,7 +13,6 @@ use Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\ReorderOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
-use PhpOption\Option;
 
 /**
  * Class QuestionCrudController
@@ -44,7 +42,7 @@ class QuestionCrudController extends CrudController
         CRUD::enableReorder('question', 2);
     }
 
-    public function fetchOptionGroups()
+    protected function fetchOptionGroup()
     {
         return $this->fetch(OptionGroup::class);
     }
@@ -105,12 +103,12 @@ class QuestionCrudController extends CrudController
                 'tab'     => 'General',
             ],
             [
-                'name'   => 'option_group_id',
-                'label'  => 'Options',
-                'type'   => 'select2',
-                'entity' => 'optiongroup',
-                'model'  => OptionGroup::class,
-                'tab'    => 'General',
+                'name'          => 'option_group_id',
+                'label'         => 'Options',
+                'type'          => 'select2',
+                'entity'        => 'optiongroup',
+                'model'         => OptionGroup::class,
+                'tab'           => 'General',
             ],
             [
                 'name'      => 'campaign_id',
