@@ -8,7 +8,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Typography from '@material-ui/core/Typography';
 
-const CheckboxQuestion = () => {
+const CheckboxQuestion = ({ name, text, input, options, ...rest }) => {
     const [value, setValue] = useState({});
 
     const handleChange = event => {
@@ -16,28 +16,21 @@ const CheckboxQuestion = () => {
     };
 
     return (
-        <>
-            <Typography>Ovdje dolazi pitanje</Typography>
+        <div>
+            <Typography>{text}</Typography>
             <FormControl component="fieldset">
-                <FormGroup name="ime" value={value}>
-                    <FormControlLabel
-                        control={<Checkbox onChange={handleChange} />}
-                        label="Label1"
-                        value="label1"
-                    />
-                    <FormControlLabel
-                        control={<Checkbox onChange={handleChange} />}
-                        label="Label2"
-                        value="label2"
-                    />
-                    <FormControlLabel
-                        control={<Checkbox onChange={handleChange} />}
-                        label="Label3"
-                        value="label3"
-                    />
+                <FormGroup {...input} {...rest}>
+                    {options.map((option, idx) => (
+                        <FormControlLabel
+                            key={idx}
+                            control={<Checkbox />}
+                            label={option.text}
+                            value={option.value}
+                        />
+                    ))}
                 </FormGroup>
             </FormControl>
-        </>
+        </div>
     );
 };
 

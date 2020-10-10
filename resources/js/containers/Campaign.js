@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { reduxForm, Field } from 'redux-form';
+import { compose } from 'redux';
 import {
     fetchCampaignById,
     selectCampaignById
@@ -13,15 +15,50 @@ class Campaign extends Component {
         this.props.fetchCampaignById(6);
     }
 
+    onSubmit(formValues) {
+        console.log(formValues);
+    }
+
     renderQuestion(question) {
         switch (question.type) {
             case 0:
             case 1:
-                return <TextQuestion question={question} />;
+                return (
+                    <Field
+                        key={question.id}
+                        component={TextQuestion}
+                        name={question.code}
+                        text={question.text}
+                        questionType={question.type}
+                    />
+                );
             case 2:
-                return <RadioQuestion question={question} />;
+                return (
+                    /*<Field
+                        key={question.id}
+                        component={RadioQuestion}
+                        name={question.code}
+                        text={question.text}
+                        options={question.optiongroup.options}
+                    />*/
+                    <Field
+                        key={question.id}
+                        component={RadioQuestion}
+                        name={question.code}
+                        text={question.text}
+                        options={question.optiongroup.options}
+                    />
+                );
             case 3:
-                return <CheckboxQuestion question={question} />;
+                return (
+                    <Field
+                        key={question.id}
+                        component={CheckboxQuestion}
+                        name={question.code}
+                        text={question.text}
+                        options={question.optiongroup.options}
+                    />
+                );
             case 4:
                 return null;
             case 5:
@@ -34,17 +71,13 @@ class Campaign extends Component {
     }
 
     render() {
-        const { campaign } = this.props;
+        const { campaign, handleSubmit } = this.props;
 
         return (
-            <>
+            <form onSubmit={handleSubmit(this.onSubmit)}>
                 {campaign &&
-                    campaign.questions.map(q => (
-                        <React.Fragment key={q.id}>
-                            {this.renderQuestion(q)}
-                        </React.Fragment>
-                    ))}
-            </>
+                    campaign.questions.map(q => this.renderQuestion(q))}
+            </form>
         );
     }
 }
@@ -55,4 +88,7 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps, { fetchCampaignById })(Campaign);
+export default compose(
+    reduxForm({ form: 'campaignForm' }),
+    connect(mapStateToProps, { fetchCampaignById })
+)(Campaign);
