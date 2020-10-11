@@ -102450,7 +102450,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
 /* harmony default export */ __webpack_exports__["default"] = (axios__WEBPACK_IMPORTED_MODULE_0___default.a.create({
-  baseURL: "".concat("http://localhost:8000", "/api")
+  baseURL: "".concat("http://kosta.local", "/api")
 }));
 
 /***/ }),
@@ -102908,10 +102908,12 @@ var TextQuestion = function TextQuestion(_ref) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
-/* harmony import */ var _material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/CssBaseline */ "./node_modules/@material-ui/core/esm/CssBaseline/index.js");
-/* harmony import */ var _material_ui_core_Container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Container */ "./node_modules/@material-ui/core/esm/Container/index.js");
-/* harmony import */ var _Campaign__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Campaign */ "./resources/js/containers/Campaign.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
+/* harmony import */ var _material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/CssBaseline */ "./node_modules/@material-ui/core/esm/CssBaseline/index.js");
+/* harmony import */ var _material_ui_core_Container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/Container */ "./node_modules/@material-ui/core/esm/Container/index.js");
+/* harmony import */ var _Campaign__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Campaign */ "./resources/js/containers/Campaign.js");
+
 
 
 
@@ -102922,11 +102924,18 @@ var App = function App(_ref) {
   var classes = _ref.classes;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: classes.root
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Container__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Container__WEBPACK_IMPORTED_MODULE_4__["default"], {
     component: "main",
     className: classes.main,
     maxWidth: "md"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Campaign__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: "/",
+    exact: true,
+    Component: null
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: "/:slug",
+    component: _Campaign__WEBPACK_IMPORTED_MODULE_5__["default"]
+  }))));
 };
 
 var styles = function styles(theme) {
@@ -102950,7 +102959,7 @@ var styles = function styles(theme) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["withStyles"])(styles, {
+/* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["withStyles"])(styles, {
   withTheme: true
 })(App));
 
@@ -102967,17 +102976,18 @@ var styles = function styles(theme) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var redux_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux-form */ "./node_modules/redux-form/es/index.js");
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../slices/campaignsSlice */ "./resources/js/slices/campaignsSlice.js");
-/* harmony import */ var _material_ui_core_Card__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/Card */ "./node_modules/@material-ui/core/esm/Card/index.js");
-/* harmony import */ var _components_RadioQuestion__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/RadioQuestion */ "./resources/js/components/RadioQuestion.js");
-/* harmony import */ var _components_CheckboxQuestion__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/CheckboxQuestion */ "./resources/js/components/CheckboxQuestion.js");
-/* harmony import */ var _components_TextQuestion__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/TextQuestion */ "./resources/js/components/TextQuestion.js");
-/* harmony import */ var _components_Question__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../components/Question */ "./resources/js/components/Question.js");
-/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core/Button */ "./node_modules/@material-ui/core/esm/Button/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var redux_form__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux-form */ "./node_modules/redux-form/es/index.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../slices/campaignsSlice */ "./resources/js/slices/campaignsSlice.js");
+/* harmony import */ var _material_ui_core_Card__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/Card */ "./node_modules/@material-ui/core/esm/Card/index.js");
+/* harmony import */ var _components_RadioQuestion__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/RadioQuestion */ "./resources/js/components/RadioQuestion.js");
+/* harmony import */ var _components_CheckboxQuestion__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/CheckboxQuestion */ "./resources/js/components/CheckboxQuestion.js");
+/* harmony import */ var _components_TextQuestion__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../components/TextQuestion */ "./resources/js/components/TextQuestion.js");
+/* harmony import */ var _components_Question__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../components/Question */ "./resources/js/components/Question.js");
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/core/Button */ "./node_modules/@material-ui/core/esm/Button/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -103013,6 +103023,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var Campaign = /*#__PURE__*/function (_Component) {
   _inherits(Campaign, _Component);
 
@@ -103027,7 +103038,8 @@ var Campaign = /*#__PURE__*/function (_Component) {
   _createClass(Campaign, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.fetchCampaignById(6);
+      //this.props.fetchCampaignById(6);
+      this.props.fetchCampaignBySlug('test');
     }
   }, {
     key: "onSubmit",
@@ -103041,24 +103053,32 @@ var Campaign = /*#__PURE__*/function (_Component) {
           campaign = _this$props.campaign,
           handleSubmit = _this$props.handleSubmit,
           classes = _this$props.classes;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        onSubmit: handleSubmit(this.onSubmit)
-      }, campaign && campaign.questions.map(function (q) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Question__WEBPACK_IMPORTED_MODULE_10__["default"], {
-          key: q.id,
-          question: q
-        });
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_11__["default"], {
-        variant: "contained",
-        color: "primary",
-        type: "submit",
-        className: classes.button
-      }, "Save & continue later"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_11__["default"], {
-        variant: "contained",
-        color: "primary",
-        type: "submit",
-        className: classes.button
-      }, "Save & finish"));
+      console.log(campaign);
+      return null;
+      /*return (
+          <form onSubmit={handleSubmit(this.onSubmit)}>
+              {campaign &&
+                  campaign.questions.map(q => (
+                      <Question key={q.id} question={q} />
+                  ))}
+              <Button
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                  className={classes.button}
+              >
+                  Save & continue later
+              </Button>
+              <Button
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                  className={classes.button}
+              >
+                  Save & finish
+              </Button>
+          </form>
+      );*/
     }
   }]);
 
@@ -103073,18 +103093,20 @@ var styles = function styles(theme) {
   };
 };
 
-var mapStateToProps = function mapStateToProps(state) {
+var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
-    campaign: Object(_slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_5__["selectCampaignById"])(state, 6)
+    campaign: Object.values(state.campaign.entities).find(function (campaign) {
+      return campaign.slug === 'test';
+    })
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_4__["compose"])(Object(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["withStyles"])(styles, {
+/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_5__["compose"])(Object(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["withStyles"])(styles, {
   withTheme: true
-}), Object(redux_form__WEBPACK_IMPORTED_MODULE_3__["reduxForm"])({
+}), Object(redux_form__WEBPACK_IMPORTED_MODULE_4__["reduxForm"])({
   form: 'campaignForm'
-}), Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, {
-  fetchCampaignById: _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_5__["fetchCampaignById"]
+}), Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps, {
+  fetchCampaignBySlug: _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_6__["fetchCampaignBySlug"]
 }))(Campaign));
 
 /***/ }),
@@ -103093,15 +103115,17 @@ var mapStateToProps = function mapStateToProps(state) {
 /*!***********************************************!*\
   !*** ./resources/js/slices/campaignsSlice.js ***!
   \***********************************************/
-/*! exports provided: fetchCampaignById, campaignsAdapter, campaignsSlice, default, selectCampaignById */
+/*! exports provided: fetchCampaignById, fetchCampaignBySlug, campaignsAdapter, campaignsSlice, default, selectCampaignById, selectAllCampaigns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchCampaignById", function() { return fetchCampaignById; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchCampaignBySlug", function() { return fetchCampaignBySlug; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "campaignsAdapter", function() { return campaignsAdapter; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "campaignsSlice", function() { return campaignsSlice; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectCampaignById", function() { return selectCampaignById; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectAllCampaigns", function() { return selectAllCampaigns; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
@@ -103115,14 +103139,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 var fetchCampaignById = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__["createAsyncThunk"])('campaigns/fetchByIdStatus', /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(slug, thunkAPI) {
+  var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(id, thunkAPI) {
     var response;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             _context.next = 2;
-            return _app_api__WEBPACK_IMPORTED_MODULE_2__["default"].get("/campaign/".concat(slug));
+            return _app_api__WEBPACK_IMPORTED_MODULE_2__["default"].get("/campaign/".concat(id));
 
           case 2:
             response = _context.sent;
@@ -103140,6 +103164,32 @@ var fetchCampaignById = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__["cr
     return _ref.apply(this, arguments);
   };
 }());
+var fetchCampaignBySlug = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__["createAsyncThunk"])('campaigns/fetchBySlugStatus', /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(slug, thunkAPI) {
+    var response;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.next = 2;
+            return _app_api__WEBPACK_IMPORTED_MODULE_2__["default"].get("/campaign/slug/".concat(slug));
+
+          case 2:
+            response = _context2.sent;
+            return _context2.abrupt("return", response.data);
+
+          case 4:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
+  }));
+
+  return function (_x3, _x4) {
+    return _ref2.apply(this, arguments);
+  };
+}());
 var campaignsAdapter = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__["createEntityAdapter"])();
 var initialState = campaignsAdapter.getInitialState();
 var campaignsSlice = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__["createSlice"])({
@@ -103148,6 +103198,7 @@ var campaignsSlice = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__["creat
   reducers: {},
   extraReducers: function extraReducers(builder) {
     builder.addCase(fetchCampaignById.fulfilled, campaignsAdapter.upsertOne);
+    builder.addCase(fetchCampaignBySlug.fulfilled, campaignsAdapter.upsertOne);
   }
 });
 /* harmony default export */ __webpack_exports__["default"] = (campaignsSlice.reducer);
@@ -103155,7 +103206,8 @@ var campaignsSlice = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__["creat
 var _campaignsAdapter$get = campaignsAdapter.getSelectors(function (state) {
   return state.campaign;
 }),
-    selectCampaignById = _campaignsAdapter$get.selectById;
+    selectCampaignById = _campaignsAdapter$get.selectById,
+    selectAllCampaigns = _campaignsAdapter$get.selectAll;
 
 
 
@@ -103168,7 +103220,7 @@ var _campaignsAdapter$get = campaignsAdapter.getSelectors(function (state) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/skruzic/Documents/Web/kosta/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/stanko/web/kosta/resources/js/app.js */"./resources/js/app.js");
 
 
 /***/ })

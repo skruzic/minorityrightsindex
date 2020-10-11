@@ -6,13 +6,14 @@ use App\Helpers\AnswerExporter;
 use App\Helpers\PanelImporter;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 
 class Campaign extends Model
 {
-    use HasFactory, CrudTrait, Sluggable;
+    use HasFactory, CrudTrait, Sluggable, SluggableScopeHelpers;
 
     protected $fillable = ['title', 'slug', 'description'];
 

@@ -16,7 +16,7 @@ class CampaignsController extends Controller
      */
     public function index()
     {
-        return response()->json(Campaign::all());
+        return CampaignResource::collection(Campaign::all());
     }
 
     /**
@@ -81,5 +81,12 @@ class CampaignsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function findBySlug($slug)
+    {
+        $campaign = Campaign::findBySlugOrFail($slug);
+
+        return new CampaignResource($campaign);
     }
 }

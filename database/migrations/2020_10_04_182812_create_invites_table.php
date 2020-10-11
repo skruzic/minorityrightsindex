@@ -19,6 +19,7 @@ class CreateInvitesTable extends Migration
             $table->string('token', 36)->unique();
             $table->integer('page')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

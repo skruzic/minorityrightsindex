@@ -1,4 +1,5 @@
 import React from 'react';
+import { Switch, Route } from 'react-router-dom';
 import { withStyles } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
@@ -8,7 +9,10 @@ const App = ({ classes }) => (
     <div className={classes.root}>
         <CssBaseline />
         <Container component="main" className={classes.main} maxWidth="md">
-            <Campaign />
+            <Switch>
+                <Route path="/" exact Component={null} />
+                <Route path="/:slug" component={Campaign} />
+            </Switch>
         </Container>
     </div>
 );

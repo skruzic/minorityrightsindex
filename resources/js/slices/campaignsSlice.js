@@ -1,14 +1,24 @@
 import {
     createSlice,
     createAsyncThunk,
-    createEntityAdapter
+    createEntityAdapter,
+    createSelector
 } from '@reduxjs/toolkit';
 import api from '../app/api';
 
 export const fetchCampaignById = createAsyncThunk(
     'campaigns/fetchByIdStatus',
+    async (id, thunkAPI) => {
+        const response = await api.get(`/campaign/${id}`);
+
+        return response.data;
+    }
+);
+
+export const fetchCampaignBySlug = createAsyncThunk(
+    'campaigns/fetchBySlugStatus',
     async (slug, thunkAPI) => {
-        const response = await api.get(`/campaign/${slug}`);
+        const response = await api.get(`/campaign/slug/${slug}`);
 
         return response.data;
     }
@@ -27,11 +37,16 @@ export const campaignsSlice = createSlice({
             fetchCampaignById.fulfilled,
             campaignsAdapter.upsertOne
         );
+        builder.addCase(
+            fetchCampaignBySlug.fulfilled,
+            campaignsAdapter.upsertOne
+        );
     }
 });
 
 export default campaignsSlice.reducer;
 
-export const { selectById: selectCampaignById } = campaignsAdapter.getSelectors(
-    state => state.campaign
-);
+export const {
+    selectById: selectCampaignById,
+    selectAll: selectAllCampaigns
+} = campaignsAdapter.getSelectors(state => state.campaign);

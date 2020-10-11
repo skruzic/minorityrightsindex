@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import { compose } from 'redux';
-import {
-    fetchCampaignById,
-    selectCampaignById,
-} from '../slices/campaignsSlice';
+import { fetchCampaignBySlug } from '../slices/campaignsSlice';
 import Card from '@material-ui/core/Card';
 import RadioQuestion from '../components/RadioQuestion';
 import CheckboxQuestion from '../components/CheckboxQuestion';
@@ -16,7 +14,8 @@ import Button from '@material-ui/core/Button';
 
 class Campaign extends Component {
     componentDidMount() {
-        this.props.fetchCampaignById(6);
+        //this.props.fetchCampaignById(6);
+        this.props.fetchCampaignBySlug('test');
     }
 
     onSubmit(formValues) {
@@ -26,10 +25,13 @@ class Campaign extends Component {
     render() {
         const { campaign, handleSubmit, classes } = this.props;
 
-        return (
+        console.log(campaign);
+
+        return null;
+        /*return (
             <form onSubmit={handleSubmit(this.onSubmit)}>
                 {campaign &&
-                    campaign.questions.map((q) => (
+                    campaign.questions.map(q => (
                         <Question key={q.id} question={q} />
                     ))}
                 <Button
@@ -49,24 +51,26 @@ class Campaign extends Component {
                     Save & finish
                 </Button>
             </form>
-        );
+        );*/
     }
 }
 
-const styles = (theme) => ({
+const styles = theme => ({
     button: {
-        marginLeft: theme.spacing(3),
-    },
+        marginLeft: theme.spacing(3)
+    }
 });
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
     return {
-        campaign: selectCampaignById(state, 6),
+        campaign: Object.values(state.campaign.entities).find(
+            campaign => campaign.slug === 'test'
+        )
     };
 };
 
 export default compose(
     withStyles(styles, { withTheme: true }),
     reduxForm({ form: 'campaignForm' }),
-    connect(mapStateToProps, { fetchCampaignById })
+    connect(mapStateToProps, { fetchCampaignBySlug })
 )(Campaign);

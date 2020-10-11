@@ -29,4 +29,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 // Kampanje
 Route::apiResource('campaign', CampaignsController::class);
+Route::get('campaign/slug/{slug}', [CampaignsController::class, 'findBySlug']);
 Route::get('menu', MenuController::class);
