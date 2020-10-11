@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\AccessType;
 use App\Http\Requests\CampaignRequest;
+use App\Models\Campaign;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Http\Controllers\Operations\CloneOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
@@ -10,8 +12,6 @@ use Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
-
-use App\Models\Campaign;
 
 /**
  * Class CampaignCrudController
@@ -53,6 +53,12 @@ class CampaignCrudController extends CrudController
                 'type'  => 'text',
             ],
             [
+                'name'    => 'access_type',
+                'label'   => 'Access type',
+                'type'    => 'select_from_array',
+                'options' => AccessType::asSelectArray(),
+            ],
+            [
                 'name'  => 'updated_at',
                 'label' => 'Last update',
                 'type'  => 'datetime',
@@ -82,10 +88,10 @@ class CampaignCrudController extends CrudController
                 'type'  => 'textarea',
             ],
             [
-                'name'  => 'user_id',
-                'label' => 'User',
-                'type'  => 'hidden',
-                'value' => backpack_user()->id,
+                'name'    => 'access_type',
+                'label'   => 'Access type',
+                'type'    => 'select_from_array',
+                'options' => AccessType::asSelectArray(),
             ],
         ]);
     }

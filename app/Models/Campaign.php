@@ -15,7 +15,7 @@ class Campaign extends Model
 {
     use HasFactory, CrudTrait, Sluggable, SluggableScopeHelpers;
 
-    protected $fillable = ['title', 'slug', 'description'];
+    protected $fillable = ['title', 'slug', 'description', 'access_type'];
 
     public function invites()
     {

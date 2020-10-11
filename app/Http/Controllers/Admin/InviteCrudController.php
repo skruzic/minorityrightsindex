@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Invite;
 use Illuminate\Support\Str;
 use App\Http\Requests\InviteRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
@@ -34,10 +35,10 @@ class InviteCrudController extends CrudController
     {
         $this->campaign_id = \Route::current()->parameter('campaign_id');
 
-        CRUD::setModel(\App\Models\Invite::class);
+        CRUD::setModel(Invite::class);
         CRUD::setRoute(config('backpack.base.route_prefix').'/campaign/'.$this->campaign_id.'/invite');
         //CRUD::setRoute('admin/campaign/'.$this->campaign_id.'/section/'.$this->section_id.'/question');
-        CRUD::setEntityNameStrings('pozivnica', 'pozivnice');
+        CRUD::setEntityNameStrings('invite', 'invites');
     }
 
     /**

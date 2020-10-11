@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Enums\AccessType;
+use App\Models\Invite;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Campaign, App\Models\Answer;
 use App\Http\Resources\CampaignResource;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class CampaignsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return ResourceCollection
      */
     public function index()
     {
@@ -43,7 +47,7 @@ class CampaignsController extends Controller
      *
      * @param  Campaign  $campaign
      *
-     * @return \Illuminate\Http\Response
+     * @return CampaignResource
      */
     public function show(Campaign $campaign)
     {
@@ -59,34 +63,30 @@ class CampaignsController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * @param $slug
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     *
-     * @return \Illuminate\Http\Response
+     * @return CampaignResource|JsonResponse
      */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
     public function findBySlug($slug)
     {
         $campaign = Campaign::findBySlugOrFail($slug);
 
-        return new CampaignResource($campaign);
+        if ($campaign->access_type == AccessType::Free) {
+            return new CampaignResource($campaign);
+        } else {
+            return response()->json(['error' => 'error'], 400);
+        }
+    }
+
+    /**
+     * @param $token
+     *
+     * @return CampaignResource
+     */
+    public function findByToken($token)
+    {
+        $invite = Invite::where('token', $token)->firstOrFail();
+
+        return new CampaignResource($invite->campaign);
     }
 }

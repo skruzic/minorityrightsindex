@@ -28,6 +28,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });*/
 
 // Kampanje
-Route::apiResource('campaign', CampaignsController::class);
+Route::apiResource('campaign', CampaignsController::class)->only(['index', 'store', 'show']);
 Route::get('campaign/slug/{slug}', [CampaignsController::class, 'findBySlug']);
+Route::get('campaign/token/{token}', [CampaignsController::class, 'findByToken']);
 Route::get('menu', MenuController::class);

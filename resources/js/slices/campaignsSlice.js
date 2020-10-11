@@ -24,29 +24,51 @@ export const fetchCampaignBySlug = createAsyncThunk(
     }
 );
 
-export const campaignsAdapter = createEntityAdapter();
+export const fetchCampaignByToken = createAsyncThunk(
+    'campaigns/fetchByTokenStatus',
+    async (token, thunkAPI) => {
+        const response = await api.get(`/campaign/token/${token}`);
 
-const initialState = campaignsAdapter.getInitialState();
+        return response.data;
+    }
+);
 
 export const campaignsSlice = createSlice({
     name: 'campaigns',
-    initialState,
+    initialState: { data: {}, loading: 'pending', error: null },
     reducers: {},
-    extraReducers: builder => {
-        builder.addCase(
-            fetchCampaignById.fulfilled,
-            campaignsAdapter.upsertOne
-        );
-        builder.addCase(
-            fetchCampaignBySlug.fulfilled,
-            campaignsAdapter.upsertOne
-        );
+    extraReducers: {
+        [fetchCampaignBySlug.pending]: (state, action) => {
+            state.loading = 'pending';
+        },
+        [fetchCampaignBySlug.fulfilled]: (state, action) => {
+            state.loading = 'idle';
+            state.data = action.payload;
+        },
+        [fetchCampaignBySlug.rejected]: (state, action) => {
+            console.log(action);
+            state.loading = 'idle';
+            state.data = {};
+            state.error = action.error.message;
+        },
+        [fetchCampaignByToken.pending]: (state, action) => {
+            state.loading = 'pending';
+        },
+        [fetchCampaignByToken.fulfilled]: (state, action) => {
+            state.loading = 'idle';
+            state.data = action.payload;
+        },
+        [fetchCampaignByToken.rejected]: (state, action) => {
+            state.loading = 'idle';
+            state.data = {};
+            state.error = action.error.message;
+        }
     }
 });
 
 export default campaignsSlice.reducer;
 
-export const {
+/*export const {
     selectById: selectCampaignById,
     selectAll: selectAllCampaigns
-} = campaignsAdapter.getSelectors(state => state.campaign);
+} = campaignsAdapter.getSelectors(state => state.campaign);*/

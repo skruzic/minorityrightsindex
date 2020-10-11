@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import { compose } from 'redux';
-import { fetchCampaignBySlug } from '../slices/campaignsSlice';
+import {
+    fetchCampaignBySlug,
+    fetchCampaignByToken
+} from '../slices/campaignsSlice';
+import queryString from 'query-string';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Card from '@material-ui/core/Card';
 import RadioQuestion from '../components/RadioQuestion';
 import CheckboxQuestion from '../components/CheckboxQuestion';
@@ -14,8 +18,13 @@ import Button from '@material-ui/core/Button';
 
 class Campaign extends Component {
     componentDidMount() {
-        //this.props.fetchCampaignById(6);
-        this.props.fetchCampaignBySlug('test');
+        const qs = queryString.parse(this.props.location.search);
+
+        if (qs.token) {
+            this.props.fetchCampaignByToken(qs.token);
+        } else {
+            this.props.fetchCampaignBySlug(this.props.match.params.slug);
+        }
     }
 
     onSubmit(formValues) {
@@ -25,15 +34,17 @@ class Campaign extends Component {
     render() {
         const { campaign, handleSubmit, classes } = this.props;
 
-        console.log(campaign);
+        if (this.props.loading === 'pending') {
+            return <CircularProgress />;
+        } else if (this.state.error) {
+            return <h1>Došlo je do greške</h1>;
+        }
 
-        return null;
-        /*return (
+        return (
             <form onSubmit={handleSubmit(this.onSubmit)}>
-                {campaign &&
-                    campaign.questions.map(q => (
-                        <Question key={q.id} question={q} />
-                    ))}
+                {campaign.questions.map(q => (
+                    <Question key={q.id} question={q} />
+                ))}
                 <Button
                     variant="contained"
                     color="primary"
@@ -51,7 +62,7 @@ class Campaign extends Component {
                     Save & finish
                 </Button>
             </form>
-        );*/
+        );
     }
 }
 
@@ -61,16 +72,16 @@ const styles = theme => ({
     }
 });
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = state => {
     return {
-        campaign: Object.values(state.campaign.entities).find(
-            campaign => campaign.slug === 'test'
-        )
+        loading: state.campaign.loading,
+        error: state.campaign.error,
+        campaign: state.campaign.data
     };
 };
 
 export default compose(
     withStyles(styles, { withTheme: true }),
     reduxForm({ form: 'campaignForm' }),
-    connect(mapStateToProps, { fetchCampaignBySlug })
+    connect(mapStateToProps, { fetchCampaignBySlug, fetchCampaignByToken })
 )(Campaign);
