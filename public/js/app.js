@@ -102996,7 +102996,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
 /* harmony default export */ __webpack_exports__["default"] = (axios__WEBPACK_IMPORTED_MODULE_0___default.a.create({
-  baseURL: "".concat("http://kosta.local", "/api")
+  baseURL: "".concat("http://localhost:8000", "/api")
 }));
 
 /***/ }),
@@ -103530,12 +103530,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var query_string__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! query-string */ "./node_modules/query-string/index.js");
 /* harmony import */ var query_string__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(query_string__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/CircularProgress */ "./node_modules/@material-ui/core/esm/CircularProgress/index.js");
-/* harmony import */ var _material_ui_core_Card__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/Card */ "./node_modules/@material-ui/core/esm/Card/index.js");
-/* harmony import */ var _components_RadioQuestion__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/RadioQuestion */ "./resources/js/components/RadioQuestion.js");
-/* harmony import */ var _components_CheckboxQuestion__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../components/CheckboxQuestion */ "./resources/js/components/CheckboxQuestion.js");
-/* harmony import */ var _components_TextQuestion__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../components/TextQuestion */ "./resources/js/components/TextQuestion.js");
-/* harmony import */ var _components_Question__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../components/Question */ "./resources/js/components/Question.js");
-/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @material-ui/core/Button */ "./node_modules/@material-ui/core/esm/Button/index.js");
+/* harmony import */ var _components_Question__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/Question */ "./resources/js/components/Question.js");
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/Button */ "./node_modules/@material-ui/core/esm/Button/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -103557,10 +103553,6 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-
 
 
 
@@ -103599,6 +103591,10 @@ var Campaign = /*#__PURE__*/function (_Component) {
     key: "onSubmit",
     value: function onSubmit(formValues) {
       console.log(formValues);
+      this.props.saveCampaignAnswers({
+        campaign_id: this.props.campaign.id,
+        data: formValues
+      });
     }
   }, {
     key: "render",
@@ -103610,23 +103606,23 @@ var Campaign = /*#__PURE__*/function (_Component) {
 
       if (this.props.loading === 'pending') {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_7__["default"], null);
-      } else if (this.state.error) {
+      } else if (this.props.error) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Do\u0161lo je do gre\u0161ke");
       }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        onSubmit: handleSubmit(this.onSubmit)
+        onSubmit: handleSubmit(this.onSubmit.bind(this))
       }, campaign.questions.map(function (q) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Question__WEBPACK_IMPORTED_MODULE_12__["default"], {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Question__WEBPACK_IMPORTED_MODULE_8__["default"], {
           key: q.id,
           question: q
         });
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_13__["default"], {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_9__["default"], {
         variant: "contained",
         color: "primary",
         type: "submit",
         className: classes.button
-      }, "Save & continue later"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_13__["default"], {
+      }, "Save & continue later"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_9__["default"], {
         variant: "contained",
         color: "primary",
         type: "submit",
@@ -103660,7 +103656,8 @@ var mapStateToProps = function mapStateToProps(state) {
   form: 'campaignForm'
 }), Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, {
   fetchCampaignBySlug: _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_5__["fetchCampaignBySlug"],
-  fetchCampaignByToken: _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_5__["fetchCampaignByToken"]
+  fetchCampaignByToken: _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_5__["fetchCampaignByToken"],
+  saveCampaignAnswers: _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_5__["saveCampaignAnswers"]
 }))(Campaign));
 
 /***/ }),
@@ -103750,7 +103747,7 @@ var ErrorBoundary = /*#__PURE__*/function (_Component) {
 /*!***********************************************!*\
   !*** ./resources/js/slices/campaignsSlice.js ***!
   \***********************************************/
-/*! exports provided: fetchCampaignById, fetchCampaignBySlug, fetchCampaignByToken, campaignsSlice, default */
+/*! exports provided: fetchCampaignById, fetchCampaignBySlug, fetchCampaignByToken, saveCampaignAnswers, campaignsSlice, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -103758,6 +103755,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchCampaignById", function() { return fetchCampaignById; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchCampaignBySlug", function() { return fetchCampaignBySlug; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchCampaignByToken", function() { return fetchCampaignByToken; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "saveCampaignAnswers", function() { return saveCampaignAnswers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "campaignsSlice", function() { return campaignsSlice; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
@@ -103853,6 +103851,32 @@ var fetchCampaignByToken = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__[
     return _ref3.apply(this, arguments);
   };
 }());
+var saveCampaignAnswers = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__["createAsyncThunk"])('campaigns/saveAnswersStatus', /*#__PURE__*/function () {
+  var _ref4 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(formValues, thunkAPI) {
+    var response;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            _context4.next = 2;
+            return _app_api__WEBPACK_IMPORTED_MODULE_2__["default"].post('/campaign', formValues);
+
+          case 2:
+            response = _context4.sent;
+            return _context4.abrupt("return", response.data);
+
+          case 4:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    }, _callee4);
+  }));
+
+  return function (_x7, _x8) {
+    return _ref4.apply(this, arguments);
+  };
+}());
 var campaignsSlice = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__["createSlice"])({
   name: 'campaigns',
   initialState: {
@@ -103897,7 +103921,7 @@ var campaignsSlice = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__["creat
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/stanko/web/kosta/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/skruzic/Documents/Web/kosta/resources/js/app.js */"./resources/js/app.js");
 
 
 /***/ })

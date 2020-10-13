@@ -2,7 +2,7 @@ import {
     createSlice,
     createAsyncThunk,
     createEntityAdapter,
-    createSelector
+    createSelector,
 } from '@reduxjs/toolkit';
 import api from '../app/api';
 
@@ -28,6 +28,15 @@ export const fetchCampaignByToken = createAsyncThunk(
     'campaigns/fetchByTokenStatus',
     async (token, thunkAPI) => {
         const response = await api.get(`/campaign/token/${token}`);
+
+        return response.data;
+    }
+);
+
+export const saveCampaignAnswers = createAsyncThunk(
+    'campaigns/saveAnswersStatus',
+    async (formValues, thunkAPI) => {
+        const response = await api.post('/campaign', formValues);
 
         return response.data;
     }
@@ -62,8 +71,8 @@ export const campaignsSlice = createSlice({
             state.loading = 'idle';
             state.data = {};
             state.error = action.error.message;
-        }
-    }
+        },
+    },
 });
 
 export default campaignsSlice.reducer;

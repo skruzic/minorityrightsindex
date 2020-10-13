@@ -5,14 +5,11 @@ import { reduxForm, Field } from 'redux-form';
 import { compose } from 'redux';
 import {
     fetchCampaignBySlug,
-    fetchCampaignByToken
+    fetchCampaignByToken,
+    saveCampaignAnswers,
 } from '../slices/campaignsSlice';
 import queryString from 'query-string';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Card from '@material-ui/core/Card';
-import RadioQuestion from '../components/RadioQuestion';
-import CheckboxQuestion from '../components/CheckboxQuestion';
-import TextQuestion from '../components/TextQuestion';
 import Question from '../components/Question';
 import Button from '@material-ui/core/Button';
 
@@ -29,6 +26,10 @@ class Campaign extends Component {
 
     onSubmit(formValues) {
         console.log(formValues);
+        this.props.saveCampaignAnswers({
+            campaign_id: this.props.campaign.id,
+            data: formValues,
+        });
     }
 
     render() {
@@ -36,13 +37,13 @@ class Campaign extends Component {
 
         if (this.props.loading === 'pending') {
             return <CircularProgress />;
-        } else if (this.state.error) {
+        } else if (this.props.error) {
             return <h1>Došlo je do greške</h1>;
         }
 
         return (
-            <form onSubmit={handleSubmit(this.onSubmit)}>
-                {campaign.questions.map(q => (
+            <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+                {campaign.questions.map((q) => (
                     <Question key={q.id} question={q} />
                 ))}
                 <Button
@@ -66,22 +67,26 @@ class Campaign extends Component {
     }
 }
 
-const styles = theme => ({
+const styles = (theme) => ({
     button: {
-        marginLeft: theme.spacing(3)
-    }
+        marginLeft: theme.spacing(3),
+    },
 });
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
     return {
         loading: state.campaign.loading,
         error: state.campaign.error,
-        campaign: state.campaign.data
+        campaign: state.campaign.data,
     };
 };
 
 export default compose(
     withStyles(styles, { withTheme: true }),
     reduxForm({ form: 'campaignForm' }),
-    connect(mapStateToProps, { fetchCampaignBySlug, fetchCampaignByToken })
+    connect(mapStateToProps, {
+        fetchCampaignBySlug,
+        fetchCampaignByToken,
+        saveCampaignAnswers,
+    })
 )(Campaign);
