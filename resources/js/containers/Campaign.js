@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core';
 import { connect } from 'react-redux';
-import { reduxForm, Field } from 'redux-form';
-import { compose } from 'redux';
 import {
     fetchCampaignBySlug,
     fetchCampaignByToken,
@@ -10,8 +7,7 @@ import {
 } from '../slices/campaignsSlice';
 import queryString from 'query-string';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Question from '../components/Question';
-import Button from '@material-ui/core/Button';
+import CampaignForm from '../components/CampaignForm';
 
 class Campaign extends Component {
     componentDidMount() {
@@ -24,16 +20,8 @@ class Campaign extends Component {
         }
     }
 
-    onSubmit(formValues) {
-        console.log(formValues);
-        this.props.saveCampaignAnswers({
-            campaign_id: this.props.campaign.id,
-            data: formValues,
-        });
-    }
-
     render() {
-        const { campaign, handleSubmit, classes } = this.props;
+        const { campaign } = this.props;
 
         if (this.props.loading === 'pending') {
             return <CircularProgress />;
@@ -42,36 +30,13 @@ class Campaign extends Component {
         }
 
         return (
-            <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-                {campaign.questions.map((q) => (
-                    <Question key={q.id} question={q} />
-                ))}
-                <Button
-                    variant="contained"
-                    color="primary"
-                    type="submit"
-                    className={classes.button}
-                >
-                    Save & continue later
-                </Button>
-                <Button
-                    variant="contained"
-                    color="primary"
-                    type="submit"
-                    className={classes.button}
-                >
-                    Save & finish
-                </Button>
-            </form>
+            <CampaignForm
+                campaign={campaign}
+                saveFn={this.props.saveCampaignAnswers}
+            />
         );
     }
 }
-
-const styles = (theme) => ({
-    button: {
-        marginLeft: theme.spacing(3),
-    },
-});
 
 const mapStateToProps = (state) => {
     return {
@@ -81,12 +46,8 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default compose(
-    withStyles(styles, { withTheme: true }),
-    reduxForm({ form: 'campaignForm' }),
-    connect(mapStateToProps, {
-        fetchCampaignBySlug,
-        fetchCampaignByToken,
-        saveCampaignAnswers,
-    })
-)(Campaign);
+export default connect(mapStateToProps, {
+    fetchCampaignBySlug,
+    fetchCampaignByToken,
+    saveCampaignAnswers,
+})(Campaign);
