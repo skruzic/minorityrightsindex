@@ -18,7 +18,7 @@ Route::group([
     Route::group(['prefix' => 'campaign/{campaign_id}'], function () {
         Route::crud('invite', 'InviteCrudController');
         //Route::crud('section', 'CampaignSectionCrudController');
-        //Route::get('download', 'CampaignSectionCrudController@download');
+        Route::get('download', 'QuestionCrudController@download');
 
 
         Route::crud('question', 'QuestionCrudController');

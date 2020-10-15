@@ -24,10 +24,9 @@ class CreateQuestionsTable extends Migration
             $table->string('code')->nullable();
             $table->tinyInteger('type')->unsigned()->default(QuestionType::Text);
             $table->mediumText('text');
-            $table->mediumText('panel')->nullable();
             $table->mediumText('conditions')->nullable();
             $table->text('extras')->nullable();
-            $table->integer('option_group_id')->unsigned()->nullable();
+            $table->foreignId('option_group_id')->nullable();
             $table->timestamps();
         });
     }

@@ -29,7 +29,6 @@ class QuestionRequest extends FormRequest
             'code' => 'required',
             'type' => 'required',
             'text' => 'required',
-            'csv'  => 'sometimes|required_if:type,4|file',
         ];
     }
 

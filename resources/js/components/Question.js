@@ -1,14 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core';
-import { Field } from 'redux-form';
+import { compose } from 'redux';
+import { Field, formValueSelector } from 'redux-form';
 import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
 import TextQuestion from './TextQuestion';
 import RadioQuestion from './RadioQuestion';
 import CheckboxQuestion from './CheckboxQuestion';
+import Button from '@material-ui/core/Button';
+import { isEmpty } from 'lodash';
 
-const Question = ({ question, classes }) => {
-    const renderQuestion = (question) => {
+const Question = ({
+    question,
+    classes,
+    nextStep,
+    goToStep,
+    currentStep,
+    totalSteps,
+    conditionalJump,
+    value
+}) => {
+    const renderQuestion = question => {
         switch (question.type) {
             case 0:
             case 1:
@@ -59,18 +73,62 @@ const Question = ({ question, classes }) => {
         }
     };
 
-    return <Card className={classes.root}>{renderQuestion(question)}</Card>;
+    return (
+        <>
+            <Card className={classes.root}>
+                {renderQuestion(question)}
+                <CardActions>
+                    {currentStep !== totalSteps && (
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            className={classes.button}
+                            onClick={() => {
+                                if (isEmpty(question.conditions)) {
+                                    nextStep();
+                                } else if (
+                                    question.conditions[0].answer === value
+                                ) {
+                                    goToStep(conditionalJump);
+                                } else {
+                                    nextStep();
+                                }
+                            }}
+                        >
+                            Next
+                        </Button>
+                    )}
+                </CardActions>
+            </Card>
+        </>
+    );
 };
 
 Question.propTypes = {
-    question: PropTypes.object.isRequired,
+    question: PropTypes.object.isRequired
 };
 
-const styles = (theme) => ({
+const styles = theme => ({
     root: {
+        display: 'flex',
+        flexDirection: 'column',
         margin: theme.spacing(3),
-        padding: theme.spacing(1),
+        padding: theme.spacing(1)
     },
+    button: {
+        marginLeft: 'auto'
+    }
 });
 
-export default withStyles(styles, { withTheme: true })(Question);
+const selector = formValueSelector('campaignForm');
+
+const mapStateToProps = (state, ownProps) => {
+    return {
+        value: selector(state, ownProps.question.code)
+    };
+};
+
+export default compose(
+    connect(mapStateToProps),
+    withStyles(styles, { withTheme: true })
+)(Question);

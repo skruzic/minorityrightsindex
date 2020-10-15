@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\QuestionType;
 use App\Models\Campaign;
 use App\Models\OptionGroup;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -13,15 +14,13 @@ class QuestionFactory extends Factory
 
     public function definition()
     {
-        $campaign_ids     = Campaign::all()->pluck('id')->toArray();
+        $campaign_ids = Campaign::all()->pluck('id')->toArray();
 
         return [
-            //'campaign_id' => $faker->numberBetween(1, 10),
-            //'question_type_id' => 1,
-            'code'            => $this->faker->uuid,
-            'type'            => $this->faker->numberBetween(0, 6),
-            'text'            => $this->faker->sentence,
-            'campaign_id'     => $this->faker->randomElement($campaign_ids),
+            'code'        => $this->faker->uuid,
+            'type'        => $this->faker->randomElement(QuestionType::getValues()),
+            'text'        => $this->faker->sentence,
+            'campaign_id' => $this->faker->randomElement($campaign_ids),
         ];
     }
 

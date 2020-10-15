@@ -21,7 +21,6 @@ class QuestionResource extends JsonResource
             'code'        => $this->code,
             'type'        => $this->type,
             'text'        => $this->text,
-            'panel'       => $this->panel,
             'conditions'  => $this->conditions,
             'extras'      => $this->extras,
             'optiongroup' => new OptionGroupResource($this->optiongroup),

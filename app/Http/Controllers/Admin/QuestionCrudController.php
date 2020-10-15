@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Enums\QuestionType;
+use App\Helpers\AnswerExporter;
 use App\Http\Requests\QuestionRequest;
 use App\Models\OptionGroup;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
@@ -103,12 +104,12 @@ class QuestionCrudController extends CrudController
                 'tab'     => 'General',
             ],
             [
-                'name'          => 'option_group_id',
-                'label'         => 'Options',
-                'type'          => 'select2',
-                'entity'        => 'optiongroup',
-                'model'         => OptionGroup::class,
-                'tab'           => 'General',
+                'name'   => 'option_group_id',
+                'label'  => 'Options',
+                'type'   => 'select2',
+                'entity' => 'optiongroup',
+                'model'  => OptionGroup::class,
+                'tab'    => 'General',
             ],
             [
                 'name'      => 'campaign_id',
@@ -120,12 +121,11 @@ class QuestionCrudController extends CrudController
                 'value'     => $this->campaign_id,
                 'tab'       => 'General',
             ],
-
             [
-                'name'   => 'conditions',
-                'label'  => 'Conditionals',
-                'type'   => 'repeatable',
-                'fields' => [
+                'name'    => 'conditions',
+                'label'   => 'Conditionals',
+                'type'    => 'repeatable',
+                'fields'  => [
                     [
                         'name'  => 'answer',
                         'label' => 'Answer',
@@ -137,48 +137,14 @@ class QuestionCrudController extends CrudController
                         'entity'    => 'children',
                         'model'     => 'App\Models\Question',
                         'attribute' => 'text',
-                        'label'     => 'Skip to question',
+                        'label'     => 'Question',
                         'options'   => function ($query) {
                             return $query->where('campaign_id', $this->campaign_id)->get();
                         },
                     ],
                 ],
-                'tab'    => 'Conditionals',
-            ],
-            [
-                'name'   => 'csv',
-                'label'  => 'Panel',
-                'type'   => 'upload',
-                'upload' => true,
-                'disk'   => 'uploads',
-                'tab'    => 'Panel settings',
-            ],
-            [
-                'name'    => 'dynamic',
-                'label'   => 'Static or dynamic panel',
-                'type'    => 'radio',
-                'options' => [
-                    0 => 'Static',
-                    1 => 'Dynamic',
-                ],
-                'inline'  => true,
-                'fake'    => true,
-                'tab'     => 'Panel settings',
-            ],
-            [
-                'name'  => 'timeout',
-                'label' => 'Timeout (s)',
-                'type'  => 'number',
-                'fake'  => true,
-                'tab'   => 'Panel settings',
-            ],
-            [
-                'name'    => 'batch_size',
-                'label'   => 'Batch size',
-                'type'    => 'number',
-                'default' => 5,
-                'fake'    => true,
-                'tab'     => 'Panel settings',
+                'default' => [],
+                'tab'     => 'Conditionals',
             ],
         ]);
     }
@@ -197,28 +163,8 @@ class QuestionCrudController extends CrudController
         CRUD::set('reorder.max_lavel', 1);
     }
 
-    /*public function store()
+    public function download()
     {
-        CRUD::setOperationSetting('saveAllInputsExcept',
-            ['_token', '_method', 'http_referrer', 'current_tab', 'save_action']);
-
-        $request = CRUD::getRequest()->request;
-
-        if ($request->hasFile('csv')) {
-
-            $file = $request->file('csv');
-
-            // Obrada CSV filea
-            //$csv = PanelImporter::import($file);
-            $csv = (new PanelImporter($file))->import();
-
-            $panel = json_encode($csv);
-
-            $request->add(['panel' => $panel]);
-        }
-
-        CRUD::setRequest($request);
-
-        return $this->traitStore();
-    }*/
+        (new AnswerExporter($this->campaign_id))->export();
+    }
 }

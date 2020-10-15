@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Enums\AccessType;
+use App\Helpers\AnswerExporter;
 use App\Http\Requests\CampaignRequest;
 use App\Models\Campaign;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
@@ -31,7 +32,6 @@ class CampaignCrudController extends CrudController
         //CRUD::addButtonFromView('line', 'campaign_sections', 'campaign_sections', 'beginning');
         CRUD::addButtonFromView('line', 'campaign_invites', 'campaign_invites');
         CRUD::addButtonFromView('line', 'download_answers', 'export_csv', 'end');
-        //CRUD::addButtonFromView('line', 'campaign_view', 'campaign_view', 'end');
     }
 
     protected function setupListOperation()
@@ -109,7 +109,7 @@ class CampaignCrudController extends CrudController
         CRUD::setOperation('clone');
 
         $clone        = $model->replicate();
-        $clone->title = $model->title.' (klon)';
+        $clone->title = $model->title.' (clone)';
         $clone->push();
 
 
@@ -132,4 +132,7 @@ class CampaignCrudController extends CrudController
             }
         }
     }
+
+
+
 }
