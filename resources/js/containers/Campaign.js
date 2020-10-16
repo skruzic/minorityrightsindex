@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
     fetchCampaignBySlug,
-    fetchCampaignByToken,
-    saveCampaignAnswers,
+    //fetchCampaignByToken,
+    saveCampaignAnswers
 } from '../slices/campaignsSlice';
+import { fetchInviteByToken } from '../slices/inviteSlice';
 import queryString from 'query-string';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import CampaignForm from '../components/CampaignForm';
@@ -14,7 +15,8 @@ class Campaign extends Component {
         const qs = queryString.parse(this.props.location.search);
 
         if (qs.token) {
-            this.props.fetchCampaignByToken(qs.token);
+            //this.props.fetchCampaignByToken(qs.token);
+            this.props.fetchInviteByToken(qs.token);
         } else {
             this.props.fetchCampaignBySlug(this.props.match.params.slug);
         }
@@ -38,16 +40,17 @@ class Campaign extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
     return {
-        loading: state.campaign.loading,
-        error: state.campaign.error,
-        campaign: state.campaign.data,
+        loading: state.invite.loading,
+        error: state.invite.error,
+        campaign: state.invite.data.campaign
     };
 };
 
 export default connect(mapStateToProps, {
     fetchCampaignBySlug,
-    fetchCampaignByToken,
-    saveCampaignAnswers,
+    //fetchCampaignByToken,
+    fetchInviteByToken,
+    saveCampaignAnswers
 })(Campaign);

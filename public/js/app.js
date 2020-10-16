@@ -120192,6 +120192,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux-logger */ "./node_modules/redux-logger/dist/redux-logger.js");
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(redux_logger__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../slices/campaignsSlice */ "./resources/js/slices/campaignsSlice.js");
+/* harmony import */ var _slices_inviteSlice__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../slices/inviteSlice */ "./resources/js/slices/inviteSlice.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -120208,10 +120209,12 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = (Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__["configureStore"])({
   reducer: {
     form: redux_form__WEBPACK_IMPORTED_MODULE_1__["reducer"],
-    campaign: _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_3__["default"]
+    campaign: _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_3__["default"],
+    invite: _slices_inviteSlice__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   middleware: [redux_logger__WEBPACK_IMPORTED_MODULE_2___default.a].concat(_toConsumableArray(Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__["getDefaultMiddleware"])()))
 }));
@@ -120347,6 +120350,10 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
 
 
 
@@ -120358,8 +120365,10 @@ var CheckboxGroup = function CheckboxGroup(_ref) {
       name = _ref.name,
       options = _ref.options,
       input = _ref.input,
-      meta = _ref.meta;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_1__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_FormGroup__WEBPACK_IMPORTED_MODULE_2__["default"], null, options.map(function (option, idx) {
+      meta = _ref.meta,
+      rest = _objectWithoutProperties(_ref, ["label", "name", "options", "input", "meta"]);
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_1__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_FormGroup__WEBPACK_IMPORTED_MODULE_2__["default"], rest, options.map(function (option, idx) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: idx
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -120409,23 +120418,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_FormHelperText__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/FormHelperText */ "./node_modules/@material-ui/core/esm/FormHelperText/index.js");
 /* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/Typography */ "./node_modules/@material-ui/core/esm/Typography/index.js");
 /* harmony import */ var _CheckboxGroup__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./CheckboxGroup */ "./resources/js/components/CheckboxGroup.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
 
@@ -120448,39 +120453,52 @@ var CheckboxQuestion = function CheckboxQuestion(_ref) {
       text = _ref.text,
       input = _ref.input,
       options = _ref.options,
-      rest = _objectWithoutProperties(_ref, ["name", "text", "input", "options"]);
+      saveFn = _ref.saveFn,
+      rest = _objectWithoutProperties(_ref, ["name", "text", "input", "options", "saveFn"]);
 
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({}),
-      _useState2 = _slicedToArray(_useState, 2),
-      value = _useState2[0],
-      setValue = _useState2[1];
-
-  var handleChange = function handleChange(event) {
-    setValue(_objectSpread(_objectSpread({}, value), {}, _defineProperty({}, event.target.value, event.target.checked)));
+  /*const [value, setValue] = useState({});
+   const handleChange = event => {
+      setValue({ ...value, [event.target.value]: event.target.checked });
   };
+   const renderOptions = ({ fields }) => {
+      options.forEach(option => fields.push(option));
+       return fields.map((option, idx) => (
+          <Field
+              key={idx}
+              name={`${name}.${option.value}`}
+              component={FormControlLabel}
+              control={<Checkbox />}
+              label={option.text}
+              value={option.value}
+          />
+      ));
+  };*/
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_9__["default"], null, text), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    component: "fieldset"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_FormGroup__WEBPACK_IMPORTED_MODULE_7__["default"], _extends({}, rest, {
+    onBlur: saveFn
+  }), options.map(function (option, idx) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      key: idx
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      control: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_3__["default"], null),
+      label: option.text,
+      name: "".concat(name, "[").concat(option.value, "]"),
+      value: option.value,
+      checked: input.value.indexOf(option.value) !== -1,
+      onChange: function onChange(event) {
+        var newValue = _toConsumableArray(input.value);
 
-  var renderOptions = function renderOptions(_ref2) {
-    var fields = _ref2.fields;
-    options.forEach(function (option) {
-      return fields.push(option);
-    });
-    return fields.map(function (option, idx) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(redux_form__WEBPACK_IMPORTED_MODULE_2__["Field"], {
-        key: idx,
-        name: "".concat(name, ".").concat(option.value),
-        component: _material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_4__["default"],
-        control: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_3__["default"], null),
-        label: option.text,
-        value: option.value
-      });
-    });
-  };
+        if (event.target.checked) {
+          newValue.push(option.value);
+        } else {
+          newValue.splice(newValue.indexOf(option.text), 1);
+        }
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_9__["default"], null, text), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CheckboxGroup__WEBPACK_IMPORTED_MODULE_10__["default"], {
-    name: name,
-    options: options,
-    input: input
-  }));
+        return input.onChange(newValue);
+      }
+    }));
+  }))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (CheckboxQuestion);
@@ -120512,6 +120530,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core/Button */ "./node_modules/@material-ui/core/esm/Button/index.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../slices/campaignsSlice */ "./resources/js/slices/campaignsSlice.js");
+
 
 
 
@@ -120534,7 +120554,9 @@ var Question = function Question(_ref) {
       currentStep = _ref.currentStep,
       totalSteps = _ref.totalSteps,
       conditionalJump = _ref.conditionalJump,
-      value = _ref.value;
+      value = _ref.value,
+      invite = _ref.invite,
+      saveResponse = _ref.saveResponse;
 
   var renderQuestion = function renderQuestion(question) {
     switch (question.type) {
@@ -120545,7 +120567,8 @@ var Question = function Question(_ref) {
           component: _TextQuestion__WEBPACK_IMPORTED_MODULE_8__["default"],
           name: question.code,
           text: question.text,
-          questionType: question.type
+          questionType: question.type,
+          onBlur: handleSave
         });
 
       case 2:
@@ -120564,7 +120587,8 @@ var Question = function Question(_ref) {
             component: _RadioQuestion__WEBPACK_IMPORTED_MODULE_9__["default"],
             name: question.code,
             text: question.text,
-            options: question.optiongroup.options
+            options: question.optiongroup.options,
+            onBlur: handleSave
           })
         );
 
@@ -120574,7 +120598,8 @@ var Question = function Question(_ref) {
           component: _CheckboxQuestion__WEBPACK_IMPORTED_MODULE_10__["default"],
           name: question.code,
           text: question.text,
-          options: question.optiongroup.options
+          options: question.optiongroup.options,
+          saveFn: handleSave
         });
 
       case 4:
@@ -120589,6 +120614,14 @@ var Question = function Question(_ref) {
       default:
         return null;
     }
+  };
+
+  var handleSave = function handleSave() {
+    saveResponse({
+      invite_id: invite.id,
+      question_id: question.id,
+      answer: value
+    });
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -120631,11 +120664,14 @@ var selector = Object(redux_form__WEBPACK_IMPORTED_MODULE_5__["formValueSelector
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
-    value: selector(state, ownProps.question.code)
+    value: selector(state, ownProps.question.code),
+    invite: state.invite.data
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_4__["compose"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps), Object(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["withStyles"])(styles, {
+/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_4__["compose"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, {
+  saveResponse: _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_13__["saveResponse"]
+}), Object(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["withStyles"])(styles, {
   withTheme: true
 }))(Question));
 
@@ -120846,10 +120882,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../slices/campaignsSlice */ "./resources/js/slices/campaignsSlice.js");
-/* harmony import */ var query_string__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! query-string */ "./node_modules/query-string/index.js");
-/* harmony import */ var query_string__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(query_string__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/CircularProgress */ "./node_modules/@material-ui/core/esm/CircularProgress/index.js");
-/* harmony import */ var _components_CampaignForm__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/CampaignForm */ "./resources/js/components/CampaignForm.js");
+/* harmony import */ var _slices_inviteSlice__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../slices/inviteSlice */ "./resources/js/slices/inviteSlice.js");
+/* harmony import */ var query_string__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! query-string */ "./node_modules/query-string/index.js");
+/* harmony import */ var query_string__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(query_string__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/CircularProgress */ "./node_modules/@material-ui/core/esm/CircularProgress/index.js");
+/* harmony import */ var _components_CampaignForm__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/CampaignForm */ "./resources/js/components/CampaignForm.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -120879,6 +120916,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var Campaign = /*#__PURE__*/function (_Component) {
   _inherits(Campaign, _Component);
 
@@ -120893,10 +120931,11 @@ var Campaign = /*#__PURE__*/function (_Component) {
   _createClass(Campaign, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var qs = query_string__WEBPACK_IMPORTED_MODULE_3___default.a.parse(this.props.location.search);
+      var qs = query_string__WEBPACK_IMPORTED_MODULE_4___default.a.parse(this.props.location.search);
 
       if (qs.token) {
-        this.props.fetchCampaignByToken(qs.token);
+        //this.props.fetchCampaignByToken(qs.token);
+        this.props.fetchInviteByToken(qs.token);
       } else {
         this.props.fetchCampaignBySlug(this.props.match.params.slug);
       }
@@ -120907,12 +120946,12 @@ var Campaign = /*#__PURE__*/function (_Component) {
       var campaign = this.props.campaign;
 
       if (this.props.loading === 'pending') {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_4__["default"], null);
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_5__["default"], null);
       } else if (this.props.error) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Do\u0161lo je do gre\u0161ke");
       }
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_CampaignForm__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_CampaignForm__WEBPACK_IMPORTED_MODULE_6__["default"], {
         campaign: campaign,
         saveFn: this.props.saveCampaignAnswers
       });
@@ -120924,15 +120963,16 @@ var Campaign = /*#__PURE__*/function (_Component) {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    loading: state.campaign.loading,
-    error: state.campaign.error,
-    campaign: state.campaign.data
+    loading: state.invite.loading,
+    error: state.invite.error,
+    campaign: state.invite.data.campaign
   };
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, {
   fetchCampaignBySlug: _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_2__["fetchCampaignBySlug"],
-  fetchCampaignByToken: _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_2__["fetchCampaignByToken"],
+  //fetchCampaignByToken,
+  fetchInviteByToken: _slices_inviteSlice__WEBPACK_IMPORTED_MODULE_3__["fetchInviteByToken"],
   saveCampaignAnswers: _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_2__["saveCampaignAnswers"]
 })(Campaign));
 
@@ -121023,7 +121063,7 @@ var ErrorBoundary = /*#__PURE__*/function (_Component) {
 /*!***********************************************!*\
   !*** ./resources/js/slices/campaignsSlice.js ***!
   \***********************************************/
-/*! exports provided: fetchCampaignById, fetchCampaignBySlug, fetchCampaignByToken, saveCampaignAnswers, campaignsSlice, default */
+/*! exports provided: fetchCampaignById, fetchCampaignBySlug, fetchCampaignByToken, saveResponse, saveCampaignAnswers, campaignsSlice, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -121031,6 +121071,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchCampaignById", function() { return fetchCampaignById; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchCampaignBySlug", function() { return fetchCampaignBySlug; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchCampaignByToken", function() { return fetchCampaignByToken; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "saveResponse", function() { return saveResponse; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "saveCampaignAnswers", function() { return saveCampaignAnswers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "campaignsSlice", function() { return campaignsSlice; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
@@ -121127,8 +121168,8 @@ var fetchCampaignByToken = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__[
     return _ref3.apply(this, arguments);
   };
 }());
-var saveCampaignAnswers = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__["createAsyncThunk"])('campaigns/saveAnswersStatus', /*#__PURE__*/function () {
-  var _ref4 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(formValues, thunkAPI) {
+var saveResponse = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__["createAsyncThunk"])('campaigns/saveResponseStatus', /*#__PURE__*/function () {
+  var _ref4 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(formValues) {
     var response;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
       while (1) {
@@ -121149,8 +121190,34 @@ var saveCampaignAnswers = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__["
     }, _callee4);
   }));
 
-  return function (_x7, _x8) {
+  return function (_x7) {
     return _ref4.apply(this, arguments);
+  };
+}());
+var saveCampaignAnswers = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__["createAsyncThunk"])('campaigns/saveAnswersStatus', /*#__PURE__*/function () {
+  var _ref5 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(formValues, thunkAPI) {
+    var response;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+      while (1) {
+        switch (_context5.prev = _context5.next) {
+          case 0:
+            _context5.next = 2;
+            return _app_api__WEBPACK_IMPORTED_MODULE_2__["default"].post('/campaign', formValues);
+
+          case 2:
+            response = _context5.sent;
+            return _context5.abrupt("return", response.data);
+
+          case 4:
+          case "end":
+            return _context5.stop();
+        }
+      }
+    }, _callee5);
+  }));
+
+  return function (_x8, _x9) {
+    return _ref5.apply(this, arguments);
   };
 }());
 var campaignsSlice = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__["createSlice"])({
@@ -121167,7 +121234,6 @@ var campaignsSlice = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__["creat
     state.loading = 'idle';
     state.data = action.payload;
   }), _defineProperty(_extraReducers, fetchCampaignBySlug.rejected, function (state, action) {
-    console.log(action);
     state.loading = 'idle';
     state.data = {};
     state.error = action.error.message;
@@ -121187,6 +121253,74 @@ var campaignsSlice = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__["creat
     selectById: selectCampaignById,
     selectAll: selectAllCampaigns
 } = campaignsAdapter.getSelectors(state => state.campaign);*/
+
+/***/ }),
+
+/***/ "./resources/js/slices/inviteSlice.js":
+/*!********************************************!*\
+  !*** ./resources/js/slices/inviteSlice.js ***!
+  \********************************************/
+/*! exports provided: fetchInviteByToken, inviteSlice, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchInviteByToken", function() { return fetchInviteByToken; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "inviteSlice", function() { return inviteSlice; });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
+/* harmony import */ var _app_api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../app/api */ "./resources/js/app/api.js");
+
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+var fetchInviteByToken = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__["createAsyncThunk"])('invite/fetchByTokenStatus', /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(token, thunkAPI) {
+    var response;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return _app_api__WEBPACK_IMPORTED_MODULE_2__["default"].get("/campaign/token/".concat(token));
+
+          case 2:
+            response = _context.sent;
+            return _context.abrupt("return", response.data);
+
+          case 4:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function (_x, _x2) {
+    return _ref.apply(this, arguments);
+  };
+}());
+var inviteSlice = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__["createSlice"])({
+  name: 'invite',
+  initialState: {
+    data: {},
+    loading: 'pending',
+    error: null
+  },
+  reducers: {},
+  extraReducers: _defineProperty({}, fetchInviteByToken.fulfilled, function (state, action) {
+    state.loading = 'idle';
+    state.data = action.payload;
+  })
+});
+/* harmony default export */ __webpack_exports__["default"] = (inviteSlice.reducer);
 
 /***/ }),
 

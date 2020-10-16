@@ -11,6 +11,7 @@ import RadioQuestion from './RadioQuestion';
 import CheckboxQuestion from './CheckboxQuestion';
 import Button from '@material-ui/core/Button';
 import { isEmpty } from 'lodash';
+import { saveResponse } from '../slices/campaignsSlice';
 
 const Question = ({
     question,
@@ -20,7 +21,9 @@ const Question = ({
     currentStep,
     totalSteps,
     conditionalJump,
-    value
+    value,
+    invite,
+    saveResponse
 }) => {
     const renderQuestion = question => {
         switch (question.type) {
@@ -33,6 +36,7 @@ const Question = ({
                         name={question.code}
                         text={question.text}
                         questionType={question.type}
+                        onBlur={handleSave}
                     />
                 );
             case 2:
@@ -50,6 +54,7 @@ const Question = ({
                         name={question.code}
                         text={question.text}
                         options={question.optiongroup.options}
+                        onBlur={handleSave}
                     />
                 );
             case 3:
@@ -60,6 +65,7 @@ const Question = ({
                         name={question.code}
                         text={question.text}
                         options={question.optiongroup.options}
+                        saveFn={handleSave}
                     />
                 );
             case 4:
@@ -71,6 +77,14 @@ const Question = ({
             default:
                 return null;
         }
+    };
+
+    const handleSave = () => {
+        saveResponse({
+            invite_id: invite.id,
+            question_id: question.id,
+            answer: value
+        });
     };
 
     return (
@@ -124,11 +138,12 @@ const selector = formValueSelector('campaignForm');
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        value: selector(state, ownProps.question.code)
+        value: selector(state, ownProps.question.code),
+        invite: state.invite.data
     };
 };
 
 export default compose(
-    connect(mapStateToProps),
+    connect(mapStateToProps, { saveResponse }),
     withStyles(styles, { withTheme: true })
 )(Question);

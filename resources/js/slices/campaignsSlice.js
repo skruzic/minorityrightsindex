@@ -1,9 +1,4 @@
-import {
-    createSlice,
-    createAsyncThunk,
-    createEntityAdapter,
-    createSelector,
-} from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import api from '../app/api';
 
 export const fetchCampaignById = createAsyncThunk(
@@ -33,6 +28,15 @@ export const fetchCampaignByToken = createAsyncThunk(
     }
 );
 
+export const saveResponse = createAsyncThunk(
+    'campaigns/saveResponseStatus',
+    async formValues => {
+        const response = await api.post('/campaign', formValues);
+
+        return response.data;
+    }
+);
+
 export const saveCampaignAnswers = createAsyncThunk(
     'campaigns/saveAnswersStatus',
     async (formValues, thunkAPI) => {
@@ -55,7 +59,6 @@ export const campaignsSlice = createSlice({
             state.data = action.payload;
         },
         [fetchCampaignBySlug.rejected]: (state, action) => {
-            console.log(action);
             state.loading = 'idle';
             state.data = {};
             state.error = action.error.message;
@@ -71,8 +74,8 @@ export const campaignsSlice = createSlice({
             state.loading = 'idle';
             state.data = {};
             state.error = action.error.message;
-        },
-    },
+        }
+    }
 });
 
 export default campaignsSlice.reducer;

@@ -4,9 +4,9 @@ import FormGroup from '@material-ui/core/FormGroup';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-const CheckboxGroup = ({ label, name, options, input, meta }) => (
+const CheckboxGroup = ({ label, name, options, input, meta, ...rest }) => (
     <FormControl>
-        <FormGroup>
+        <FormGroup {...rest}>
             {options.map((option, idx) => (
                 <div key={idx}>
                     <FormControlLabel
@@ -15,7 +15,7 @@ const CheckboxGroup = ({ label, name, options, input, meta }) => (
                         name={`${name}[${idx}]`}
                         value={option.value}
                         checked={input.value.indexOf(option.value) !== -1}
-                        onChange={(event) => {
+                        onChange={event => {
                             const newValue = [...input.value];
                             if (event.target.checked) {
                                 newValue.push(option.value);

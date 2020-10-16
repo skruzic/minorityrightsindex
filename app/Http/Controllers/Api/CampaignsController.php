@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Enums\AccessType;
+use App\Http\Resources\InviteResource;
 use App\Models\Invite;
+use App\Models\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -32,14 +34,23 @@ class CampaignsController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->all();
+        /*$input = $request->all();
 
         Answer::create([
             'campaign_id' => $request->campaign_id,
             'data'        => json_encode($request->data),
         ]);
 
-        return response()->json('success', 200);
+        return response()->json('success', 200);*/
+
+        $resp = Response::updateOrCreate([
+            'invite_id'   => $request->invite_id,
+            'question_id' => $request->question_id,
+        ], [
+            'answer' => is_array($request->answer) ? implode(',', $request->answer) : $request->answer,
+        ]);
+
+        return response()->json([], 204);
     }
 
     /**
@@ -51,14 +62,6 @@ class CampaignsController extends Controller
      */
     public function show(Campaign $campaign)
     {
-        /*return response()->json($campaign->with(['sections' => function($query) {
-            $query->with(['questions' => function($query) {
-                $query->with('children');
-                $query->with('options');
-                $query->where('parent_id', null);
-                $query->orderBy('lft');
-            }]);
-        }])->where('id', $campaign->id)->first());*/
         return new CampaignResource($campaign);
     }
 
@@ -81,12 +84,12 @@ class CampaignsController extends Controller
     /**
      * @param $token
      *
-     * @return CampaignResource
+     * @return InviteResource
      */
     public function findByToken($token)
     {
         $invite = Invite::where('token', $token)->firstOrFail();
 
-        return new CampaignResource($invite->campaign);
+        return new InviteResource($invite);
     }
 }
