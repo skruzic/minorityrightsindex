@@ -17,7 +17,7 @@ class CreateInvitesTable extends Migration
             $table->foreignId('campaign_id')->constrained();
             $table->string('email');
             $table->string('token', 36)->unique();
-            $table->integer('page')->nullable();
+            $table->integer('page')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });
