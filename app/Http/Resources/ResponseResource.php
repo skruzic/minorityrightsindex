@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class InviteResource extends JsonResource
+class ResponseResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,11 +16,9 @@ class InviteResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'        => $this->id,
-            'token'     => $this->token,
-            'campaign'  => new CampaignResource($this->campaign),
-            'responses' => ResponseResource::collection($this->responses),
-            'page'      => $this->page,
+            'question' => new QuestionResource($this->question),
+            //'answer'   => $this->answer[0] == '[' ? json_decode($this->answer) : $this->answer,
+            'answer'   => isJson($this->answer) ? json_decode($this->answer) : $this->answer,
         ];
     }
 }

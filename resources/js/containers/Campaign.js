@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
     fetchCampaignBySlug,
-    saveCampaignAnswers
+    saveCampaignAnswers,
 } from '../slices/campaignsSlice';
 import { fetchInviteByToken } from '../slices/inviteSlice';
 import queryString from 'query-string';
@@ -22,7 +22,7 @@ class Campaign extends Component {
     }
 
     render() {
-        const { campaign } = this.props;
+        const { campaign, responses, page } = this.props;
 
         if (this.props.loading === 'pending') {
             return <CircularProgress />;
@@ -34,16 +34,24 @@ class Campaign extends Component {
             <CampaignForm
                 campaign={campaign}
                 saveFn={this.props.saveCampaignAnswers}
+                initialValues={responses.reduce((obj, item) => {
+                    return Object.assign(obj, {
+                        [item.question.code]: item.answer,
+                    });
+                }, {})}
+                page={page}
             />
         );
     }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
     return {
         loading: state.invite.loading,
         error: state.invite.error,
-        campaign: state.invite.data.campaign
+        campaign: state.invite.data.campaign,
+        responses: state.invite.data.responses,
+        page: state.invite.data.page,
     };
 };
 
@@ -51,5 +59,5 @@ export default connect(mapStateToProps, {
     fetchCampaignBySlug,
     //fetchCampaignByToken,
     fetchInviteByToken,
-    saveCampaignAnswers
+    saveCampaignAnswers,
 })(Campaign);

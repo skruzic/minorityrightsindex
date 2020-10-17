@@ -8,11 +8,11 @@ import Question from '../containers/Question';
 import Button from '@material-ui/core/Button';
 import { isEmpty } from 'lodash';
 
-const CampaignForm = ({ handleSubmit, saveFn, campaign, classes, ...rest }) => {
-    const onSubmit = formValues => {
+const CampaignForm = ({ handleSubmit, saveFn, campaign, classes, page }) => {
+    const onSubmit = (formValues) => {
         saveFn({
             campaign_id: campaign.id,
-            data: formValues
+            data: formValues,
         });
     };
 
@@ -26,7 +26,7 @@ const CampaignForm = ({ handleSubmit, saveFn, campaign, classes, ...rest }) => {
                         conditionalJump={
                             !isEmpty(q.conditions) &&
                             campaign.questions.indexOf(
-                                campaign.questions.find(item => {
+                                campaign.questions.find((item) => {
                                     return (
                                         item.id ===
                                         parseInt(q.conditions[0].question_id)
@@ -37,7 +37,7 @@ const CampaignForm = ({ handleSubmit, saveFn, campaign, classes, ...rest }) => {
                     />
                 ))}
             </StepWizard>
-            <Button
+            {/*<Button
                 variant="contained"
                 color="primary"
                 type="submit"
@@ -52,20 +52,20 @@ const CampaignForm = ({ handleSubmit, saveFn, campaign, classes, ...rest }) => {
                 className={classes.button}
             >
                 Save & finish
-            </Button>
+            </Button>*/}
         </form>
     );
 };
 
 CampaignForm.propTypes = {
     saveFn: PropTypes.func.isRequired,
-    campaign: PropTypes.object.isRequired
+    campaign: PropTypes.object.isRequired,
 };
 
-const styles = theme => ({
+const styles = (theme) => ({
     button: {
-        marginLeft: theme.spacing(3)
-    }
+        marginLeft: theme.spacing(3),
+    },
 });
 
 export default compose(

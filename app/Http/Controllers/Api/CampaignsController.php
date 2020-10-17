@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Enums\AccessType;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\CampaignResource;
 use App\Http\Resources\InviteResource;
+use App\Models\Campaign;
 use App\Models\Invite;
 use App\Models\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Models\Campaign, App\Models\Answer;
-use App\Http\Resources\CampaignResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class CampaignsController extends Controller
@@ -34,21 +34,16 @@ class CampaignsController extends Controller
      */
     public function store(Request $request)
     {
-        /*$input = $request->all();
-
-        Answer::create([
-            'campaign_id' => $request->campaign_id,
-            'data'        => json_encode($request->data),
-        ]);
-
-        return response()->json('success', 200);*/
-
         $resp = Response::updateOrCreate([
             'invite_id'   => $request->invite_id,
             'question_id' => $request->question_id,
         ], [
-            'answer' => is_array($request->answer) ? implode(',', $request->answer) : $request->answer,
+            'answer' => is_array($request->answer) ? json_encode($request->answer) : $request->answer,
         ]);
+
+        $inv       = Invite::findOrFail($request->invite_id);
+        $inv->page = $request->page + 1;
+        $inv->save();
 
         return response()->json([], 204);
     }

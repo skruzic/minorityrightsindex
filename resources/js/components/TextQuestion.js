@@ -9,6 +9,7 @@ const TextQuestion = ({ name, text, questionType, input, ...custom }) => (
             name={name}
             variant="outlined"
             id={name}
+            fullWidth
             multiline={questionType === 1}
             rowsMax={4}
             {...input}

@@ -16,4 +16,9 @@ class Invite extends Model
     {
         return $this->belongsTo(Campaign::class);
     }
+
+    public function responses()
+    {
+        return $this->hasMany(Response::class);
+    }
 }

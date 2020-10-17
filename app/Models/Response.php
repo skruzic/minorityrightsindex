@@ -10,4 +10,14 @@ class Response extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function invite()
+    {
+        return $this->belongsTo(Invite::class);
+    }
+
+    public function question()
+    {
+        return $this->belongsTo(Question::class);
+    }
 }

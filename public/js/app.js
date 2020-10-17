@@ -120173,7 +120173,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
 /* harmony default export */ __webpack_exports__["default"] = (axios__WEBPACK_IMPORTED_MODULE_0___default.a.create({
-  baseURL: "".concat("http://kosta.local", "/api")
+  baseURL: "".concat("http://localhost:8000", "/api")
 }));
 
 /***/ }),
@@ -120249,10 +120249,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
-
-function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
-
 
 
 
@@ -120268,7 +120264,7 @@ var CampaignForm = function CampaignForm(_ref) {
       saveFn = _ref.saveFn,
       campaign = _ref.campaign,
       classes = _ref.classes,
-      rest = _objectWithoutProperties(_ref, ["handleSubmit", "saveFn", "campaign", "classes"]);
+      page = _ref.page;
 
   var onSubmit = function onSubmit(formValues) {
     saveFn({
@@ -120289,17 +120285,7 @@ var CampaignForm = function CampaignForm(_ref) {
         return item.id === parseInt(q.conditions[0].question_id);
       })) + 1
     });
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    variant: "contained",
-    color: "primary",
-    type: "submit",
-    className: classes.button
-  }, "Save & continue later"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    variant: "contained",
-    color: "primary",
-    type: "submit",
-    className: classes.button
-  }, "Save & finish"));
+  })));
 };
 
 CampaignForm.propTypes = {
@@ -120524,6 +120510,7 @@ var TextQuestion = function TextQuestion(_ref) {
     name: name,
     variant: "outlined",
     id: name,
+    fullWidth: true,
     multiline: questionType === 1,
     rowsMax: 4
   }, input, custom)));
@@ -120621,6 +120608,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_CampaignForm__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/CampaignForm */ "./resources/js/components/CampaignForm.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -120675,7 +120664,10 @@ var Campaign = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var campaign = this.props.campaign;
+      var _this$props = this.props,
+          campaign = _this$props.campaign,
+          responses = _this$props.responses,
+          page = _this$props.page;
 
       if (this.props.loading === 'pending') {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_5__["default"], null);
@@ -120685,7 +120677,11 @@ var Campaign = /*#__PURE__*/function (_Component) {
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_CampaignForm__WEBPACK_IMPORTED_MODULE_6__["default"], {
         campaign: campaign,
-        saveFn: this.props.saveCampaignAnswers
+        saveFn: this.props.saveCampaignAnswers,
+        initialValues: responses.reduce(function (obj, item) {
+          return Object.assign(obj, _defineProperty({}, item.question.code, item.answer));
+        }, {}),
+        page: page
       });
     }
   }]);
@@ -120697,7 +120693,9 @@ var mapStateToProps = function mapStateToProps(state) {
   return {
     loading: state.invite.loading,
     error: state.invite.error,
-    campaign: state.invite.data.campaign
+    campaign: state.invite.data.campaign,
+    responses: state.invite.data.responses,
+    page: state.invite.data.page
   };
 };
 
@@ -120825,7 +120823,8 @@ var Question = function Question(_ref) {
     saveResponse({
       invite_id: invite.id,
       question_id: question.id,
-      answer: value
+      answer: value,
+      page: currentStep
     });
   };
 
@@ -121239,7 +121238,7 @@ var inviteSlice = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__["createSl
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/stanko/web/kosta/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/skruzic/Documents/Web/kosta/resources/js/app.js */"./resources/js/app.js");
 
 
 /***/ })

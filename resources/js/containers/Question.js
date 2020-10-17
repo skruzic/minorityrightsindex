@@ -23,9 +23,9 @@ const Question = ({
     conditionalJump,
     value,
     invite,
-    saveResponse
+    saveResponse,
 }) => {
-    const renderQuestion = question => {
+    const renderQuestion = (question) => {
         switch (question.type) {
             case 0:
             case 1:
@@ -83,7 +83,8 @@ const Question = ({
         saveResponse({
             invite_id: invite.id,
             question_id: question.id,
-            answer: value
+            answer: value,
+            page: currentStep,
         });
     };
 
@@ -119,19 +120,19 @@ const Question = ({
 };
 
 Question.propTypes = {
-    question: PropTypes.object.isRequired
+    question: PropTypes.object.isRequired,
 };
 
-const styles = theme => ({
+const styles = (theme) => ({
     root: {
         display: 'flex',
         flexDirection: 'column',
         margin: theme.spacing(3),
-        padding: theme.spacing(1)
+        padding: theme.spacing(1),
     },
     button: {
-        marginLeft: 'auto'
-    }
+        marginLeft: 'auto',
+    },
 });
 
 const selector = formValueSelector('campaignForm');
@@ -139,7 +140,7 @@ const selector = formValueSelector('campaignForm');
 const mapStateToProps = (state, ownProps) => {
     return {
         value: selector(state, ownProps.question.code),
-        invite: state.invite.data
+        invite: state.invite.data,
     };
 };
 

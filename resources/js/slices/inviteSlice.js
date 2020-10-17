@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import api from '../app/api';
 
 export const fetchInviteByToken = createAsyncThunk(
@@ -21,8 +21,8 @@ export const inviteSlice = createSlice({
         [fetchInviteByToken.fulfilled]: (state, action) => {
             state.loading = 'idle';
             state.data = action.payload;
-        }
-    }
+        },
+    },
 });
 
 export default inviteSlice.reducer;

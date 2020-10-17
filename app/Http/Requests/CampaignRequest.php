@@ -25,7 +25,6 @@ class CampaignRequest extends FormRequest
     {
         return [
             'title'       => 'required',
-            'access_type' => 'required|numeric',
         ];
     }
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AnswersController;
 use App\Http\Controllers\Api\CampaignsController;
 use App\Http\Controllers\Api\MenuController;
+use App\Http\Controllers\Api\ResponseController;
 use Illuminate\Http\Request;
 
 /*
@@ -32,5 +33,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::apiResource('campaign', CampaignsController::class)->only(['index', 'store', 'show']);
 Route::get('campaign/slug/{slug}', [CampaignsController::class, 'findBySlug']);
 Route::get('campaign/token/{token}', [CampaignsController::class, 'findByToken']);
-Route::apiResource('answer', AnswersController::class)->only(['store']);
 Route::get('menu', MenuController::class);

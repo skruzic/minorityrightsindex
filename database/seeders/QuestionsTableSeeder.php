@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
+use App\Enums\QuestionType;
 use App\Models\Question;
+use Illuminate\Database\Seeder;
 
 class QuestionsTableSeeder extends Seeder
 {
