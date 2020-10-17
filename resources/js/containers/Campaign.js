@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
     fetchCampaignBySlug,
-    //fetchCampaignByToken,
     saveCampaignAnswers
 } from '../slices/campaignsSlice';
 import { fetchInviteByToken } from '../slices/inviteSlice';

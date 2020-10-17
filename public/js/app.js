@@ -120239,7 +120239,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var react_step_wizard__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-step-wizard */ "./node_modules/react-step-wizard/dist/react-step-wizard.min.js");
 /* harmony import */ var react_step_wizard__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_step_wizard__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _Question__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Question */ "./resources/js/components/Question.js");
+/* harmony import */ var _containers_Question__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../containers/Question */ "./resources/js/containers/Question.js");
 /* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/Button */ "./node_modules/@material-ui/core/esm/Button/index.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_8__);
@@ -120280,7 +120280,7 @@ var CampaignForm = function CampaignForm(_ref) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
     onSubmit: handleSubmit(onSubmit)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_step_wizard__WEBPACK_IMPORTED_MODULE_5___default.a, null, campaign.questions.map(function (q, idx) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Question__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_Question__WEBPACK_IMPORTED_MODULE_6__["default"], {
       key: q.id,
       question: _objectSpread(_objectSpread({}, q), {}, {
         step: idx + 1
@@ -120323,79 +120323,6 @@ var styles = function styles(theme) {
 
 /***/ }),
 
-/***/ "./resources/js/components/CheckboxGroup.js":
-/*!**************************************************!*\
-  !*** ./resources/js/components/CheckboxGroup.js ***!
-  \**************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/FormControl */ "./node_modules/@material-ui/core/esm/FormControl/index.js");
-/* harmony import */ var _material_ui_core_FormGroup__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/FormGroup */ "./node_modules/@material-ui/core/esm/FormGroup/index.js");
-/* harmony import */ var _material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Checkbox */ "./node_modules/@material-ui/core/esm/Checkbox/index.js");
-/* harmony import */ var _material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/FormControlLabel */ "./node_modules/@material-ui/core/esm/FormControlLabel/index.js");
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
-
-function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
-
-
-
-
-
-
-
-var CheckboxGroup = function CheckboxGroup(_ref) {
-  var label = _ref.label,
-      name = _ref.name,
-      options = _ref.options,
-      input = _ref.input,
-      meta = _ref.meta,
-      rest = _objectWithoutProperties(_ref, ["label", "name", "options", "input", "meta"]);
-
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_1__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_FormGroup__WEBPACK_IMPORTED_MODULE_2__["default"], rest, options.map(function (option, idx) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      key: idx
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      control: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_3__["default"], null),
-      label: option.text,
-      name: "".concat(name, "[").concat(idx, "]"),
-      value: option.value,
-      checked: input.value.indexOf(option.value) !== -1,
-      onChange: function onChange(event) {
-        var newValue = _toConsumableArray(input.value);
-
-        if (event.target.checked) {
-          newValue.push(option.value);
-        } else {
-          newValue.splice(newValue.indexOf(option.text), 1);
-        }
-
-        return input.onChange(newValue);
-      }
-    }));
-  })));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (CheckboxGroup);
-
-/***/ }),
-
 /***/ "./resources/js/components/CheckboxQuestion.js":
 /*!*****************************************************!*\
   !*** ./resources/js/components/CheckboxQuestion.js ***!
@@ -120413,11 +120340,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Checkbox */ "./node_modules/@material-ui/core/esm/Checkbox/index.js");
 /* harmony import */ var _material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/FormControlLabel */ "./node_modules/@material-ui/core/esm/FormControlLabel/index.js");
 /* harmony import */ var _material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/FormControl */ "./node_modules/@material-ui/core/esm/FormControl/index.js");
-/* harmony import */ var _material_ui_core_FormLabel__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/FormLabel */ "./node_modules/@material-ui/core/esm/FormLabel/index.js");
-/* harmony import */ var _material_ui_core_FormGroup__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/FormGroup */ "./node_modules/@material-ui/core/esm/FormGroup/index.js");
-/* harmony import */ var _material_ui_core_FormHelperText__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/FormHelperText */ "./node_modules/@material-ui/core/esm/FormHelperText/index.js");
-/* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/Typography */ "./node_modules/@material-ui/core/esm/Typography/index.js");
-/* harmony import */ var _CheckboxGroup__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./CheckboxGroup */ "./resources/js/components/CheckboxGroup.js");
+/* harmony import */ var _material_ui_core_FormGroup__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/FormGroup */ "./node_modules/@material-ui/core/esm/FormGroup/index.js");
+/* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/Typography */ "./node_modules/@material-ui/core/esm/Typography/index.js");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
@@ -120445,9 +120369,6 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 
 
 
-
-
-
 var CheckboxQuestion = function CheckboxQuestion(_ref) {
   var name = _ref.name,
       text = _ref.text,
@@ -120456,26 +120377,9 @@ var CheckboxQuestion = function CheckboxQuestion(_ref) {
       saveFn = _ref.saveFn,
       rest = _objectWithoutProperties(_ref, ["name", "text", "input", "options", "saveFn"]);
 
-  /*const [value, setValue] = useState({});
-   const handleChange = event => {
-      setValue({ ...value, [event.target.value]: event.target.checked });
-  };
-   const renderOptions = ({ fields }) => {
-      options.forEach(option => fields.push(option));
-       return fields.map((option, idx) => (
-          <Field
-              key={idx}
-              name={`${name}.${option.value}`}
-              component={FormControlLabel}
-              control={<Checkbox />}
-              label={option.text}
-              value={option.value}
-          />
-      ));
-  };*/
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_9__["default"], null, text), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_7__["default"], null, text), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_5__["default"], {
     component: "fieldset"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_FormGroup__WEBPACK_IMPORTED_MODULE_7__["default"], _extends({}, rest, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_FormGroup__WEBPACK_IMPORTED_MODULE_6__["default"], _extends({}, rest, {
     onBlur: saveFn
   }), options.map(function (option, idx) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -120502,178 +120406,6 @@ var CheckboxQuestion = function CheckboxQuestion(_ref) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (CheckboxQuestion);
-
-/***/ }),
-
-/***/ "./resources/js/components/Question.js":
-/*!*********************************************!*\
-  !*** ./resources/js/components/Question.js ***!
-  \*********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var redux_form__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! redux-form */ "./node_modules/redux-form/es/index.js");
-/* harmony import */ var _material_ui_core_Card__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/Card */ "./node_modules/@material-ui/core/esm/Card/index.js");
-/* harmony import */ var _material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/CardActions */ "./node_modules/@material-ui/core/esm/CardActions/index.js");
-/* harmony import */ var _TextQuestion__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./TextQuestion */ "./resources/js/components/TextQuestion.js");
-/* harmony import */ var _RadioQuestion__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./RadioQuestion */ "./resources/js/components/RadioQuestion.js");
-/* harmony import */ var _CheckboxQuestion__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./CheckboxQuestion */ "./resources/js/components/CheckboxQuestion.js");
-/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core/Button */ "./node_modules/@material-ui/core/esm/Button/index.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../slices/campaignsSlice */ "./resources/js/slices/campaignsSlice.js");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var Question = function Question(_ref) {
-  var question = _ref.question,
-      classes = _ref.classes,
-      nextStep = _ref.nextStep,
-      goToStep = _ref.goToStep,
-      currentStep = _ref.currentStep,
-      totalSteps = _ref.totalSteps,
-      conditionalJump = _ref.conditionalJump,
-      value = _ref.value,
-      invite = _ref.invite,
-      saveResponse = _ref.saveResponse;
-
-  var renderQuestion = function renderQuestion(question) {
-    switch (question.type) {
-      case 0:
-      case 1:
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(redux_form__WEBPACK_IMPORTED_MODULE_5__["Field"], {
-          key: question.id,
-          component: _TextQuestion__WEBPACK_IMPORTED_MODULE_8__["default"],
-          name: question.code,
-          text: question.text,
-          questionType: question.type,
-          onBlur: handleSave
-        });
-
-      case 2:
-        return (
-          /*#__PURE__*/
-
-          /*<Field
-              key={question.id}
-              component={RadioQuestion}
-              name={question.code}
-              text={question.text}
-              options={question.optiongroup.options}
-          />*/
-          react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(redux_form__WEBPACK_IMPORTED_MODULE_5__["Field"], {
-            key: question.id,
-            component: _RadioQuestion__WEBPACK_IMPORTED_MODULE_9__["default"],
-            name: question.code,
-            text: question.text,
-            options: question.optiongroup.options,
-            onBlur: handleSave
-          })
-        );
-
-      case 3:
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(redux_form__WEBPACK_IMPORTED_MODULE_5__["Field"], {
-          key: question.id,
-          component: _CheckboxQuestion__WEBPACK_IMPORTED_MODULE_10__["default"],
-          name: question.code,
-          text: question.text,
-          options: question.optiongroup.options,
-          saveFn: handleSave
-        });
-
-      case 4:
-        return null;
-
-      case 5:
-        return null;
-
-      case 6:
-        return null;
-
-      default:
-        return null;
-    }
-  };
-
-  var handleSave = function handleSave() {
-    saveResponse({
-      invite_id: invite.id,
-      question_id: question.id,
-      answer: value
-    });
-  };
-
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    className: classes.root
-  }, renderQuestion(question), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_7__["default"], null, currentStep !== totalSteps && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_11__["default"], {
-    variant: "contained",
-    color: "primary",
-    className: classes.button,
-    onClick: function onClick() {
-      if (Object(lodash__WEBPACK_IMPORTED_MODULE_12__["isEmpty"])(question.conditions)) {
-        nextStep();
-      } else if (question.conditions[0].answer === value) {
-        goToStep(conditionalJump);
-      } else {
-        nextStep();
-      }
-    }
-  }, "Next"))));
-};
-
-Question.propTypes = {
-  question: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired
-};
-
-var styles = function styles(theme) {
-  return {
-    root: {
-      display: 'flex',
-      flexDirection: 'column',
-      margin: theme.spacing(3),
-      padding: theme.spacing(1)
-    },
-    button: {
-      marginLeft: 'auto'
-    }
-  };
-};
-
-var selector = Object(redux_form__WEBPACK_IMPORTED_MODULE_5__["formValueSelector"])('campaignForm');
-
-var mapStateToProps = function mapStateToProps(state, ownProps) {
-  return {
-    value: selector(state, ownProps.question.code),
-    invite: state.invite.data
-  };
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_4__["compose"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, {
-  saveResponse: _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_13__["saveResponse"]
-}), Object(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["withStyles"])(styles, {
-  withTheme: true
-}))(Question));
 
 /***/ }),
 
@@ -120978,6 +120710,178 @@ var mapStateToProps = function mapStateToProps(state) {
 
 /***/ }),
 
+/***/ "./resources/js/containers/Question.js":
+/*!*********************************************!*\
+  !*** ./resources/js/containers/Question.js ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux_form__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! redux-form */ "./node_modules/redux-form/es/index.js");
+/* harmony import */ var _material_ui_core_Card__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/Card */ "./node_modules/@material-ui/core/esm/Card/index.js");
+/* harmony import */ var _material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/CardActions */ "./node_modules/@material-ui/core/esm/CardActions/index.js");
+/* harmony import */ var _components_TextQuestion__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/TextQuestion */ "./resources/js/components/TextQuestion.js");
+/* harmony import */ var _components_RadioQuestion__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/RadioQuestion */ "./resources/js/components/RadioQuestion.js");
+/* harmony import */ var _components_CheckboxQuestion__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../components/CheckboxQuestion */ "./resources/js/components/CheckboxQuestion.js");
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core/Button */ "./node_modules/@material-ui/core/esm/Button/index.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../slices/campaignsSlice */ "./resources/js/slices/campaignsSlice.js");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var Question = function Question(_ref) {
+  var question = _ref.question,
+      classes = _ref.classes,
+      nextStep = _ref.nextStep,
+      goToStep = _ref.goToStep,
+      currentStep = _ref.currentStep,
+      totalSteps = _ref.totalSteps,
+      conditionalJump = _ref.conditionalJump,
+      value = _ref.value,
+      invite = _ref.invite,
+      saveResponse = _ref.saveResponse;
+
+  var renderQuestion = function renderQuestion(question) {
+    switch (question.type) {
+      case 0:
+      case 1:
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(redux_form__WEBPACK_IMPORTED_MODULE_5__["Field"], {
+          key: question.id,
+          component: _components_TextQuestion__WEBPACK_IMPORTED_MODULE_8__["default"],
+          name: question.code,
+          text: question.text,
+          questionType: question.type,
+          onBlur: handleSave
+        });
+
+      case 2:
+        return (
+          /*#__PURE__*/
+
+          /*<Field
+              key={question.id}
+              component={RadioQuestion}
+              name={question.code}
+              text={question.text}
+              options={question.optiongroup.options}
+          />*/
+          react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(redux_form__WEBPACK_IMPORTED_MODULE_5__["Field"], {
+            key: question.id,
+            component: _components_RadioQuestion__WEBPACK_IMPORTED_MODULE_9__["default"],
+            name: question.code,
+            text: question.text,
+            options: question.optiongroup.options,
+            onBlur: handleSave
+          })
+        );
+
+      case 3:
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(redux_form__WEBPACK_IMPORTED_MODULE_5__["Field"], {
+          key: question.id,
+          component: _components_CheckboxQuestion__WEBPACK_IMPORTED_MODULE_10__["default"],
+          name: question.code,
+          text: question.text,
+          options: question.optiongroup.options,
+          saveFn: handleSave
+        });
+
+      case 4:
+        return null;
+
+      case 5:
+        return null;
+
+      case 6:
+        return null;
+
+      default:
+        return null;
+    }
+  };
+
+  var handleSave = function handleSave() {
+    saveResponse({
+      invite_id: invite.id,
+      question_id: question.id,
+      answer: value
+    });
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    className: classes.root
+  }, renderQuestion(question), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_7__["default"], null, currentStep !== totalSteps && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    variant: "contained",
+    color: "primary",
+    className: classes.button,
+    onClick: function onClick() {
+      if (Object(lodash__WEBPACK_IMPORTED_MODULE_12__["isEmpty"])(question.conditions)) {
+        nextStep();
+      } else if (question.conditions[0].answer === value) {
+        goToStep(conditionalJump);
+      } else {
+        nextStep();
+      }
+    }
+  }, "Next"))));
+};
+
+Question.propTypes = {
+  question: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired
+};
+
+var styles = function styles(theme) {
+  return {
+    root: {
+      display: 'flex',
+      flexDirection: 'column',
+      margin: theme.spacing(3),
+      padding: theme.spacing(1)
+    },
+    button: {
+      marginLeft: 'auto'
+    }
+  };
+};
+
+var selector = Object(redux_form__WEBPACK_IMPORTED_MODULE_5__["formValueSelector"])('campaignForm');
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+  return {
+    value: selector(state, ownProps.question.code),
+    invite: state.invite.data
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_4__["compose"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, {
+  saveResponse: _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_13__["saveResponse"]
+}), Object(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["withStyles"])(styles, {
+  withTheme: true
+}))(Question));
+
+/***/ }),
+
 /***/ "./resources/js/errors/ErrorBoundary.js":
 /*!**********************************************!*\
   !*** ./resources/js/errors/ErrorBoundary.js ***!
@@ -121273,6 +121177,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../app/api */ "./resources/js/app/api.js");
 
 
+var _extraReducers;
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -121315,10 +121221,12 @@ var inviteSlice = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__["createSl
     error: null
   },
   reducers: {},
-  extraReducers: _defineProperty({}, fetchInviteByToken.fulfilled, function (state, action) {
+  extraReducers: (_extraReducers = {}, _defineProperty(_extraReducers, fetchInviteByToken.pending, function (state, action) {
+    state.loading = 'pending';
+  }), _defineProperty(_extraReducers, fetchInviteByToken.fulfilled, function (state, action) {
     state.loading = 'idle';
     state.data = action.payload;
-  })
+  }), _extraReducers)
 });
 /* harmony default export */ __webpack_exports__["default"] = (inviteSlice.reducer);
 

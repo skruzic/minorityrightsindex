@@ -18,7 +18,6 @@ class CreateCampaignsTable extends Migration
             $table->string('title');
             $table->string('slug');
             $table->text('description')->nullable();
-            $table->integer('access_type')->unsigned();
             $table->timestamps();
         });
     }

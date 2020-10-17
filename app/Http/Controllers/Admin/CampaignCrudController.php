@@ -53,12 +53,6 @@ class CampaignCrudController extends CrudController
                 'type'  => 'text',
             ],
             [
-                'name'    => 'access_type',
-                'label'   => 'Access type',
-                'type'    => 'select_from_array',
-                'options' => AccessType::asSelectArray(),
-            ],
-            [
                 'name'  => 'updated_at',
                 'label' => 'Last update',
                 'type'  => 'datetime',
@@ -86,12 +80,6 @@ class CampaignCrudController extends CrudController
                 'name'  => 'description',
                 'label' => 'Description',
                 'type'  => 'textarea',
-            ],
-            [
-                'name'    => 'access_type',
-                'label'   => 'Access type',
-                'type'    => 'select_from_array',
-                'options' => AccessType::asSelectArray(),
             ],
         ]);
     }

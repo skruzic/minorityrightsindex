@@ -4,7 +4,7 @@ import { reduxForm } from 'redux-form';
 import { withStyles } from '@material-ui/core';
 import { compose } from 'redux';
 import StepWizard from 'react-step-wizard';
-import Question from './Question';
+import Question from '../containers/Question';
 import Button from '@material-ui/core/Button';
 import { isEmpty } from 'lodash';
 

@@ -15,6 +15,9 @@ export const inviteSlice = createSlice({
     initialState: { data: {}, loading: 'pending', error: null },
     reducers: {},
     extraReducers: {
+        [fetchInviteByToken.pending]: (state, action) => {
+            state.loading = 'pending';
+        },
         [fetchInviteByToken.fulfilled]: (state, action) => {
             state.loading = 'idle';
             state.data = action.payload;
