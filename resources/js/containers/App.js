@@ -4,13 +4,15 @@ import { withStyles } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Campaign from './Campaign';
+import CampaignFinish from '../components/CampaignFinish';
 
 const App = ({ classes }) => (
     <div className={classes.root}>
         <CssBaseline />
         <Container component="main" className={classes.main} maxWidth="md">
             <Switch>
-                <Route path="/" exact Component={null} />
+                <Route path="/" exact component={null} />
+                <Route path="/finished" exact component={CampaignFinish} />
                 <Route path="/:slug" component={Campaign} />
             </Switch>
         </Container>

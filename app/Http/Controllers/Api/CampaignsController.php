@@ -42,7 +42,7 @@ class CampaignsController extends Controller
         ]);
 
         $inv       = Invite::findOrFail($request->invite_id);
-        $inv->page = $request->page + 1;
+        $inv->page = $request->page;
         $inv->save();
 
         return response()->json([], 204);

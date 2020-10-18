@@ -3,22 +3,22 @@ import PropTypes from 'prop-types';
 import { reduxForm } from 'redux-form';
 import { withStyles } from '@material-ui/core';
 import { compose } from 'redux';
+import { isEmpty } from 'lodash';
 import StepWizard from 'react-step-wizard';
 import Question from '../containers/Question';
-import Button from '@material-ui/core/Button';
-import { isEmpty } from 'lodash';
+import CampaignFinish from './CampaignFinish';
 
 const CampaignForm = ({ handleSubmit, saveFn, campaign, classes, page }) => {
-    const onSubmit = (formValues) => {
+    const onSubmit = formValues => {
         saveFn({
             campaign_id: campaign.id,
-            data: formValues,
+            data: formValues
         });
     };
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <StepWizard>
+            <StepWizard initialStep={page}>
                 {campaign.questions.map((q, idx) => (
                     <Question
                         key={q.id}
@@ -26,7 +26,7 @@ const CampaignForm = ({ handleSubmit, saveFn, campaign, classes, page }) => {
                         conditionalJump={
                             !isEmpty(q.conditions) &&
                             campaign.questions.indexOf(
-                                campaign.questions.find((item) => {
+                                campaign.questions.find(item => {
                                     return (
                                         item.id ===
                                         parseInt(q.conditions[0].question_id)
@@ -36,6 +36,7 @@ const CampaignForm = ({ handleSubmit, saveFn, campaign, classes, page }) => {
                         }
                     />
                 ))}
+                <CampaignFinish />
             </StepWizard>
             {/*<Button
                 variant="contained"
@@ -59,13 +60,13 @@ const CampaignForm = ({ handleSubmit, saveFn, campaign, classes, page }) => {
 
 CampaignForm.propTypes = {
     saveFn: PropTypes.func.isRequired,
-    campaign: PropTypes.object.isRequired,
+    campaign: PropTypes.object.isRequired
 };
 
-const styles = (theme) => ({
+const styles = theme => ({
     button: {
-        marginLeft: theme.spacing(3),
-    },
+        marginLeft: theme.spacing(3)
+    }
 });
 
 export default compose(

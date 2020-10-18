@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core';
+import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { Field, formValueSelector } from 'redux-form';
 import Card from '@material-ui/core/Card';
@@ -24,8 +25,9 @@ const Question = ({
     value,
     invite,
     saveResponse,
+    history
 }) => {
-    const renderQuestion = (question) => {
+    const renderQuestion = question => {
         switch (question.type) {
             case 0:
             case 1:
@@ -84,7 +86,7 @@ const Question = ({
             invite_id: invite.id,
             question_id: question.id,
             answer: value,
-            page: currentStep,
+            page: currentStep
         });
     };
 
@@ -93,7 +95,7 @@ const Question = ({
             <Card className={classes.root}>
                 {renderQuestion(question)}
                 <CardActions>
-                    {currentStep !== totalSteps && (
+                    {currentStep < totalSteps - 1 && (
                         <Button
                             variant="contained"
                             color="primary"
@@ -113,6 +115,16 @@ const Question = ({
                             Next
                         </Button>
                     )}
+                    {currentStep === totalSteps - 1 && (
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            className={classes.button}
+                            onClick={nextStep}
+                        >
+                            Finish
+                        </Button>
+                    )}
                 </CardActions>
             </Card>
         </>
@@ -120,19 +132,18 @@ const Question = ({
 };
 
 Question.propTypes = {
-    question: PropTypes.object.isRequired,
+    question: PropTypes.object.isRequired
 };
 
-const styles = (theme) => ({
+const styles = theme => ({
     root: {
         display: 'flex',
         flexDirection: 'column',
-        margin: theme.spacing(3),
-        padding: theme.spacing(1),
+        padding: theme.spacing(1)
     },
     button: {
-        marginLeft: 'auto',
-    },
+        marginLeft: 'auto'
+    }
 });
 
 const selector = formValueSelector('campaignForm');
@@ -140,11 +151,12 @@ const selector = formValueSelector('campaignForm');
 const mapStateToProps = (state, ownProps) => {
     return {
         value: selector(state, ownProps.question.code),
-        invite: state.invite.data,
+        invite: state.invite.data
     };
 };
 
 export default compose(
     connect(mapStateToProps, { saveResponse }),
-    withStyles(styles, { withTheme: true })
+    withStyles(styles, { withTheme: true }),
+    withRouter
 )(Question);

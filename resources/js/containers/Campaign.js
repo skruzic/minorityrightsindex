@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
+import { withStyles } from '@material-ui/core';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import {
     fetchCampaignBySlug,
-    saveCampaignAnswers,
+    saveCampaignAnswers
 } from '../slices/campaignsSlice';
 import { fetchInviteByToken } from '../slices/inviteSlice';
 import queryString from 'query-string';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import CampaignForm from '../components/CampaignForm';
+import CampaignHeader from '../components/CampaignHeader';
 
 class Campaign extends Component {
     componentDidMount() {
@@ -22,7 +25,7 @@ class Campaign extends Component {
     }
 
     render() {
-        const { campaign, responses, page } = this.props;
+        const { campaign, responses, page, classes } = this.props;
 
         if (this.props.loading === 'pending') {
             return <CircularProgress />;
@@ -31,33 +34,44 @@ class Campaign extends Component {
         }
 
         return (
-            <CampaignForm
-                campaign={campaign}
-                saveFn={this.props.saveCampaignAnswers}
-                initialValues={responses.reduce((obj, item) => {
-                    return Object.assign(obj, {
-                        [item.question.code]: item.answer,
-                    });
-                }, {})}
-                page={page}
-            />
+            <div className={classes.root}>
+                <CampaignHeader title={campaign.title} />
+                <CampaignForm
+                    campaign={campaign}
+                    saveFn={this.props.saveCampaignAnswers}
+                    initialValues={responses.reduce((obj, item) => {
+                        return Object.assign(obj, {
+                            [item.question.code]: item.answer
+                        });
+                    }, {})}
+                    page={page}
+                />
+            </div>
         );
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
     return {
         loading: state.invite.loading,
         error: state.invite.error,
         campaign: state.invite.data.campaign,
         responses: state.invite.data.responses,
-        page: state.invite.data.page,
+        page: state.invite.data.page
     };
 };
 
-export default connect(mapStateToProps, {
-    fetchCampaignBySlug,
-    //fetchCampaignByToken,
-    fetchInviteByToken,
-    saveCampaignAnswers,
-})(Campaign);
+const styles = theme => ({
+    root: {
+        margin: theme.spacing(3)
+    }
+});
+
+export default compose(
+    withStyles(styles, { withTheme: true }),
+    connect(mapStateToProps, {
+        fetchCampaignBySlug,
+        fetchInviteByToken,
+        saveCampaignAnswers
+    })
+)(Campaign);
