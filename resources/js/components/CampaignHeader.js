@@ -3,9 +3,7 @@ import Typography from '@material-ui/core/Typography';
 
 const CampaignHeader = ({ title }) => (
     <>
-        <Typography variant="h3" component="h1">
-            {title}
-        </Typography>
+        <Typography variant="h2">{title}</Typography>
     </>
 );
 

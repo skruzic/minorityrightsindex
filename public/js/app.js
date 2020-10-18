@@ -120254,6 +120254,14 @@ var theme = Object(_material_ui_core__WEBPACK_IMPORTED_MODULE_0__["createMuiThem
     common: {
       black: '#161c2d'
     }
+  },
+  typography: {
+    fontFamily: ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', '"Noto Sans"', 'sans-serif', '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"', '"Noto Color Emoji"'].join(','),
+    fontSize: 14,
+    h2: {
+      fontSize: '3.75rem',
+      fontWeight: 500
+    }
   }
 });
 console.log(theme);
@@ -120390,8 +120398,7 @@ __webpack_require__.r(__webpack_exports__);
 var CampaignHeader = function CampaignHeader(_ref) {
   var title = _ref.title;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    variant: "h3",
-    component: "h1"
+    variant: "h2"
   }, title));
 };
 

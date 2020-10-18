@@ -19,6 +19,27 @@ const theme = createMuiTheme({
         common: {
             black: '#161c2d'
         }
+    },
+    typography: {
+        fontFamily: [
+            '-apple-system',
+            'BlinkMacSystemFont',
+            '"Segoe UI"',
+            'Roboto',
+            '"Helvetica Neue"',
+            'Arial',
+            '"Noto Sans"',
+            'sans-serif',
+            '"Apple Color Emoji"',
+            '"Segoe UI Emoji"',
+            '"Segoe UI Symbol"',
+            '"Noto Color Emoji"'
+        ].join(','),
+        fontSize: 14,
+        h2: {
+            fontSize: '3.75rem',
+            fontWeight: 500
+        }
     }
 });
 
