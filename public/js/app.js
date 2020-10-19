@@ -120253,16 +120253,75 @@ var theme = Object(_material_ui_core__WEBPACK_IMPORTED_MODULE_0__["createMuiThem
     },
     common: {
       black: '#161c2d'
+    },
+    primary: {
+      main: '#7c69ef'
+    },
+    secondary: {
+      main: '#d9e2ef'
+    },
+    success: {
+      main: '#42ba96'
+    },
+    info: {
+      main: '#467fd0'
+    },
+    warning: {
+      main: '#ffc107'
+    },
+    error: {
+      main: '#df4759'
     }
   },
   typography: {
     fontFamily: ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', '"Noto Sans"', 'sans-serif', '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"', '"Noto Color Emoji"'].join(','),
     fontSize: 14,
+    h1: {
+      fontSize: '2.5rem',
+      fontWeight: 500,
+      lineHeight: 1.2,
+      marginBottom: '0.5rem'
+    },
     h2: {
-      fontSize: '3.75rem',
-      fontWeight: 500
+      fontSize: '2rem',
+      fontWeight: 500,
+      lineHeight: 1.2,
+      marginBottom: '0.5rem'
+    },
+    h3: {
+      fontSize: '1.75rem',
+      fontWeight: 500,
+      lineHeight: 1.2,
+      marginBottom: '0.5rem'
+    },
+    h4: {
+      fontSize: '1.5rem',
+      fontWeight: 500,
+      lineHeight: 1.2,
+      marginBottom: '0.5rem'
+    },
+    h5: {
+      fontSize: '1.25rem',
+      fontWeight: 500,
+      lineHeight: 1.2,
+      marginBottom: '0.5rem'
+    },
+    h6: {
+      fontSize: '1rem',
+      fontWeight: 500,
+      lineHeight: 1.2,
+      marginBottom: '0.5rem'
     }
   }
+  /*overrides: {
+      MuiCard: {
+          root: {
+              border: '1px solid rgba(0,40,100,0.12)',
+              boxShadow: ''
+          }
+      }
+  }*/
+
 });
 console.log(theme);
 /* harmony default export */ __webpack_exports__["default"] = (theme);
@@ -120420,11 +120479,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var redux_form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux-form */ "./node_modules/redux-form/es/index.js");
-/* harmony import */ var _material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Checkbox */ "./node_modules/@material-ui/core/esm/Checkbox/index.js");
-/* harmony import */ var _material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/FormControlLabel */ "./node_modules/@material-ui/core/esm/FormControlLabel/index.js");
-/* harmony import */ var _material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/FormControl */ "./node_modules/@material-ui/core/esm/FormControl/index.js");
-/* harmony import */ var _material_ui_core_FormGroup__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/FormGroup */ "./node_modules/@material-ui/core/esm/FormGroup/index.js");
-/* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/Typography */ "./node_modules/@material-ui/core/esm/Typography/index.js");
+/* harmony import */ var _material_ui_core_CardHeader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/CardHeader */ "./node_modules/@material-ui/core/esm/CardHeader/index.js");
+/* harmony import */ var _material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/CardContent */ "./node_modules/@material-ui/core/esm/CardContent/index.js");
+/* harmony import */ var _material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/Checkbox */ "./node_modules/@material-ui/core/esm/Checkbox/index.js");
+/* harmony import */ var _material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/FormControlLabel */ "./node_modules/@material-ui/core/esm/FormControlLabel/index.js");
+/* harmony import */ var _material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/FormControl */ "./node_modules/@material-ui/core/esm/FormControl/index.js");
+/* harmony import */ var _material_ui_core_FormGroup__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/FormGroup */ "./node_modules/@material-ui/core/esm/FormGroup/index.js");
+/* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/Typography */ "./node_modules/@material-ui/core/esm/Typography/index.js");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
@@ -120452,6 +120513,8 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 
 
 
+
+
 var CheckboxQuestion = function CheckboxQuestion(_ref) {
   var name = _ref.name,
       text = _ref.text,
@@ -120460,15 +120523,19 @@ var CheckboxQuestion = function CheckboxQuestion(_ref) {
       saveFn = _ref.saveFn,
       rest = _objectWithoutProperties(_ref, ["name", "text", "input", "options", "saveFn"]);
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_7__["default"], null, text), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CardHeader__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    title: text
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_4__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_7__["default"], {
     component: "fieldset"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_FormGroup__WEBPACK_IMPORTED_MODULE_6__["default"], _extends({}, rest, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_FormGroup__WEBPACK_IMPORTED_MODULE_8__["default"], _extends({}, rest, {
     onBlur: saveFn
   }), options.map(function (option, idx) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: idx
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      control: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_3__["default"], null),
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      control: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        color: "primary"
+      }),
       label: option.text,
       name: "".concat(name, "[").concat(option.value, "]"),
       value: option.value,
@@ -120479,13 +120546,13 @@ var CheckboxQuestion = function CheckboxQuestion(_ref) {
         if (event.target.checked) {
           newValue.push(option.value);
         } else {
-          newValue.splice(newValue.indexOf(option.text), 1);
+          newValue.splice(newValue.indexOf(option.value), 1);
         }
 
         return input.onChange(newValue);
       }
     }));
-  }))));
+  })))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (CheckboxQuestion);
