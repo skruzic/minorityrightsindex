@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { Field, formValueSelector } from 'redux-form';
 import Card from '@material-ui/core/Card';
+import LinearProgress from '@material-ui/core/LinearProgress';
 import CardActions from '@material-ui/core/CardActions';
 import TextQuestion from '../components/TextQuestion';
 import RadioQuestion from '../components/RadioQuestion';
@@ -92,6 +93,10 @@ const Question = ({
 
     return (
         <>
+            <LinearProgress
+                variant="determinate"
+                value={(currentStep / totalSteps) * 100}
+            />
             <Card className={classes.root}>
                 {renderQuestion(question)}
                 <CardActions>

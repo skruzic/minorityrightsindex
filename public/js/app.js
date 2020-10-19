@@ -120917,14 +120917,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var redux_form__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! redux-form */ "./node_modules/redux-form/es/index.js");
 /* harmony import */ var _material_ui_core_Card__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/Card */ "./node_modules/@material-ui/core/esm/Card/index.js");
-/* harmony import */ var _material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/CardActions */ "./node_modules/@material-ui/core/esm/CardActions/index.js");
-/* harmony import */ var _components_TextQuestion__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/TextQuestion */ "./resources/js/components/TextQuestion.js");
-/* harmony import */ var _components_RadioQuestion__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../components/RadioQuestion */ "./resources/js/components/RadioQuestion.js");
-/* harmony import */ var _components_CheckboxQuestion__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../components/CheckboxQuestion */ "./resources/js/components/CheckboxQuestion.js");
-/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/core/Button */ "./node_modules/@material-ui/core/esm/Button/index.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../slices/campaignsSlice */ "./resources/js/slices/campaignsSlice.js");
+/* harmony import */ var _material_ui_core_LinearProgress__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/LinearProgress */ "./node_modules/@material-ui/core/esm/LinearProgress/index.js");
+/* harmony import */ var _material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/CardActions */ "./node_modules/@material-ui/core/esm/CardActions/index.js");
+/* harmony import */ var _components_TextQuestion__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../components/TextQuestion */ "./resources/js/components/TextQuestion.js");
+/* harmony import */ var _components_RadioQuestion__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../components/RadioQuestion */ "./resources/js/components/RadioQuestion.js");
+/* harmony import */ var _components_CheckboxQuestion__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../components/CheckboxQuestion */ "./resources/js/components/CheckboxQuestion.js");
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @material-ui/core/Button */ "./node_modules/@material-ui/core/esm/Button/index.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../slices/campaignsSlice */ "./resources/js/slices/campaignsSlice.js");
+
 
 
 
@@ -120960,7 +120962,7 @@ var Question = function Question(_ref) {
       case 1:
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(redux_form__WEBPACK_IMPORTED_MODULE_6__["Field"], {
           key: question.id,
-          component: _components_TextQuestion__WEBPACK_IMPORTED_MODULE_9__["default"],
+          component: _components_TextQuestion__WEBPACK_IMPORTED_MODULE_10__["default"],
           name: question.code,
           text: question.text,
           questionType: question.type,
@@ -120980,7 +120982,7 @@ var Question = function Question(_ref) {
           />*/
           react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(redux_form__WEBPACK_IMPORTED_MODULE_6__["Field"], {
             key: question.id,
-            component: _components_RadioQuestion__WEBPACK_IMPORTED_MODULE_10__["default"],
+            component: _components_RadioQuestion__WEBPACK_IMPORTED_MODULE_11__["default"],
             name: question.code,
             text: question.text,
             options: question.optiongroup.options,
@@ -120991,7 +120993,7 @@ var Question = function Question(_ref) {
       case 3:
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(redux_form__WEBPACK_IMPORTED_MODULE_6__["Field"], {
           key: question.id,
-          component: _components_CheckboxQuestion__WEBPACK_IMPORTED_MODULE_11__["default"],
+          component: _components_CheckboxQuestion__WEBPACK_IMPORTED_MODULE_12__["default"],
           name: question.code,
           text: question.text,
           options: question.optiongroup.options,
@@ -121021,14 +121023,17 @@ var Question = function Question(_ref) {
     });
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_LinearProgress__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    variant: "determinate",
+    value: currentStep / totalSteps * 100
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_7__["default"], {
     className: classes.root
-  }, renderQuestion(question), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_8__["default"], null, currentStep < totalSteps - 1 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_12__["default"], {
+  }, renderQuestion(question), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_9__["default"], null, currentStep < totalSteps - 1 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_13__["default"], {
     variant: "contained",
     color: "primary",
     className: classes.button,
     onClick: function onClick() {
-      if (Object(lodash__WEBPACK_IMPORTED_MODULE_13__["isEmpty"])(question.conditions)) {
+      if (Object(lodash__WEBPACK_IMPORTED_MODULE_14__["isEmpty"])(question.conditions)) {
         nextStep();
       } else if (question.conditions[0].answer === value) {
         goToStep(conditionalJump);
@@ -121036,7 +121041,7 @@ var Question = function Question(_ref) {
         nextStep();
       }
     }
-  }, "Next"), currentStep === totalSteps - 1 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_12__["default"], {
+  }, "Next"), currentStep === totalSteps - 1 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_13__["default"], {
     variant: "contained",
     color: "primary",
     className: classes.button,
@@ -121071,7 +121076,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_5__["compose"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, {
-  saveResponse: _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_14__["saveResponse"]
+  saveResponse: _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_15__["saveResponse"]
 }), Object(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["withStyles"])(styles, {
   withTheme: true
 }), react_router_dom__WEBPACK_IMPORTED_MODULE_4__["withRouter"])(Question));

@@ -38,22 +38,6 @@ const CampaignForm = ({ handleSubmit, saveFn, campaign, classes, page }) => {
                 ))}
                 <CampaignFinish />
             </StepWizard>
-            {/*<Button
-                variant="contained"
-                color="primary"
-                type="submit"
-                className={classes.button}
-            >
-                Save & continue later
-            </Button>
-            <Button
-                variant="contained"
-                color="primary"
-                type="submit"
-                className={classes.button}
-            >
-                Save & finish
-            </Button>*/}
         </form>
     );
 };
