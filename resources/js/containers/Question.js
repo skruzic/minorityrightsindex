@@ -39,7 +39,7 @@ const Question = ({
                         name={question.code}
                         text={question.text}
                         questionType={question.type}
-                        onBlur={handleSave}
+                        //onBlur={handleSave}
                     />
                 );
             case 2:
@@ -57,7 +57,7 @@ const Question = ({
                         name={question.code}
                         text={question.text}
                         options={question.optiongroup.options}
-                        onBlur={handleSave}
+                        //onBlur={handleSave}
                     />
                 );
             case 3:
@@ -68,7 +68,7 @@ const Question = ({
                         name={question.code}
                         text={question.text}
                         options={question.optiongroup.options}
-                        saveFn={handleSave}
+                        //saveFn={handleSave}
                     />
                 );
             case 4:
@@ -95,7 +95,7 @@ const Question = ({
         <>
             <LinearProgress
                 variant="determinate"
-                value={(currentStep / totalSteps) * 100}
+                value={((currentStep - 1) / totalSteps) * 100}
             />
             <Card className={classes.root}>
                 {renderQuestion(question)}
@@ -115,6 +115,8 @@ const Question = ({
                                 } else {
                                     nextStep();
                                 }
+
+                                handleSave();
                             }}
                         >
                             Next
@@ -125,7 +127,10 @@ const Question = ({
                             variant="contained"
                             color="primary"
                             className={classes.button}
-                            onClick={nextStep}
+                            onClick={() => {
+                                handleSave();
+                                nextStep();
+                            }}
                         >
                             Finish
                         </Button>

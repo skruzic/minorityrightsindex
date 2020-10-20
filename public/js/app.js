@@ -120486,8 +120486,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/FormControl */ "./node_modules/@material-ui/core/esm/FormControl/index.js");
 /* harmony import */ var _material_ui_core_FormGroup__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/FormGroup */ "./node_modules/@material-ui/core/esm/FormGroup/index.js");
 /* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/Typography */ "./node_modules/@material-ui/core/esm/Typography/index.js");
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -120527,9 +120525,7 @@ var CheckboxQuestion = function CheckboxQuestion(_ref) {
     title: text
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_4__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_7__["default"], {
     component: "fieldset"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_FormGroup__WEBPACK_IMPORTED_MODULE_8__["default"], _extends({}, rest, {
-    onBlur: saveFn
-  }), options.map(function (option, idx) {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_FormGroup__WEBPACK_IMPORTED_MODULE_8__["default"], rest, options.map(function (option, idx) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: idx
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -120965,8 +120961,8 @@ var Question = function Question(_ref) {
           component: _components_TextQuestion__WEBPACK_IMPORTED_MODULE_10__["default"],
           name: question.code,
           text: question.text,
-          questionType: question.type,
-          onBlur: handleSave
+          questionType: question.type //onBlur={handleSave}
+
         });
 
       case 2:
@@ -120985,8 +120981,8 @@ var Question = function Question(_ref) {
             component: _components_RadioQuestion__WEBPACK_IMPORTED_MODULE_11__["default"],
             name: question.code,
             text: question.text,
-            options: question.optiongroup.options,
-            onBlur: handleSave
+            options: question.optiongroup.options //onBlur={handleSave}
+
           })
         );
 
@@ -120996,8 +120992,8 @@ var Question = function Question(_ref) {
           component: _components_CheckboxQuestion__WEBPACK_IMPORTED_MODULE_12__["default"],
           name: question.code,
           text: question.text,
-          options: question.optiongroup.options,
-          saveFn: handleSave
+          options: question.optiongroup.options //saveFn={handleSave}
+
         });
 
       case 4:
@@ -121025,7 +121021,7 @@ var Question = function Question(_ref) {
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_LinearProgress__WEBPACK_IMPORTED_MODULE_8__["default"], {
     variant: "determinate",
-    value: currentStep / totalSteps * 100
+    value: (currentStep - 1) / totalSteps * 100
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_7__["default"], {
     className: classes.root
   }, renderQuestion(question), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_9__["default"], null, currentStep < totalSteps - 1 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_13__["default"], {
@@ -121040,12 +121036,17 @@ var Question = function Question(_ref) {
       } else {
         nextStep();
       }
+
+      handleSave();
     }
   }, "Next"), currentStep === totalSteps - 1 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_13__["default"], {
     variant: "contained",
     color: "primary",
     className: classes.button,
-    onClick: nextStep
+    onClick: function onClick() {
+      handleSave();
+      nextStep();
+    }
   }, "Finish"))));
 };
 

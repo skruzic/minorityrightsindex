@@ -14,7 +14,10 @@ const CheckboxQuestion = ({ name, text, input, options, saveFn, ...rest }) => (
         <CardHeader title={text} />
         <CardContent>
             <FormControl component="fieldset">
-                <FormGroup {...rest} onBlur={saveFn}>
+                <FormGroup
+                    {...rest}
+                    //onBlur={saveFn}
+                >
                     {options.map((option, idx) => (
                         <div key={idx}>
                             <FormControlLabel
