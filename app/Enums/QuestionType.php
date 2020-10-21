@@ -11,8 +11,7 @@ final class QuestionType extends Enum
     const Choice = 2;
     const MultipleChoice = 3;
     const ChoiceArray = 4;
-    const MultipleChoiceArray = 5;
-    const StaticText = 6;
+    const StaticText = 5;
 
     /*public static function asArray(): array
     {

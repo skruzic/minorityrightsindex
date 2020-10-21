@@ -120943,6 +120943,7 @@ var Question = function Question(_ref) {
   var question = _ref.question,
       classes = _ref.classes,
       nextStep = _ref.nextStep,
+      previousStep = _ref.previousStep,
       goToStep = _ref.goToStep,
       currentStep = _ref.currentStep,
       totalSteps = _ref.totalSteps,
@@ -121002,9 +121003,6 @@ var Question = function Question(_ref) {
       case 5:
         return null;
 
-      case 6:
-        return null;
-
       default:
         return null;
     }
@@ -121015,7 +121013,7 @@ var Question = function Question(_ref) {
       invite_id: invite.id,
       question_id: question.id,
       answer: value,
-      page: currentStep
+      page: currentStep + 1
     });
   };
 
@@ -121024,10 +121022,12 @@ var Question = function Question(_ref) {
     value: (currentStep - 1) / totalSteps * 100
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_7__["default"], {
     className: classes.root
-  }, renderQuestion(question), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_9__["default"], null, currentStep < totalSteps - 1 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_13__["default"], {
+  }, renderQuestion(question), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    className: classes.actions,
+    disableSpacing: true
+  }, currentStep < totalSteps - 1 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_13__["default"], {
     variant: "contained",
     color: "primary",
-    className: classes.button,
     onClick: function onClick() {
       if (Object(lodash__WEBPACK_IMPORTED_MODULE_14__["isEmpty"])(question.conditions)) {
         nextStep();
@@ -121042,12 +121042,14 @@ var Question = function Question(_ref) {
   }, "Next"), currentStep === totalSteps - 1 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_13__["default"], {
     variant: "contained",
     color: "primary",
-    className: classes.button,
     onClick: function onClick() {
       handleSave();
       nextStep();
     }
-  }, "Finish"))));
+  }, "Finish"), currentStep !== 1 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_13__["default"], {
+    variant: "contained",
+    color: "primary"
+  }, "Back"))));
 };
 
 Question.propTypes = {
@@ -121061,8 +121063,10 @@ var styles = function styles(theme) {
       flexDirection: 'column',
       padding: theme.spacing(1)
     },
-    button: {
-      marginLeft: 'auto'
+    actions: {
+      display: 'flex',
+      flexDirection: 'row-reverse',
+      justifyContent: 'space-between'
     }
   };
 };

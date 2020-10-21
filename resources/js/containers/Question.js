@@ -19,6 +19,7 @@ const Question = ({
     question,
     classes,
     nextStep,
+    previousStep,
     goToStep,
     currentStep,
     totalSteps,
@@ -75,8 +76,6 @@ const Question = ({
                 return null;
             case 5:
                 return null;
-            case 6:
-                return null;
             default:
                 return null;
         }
@@ -87,7 +86,7 @@ const Question = ({
             invite_id: invite.id,
             question_id: question.id,
             answer: value,
-            page: currentStep
+            page: currentStep + 1
         });
     };
 
@@ -99,12 +98,11 @@ const Question = ({
             />
             <Card className={classes.root}>
                 {renderQuestion(question)}
-                <CardActions>
+                <CardActions className={classes.actions} disableSpacing={true}>
                     {currentStep < totalSteps - 1 && (
                         <Button
                             variant="contained"
                             color="primary"
-                            className={classes.button}
                             onClick={() => {
                                 if (isEmpty(question.conditions)) {
                                     nextStep();
@@ -126,13 +124,17 @@ const Question = ({
                         <Button
                             variant="contained"
                             color="primary"
-                            className={classes.button}
                             onClick={() => {
                                 handleSave();
                                 nextStep();
                             }}
                         >
                             Finish
+                        </Button>
+                    )}
+                    {currentStep !== 1 && (
+                        <Button variant="contained" color="primary">
+                            Back
                         </Button>
                     )}
                 </CardActions>
@@ -151,8 +153,10 @@ const styles = theme => ({
         flexDirection: 'column',
         padding: theme.spacing(1)
     },
-    button: {
-        marginLeft: 'auto'
+    actions: {
+        display: 'flex',
+        flexDirection: 'row-reverse',
+        justifyContent: 'space-between'
     }
 });
 
