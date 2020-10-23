@@ -14,6 +14,7 @@ import CheckboxQuestion from '../components/CheckboxQuestion';
 import Button from '@material-ui/core/Button';
 import { isEmpty } from 'lodash';
 import { saveResponse } from '../slices/campaignsSlice';
+import LikertQuestion from '../components/LikertQuestion';
 
 const Question = ({
     question,
@@ -45,13 +46,6 @@ const Question = ({
                 );
             case 2:
                 return (
-                    /*<Field
-                        key={question.id}
-                        component={RadioQuestion}
-                        name={question.code}
-                        text={question.text}
-                        options={question.optiongroup.options}
-                    />*/
                     <Field
                         key={question.id}
                         component={RadioQuestion}
@@ -73,7 +67,16 @@ const Question = ({
                     />
                 );
             case 4:
-                return null;
+                return (
+                    <Field
+                        key={question.id}
+                        component={LikertQuestion}
+                        name={question.code}
+                        text={question.text}
+                        options={question.optiongroup.options}
+                        questions={question.children}
+                    />
+                );
             case 5:
                 return null;
             default:

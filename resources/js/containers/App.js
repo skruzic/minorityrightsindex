@@ -31,7 +31,7 @@ const styles = theme => ({
     },
     content: {
         flexGrow: 1,
-        maxWidth: theme.breakpoints.values.lg,
+        maxWidth: theme.breakpoints.values.xl,
         //height: '100vh',
         overflow: 'auto',
         padding: theme.spacing(3)

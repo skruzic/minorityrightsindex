@@ -120555,6 +120555,203 @@ var CheckboxQuestion = function CheckboxQuestion(_ref) {
 
 /***/ }),
 
+/***/ "./resources/js/components/LikertQuestion.js":
+/*!***************************************************!*\
+  !*** ./resources/js/components/LikertQuestion.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
+/* harmony import */ var redux_form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux-form */ "./node_modules/redux-form/es/index.js");
+/* harmony import */ var _material_ui_core_CardHeader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/CardHeader */ "./node_modules/@material-ui/core/esm/CardHeader/index.js");
+/* harmony import */ var _material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/CardContent */ "./node_modules/@material-ui/core/esm/CardContent/index.js");
+/* harmony import */ var _material_ui_core_TableContainer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/TableContainer */ "./node_modules/@material-ui/core/esm/TableContainer/index.js");
+/* harmony import */ var _material_ui_core_Table__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/Table */ "./node_modules/@material-ui/core/esm/Table/index.js");
+/* harmony import */ var _material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/TableHead */ "./node_modules/@material-ui/core/esm/TableHead/index.js");
+/* harmony import */ var _material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/TableRow */ "./node_modules/@material-ui/core/esm/TableRow/index.js");
+/* harmony import */ var _material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/TableCell */ "./node_modules/@material-ui/core/esm/TableCell/index.js");
+/* harmony import */ var _material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core/TableBody */ "./node_modules/@material-ui/core/esm/TableBody/index.js");
+/* harmony import */ var _LikertQuestionRow__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./LikertQuestionRow */ "./resources/js/components/LikertQuestionRow.js");
+/* harmony import */ var _RadioQuestion__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./RadioQuestion */ "./resources/js/components/RadioQuestion.js");
+/* harmony import */ var _material_ui_core_Radio__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @material-ui/core/Radio */ "./node_modules/@material-ui/core/esm/Radio/index.js");
+/* harmony import */ var _material_ui_core_RadioGroup__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @material-ui/core/RadioGroup */ "./node_modules/@material-ui/core/esm/RadioGroup/index.js");
+/* harmony import */ var _material_ui_core_Box__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @material-ui/core/Box */ "./node_modules/@material-ui/core/esm/Box/index.js");
+/* harmony import */ var _material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @material-ui/core/FormControl */ "./node_modules/@material-ui/core/esm/FormControl/index.js");
+/* harmony import */ var _material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @material-ui/core/FormControlLabel */ "./node_modules/@material-ui/core/esm/FormControlLabel/index.js");
+/* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @material-ui/core/Typography */ "./node_modules/@material-ui/core/esm/Typography/index.js");
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var LikertQuestion = function LikertQuestion(_ref) {
+  var classes = _ref.classes,
+      name = _ref.name,
+      text = _ref.text,
+      options = _ref.options,
+      questions = _ref.questions,
+      input = _ref.input,
+      rest = _objectWithoutProperties(_ref, ["classes", "name", "text", "options", "questions", "input"]);
+
+  console.log(rest);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CardHeader__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    title: text
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_4__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    className: classes.table
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: classes.row
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_18__["default"], {
+    className: classes.cell
+  }), options.map(function (option, idx) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_18__["default"], {
+      key: idx,
+      className: classes.cell
+    }, option.text);
+  })), questions.map(function (q) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_RadioGroup__WEBPACK_IMPORTED_MODULE_14__["default"], {
+      key: q.id,
+      className: classes.row
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_18__["default"], {
+      className: classes.cell
+    }, q.text), options.map(function (option, idx) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_17__["default"], {
+        key: idx,
+        control: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Radio__WEBPACK_IMPORTED_MODULE_13__["default"], null),
+        label: null,
+        name: q.code,
+        value: option.value.toString(),
+        className: classes.cell
+      });
+    }));
+  }))));
+};
+
+var styles = {
+  table: {
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  row: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  cell: {
+    flex: '1 1 0',
+    margin: '0 auto'
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["withStyles"])(styles)(LikertQuestion));
+
+/***/ }),
+
+/***/ "./resources/js/components/LikertQuestionRow.js":
+/*!******************************************************!*\
+  !*** ./resources/js/components/LikertQuestionRow.js ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
+/* harmony import */ var _material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/TableCell */ "./node_modules/@material-ui/core/esm/TableCell/index.js");
+/* harmony import */ var _material_ui_core_RadioGroup__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/RadioGroup */ "./node_modules/@material-ui/core/esm/RadioGroup/index.js");
+/* harmony import */ var _material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/FormControlLabel */ "./node_modules/@material-ui/core/esm/FormControlLabel/index.js");
+/* harmony import */ var _material_ui_core_Radio__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/Radio */ "./node_modules/@material-ui/core/esm/Radio/index.js");
+/* harmony import */ var _material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/FormControl */ "./node_modules/@material-ui/core/esm/FormControl/index.js");
+/* harmony import */ var redux_form__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! redux-form */ "./node_modules/redux-form/es/index.js");
+/* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/Typography */ "./node_modules/@material-ui/core/esm/Typography/index.js");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+var LikertQuestionRow = function LikertQuestionRow(_ref) {
+  var classes = _ref.classes,
+      name = _ref.name,
+      text = _ref.text,
+      input = _ref.input,
+      options = _ref.options,
+      rest = _objectWithoutProperties(_ref, ["classes", "name", "text", "input", "options"]);
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_9__["default"], null, text), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    component: "fieldset"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_RadioGroup__WEBPACK_IMPORTED_MODULE_4__["default"], _extends({}, input, rest), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    className: classes.ul
+  }, options.map(function (option, idx) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      key: idx
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      key: idx,
+      name: name,
+      label: null,
+      control: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Radio__WEBPACK_IMPORTED_MODULE_6__["default"], null),
+      value: option.value.toString()
+    }));
+  })))));
+};
+
+LikertQuestionRow.propTypes = {
+  text: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired,
+  name: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired,
+  options: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.array.isRequired
+};
+var styles = {
+  ul: {
+    listStyle: 'none',
+    width: '100%',
+    margin: 0,
+    padding: '0 0 35px',
+    display: 'block' //border-bottom:2px solid #efefef;
+
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["withStyles"])(styles)(LikertQuestionRow));
+
+/***/ }),
+
 /***/ "./resources/js/components/RadioQuestion.js":
 /*!**************************************************!*\
   !*** ./resources/js/components/RadioQuestion.js ***!
@@ -120740,7 +120937,7 @@ var styles = function styles(theme) {
     },
     content: {
       flexGrow: 1,
-      maxWidth: theme.breakpoints.values.lg,
+      maxWidth: theme.breakpoints.values.xl,
       //height: '100vh',
       overflow: 'auto',
       padding: theme.spacing(3)
@@ -120922,6 +121119,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_14__);
 /* harmony import */ var _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../slices/campaignsSlice */ "./resources/js/slices/campaignsSlice.js");
+/* harmony import */ var _components_LikertQuestion__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../components/LikertQuestion */ "./resources/js/components/LikertQuestion.js");
+
 
 
 
@@ -120967,25 +121166,14 @@ var Question = function Question(_ref) {
         });
 
       case 2:
-        return (
-          /*#__PURE__*/
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(redux_form__WEBPACK_IMPORTED_MODULE_6__["Field"], {
+          key: question.id,
+          component: _components_RadioQuestion__WEBPACK_IMPORTED_MODULE_11__["default"],
+          name: question.code,
+          text: question.text,
+          options: question.optiongroup.options //onBlur={handleSave}
 
-          /*<Field
-              key={question.id}
-              component={RadioQuestion}
-              name={question.code}
-              text={question.text}
-              options={question.optiongroup.options}
-          />*/
-          react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(redux_form__WEBPACK_IMPORTED_MODULE_6__["Field"], {
-            key: question.id,
-            component: _components_RadioQuestion__WEBPACK_IMPORTED_MODULE_11__["default"],
-            name: question.code,
-            text: question.text,
-            options: question.optiongroup.options //onBlur={handleSave}
-
-          })
-        );
+        });
 
       case 3:
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(redux_form__WEBPACK_IMPORTED_MODULE_6__["Field"], {
@@ -120998,7 +121186,14 @@ var Question = function Question(_ref) {
         });
 
       case 4:
-        return null;
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(redux_form__WEBPACK_IMPORTED_MODULE_6__["Field"], {
+          key: question.id,
+          component: _components_LikertQuestion__WEBPACK_IMPORTED_MODULE_16__["default"],
+          name: question.code,
+          text: question.text,
+          options: question.optiongroup.options,
+          questions: question.children
+        });
 
       case 5:
         return null;

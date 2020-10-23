@@ -24,7 +24,7 @@ class Campaign extends Model
 
     public function questions()
     {
-        return $this->hasMany(Question::class)->orderBy('questions.lft');
+        return $this->hasMany(Question::class)->orderBy('lft')->whereParentId(null);
     }
 
     public function answers()

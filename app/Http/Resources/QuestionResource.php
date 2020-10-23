@@ -24,6 +24,7 @@ class QuestionResource extends JsonResource
             'conditions'  => $this->conditions,
             'extras'      => $this->extras,
             'optiongroup' => new OptionGroupResource($this->optiongroup),
+            'children'    => $this->children,
         ];
     }
 }

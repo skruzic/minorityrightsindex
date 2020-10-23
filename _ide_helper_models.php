@@ -12,39 +12,14 @@
 
 namespace App\Models{
 /**
- * App\Models\Answer
- *
- * @property int $id
- * @property int $campaign_id
- * @property string|null $data
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Campaign $campaign
- * @method static \Illuminate\Database\Eloquent\Builder|Answer newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Answer newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Answer query()
- * @method static \Illuminate\Database\Eloquent\Builder|Answer whereCampaignId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Answer whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Answer whereData($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Answer whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Answer whereUpdatedAt($value)
- */
-	class Answer extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
  * App\Models\Campaign
  *
  * @property int $id
  * @property string $title
  * @property string $slug
  * @property string|null $description
- * @property int $access_type
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Answer[] $answers
- * @property-read int|null $answers_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Invite[] $invites
  * @property-read int|null $invites_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Question[] $questions
@@ -53,7 +28,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Campaign newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Campaign newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Campaign query()
- * @method static \Illuminate\Database\Eloquent\Builder|Campaign whereAccessType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Campaign whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Campaign whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Campaign whereId($value)
@@ -72,11 +46,13 @@ namespace App\Models{
  * @property int $campaign_id
  * @property string $email
  * @property string $token
- * @property int|null $page
+ * @property int $page
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string|null $deleted_at
  * @property-read \App\Models\Campaign $campaign
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Response[] $responses
+ * @property-read int|null $responses_count
  * @method static \Illuminate\Database\Eloquent\Builder|Invite newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Invite newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Invite query()
@@ -169,9 +145,11 @@ namespace App\Models{
  * @property int $id
  * @property int $invite_id
  * @property int $question_id
- * @property string $answer
+ * @property string|null $answer
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Invite $invite
+ * @property-read \App\Models\Question $question
  * @method static \Illuminate\Database\Eloquent\Builder|Response newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Response newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Response query()
