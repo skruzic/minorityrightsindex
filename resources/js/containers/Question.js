@@ -68,9 +68,16 @@ const Question = ({
                 );
             case 4:
                 return (
-                    <Field
+                    /*<Field
                         key={question.id}
                         component={LikertQuestion}
+                        name={question.code}
+                        text={question.text}
+                        options={question.optiongroup.options}
+                        questions={question.children}
+                    />*/
+                    <LikertQuestion
+                        key={question.id}
                         name={question.code}
                         text={question.text}
                         options={question.optiongroup.options}
