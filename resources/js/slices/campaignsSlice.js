@@ -31,6 +31,7 @@ export const fetchCampaignByToken = createAsyncThunk(
 export const saveResponse = createAsyncThunk(
     'campaigns/saveResponseStatus',
     async formValues => {
+        console.log('formvalues', formValues);
         const response = await api.post('/campaign', formValues);
 
         return response.data;

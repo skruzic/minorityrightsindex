@@ -27,8 +27,7 @@ const Question = ({
     conditionalJump,
     value,
     invite,
-    saveResponse,
-    history
+    saveResponse
 }) => {
     const renderQuestion = question => {
         switch (question.type) {
@@ -82,6 +81,8 @@ const Question = ({
                         text={question.text}
                         options={question.optiongroup.options}
                         questions={question.children}
+                        invite={invite}
+                        currentStep={currentStep}
                     />
                 );
             case 5:
@@ -92,12 +93,14 @@ const Question = ({
     };
 
     const handleSave = () => {
-        saveResponse({
-            invite_id: invite.id,
-            question_id: question.id,
-            answer: value,
-            page: currentStep + 1
-        });
+        // Ne piši ništa ako pitanje ima children pitanja (Likert)
+        question.type !== 4 &&
+            saveResponse({
+                invite_id: invite.id,
+                question_id: question.id,
+                answer: value,
+                page: currentStep + 1
+            });
     };
 
     return (

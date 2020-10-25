@@ -120611,7 +120611,9 @@ var LikertQuestion = function LikertQuestion(_ref) {
       options = _ref.options,
       questions = _ref.questions,
       input = _ref.input,
-      rest = _objectWithoutProperties(_ref, ["classes", "name", "text", "options", "questions", "input"]);
+      invite = _ref.invite,
+      currentStep = _ref.currentStep,
+      rest = _objectWithoutProperties(_ref, ["classes", "name", "text", "options", "questions", "input", "invite", "currentStep"]);
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CardHeader__WEBPACK_IMPORTED_MODULE_3__["default"], {
     title: text
@@ -120626,7 +120628,9 @@ var LikertQuestion = function LikertQuestion(_ref) {
       component: _LikertQuestionRow__WEBPACK_IMPORTED_MODULE_16__["default"],
       name: q.code,
       question: q,
-      options: options
+      options: options,
+      invite: invite,
+      currentStep: currentStep
     });
   }))))));
 };
@@ -120663,14 +120667,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
-/* harmony import */ var _material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/TableCell */ "./node_modules/@material-ui/core/esm/TableCell/index.js");
-/* harmony import */ var _material_ui_core_RadioGroup__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/RadioGroup */ "./node_modules/@material-ui/core/esm/RadioGroup/index.js");
-/* harmony import */ var _material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/FormControlLabel */ "./node_modules/@material-ui/core/esm/FormControlLabel/index.js");
-/* harmony import */ var _material_ui_core_Radio__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/Radio */ "./node_modules/@material-ui/core/esm/Radio/index.js");
-/* harmony import */ var _material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/FormControl */ "./node_modules/@material-ui/core/esm/FormControl/index.js");
-/* harmony import */ var redux_form__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! redux-form */ "./node_modules/redux-form/es/index.js");
-/* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/Typography */ "./node_modules/@material-ui/core/esm/Typography/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var _material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/TableCell */ "./node_modules/@material-ui/core/esm/TableCell/index.js");
+/* harmony import */ var _material_ui_core_RadioGroup__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/RadioGroup */ "./node_modules/@material-ui/core/esm/RadioGroup/index.js");
+/* harmony import */ var _material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/FormControlLabel */ "./node_modules/@material-ui/core/esm/FormControlLabel/index.js");
+/* harmony import */ var _material_ui_core_Radio__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/Radio */ "./node_modules/@material-ui/core/esm/Radio/index.js");
+/* harmony import */ var _material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/FormControl */ "./node_modules/@material-ui/core/esm/FormControl/index.js");
+/* harmony import */ var _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../slices/campaignsSlice */ "./resources/js/slices/campaignsSlice.js");
+/* harmony import */ var _LikertQuestion__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./LikertQuestion */ "./resources/js/components/LikertQuestion.js");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -120701,29 +120707,42 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 
 
 
+
+
 var LikertQuestionRow = function LikertQuestionRow(_ref) {
   var classes = _ref.classes,
       question = _ref.question,
       input = _ref.input,
       options = _ref.options,
-      rest = _objectWithoutProperties(_ref, ["classes", "question", "input", "options"]);
+      currentStep = _ref.currentStep,
+      invite = _ref.invite,
+      saveResponse = _ref.saveResponse,
+      rest = _objectWithoutProperties(_ref, ["classes", "question", "input", "options", "currentStep", "invite", "saveResponse"]);
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(-1),
       _useState2 = _slicedToArray(_useState, 2),
       selectedValue = _useState2[0],
       setSelectedValue = _useState2[1];
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["TableRow"], _extends({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["TableRow"], _extends({
     key: question.id
-  }, input), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_3__["default"], null, question.text), options.map(function (option, idx) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, input), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_5__["default"], null, question.text), options.map(function (option, idx) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_5__["default"], {
       key: idx
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Radio__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Radio__WEBPACK_IMPORTED_MODULE_8__["default"], {
       checked: option.value === selectedValue,
       value: option.value,
       color: "primary",
       onChange: function onChange(e) {
         setSelectedValue(parseInt(e.target.value));
+      },
+      onBlur: function onBlur() {
+        saveResponse({
+          invite_id: invite.id,
+          question_id: question.id,
+          answer: selectedValue,
+          page: currentStep + 1
+        });
       }
     }));
   }));
@@ -120745,7 +120764,9 @@ var styles = {
 
   }
 };
-/* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["withStyles"])(styles)(LikertQuestionRow));
+/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_4__["compose"])(Object(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["withStyles"])(styles), Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(null, {
+  saveResponse: _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_10__["saveResponse"]
+}))(LikertQuestionRow));
 
 /***/ }),
 
@@ -121146,8 +121167,7 @@ var Question = function Question(_ref) {
       conditionalJump = _ref.conditionalJump,
       value = _ref.value,
       invite = _ref.invite,
-      saveResponse = _ref.saveResponse,
-      history = _ref.history;
+      saveResponse = _ref.saveResponse;
 
   var renderQuestion = function renderQuestion(question) {
     switch (question.type) {
@@ -121199,7 +121219,9 @@ var Question = function Question(_ref) {
             name: question.code,
             text: question.text,
             options: question.optiongroup.options,
-            questions: question.children
+            questions: question.children,
+            invite: invite,
+            currentStep: currentStep
           })
         );
 
@@ -121212,7 +121234,8 @@ var Question = function Question(_ref) {
   };
 
   var handleSave = function handleSave() {
-    saveResponse({
+    // Ne piši ništa ako pitanje ima children pitanja (Likert)
+    question.type !== 4 && saveResponse({
       invite_id: invite.id,
       question_id: question.id,
       answer: value,
@@ -121488,14 +121511,15 @@ var saveResponse = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__["createA
       while (1) {
         switch (_context4.prev = _context4.next) {
           case 0:
-            _context4.next = 2;
+            console.log('formvalues', formValues);
+            _context4.next = 3;
             return _app_api__WEBPACK_IMPORTED_MODULE_2__["default"].post('/campaign', formValues);
 
-          case 2:
+          case 3:
             response = _context4.sent;
             return _context4.abrupt("return", response.data);
 
-          case 4:
+          case 5:
           case "end":
             return _context4.stop();
         }

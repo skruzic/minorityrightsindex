@@ -1,16 +1,27 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core';
+import { compose } from 'redux';
 import TableCell from '@material-ui/core/TableCell';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
 import FormControl from '@material-ui/core/FormControl';
 import { TableRow } from '@material-ui/core';
-import { Field } from 'redux-form';
-import Typography from '@material-ui/core/Typography';
+import { saveResponse } from '../slices/campaignsSlice';
+import LikertQuestion from './LikertQuestion';
 
-const LikertQuestionRow = ({ classes, question, input, options, ...rest }) => {
+const LikertQuestionRow = ({
+    classes,
+    question,
+    input,
+    options,
+    currentStep,
+    invite,
+    saveResponse,
+    ...rest
+}) => {
     const [selectedValue, setSelectedValue] = useState(-1);
 
     return (
@@ -24,6 +35,14 @@ const LikertQuestionRow = ({ classes, question, input, options, ...rest }) => {
                         color="primary"
                         onChange={e => {
                             setSelectedValue(parseInt(e.target.value));
+                        }}
+                        onBlur={() => {
+                            saveResponse({
+                                invite_id: invite.id,
+                                question_id: question.id,
+                                answer: selectedValue,
+                                page: currentStep + 1
+                            });
                         }}
                     />
                 </TableCell>
@@ -49,4 +68,7 @@ const styles = {
     }
 };
 
-export default withStyles(styles)(LikertQuestionRow);
+export default compose(
+    withStyles(styles),
+    connect(null, { saveResponse })
+)(LikertQuestionRow);
