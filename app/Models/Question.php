@@ -3,9 +3,8 @@
 namespace App\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Enums\QuestionType;
+use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
@@ -26,6 +25,8 @@ class Question extends Model
     protected $fakeColumns = ['extras'];
 
     protected $casts = ['conditions' => 'array', 'extras' => 'array'];
+
+    protected $touches = ['campaign'];
 
     /*
      * Relationships

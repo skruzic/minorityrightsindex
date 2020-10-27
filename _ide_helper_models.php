@@ -24,6 +24,8 @@ namespace App\Models{
  * @property-read int|null $invites_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Question[] $questions
  * @property-read int|null $questions_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Response[] $responses
+ * @property-read int|null $responses_count
  * @method static \Illuminate\Database\Eloquent\Builder|Campaign findSimilarSlugs($attribute, $config, $slug)
  * @method static \Illuminate\Database\Eloquent\Builder|Campaign newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Campaign newQuery()

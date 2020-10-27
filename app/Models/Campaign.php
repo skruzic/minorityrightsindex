@@ -2,13 +2,12 @@
 
 namespace App\Models;
 
-use App\Helpers\AnswerExporter;
 use App\Helpers\PanelImporter;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 
 class Campaign extends Model
@@ -27,9 +26,9 @@ class Campaign extends Model
         return $this->hasMany(Question::class)->orderBy('lft')->whereParentId(null);
     }
 
-    public function answers()
+    public function responses()
     {
-        return $this->hasMany(Answer::class);
+        return $this->hasManyThrough(Response::class, Invite::class);
     }
 
     public function sluggable(): array

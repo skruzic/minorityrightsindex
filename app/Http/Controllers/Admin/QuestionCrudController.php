@@ -162,6 +162,7 @@ class QuestionCrudController extends CrudController
 
     public function download()
     {
-        (new AnswerExporter($this->campaign_id))->export();
+        //(new AnswerExporter($this->campaign_id))->export();
+        new AnswerExporter($this->campaign_id);
     }
 }
