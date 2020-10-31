@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Enums\QuestionType;
-use App\Helpers\AnswerExporter;
+use App\Helpers\CsvExporter;
 use App\Http\Requests\QuestionRequest;
 use App\Models\OptionGroup;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
@@ -163,6 +163,6 @@ class QuestionCrudController extends CrudController
     public function download()
     {
         //(new AnswerExporter($this->campaign_id))->export();
-        new AnswerExporter($this->campaign_id);
+        (new CsvExporter($this->campaign_id))->export();
     }
 }

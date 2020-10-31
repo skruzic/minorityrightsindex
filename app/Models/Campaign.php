@@ -23,7 +23,8 @@ class Campaign extends Model
 
     public function questions()
     {
-        return $this->hasMany(Question::class)->orderBy('lft')->whereParentId(null);
+        //return $this->hasMany(Question::class)->orderBy('lft')->whereParentId(null);
+        return $this->hasMany(Question::class)->orderBy('lft')->whereDoesntHave('children');
     }
 
     public function responses()
