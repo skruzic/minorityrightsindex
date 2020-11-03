@@ -14,8 +14,8 @@ use League\Csv\Writer;
 
 class CsvExporter
 {
-    protected array $headers = [];
-    protected array $data = [];
+    protected $headers = [];
+    protected $data = [];
 
     public function __construct($id)
     {

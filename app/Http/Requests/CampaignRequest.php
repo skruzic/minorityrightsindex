@@ -24,7 +24,8 @@ class CampaignRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'       => 'required',
+            'title'  => 'required',
+            'locked' => 'required|boolean',
         ];
     }
 }

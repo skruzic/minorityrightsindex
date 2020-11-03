@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Enums\QuestionType;
 use App\Helpers\CsvExporter;
 use App\Http\Requests\QuestionRequest;
+use App\Models\Campaign;
 use App\Models\OptionGroup;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
@@ -41,6 +42,13 @@ class QuestionCrudController extends CrudController
 
         CRUD::allowAccess('reorder');
         CRUD::enableReorder('question', 2);
+
+        $campaign = Campaign::findOrFail($this->campaign_id);
+
+        // Ako je kampanja zakljucana, nema novih unosa
+        if ($campaign->locked) {
+            CRUD::denyAccess(['create', 'update', 'delete', 'reorder']);
+        }
     }
 
     protected function fetchOptionGroup()

@@ -48,9 +48,8 @@ class CampaignCrudController extends CrudController
                 ],
             ],
             [
-                'name'  => 'description',
-                'label' => 'Description',
-                'type'  => 'text',
+                'name' => 'locked',
+                'type' => 'boolean',
             ],
             [
                 'name'  => 'updated_at',
@@ -80,6 +79,12 @@ class CampaignCrudController extends CrudController
                 'name'  => 'description',
                 'label' => 'Description',
                 'type'  => 'textarea',
+            ],
+            [
+                'name'  => 'locked',
+                'type'  => 'checkbox',
+                'label' => 'Lock the campaign',
+                'hint'  => 'When the campaign is locked, no new questions can be created and it can be filled by users',
             ],
         ]);
     }
@@ -120,7 +125,6 @@ class CampaignCrudController extends CrudController
             }
         }
     }
-
 
 
 }
