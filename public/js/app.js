@@ -120176,7 +120176,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
 /* harmony default export */ __webpack_exports__["default"] = (axios__WEBPACK_IMPORTED_MODULE_0___default.a.create({
-  baseURL: "".concat("http://localhost:8000", "/api")
+  baseURL: "".concat("http://kosta.local", "/api")
 }));
 
 /***/ }),
@@ -121368,7 +121368,9 @@ var ErrorBoundary = /*#__PURE__*/function (_Component) {
 
   _createClass(ErrorBoundary, [{
     key: "componentDidCatch",
-    value: function componentDidCatch(error, info) {//this.logErrorToServices(error.toString(), info.componentStack);
+    value: function componentDidCatch(error, info) {
+      //this.logErrorToServices(error.toString(), info.componentStack);
+      console.log(error);
     }
   }, {
     key: "render",
@@ -121672,7 +121674,7 @@ var inviteSlice = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__["createSl
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/skruzic/Documents/Web/kosta/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/stanko/web/kosta/resources/js/app.js */"./resources/js/app.js");
 
 
 /***/ })

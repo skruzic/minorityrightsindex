@@ -81,6 +81,12 @@ class CampaignsController extends Controller
     {
         $invite = Invite::where('token', $token)->firstOrFail();
 
-        return new InviteResource($invite);
+        if ($invite->campaign->locked) {
+            return new InviteResource($invite);
+        } else {
+            abort(403, 'The campaign is not locked for edits.');
+        }
+
+
     }
 }
