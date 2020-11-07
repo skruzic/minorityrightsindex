@@ -69,11 +69,7 @@ class CampaignsController extends Controller
     {
         $campaign = Campaign::findBySlugOrFail($slug);
 
-        if ($campaign->access_type == AccessType::Free) {
-            return new CampaignResource($campaign);
-        } else {
-            return response()->json(['error' => 'error'], 400);
-        }
+        return new CampaignResource($campaign);
     }
 
     /**
