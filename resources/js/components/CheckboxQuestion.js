@@ -21,7 +21,7 @@ const CheckboxQuestion = ({ name, text, input, options, saveFn, ...rest }) => (
                     {options.map((option, idx) => (
                         <div key={idx}>
                             <FormControlLabel
-                                control={<Checkbox color="primary" />}
+                                control={<Checkbox color="secondary" />}
                                 label={option.text}
                                 name={`${name}[${option.value}]`}
                                 value={option.value}

@@ -17,7 +17,7 @@ class CreateQuestionsTable extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
             $table->integer('campaign_id')->unsigned();
-            $table->integer('parent_id')->unsigned()->nullable()->default(0);
+            $table->integer('parent_id')->unsigned()->nullable()->default(null);
             $table->integer('lft')->unsigned()->default(0);
             $table->integer('rgt')->unsigned()->default(0);
             $table->integer('depth')->unsigned()->default(0);

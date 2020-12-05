@@ -103,6 +103,8 @@ const Question = ({
             });
     };
 
+    console.log(question);
+
     return (
         <>
             <LinearProgress

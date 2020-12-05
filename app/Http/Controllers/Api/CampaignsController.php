@@ -75,7 +75,7 @@ class CampaignsController extends Controller
     /**
      * @param $token
      *
-     * @return InviteResource
+     * @return InviteResource|void
      */
     public function findByToken($token)
     {
@@ -85,8 +85,8 @@ class CampaignsController extends Controller
             return new InviteResource($invite);
         } else {
             abort(403, 'The campaign is not locked for edits.');
+
+            return;
         }
-
-
     }
 }

@@ -32,7 +32,7 @@ const LikertQuestionRow = ({
                     <Radio
                         checked={option.value === selectedValue}
                         value={option.value}
-                        color="primary"
+                        color="secondary"
                         onChange={e => {
                             setSelectedValue(parseInt(e.target.value));
                         }}
