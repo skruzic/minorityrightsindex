@@ -11,7 +11,7 @@ const TextQuestion = ({ name, text, questionType, input, ...custom }) => (
             id={name}
             fullWidth
             multiline={questionType === 1}
-            rowsMax={4}
+            rows={4}
             {...input}
             {...custom}
         />

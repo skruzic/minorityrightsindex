@@ -121908,7 +121908,7 @@ var TextQuestion = function TextQuestion(_ref) {
     id: name,
     fullWidth: true,
     multiline: questionType === 1,
-    rowsMax: 4
+    rows: 4
   }, input, custom)));
 };
 
