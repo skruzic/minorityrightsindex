@@ -121285,27 +121285,6 @@ console.log(theme);
 
 /***/ }),
 
-/***/ "./resources/js/components/CampaignFinish.js":
-/*!***************************************************!*\
-  !*** ./resources/js/components/CampaignFinish.js ***!
-  \***************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-
-var CampaignFinish = function CampaignFinish() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Finished");
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (CampaignFinish);
-
-/***/ }),
-
 /***/ "./resources/js/components/CampaignForm.js":
 /*!*************************************************!*\
   !*** ./resources/js/components/CampaignForm.js ***!
@@ -121327,7 +121306,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_step_wizard__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-step-wizard */ "./node_modules/react-step-wizard/dist/react-step-wizard.min.js");
 /* harmony import */ var react_step_wizard__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_step_wizard__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _containers_Question__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../containers/Question */ "./resources/js/containers/Question.js");
-/* harmony import */ var _CampaignFinish__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./CampaignFinish */ "./resources/js/components/CampaignFinish.js");
+/* harmony import */ var _CampaignMessage__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./CampaignMessage */ "./resources/js/components/CampaignMessage.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -121347,7 +121326,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var CampaignForm = function CampaignForm(_ref) {
   var handleSubmit = _ref.handleSubmit,
       saveFn = _ref.saveFn,
-      campaign = _ref.campaign,
+      _ref$campaign = _ref.campaign,
+      questions = _ref$campaign.questions,
+      messages = _ref$campaign.messages,
       classes = _ref.classes,
       page = _ref.page;
 
@@ -121362,17 +121343,23 @@ var CampaignForm = function CampaignForm(_ref) {
     onSubmit: handleSubmit(onSubmit)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_step_wizard__WEBPACK_IMPORTED_MODULE_6___default.a, {
     initialStep: page
-  }, campaign.questions.map(function (q, idx) {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CampaignMessage__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    message: messages.intro,
+    type: "intro"
+  }), questions.map(function (q, idx) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_Question__WEBPACK_IMPORTED_MODULE_7__["default"], {
       key: q.id,
       question: _objectSpread(_objectSpread({}, q), {}, {
         step: idx + 1
       }),
-      conditionalJump: !Object(lodash__WEBPACK_IMPORTED_MODULE_5__["isEmpty"])(q.conditions) && campaign.questions.indexOf(campaign.questions.find(function (item) {
+      conditionalJump: !Object(lodash__WEBPACK_IMPORTED_MODULE_5__["isEmpty"])(q.conditions) && questions.indexOf(questions.find(function (item) {
         return item.id === parseInt(q.conditions[0].question_id);
       })) + 1
     });
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CampaignFinish__WEBPACK_IMPORTED_MODULE_8__["default"], null)));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CampaignMessage__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    message: messages["final"],
+    type: "final"
+  })));
 };
 
 CampaignForm.propTypes = {
@@ -121419,6 +121406,83 @@ var CampaignHeader = function CampaignHeader(_ref) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (CampaignHeader);
+
+/***/ }),
+
+/***/ "./resources/js/components/CampaignMessage.js":
+/*!****************************************************!*\
+  !*** ./resources/js/components/CampaignMessage.js ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
+/* harmony import */ var _material_ui_core_LinearProgress__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/LinearProgress */ "./node_modules/@material-ui/core/esm/LinearProgress/index.js");
+/* harmony import */ var _material_ui_core_Card__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/Card */ "./node_modules/@material-ui/core/esm/Card/index.js");
+/* harmony import */ var _material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/CardContent */ "./node_modules/@material-ui/core/esm/CardContent/index.js");
+/* harmony import */ var _material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/CardActions */ "./node_modules/@material-ui/core/esm/CardActions/index.js");
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/Button */ "./node_modules/@material-ui/core/esm/Button/index.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_8__);
+
+
+
+
+
+
+
+
+
+
+var CampaignMessage = function CampaignMessage(_ref) {
+  var message = _ref.message,
+      type = _ref.type,
+      classes = _ref.classes,
+      nextStep = _ref.nextStep,
+      previousStep = _ref.previousStep;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    className: classes.root
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    dangerouslySetInnerHTML: {
+      __html: message
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    className: classes.actions,
+    disableSpacing: true
+  }, type === 'intro' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    variant: "contained",
+    color: "primary",
+    onClick: nextStep
+  }, "Next"))));
+};
+
+CampaignMessage.propTypes = {
+  message: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired,
+  type: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.oneOf(['intro', 'final']).isRequired
+};
+
+var styles = function styles(theme) {
+  return {
+    root: {
+      display: 'flex',
+      flexDirection: 'column',
+      padding: theme.spacing(1)
+    },
+    actions: {
+      display: 'flex',
+      flexDirection: 'row-reverse',
+      justifyContent: 'space-between'
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["withStyles"])(styles)(CampaignMessage));
 
 /***/ }),
 
@@ -121868,7 +121932,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/CssBaseline */ "./node_modules/@material-ui/core/esm/CssBaseline/index.js");
 /* harmony import */ var _material_ui_core_Container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/Container */ "./node_modules/@material-ui/core/esm/Container/index.js");
 /* harmony import */ var _Campaign__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Campaign */ "./resources/js/containers/Campaign.js");
-/* harmony import */ var _components_CampaignFinish__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/CampaignFinish */ "./resources/js/components/CampaignFinish.js");
+/* harmony import */ var _components_CampaignMessage__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/CampaignMessage */ "./resources/js/components/CampaignMessage.js");
 
 
 
@@ -121892,7 +121956,7 @@ var App = function App(_ref) {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/finished",
     exact: true,
-    component: _components_CampaignFinish__WEBPACK_IMPORTED_MODULE_6__["default"]
+    component: _components_CampaignMessage__WEBPACK_IMPORTED_MODULE_6__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/:slug",
     component: _Campaign__WEBPACK_IMPORTED_MODULE_5__["default"]
@@ -122200,7 +122264,6 @@ var Question = function Question(_ref) {
     });
   };
 
-  console.log(question);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_LinearProgress__WEBPACK_IMPORTED_MODULE_8__["default"], {
     variant: "determinate",
     value: (currentStep - 1) / totalSteps * 100

@@ -19,6 +19,7 @@ class CreateCampaignsTable extends Migration
             $table->string('slug');
             $table->text('description')->nullable();
             $table->boolean('locked')->default(false);
+            $table->text('messages')->nullable();
             $table->timestamps();
         });
     }

@@ -6,9 +6,15 @@ import { compose } from 'redux';
 import { isEmpty } from 'lodash';
 import StepWizard from 'react-step-wizard';
 import Question from '../containers/Question';
-import CampaignFinish from './CampaignFinish';
+import CampaignMessage from './CampaignMessage';
 
-const CampaignForm = ({ handleSubmit, saveFn, campaign, classes, page }) => {
+const CampaignForm = ({
+    handleSubmit,
+    saveFn,
+    campaign: { questions, messages },
+    classes,
+    page
+}) => {
     const onSubmit = formValues => {
         saveFn({
             campaign_id: campaign.id,
@@ -19,14 +25,15 @@ const CampaignForm = ({ handleSubmit, saveFn, campaign, classes, page }) => {
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <StepWizard initialStep={page}>
-                {campaign.questions.map((q, idx) => (
+                <CampaignMessage message={messages.intro} type="intro" />
+                {questions.map((q, idx) => (
                     <Question
                         key={q.id}
                         question={{ ...q, step: idx + 1 }}
                         conditionalJump={
                             !isEmpty(q.conditions) &&
-                            campaign.questions.indexOf(
-                                campaign.questions.find(item => {
+                            questions.indexOf(
+                                questions.find(item => {
                                     return (
                                         item.id ===
                                         parseInt(q.conditions[0].question_id)
@@ -36,7 +43,7 @@ const CampaignForm = ({ handleSubmit, saveFn, campaign, classes, page }) => {
                         }
                     />
                 ))}
-                <CampaignFinish />
+                <CampaignMessage message={messages.final} type="final" />
             </StepWizard>
         </form>
     );

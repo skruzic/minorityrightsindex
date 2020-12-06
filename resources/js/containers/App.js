@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Campaign from './Campaign';
-import CampaignFinish from '../components/CampaignFinish';
+import CampaignMessage from '../components/CampaignMessage';
 
 const App = ({ classes }) => (
     <div className={classes.root}>
@@ -12,7 +12,7 @@ const App = ({ classes }) => (
         <Container component="main" className={classes.main} maxWidth="md">
             <Switch>
                 <Route path="/" exact component={null} />
-                <Route path="/finished" exact component={CampaignFinish} />
+                <Route path="/finished" exact component={CampaignMessage} />
                 <Route path="/:slug" component={Campaign} />
             </Switch>
         </Container>
