@@ -121269,18 +121269,36 @@ var theme = Object(_material_ui_core__WEBPACK_IMPORTED_MODULE_0__["createMuiThem
       lineHeight: 1.2,
       marginBottom: '0.5rem'
     }
-  }
-  /*overrides: {
-      MuiCard: {
-          root: {
-              border: '1px solid rgba(0,40,100,0.12)',
-              boxShadow: ''
-          }
+  },
+  overrides: {
+    MuiCard: {
+      root: {
+        display: 'flex',
+        flexDirection: 'column'
       }
-  }*/
-
+    },
+    MuiCardActions: {
+      root: {
+        display: 'flex',
+        flexDirection: 'row-reverse',
+        justifyContent: 'space-between'
+      }
+    },
+    MuiLinearProgress: {
+      root: {
+        height: 10,
+        borderRadius: 5
+      },
+      colorPrimary: {
+        backgroundColor: '#abbcd5'
+      },
+      bar: {
+        borderRadius: 5,
+        backgroundColor: '#abbcd5'
+      }
+    }
+  }
 });
-console.log(theme);
 /* harmony default export */ __webpack_exports__["default"] = (theme);
 
 /***/ }),
@@ -121422,14 +121440,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
-/* harmony import */ var _material_ui_core_LinearProgress__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/LinearProgress */ "./node_modules/@material-ui/core/esm/LinearProgress/index.js");
-/* harmony import */ var _material_ui_core_Card__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/Card */ "./node_modules/@material-ui/core/esm/Card/index.js");
-/* harmony import */ var _material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/CardContent */ "./node_modules/@material-ui/core/esm/CardContent/index.js");
-/* harmony import */ var _material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/CardActions */ "./node_modules/@material-ui/core/esm/CardActions/index.js");
-/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/Button */ "./node_modules/@material-ui/core/esm/Button/index.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _material_ui_core_Card__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Card */ "./node_modules/@material-ui/core/esm/Card/index.js");
+/* harmony import */ var _material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/CardContent */ "./node_modules/@material-ui/core/esm/CardContent/index.js");
+/* harmony import */ var _material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/CardActions */ "./node_modules/@material-ui/core/esm/CardActions/index.js");
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/Button */ "./node_modules/@material-ui/core/esm/Button/index.js");
+/* harmony import */ var _ProgressWithLabel__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./ProgressWithLabel */ "./resources/js/components/ProgressWithLabel.js");
+/* harmony import */ var _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../slices/campaignsSlice */ "./resources/js/slices/campaignsSlice.js");
 
 
 
@@ -121445,20 +121462,29 @@ var CampaignMessage = function CampaignMessage(_ref) {
       type = _ref.type,
       classes = _ref.classes,
       nextStep = _ref.nextStep,
-      previousStep = _ref.previousStep;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    className: classes.root
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      previousStep = _ref.previousStep,
+      currentStep = _ref.currentStep,
+      totalSteps = _ref.totalSteps,
+      invite = _ref.invite,
+      saveResponse = _ref.saveResponse;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ProgressWithLabel__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    value: (currentStep - 1) / (totalSteps - 1) * 100
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_3__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_4__["default"], {
     dangerouslySetInnerHTML: {
       __html: message
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    className: classes.actions,
+  }), type === 'intro' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_5__["default"], {
     disableSpacing: true
-  }, type === 'intro' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_6__["default"], {
     variant: "contained",
     color: "primary",
-    onClick: nextStep
+    onClick: function onClick() {
+      nextStep();
+      saveResponse({
+        invite_id: invite.id,
+        page: currentStep + 1
+      });
+    }
   }, "Next"))));
 };
 
@@ -121467,22 +121493,15 @@ CampaignMessage.propTypes = {
   type: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.oneOf(['intro', 'final']).isRequired
 };
 
-var styles = function styles(theme) {
+var mapStateToProps = function mapStateToProps(state) {
   return {
-    root: {
-      display: 'flex',
-      flexDirection: 'column',
-      padding: theme.spacing(1)
-    },
-    actions: {
-      display: 'flex',
-      flexDirection: 'row-reverse',
-      justifyContent: 'space-between'
-    }
+    invite: state.invite.data
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["withStyles"])(styles)(CampaignMessage));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, {
+  saveResponse: _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_8__["saveResponse"]
+})(CampaignMessage));
 
 /***/ }),
 
@@ -121788,6 +121807,52 @@ var styles = {
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_4__["compose"])(Object(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["withStyles"])(styles), Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(null, {
   saveResponse: _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_10__["saveResponse"]
 }))(LikertQuestionRow));
+
+/***/ }),
+
+/***/ "./resources/js/components/ProgressWithLabel.js":
+/*!******************************************************!*\
+  !*** ./resources/js/components/ProgressWithLabel.js ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _material_ui_core_Box__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/Box */ "./node_modules/@material-ui/core/esm/Box/index.js");
+/* harmony import */ var _material_ui_core_LinearProgress__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/LinearProgress */ "./node_modules/@material-ui/core/esm/LinearProgress/index.js");
+/* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/Typography */ "./node_modules/@material-ui/core/esm/Typography/index.js");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+
+
+
+
+
+
+var ProgressWithLabel = function ProgressWithLabel(props) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    display: "flex",
+    alignItems: "center"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    width: "100%",
+    mr: 1
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_LinearProgress__WEBPACK_IMPORTED_MODULE_3__["default"], _extends({
+    variant: "determinate"
+  }, props))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_2__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    variant: "body2",
+    color: "textSecondary"
+  }, "".concat(Math.round(props.value), "%"))));
+};
+
+ProgressWithLabel.propTypes = {
+  value: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number.isRequired
+};
+/* harmony default export */ __webpack_exports__["default"] = (ProgressWithLabel);
 
 /***/ }),
 
@@ -122159,6 +122224,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_14__);
 /* harmony import */ var _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../slices/campaignsSlice */ "./resources/js/slices/campaignsSlice.js");
 /* harmony import */ var _components_LikertQuestion__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../components/LikertQuestion */ "./resources/js/components/LikertQuestion.js");
+/* harmony import */ var _components_ProgressWithLabel__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../components/ProgressWithLabel */ "./resources/js/components/ProgressWithLabel.js");
+
 
 
 
@@ -122260,13 +122327,13 @@ var Question = function Question(_ref) {
       invite_id: invite.id,
       question_id: question.id,
       answer: value,
-      page: currentStep + 1
+      page: currentStep + 1 //page: currentStep
+
     });
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_LinearProgress__WEBPACK_IMPORTED_MODULE_8__["default"], {
-    variant: "determinate",
-    value: (currentStep - 1) / totalSteps * 100
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_ProgressWithLabel__WEBPACK_IMPORTED_MODULE_17__["default"], {
+    value: (currentStep - 1) / (totalSteps - 1) * 100
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_7__["default"], {
     className: classes.root
   }, renderQuestion(question), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_9__["default"], {

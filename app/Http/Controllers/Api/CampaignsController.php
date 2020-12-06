@@ -34,12 +34,14 @@ class CampaignsController extends Controller
      */
     public function store(Request $request)
     {
-        $resp = Response::updateOrCreate([
-            'invite_id'   => $request->invite_id,
-            'question_id' => $request->question_id,
-        ], [
-            'answer' => is_array($request->answer) ? json_encode($request->answer) : $request->answer,
-        ]);
+        if ($request->has('question_id')) {
+            $resp = Response::updateOrCreate([
+                'invite_id'   => $request->invite_id,
+                'question_id' => $request->question_id,
+            ], [
+                'answer' => is_array($request->answer) ? json_encode($request->answer) : $request->answer,
+            ]);
+        }
 
         $inv       = Invite::findOrFail($request->invite_id);
         $inv->page = $request->page;

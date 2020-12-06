@@ -94,17 +94,35 @@ const theme = createMuiTheme({
             lineHeight: 1.2,
             marginBottom: '0.5rem'
         }
-    }
-    /*overrides: {
+    },
+    overrides: {
         MuiCard: {
             root: {
-                border: '1px solid rgba(0,40,100,0.12)',
-                boxShadow: ''
+                display: 'flex',
+                flexDirection: 'column'
+            }
+        },
+        MuiCardActions: {
+            root: {
+                display: 'flex',
+                flexDirection: 'row-reverse',
+                justifyContent: 'space-between'
+            }
+        },
+        MuiLinearProgress: {
+            root: {
+                height: 10,
+                borderRadius: 5
+            },
+            colorPrimary: {
+                backgroundColor: '#abbcd5'
+            },
+            bar: {
+                borderRadius: 5,
+                backgroundColor: '#abbcd5'
             }
         }
-    }*/
+    }
 });
-
-console.log(theme);
 
 export default theme;

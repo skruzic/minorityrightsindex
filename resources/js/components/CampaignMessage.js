@@ -1,34 +1,47 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core';
-import LinearProgress from '@material-ui/core/LinearProgress';
+import { connect } from 'react-redux';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
-import { isEmpty } from 'lodash';
+import ProgressWithLabel from './ProgressWithLabel';
+import { saveResponse } from '../slices/campaignsSlice';
 
 const CampaignMessage = ({
     message,
     type,
     classes,
     nextStep,
-    previousStep
+    previousStep,
+    currentStep,
+    totalSteps,
+    invite,
+    saveResponse
 }) => (
     <>
-        <Card className={classes.root}>
+        <ProgressWithLabel
+            value={((currentStep - 1) / (totalSteps - 1)) * 100}
+        />
+        <Card>
             <CardContent dangerouslySetInnerHTML={{ __html: message }} />
-            <CardActions className={classes.actions} disableSpacing={true}>
-                {type === 'intro' && (
+            {type === 'intro' && (
+                <CardActions disableSpacing={true}>
                     <Button
                         variant="contained"
                         color="primary"
-                        onClick={nextStep}
+                        onClick={() => {
+                            nextStep();
+                            saveResponse({
+                                invite_id: invite.id,
+                                page: currentStep + 1
+                            });
+                        }}
                     >
                         Next
                     </Button>
-                )}
-            </CardActions>
+                </CardActions>
+            )}
         </Card>
     </>
 );
@@ -38,17 +51,10 @@ CampaignMessage.propTypes = {
     type: PropTypes.oneOf(['intro', 'final']).isRequired
 };
 
-const styles = theme => ({
-    root: {
-        display: 'flex',
-        flexDirection: 'column',
-        padding: theme.spacing(1)
-    },
-    actions: {
-        display: 'flex',
-        flexDirection: 'row-reverse',
-        justifyContent: 'space-between'
-    }
-});
+const mapStateToProps = state => {
+    return {
+        invite: state.invite.data
+    };
+};
 
-export default withStyles(styles)(CampaignMessage);
+export default connect(mapStateToProps, { saveResponse })(CampaignMessage);

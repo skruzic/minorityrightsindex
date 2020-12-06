@@ -15,6 +15,7 @@ import Button from '@material-ui/core/Button';
 import { isEmpty } from 'lodash';
 import { saveResponse } from '../slices/campaignsSlice';
 import LikertQuestion from '../components/LikertQuestion';
+import ProgressWithLabel from '../components/ProgressWithLabel';
 
 const Question = ({
     question,
@@ -100,14 +101,14 @@ const Question = ({
                 question_id: question.id,
                 answer: value,
                 page: currentStep + 1
+                //page: currentStep
             });
     };
 
     return (
         <>
-            <LinearProgress
-                variant="determinate"
-                value={((currentStep - 1) / totalSteps) * 100}
+            <ProgressWithLabel
+                value={((currentStep - 1) / (totalSteps - 1)) * 100}
             />
             <Card className={classes.root}>
                 {renderQuestion(question)}
