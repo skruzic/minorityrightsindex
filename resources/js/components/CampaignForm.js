@@ -24,7 +24,7 @@ const CampaignForm = ({
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <StepWizard initialStep={page}>
+            <StepWizard initialStep={page} isHashEnabled={true}>
                 <CampaignMessage message={messages.intro} type="intro" />
                 {questions.map((q, idx) => (
                     <Question
@@ -41,6 +41,7 @@ const CampaignForm = ({
                                 })
                             ) + 1
                         }
+                        hashKey={q.code}
                     />
                 ))}
                 <CampaignMessage message={messages.final} type="final" />

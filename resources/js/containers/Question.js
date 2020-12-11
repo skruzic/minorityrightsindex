@@ -28,7 +28,8 @@ const Question = ({
     conditionalJump,
     value,
     invite,
-    saveResponse
+    saveResponse,
+    history
 }) => {
     const renderQuestion = question => {
         switch (question.type) {
@@ -147,7 +148,13 @@ const Question = ({
                         </Button>
                     )}
                     {currentStep !== 1 && (
-                        <Button variant="contained" color="primary">
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={() => {
+                                history.goBack();
+                            }}
+                        >
                             Back
                         </Button>
                     )}

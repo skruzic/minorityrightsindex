@@ -121360,7 +121360,8 @@ var CampaignForm = function CampaignForm(_ref) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
     onSubmit: handleSubmit(onSubmit)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_step_wizard__WEBPACK_IMPORTED_MODULE_6___default.a, {
-    initialStep: page
+    initialStep: page,
+    isHashEnabled: true
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CampaignMessage__WEBPACK_IMPORTED_MODULE_8__["default"], {
     message: messages.intro,
     type: "intro"
@@ -121372,7 +121373,8 @@ var CampaignForm = function CampaignForm(_ref) {
       }),
       conditionalJump: !Object(lodash__WEBPACK_IMPORTED_MODULE_5__["isEmpty"])(q.conditions) && questions.indexOf(questions.find(function (item) {
         return item.id === parseInt(q.conditions[0].question_id);
-      })) + 1
+      })) + 1,
+      hashKey: q.code
     });
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CampaignMessage__WEBPACK_IMPORTED_MODULE_8__["default"], {
     message: messages["final"],
@@ -122268,7 +122270,8 @@ var Question = function Question(_ref) {
       conditionalJump = _ref.conditionalJump,
       value = _ref.value,
       invite = _ref.invite,
-      saveResponse = _ref.saveResponse;
+      saveResponse = _ref.saveResponse,
+      history = _ref.history;
 
   var renderQuestion = function renderQuestion(question) {
     switch (question.type) {
@@ -122375,7 +122378,10 @@ var Question = function Question(_ref) {
     }
   }, "Finish"), currentStep !== 1 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_13__["default"], {
     variant: "contained",
-    color: "primary"
+    color: "primary",
+    onClick: function onClick() {
+      history.goBack();
+    }
   }, "Back"))));
 };
 
