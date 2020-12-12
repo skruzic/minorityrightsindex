@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Enums\AccessType;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CampaignResource;
 use App\Http\Resources\InviteResource;
@@ -20,7 +19,7 @@ class CampaignsController extends Controller
      *
      * @return ResourceCollection
      */
-    public function index()
+    public function index(): ResourceCollection
     {
         return CampaignResource::collection(Campaign::all());
     }
@@ -28,11 +27,11 @@ class CampaignsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
         if ($request->has('question_id')) {
             $resp = Response::updateOrCreate([
@@ -57,7 +56,7 @@ class CampaignsController extends Controller
      *
      * @return CampaignResource
      */
-    public function show(Campaign $campaign)
+    public function show(Campaign $campaign): CampaignResource
     {
         return new CampaignResource($campaign);
     }
@@ -65,9 +64,9 @@ class CampaignsController extends Controller
     /**
      * @param $slug
      *
-     * @return CampaignResource|JsonResponse
+     * @return CampaignResource
      */
-    public function findBySlug($slug)
+    public function findBySlug($slug): CampaignResource
     {
         $campaign = Campaign::findBySlugOrFail($slug);
 
@@ -79,7 +78,7 @@ class CampaignsController extends Controller
      *
      * @return InviteResource|void
      */
-    public function findByToken($token)
+    public function findByToken($token): ?InviteResource
     {
         $invite = Invite::where('token', $token)->firstOrFail();
 
@@ -88,7 +87,7 @@ class CampaignsController extends Controller
         } else {
             abort(403, 'The campaign is not locked for edits.');
 
-            return;
+            return null;
         }
     }
 }
