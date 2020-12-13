@@ -6,6 +6,8 @@
 // This route file is loaded automatically by Backpack\Base.
 // Routes you generate using Backpack\Generators will be placed here.
 
+use App\Http\Controllers\Admin\CampaignCrudController;
+
 Route::group([
     'prefix'     => config('backpack.base.route_prefix', 'admin'),
     'middleware' => ['web', config('backpack.base.middleware_key', 'admin')],
@@ -13,6 +15,7 @@ Route::group([
 ], function () { // custom admin routes
     Route::crud('user', 'UserCrudController');
     Route::crud('campaign', 'CampaignCrudController');
+    Route::get('campaign/{id}/lock', [CampaignCrudController::class, 'lock']);
     //CRUD::resource('section', 'SectionCrudController');
 
     Route::group(['prefix' => 'campaign/{campaign_id}'], function () {

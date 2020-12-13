@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CampaignCrudController;
 use App\Http\Controllers\Api\AnswersController;
 use App\Http\Controllers\Api\CampaignsController;
 use App\Http\Controllers\Api\MenuController;
@@ -33,4 +34,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::apiResource('campaign', CampaignsController::class)->only(['index', 'store', 'show']);
 Route::get('campaign/slug/{slug}', [CampaignsController::class, 'findBySlug']);
 Route::get('campaign/token/{token}', [CampaignsController::class, 'findByToken']);
+
 Route::get('menu', MenuController::class);

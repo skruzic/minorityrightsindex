@@ -13,6 +13,7 @@ use Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use Illuminate\Http\RedirectResponse;
 
 /**
  * Class CampaignCrudController
@@ -31,6 +32,7 @@ class CampaignCrudController extends CrudController
 
         //CRUD::addButtonFromView('line', 'campaign_sections', 'campaign_sections', 'beginning');
         CRUD::addButtonFromView('line', 'campaign_invites', 'campaign_invites');
+        CRUD::addButtonFromView('line', 'campaign_lock', 'campaign_lock');
         CRUD::addButtonFromView('line', 'download_answers', 'export_csv', 'end');
     }
 
@@ -166,5 +168,23 @@ class CampaignCrudController extends CrudController
         }
     }
 
+    /**
+     * Set campaign to locked or unlocked for editing, with respect to current value.
+     *
+     * @return RedirectResponse
+     */
+    public function lock(): RedirectResponse
+    {
+        $model = Campaign::find(CRUD::getCurrentEntryId());
 
+        if ($model->locked) {
+            $model->locked = false;
+        } else {
+            $model->locked = true;
+        }
+
+        $model->save();
+
+        return redirect()->back();
+    }
 }
