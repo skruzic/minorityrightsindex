@@ -60,6 +60,13 @@ class InviteCrudController extends CrudController
                 'label' => 'Pristupni token',
             ],
         ]);
+
+        $this->data['breadcrumbs'] = [
+            trans('backpack::crud.admin') => backpack_url('dashboard'),
+            'Campaigns'                   => backpack_url('campaign'),
+            'Invites'                     => backpack_url(CRUD::getRoute()),
+            trans('backpack::crud.list')  => false,
+        ];
     }
 
     /**
@@ -94,6 +101,13 @@ class InviteCrudController extends CrudController
                 ],
             ],
         ]);
+
+        $this->data['breadcrumbs'] = [
+            trans('backpack::crud.admin') => backpack_url('dashboard'),
+            'Campaigns'                   => backpack_url('campaign'),
+            'Invites'                     => backpack_url(CRUD::getRoute()),
+            trans('backpack::crud.add')   => false,
+        ];
     }
 
     /**
@@ -105,5 +119,12 @@ class InviteCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+
+        $this->data['breadcrumbs'] = [
+            trans('backpack::crud.admin') => backpack_url('dashboard'),
+            'Campaigns'                   => backpack_url('campaign'),
+            'Invites'                     => backpack_url(CRUD::getRoute()),
+            trans('backpack::crud.edit')  => false,
+        ];
     }
 }
