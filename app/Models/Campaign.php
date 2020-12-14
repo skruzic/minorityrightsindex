@@ -31,6 +31,11 @@ class Campaign extends Model
         //return $this->hasMany(Question::class)->orderBy('lft')->whereDoesntHave('children');
     }
 
+    public function leaves()
+    {
+        return $this->hasMany(Question::class)->orderBy('lft')->whereRaw("lft = rgt-1");
+    }
+
     public function responses()
     {
         return $this->hasManyThrough(Response::class, Invite::class);

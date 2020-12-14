@@ -18,10 +18,14 @@ namespace App\Models{
  * @property string $title
  * @property string $slug
  * @property string|null $description
+ * @property int $locked
+ * @property array|null $messages
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Invite[] $invites
  * @property-read int|null $invites_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Question[] $leaves
+ * @property-read int|null $leaves_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Question[] $questions
  * @property-read int|null $questions_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Response[] $responses
@@ -33,6 +37,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Campaign whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Campaign whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Campaign whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Campaign whereLocked($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Campaign whereMessages($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Campaign whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Campaign whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Campaign whereUpdatedAt($value)
