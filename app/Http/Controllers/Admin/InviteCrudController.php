@@ -37,7 +37,7 @@ class InviteCrudController extends CrudController
 
         CRUD::setModel(Invite::class);
         CRUD::setRoute(config('backpack.base.route_prefix').'/campaign/'.$this->campaign_id.'/invite');
-        //CRUD::setRoute('admin/campaign/'.$this->campaign_id.'/section/'.$this->section_id.'/question');
+        CRUD::addClause('where', 'campaign_id', $this->campaign_id);
         CRUD::setEntityNameStrings('invite', 'invites');
     }
 
