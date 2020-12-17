@@ -165,7 +165,7 @@ class QuestionCrudController extends CrudController
     public function setupReorderOperation()
     {
         CRUD::set('reorder.label', 'text');
-        CRUD::set('reorder.max_lavel', 1);
+        CRUD::set('reorder.max_level', 2);
     }
 
     public function download()
