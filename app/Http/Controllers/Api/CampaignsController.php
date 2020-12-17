@@ -85,7 +85,7 @@ class CampaignsController extends Controller
         if ($invite->campaign->locked) {
             return new InviteResource($invite);
         } else {
-            abort(403, 'The campaign is not locked for edits.');
+            abort(403, 'The campaign is currently not accessible.');
 
             return null;
         }

@@ -11,6 +11,7 @@ import queryString from 'query-string';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import CampaignForm from '../components/CampaignForm';
 import CampaignHeader from '../components/CampaignHeader';
+import ErrorMessage from '../errors/ErrorMessage';
 
 class Campaign extends Component {
     componentDidMount() {
@@ -25,29 +26,36 @@ class Campaign extends Component {
     }
 
     render() {
-        const { campaign, responses, page, classes } = this.props;
+        const {
+            campaign,
+            responses,
+            page,
+            classes,
+            error,
+            loading
+        } = this.props;
 
-        if (this.props.loading === 'pending') {
+        if (loading === 'pending') {
             return <CircularProgress />;
-        } else if (this.props.error) {
-            return <h1>Došlo je do greške</h1>;
+        } else if (error) {
+            return <ErrorMessage message={error.message} />;
+        } else {
+            return (
+                <div className={classes.root}>
+                    <CampaignHeader title={campaign.title} />
+                    <CampaignForm
+                        campaign={campaign}
+                        saveFn={this.props.saveCampaignAnswers}
+                        initialValues={responses.reduce((obj, item) => {
+                            return Object.assign(obj, {
+                                [item.question.code]: item.answer
+                            });
+                        }, {})}
+                        page={page}
+                    />
+                </div>
+            );
         }
-
-        return (
-            <div className={classes.root}>
-                <CampaignHeader title={campaign.title} />
-                <CampaignForm
-                    campaign={campaign}
-                    saveFn={this.props.saveCampaignAnswers}
-                    initialValues={responses.reduce((obj, item) => {
-                        return Object.assign(obj, {
-                            [item.question.code]: item.answer
-                        });
-                    }, {})}
-                    page={page}
-                />
-            </div>
-        );
     }
 }
 

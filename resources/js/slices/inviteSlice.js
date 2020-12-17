@@ -3,10 +3,14 @@ import api from '../app/api';
 
 export const fetchInviteByToken = createAsyncThunk(
     'invite/fetchByTokenStatus',
-    async (token, thunkAPI) => {
-        const response = await api.get(`/campaign/token/${token}`);
+    async (token, { rejectWithValue }) => {
+        try {
+            const response = await api.get(`/campaign/token/${token}`);
 
-        return response.data;
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.response.data);
+        }
     }
 );
 
@@ -22,7 +26,12 @@ export const inviteSlice = createSlice({
             state.loading = 'idle';
             state.data = action.payload;
         },
-    },
+        [fetchInviteByToken.rejected]: (state, action) => {
+            state.loading = 'idle';
+            state.error = action.payload;
+            state.data = {};
+        }
+    }
 });
 
 export default inviteSlice.reducer;
