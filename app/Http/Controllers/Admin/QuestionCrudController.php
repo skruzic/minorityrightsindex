@@ -49,6 +49,13 @@ class QuestionCrudController extends CrudController
         if ($campaign->locked) {
             CRUD::denyAccess(['create', 'update', 'delete', 'reorder']);
         }
+
+        $this->data['breadcrumbs'] = [
+            trans('backpack::crud.admin') => backpack_url('dashboard'),
+            'Campaigns'                   => backpack_url('campaign'),
+            'Questions'                   => backpack_url('campaign/'.$this->campaign_id.'/question'),
+            trans('backpack::crud.list')  => true,
+        ];
     }
 
     protected function fetchOptionGroup()
@@ -84,6 +91,13 @@ class QuestionCrudController extends CrudController
                 'model'     => 'App\Models\OptionGroup',
             ],
         ]);
+
+        $this->data['breadcrumbs'] = [
+            trans('backpack::crud.admin') => backpack_url('dashboard'),
+            'Campaigns'                   => backpack_url('campaign'),
+            'Questions'                   => backpack_url('campaign/'.$this->campaign_id.'/question'),
+            trans('backpack::crud.list')  => false,
+        ];
     }
 
     protected function setupCreateOperation()
@@ -152,6 +166,13 @@ class QuestionCrudController extends CrudController
                 'tab'     => 'Conditionals',
             ],
         ]);
+
+        $this->data['breadcrumbs'] = [
+            trans('backpack::crud.admin') => backpack_url('dashboard'),
+            'Campaigns'                   => backpack_url('campaign'),
+            'Questions'                   => backpack_url('campaign/'.$this->campaign_id.'/question'),
+            trans('backpack::crud.add')   => false,
+        ];
     }
 
     protected function setupUpdateOperation()
@@ -160,6 +181,13 @@ class QuestionCrudController extends CrudController
 
         // Micem polje za upload CSV-a kod updejta (mjenjanja postavki)
         CRUD::removeField('csv');
+
+        $this->data['breadcrumbs'] = [
+            trans('backpack::crud.admin') => backpack_url('dashboard'),
+            'Campaigns'                   => backpack_url('campaign'),
+            'Questions'                   => backpack_url('campaign/'.$this->campaign_id.'/question'),
+            trans('backpack::crud.edit')  => false,
+        ];
     }
 
     public function setupReorderOperation()
