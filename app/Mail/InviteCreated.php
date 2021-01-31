@@ -12,12 +12,12 @@ class InviteCreated extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public Invite $invite;
+    public $invite;
 
     /**
      * Create a new message instance.
      *
-     * @return void
+     * @param  Invite  $invite
      */
     public function __construct(Invite $invite)
     {
