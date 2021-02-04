@@ -65,6 +65,8 @@ class QuestionCrudController extends CrudController
 
     protected function setupListOperation()
     {
+        CRUD::setDefaultPageLength(50);
+
         CRUD::addColumns([
             [
                 'name'  => 'code',
@@ -89,6 +91,14 @@ class QuestionCrudController extends CrudController
                 'entity'    => 'options',
                 'attribute' => 'name',
                 'model'     => 'App\Models\OptionGroup',
+            ],
+            [
+                'name'     => 'conditions',
+                'label'    => 'Condition',
+                'type'     => 'closure',
+                'function' => function ($entry) {
+                    return boolval(! empty($entry->conditions)) ? 'True' : 'False';
+                },
             ],
         ]);
 
