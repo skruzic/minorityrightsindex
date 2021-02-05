@@ -29,7 +29,8 @@ const Question = ({
     value,
     invite,
     saveResponse,
-    history
+    history,
+    saveFn
 }) => {
     const renderQuestion = question => {
         switch (question.type) {
@@ -97,7 +98,7 @@ const Question = ({
     const handleSave = () => {
         // Ne piši ništa ako pitanje ima children pitanja (Likert)
         question.type !== 4 &&
-            saveResponse({
+            saveFn({
                 invite_id: invite.id,
                 question_id: question.id,
                 answer: value,

@@ -42,6 +42,7 @@ const CampaignForm = ({
                             ) + 1
                         }
                         hashKey={q.code}
+                        saveFn={saveFn}
                     />
                 ))}
                 <CampaignMessage message={messages.final} type="final" />
@@ -51,7 +52,7 @@ const CampaignForm = ({
 };
 
 CampaignForm.propTypes = {
-    saveFn: PropTypes.func.isRequired,
+    saveFn: PropTypes.func,
     campaign: PropTypes.object.isRequired
 };
 

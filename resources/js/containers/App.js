@@ -12,8 +12,12 @@ const App = ({ classes }) => (
         <Container component="main" className={classes.main} maxWidth="md">
             <Switch>
                 <Route path="/" exact component={null} />
-                <Route path="/finished" exact component={CampaignMessage} />
-                <Route path="/:slug" component={Campaign} />
+                <Route
+                    path="/campaign/finished"
+                    exact
+                    component={CampaignMessage}
+                />
+                <Route path="/campaign/:slug" component={Campaign} />
             </Switch>
         </Container>
     </div>

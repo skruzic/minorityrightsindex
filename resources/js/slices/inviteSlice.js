@@ -14,6 +14,19 @@ export const fetchInviteByToken = createAsyncThunk(
     }
 );
 
+export const fetchInviteWithoutToken = createAsyncThunk(
+    'invite/fetchByTokenStatus',
+    async (slug, { rejectWithValue }) => {
+        try {
+            const response = await api.get(`/campaign/slug/${slug}`);
+
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.response.data);
+        }
+    }
+);
+
 export const inviteSlice = createSlice({
     name: 'invite',
     initialState: { data: {}, loading: 'pending', error: null },
@@ -27,6 +40,15 @@ export const inviteSlice = createSlice({
             state.data = action.payload;
         },
         [fetchInviteByToken.rejected]: (state, action) => {
+            state.loading = 'idle';
+            state.error = action.payload;
+            state.data = {};
+        },
+        [fetchInviteWithoutToken.fulfilled]: (state, action) => {
+            state.loading = 'idle';
+            state.data = action.payload;
+        },
+        [fetchInviteWithoutToken.rejected]: (state, action) => {
             state.loading = 'idle';
             state.error = action.payload;
             state.data = {};

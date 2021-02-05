@@ -90,4 +90,19 @@ class CampaignsController extends Controller
             return null;
         }
     }
+
+    public function findWithoutToken($slug): ?InviteResource
+    {
+        $invite = Invite::whereHas('campaign', function ($q) use ($slug) {
+            $q->where('slug', $slug);
+        })->firstOrFail();
+
+        if ($invite->campaign->locked) {
+            return new InviteResource($invite);
+        } else {
+            abort(403, 'The campaign is currently not accessible.');
+
+            return null;
+        }
+    }
 }
