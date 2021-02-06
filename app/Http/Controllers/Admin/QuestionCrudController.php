@@ -119,7 +119,7 @@ class QuestionCrudController extends CrudController
                 'name'  => 'code',
                 'label' => 'Code',
                 'type'  => 'text',
-                'hint'  => 'Identification code and CSV column name for this question. Should be unique in the campaign.',
+                'hint'  => 'Identification code and CSV column name for this question. Should be unique in the campaign. <i>Can contain only alphanumeric characters, dashes and underscores.</i>',
                 'tab'   => 'General',
             ],
             [
