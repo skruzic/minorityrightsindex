@@ -17,30 +17,14 @@ import CampaignHeader from '../components/CampaignHeader';
 import ErrorMessage from '../errors/ErrorMessage';
 
 class Campaign extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            dry_run: false
-        };
-    }
-
     componentDidMount() {
         const qs = queryString.parse(this.props.location.search);
 
-        if (qs.dry_run) {
-            this.setState({ dry_run: true });
-            this.props.fetchInviteWithoutToken(this.props.match.params.slug);
-        } else {
-            this.setState({ dry_run: false });
+        if (qs.token) {
             this.props.fetchInviteByToken(qs.token);
+        } else {
+            this.props.fetchInviteWithoutToken(this.props.match.params.slug);
         }
-
-        /*if (qs.token && this.state.dry_run === false) {
-            this.props.fetchInviteByToken(qs.token);
-        } else {
-            this.props.fetchInviteWithoutToken(this.props.match.params.slug);
-        }*/
     }
 
     render() {
@@ -53,8 +37,6 @@ class Campaign extends Component {
             loading
         } = this.props;
 
-        const { dry_run } = this.state;
-
         if (loading === 'pending') {
             return <CircularProgress />;
         } else if (error) {
@@ -65,11 +47,7 @@ class Campaign extends Component {
                     <CampaignHeader title={campaign.title} />
                     <CampaignForm
                         campaign={campaign}
-                        saveFn={
-                            dry_run === true
-                                ? null
-                                : this.props.saveCampaignAnswers
-                        }
+                        saveFn={this.props.saveCampaignAnswers}
                         initialValues={responses.reduce((obj, item) => {
                             return Object.assign(obj, {
                                 [item.question.code]: item.answer

@@ -66,11 +66,17 @@ class CampaignsController extends Controller
      *
      * @return CampaignResource
      */
-    public function findBySlug($slug): CampaignResource
+    public function findBySlug($slug): ?CampaignResource
     {
         $campaign = Campaign::findBySlugOrFail($slug);
 
-        return new CampaignResource($campaign);
+        if (!$campaign->locked) {
+            return new CampaignResource($campaign);
+        } else {
+            abort(403, 'The campaign is currently open. To test it, please lock it.');
+
+            return null;
+        }
     }
 
     /**
@@ -81,21 +87,6 @@ class CampaignsController extends Controller
     public function findByToken($token): ?InviteResource
     {
         $invite = Invite::where('token', $token)->firstOrFail();
-
-        if ($invite->campaign->locked) {
-            return new InviteResource($invite);
-        } else {
-            abort(403, 'The campaign is currently not accessible.');
-
-            return null;
-        }
-    }
-
-    public function findWithoutToken($slug): ?InviteResource
-    {
-        $invite = Invite::whereHas('campaign', function ($q) use ($slug) {
-            $q->where('slug', $slug);
-        })->firstOrFail();
 
         if ($invite->campaign->locked) {
             return new InviteResource($invite);

@@ -6,18 +6,15 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 import ProgressWithLabel from './ProgressWithLabel';
-import { saveResponse } from '../slices/campaignsSlice';
 
 const CampaignMessage = ({
     message,
     type,
-    classes,
     nextStep,
-    previousStep,
     currentStep,
     totalSteps,
     invite,
-    saveResponse
+    saveFn
 }) => (
     <>
         <ProgressWithLabel
@@ -32,10 +29,11 @@ const CampaignMessage = ({
                         color="primary"
                         onClick={() => {
                             nextStep();
-                            saveResponse({
-                                invite_id: invite.id,
-                                page: currentStep + 1
-                            });
+                            !!saveFn &&
+                                saveFn({
+                                    invite_id: invite.id,
+                                    page: currentStep + 1
+                                });
                         }}
                     >
                         Next
@@ -57,4 +55,4 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps, { saveResponse })(CampaignMessage);
+export default connect(mapStateToProps)(CampaignMessage);

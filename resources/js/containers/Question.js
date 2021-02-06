@@ -6,14 +6,12 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { Field, formValueSelector } from 'redux-form';
 import Card from '@material-ui/core/Card';
-import LinearProgress from '@material-ui/core/LinearProgress';
 import CardActions from '@material-ui/core/CardActions';
 import TextQuestion from '../components/TextQuestion';
 import RadioQuestion from '../components/RadioQuestion';
 import CheckboxQuestion from '../components/CheckboxQuestion';
 import Button from '@material-ui/core/Button';
 import { isEmpty } from 'lodash';
-import { saveResponse } from '../slices/campaignsSlice';
 import LikertQuestion from '../components/LikertQuestion';
 import ProgressWithLabel from '../components/ProgressWithLabel';
 
@@ -86,6 +84,7 @@ const Question = ({
                         questions={question.children}
                         invite={invite}
                         currentStep={currentStep}
+                        saveFn={saveFn}
                     />
                 );
             case 5:
@@ -98,6 +97,7 @@ const Question = ({
     const handleSave = () => {
         // Ne piši ništa ako pitanje ima children pitanja (Likert)
         question.type !== 4 &&
+            !!saveFn &&
             saveFn({
                 invite_id: invite.id,
                 question_id: question.id,
@@ -192,7 +192,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 export default compose(
-    connect(mapStateToProps, { saveResponse }),
+    connect(mapStateToProps),
     withStyles(styles, { withTheme: true }),
     withRouter
 )(Question);

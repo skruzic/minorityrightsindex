@@ -1,15 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import api from '../app/api';
 
-export const fetchCampaignById = createAsyncThunk(
-    'campaigns/fetchByIdStatus',
-    async (id, thunkAPI) => {
-        const response = await api.get(`/campaign/${id}`);
-
-        return response.data;
-    }
-);
-
 export const fetchCampaignBySlug = createAsyncThunk(
     'campaigns/fetchBySlugStatus',
     async (slug, thunkAPI) => {
@@ -23,15 +14,6 @@ export const fetchCampaignByToken = createAsyncThunk(
     'campaigns/fetchByTokenStatus',
     async (token, thunkAPI) => {
         const response = await api.get(`/campaign/token/${token}`);
-
-        return response.data;
-    }
-);
-
-export const saveResponse = createAsyncThunk(
-    'campaigns/saveResponseStatus',
-    async formValues => {
-        const response = await api.post('/campaign', formValues);
 
         return response.data;
     }

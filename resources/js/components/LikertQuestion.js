@@ -25,6 +25,7 @@ const LikertQuestion = ({
     input,
     invite,
     currentStep,
+    saveFn,
     ...rest
 }) => {
     return (
@@ -56,6 +57,7 @@ const LikertQuestion = ({
                                     options={options}
                                     invite={invite}
                                     currentStep={currentStep}
+                                    saveFn={saveFn}
                                 />
                             ))}
                         </TableBody>

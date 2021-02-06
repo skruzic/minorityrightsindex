@@ -12,14 +12,14 @@ const CampaignForm = ({
     handleSubmit,
     saveFn,
     campaign: { questions, messages },
-    classes,
     page
 }) => {
     const onSubmit = formValues => {
-        saveFn({
-            campaign_id: campaign.id,
-            data: formValues
-        });
+        !!saveFn &&
+            saveFn({
+                campaign_id: campaign.id,
+                data: formValues
+            });
     };
 
     return (
@@ -45,7 +45,11 @@ const CampaignForm = ({
                         saveFn={saveFn}
                     />
                 ))}
-                <CampaignMessage message={messages.final} type="final" />
+                <CampaignMessage
+                    message={messages.final}
+                    type="final"
+                    saveFn={saveFn}
+                />
             </StepWizard>
         </form>
     );

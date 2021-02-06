@@ -121373,11 +121373,10 @@ var CampaignForm = function CampaignForm(_ref) {
       _ref$campaign = _ref.campaign,
       questions = _ref$campaign.questions,
       messages = _ref$campaign.messages,
-      classes = _ref.classes,
       page = _ref.page;
 
   var onSubmit = function onSubmit(formValues) {
-    saveFn({
+    !!saveFn && saveFn({
       campaign_id: campaign.id,
       data: formValues
     });
@@ -121405,7 +121404,8 @@ var CampaignForm = function CampaignForm(_ref) {
     });
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CampaignMessage__WEBPACK_IMPORTED_MODULE_8__["default"], {
     message: messages["final"],
-    type: "final"
+    type: "final",
+    saveFn: saveFn
   })));
 };
 
@@ -121488,8 +121488,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/CardActions */ "./node_modules/@material-ui/core/esm/CardActions/index.js");
 /* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/Button */ "./node_modules/@material-ui/core/esm/Button/index.js");
 /* harmony import */ var _ProgressWithLabel__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./ProgressWithLabel */ "./resources/js/components/ProgressWithLabel.js");
-/* harmony import */ var _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../slices/campaignsSlice */ "./resources/js/slices/campaignsSlice.js");
-
 
 
 
@@ -121502,13 +121500,11 @@ __webpack_require__.r(__webpack_exports__);
 var CampaignMessage = function CampaignMessage(_ref) {
   var message = _ref.message,
       type = _ref.type,
-      classes = _ref.classes,
       nextStep = _ref.nextStep,
-      previousStep = _ref.previousStep,
       currentStep = _ref.currentStep,
       totalSteps = _ref.totalSteps,
       invite = _ref.invite,
-      saveResponse = _ref.saveResponse;
+      saveFn = _ref.saveFn;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ProgressWithLabel__WEBPACK_IMPORTED_MODULE_7__["default"], {
     value: (currentStep - 1) / (totalSteps - 1) * 100
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_3__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -121522,7 +121518,7 @@ var CampaignMessage = function CampaignMessage(_ref) {
     color: "primary",
     onClick: function onClick() {
       nextStep();
-      saveResponse({
+      !!saveFn && saveFn({
         invite_id: invite.id,
         page: currentStep + 1
       });
@@ -121541,9 +121537,7 @@ var mapStateToProps = function mapStateToProps(state) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, {
-  saveResponse: _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_8__["saveResponse"]
-})(CampaignMessage));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps)(CampaignMessage));
 
 /***/ }),
 
@@ -121695,7 +121689,8 @@ var LikertQuestion = function LikertQuestion(_ref) {
       input = _ref.input,
       invite = _ref.invite,
       currentStep = _ref.currentStep,
-      rest = _objectWithoutProperties(_ref, ["classes", "name", "text", "options", "questions", "input", "invite", "currentStep"]);
+      saveFn = _ref.saveFn,
+      rest = _objectWithoutProperties(_ref, ["classes", "name", "text", "options", "questions", "input", "invite", "currentStep", "saveFn"]);
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CardHeader__WEBPACK_IMPORTED_MODULE_3__["default"], {
     title: text
@@ -121712,7 +121707,8 @@ var LikertQuestion = function LikertQuestion(_ref) {
       question: q,
       options: options,
       invite: invite,
-      currentStep: currentStep
+      currentStep: currentStep,
+      saveFn: saveFn
     });
   }))))));
 };
@@ -121753,12 +121749,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/TableCell */ "./node_modules/@material-ui/core/esm/TableCell/index.js");
-/* harmony import */ var _material_ui_core_RadioGroup__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/RadioGroup */ "./node_modules/@material-ui/core/esm/RadioGroup/index.js");
-/* harmony import */ var _material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/FormControlLabel */ "./node_modules/@material-ui/core/esm/FormControlLabel/index.js");
-/* harmony import */ var _material_ui_core_Radio__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/Radio */ "./node_modules/@material-ui/core/esm/Radio/index.js");
-/* harmony import */ var _material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/FormControl */ "./node_modules/@material-ui/core/esm/FormControl/index.js");
-/* harmony import */ var _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../slices/campaignsSlice */ "./resources/js/slices/campaignsSlice.js");
-/* harmony import */ var _LikertQuestion__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./LikertQuestion */ "./resources/js/components/LikertQuestion.js");
+/* harmony import */ var _material_ui_core_Radio__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/Radio */ "./node_modules/@material-ui/core/esm/Radio/index.js");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -121786,11 +121777,6 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 
 
 
-
-
-
-
-
 var LikertQuestionRow = function LikertQuestionRow(_ref) {
   var classes = _ref.classes,
       question = _ref.question,
@@ -121798,8 +121784,8 @@ var LikertQuestionRow = function LikertQuestionRow(_ref) {
       options = _ref.options,
       currentStep = _ref.currentStep,
       invite = _ref.invite,
-      saveResponse = _ref.saveResponse,
-      rest = _objectWithoutProperties(_ref, ["classes", "question", "input", "options", "currentStep", "invite", "saveResponse"]);
+      saveFn = _ref.saveFn,
+      rest = _objectWithoutProperties(_ref, ["classes", "question", "input", "options", "currentStep", "invite", "saveFn"]);
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(-1),
       _useState2 = _slicedToArray(_useState, 2),
@@ -121811,7 +121797,7 @@ var LikertQuestionRow = function LikertQuestionRow(_ref) {
   }, input), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_5__["default"], null, question.text), options.map(function (option, idx) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_5__["default"], {
       key: idx
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Radio__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Radio__WEBPACK_IMPORTED_MODULE_6__["default"], {
       checked: option.value === selectedValue,
       value: option.value,
       color: "secondary",
@@ -121819,7 +121805,7 @@ var LikertQuestionRow = function LikertQuestionRow(_ref) {
         setSelectedValue(parseInt(e.target.value));
       },
       onBlur: function onBlur() {
-        saveResponse({
+        saveFn({
           invite_id: invite.id,
           question_id: question.id,
           answer: selectedValue,
@@ -121846,9 +121832,7 @@ var styles = {
 
   }
 };
-/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_4__["compose"])(Object(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["withStyles"])(styles), Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(null, {
-  saveResponse: _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_10__["saveResponse"]
-}))(LikertQuestionRow));
+/* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["withStyles"])(styles)(LikertQuestionRow));
 
 /***/ }),
 
@@ -122040,6 +122024,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_Container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/Container */ "./node_modules/@material-ui/core/esm/Container/index.js");
 /* harmony import */ var _Campaign__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Campaign */ "./resources/js/containers/Campaign.js");
 /* harmony import */ var _components_CampaignMessage__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/CampaignMessage */ "./resources/js/components/CampaignMessage.js");
+/* harmony import */ var _CampaignPreview__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./CampaignPreview */ "./resources/js/containers/CampaignPreview.js");
+
 
 
 
@@ -122064,6 +122050,9 @@ var App = function App(_ref) {
     path: "/campaign/finished",
     exact: true,
     component: _components_CampaignMessage__WEBPACK_IMPORTED_MODULE_6__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: "/campaign/preview/:slug",
+    component: _CampaignPreview__WEBPACK_IMPORTED_MODULE_7__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/campaign/:slug",
     component: _Campaign__WEBPACK_IMPORTED_MODULE_5__["default"]
@@ -122160,16 +122149,10 @@ var Campaign = /*#__PURE__*/function (_Component) {
 
   var _super = _createSuper(Campaign);
 
-  function Campaign(props) {
-    var _this;
-
+  function Campaign() {
     _classCallCheck(this, Campaign);
 
-    _this = _super.call(this, props);
-    _this.state = {
-      dry_run: false
-    };
-    return _this;
+    return _super.apply(this, arguments);
   }
 
   _createClass(Campaign, [{
@@ -122177,23 +122160,11 @@ var Campaign = /*#__PURE__*/function (_Component) {
     value: function componentDidMount() {
       var qs = query_string__WEBPACK_IMPORTED_MODULE_6___default.a.parse(this.props.location.search);
 
-      if (qs.dry_run) {
-        this.setState({
-          dry_run: true
-        });
-        this.props.fetchInviteWithoutToken(this.props.match.params.slug);
-      } else {
-        this.setState({
-          dry_run: false
-        });
+      if (qs.token) {
         this.props.fetchInviteByToken(qs.token);
-      }
-      /*if (qs.token && this.state.dry_run === false) {
-          this.props.fetchInviteByToken(qs.token);
       } else {
-          this.props.fetchInviteWithoutToken(this.props.match.params.slug);
-      }*/
-
+        this.props.fetchInviteWithoutToken(this.props.match.params.slug);
+      }
     }
   }, {
     key: "render",
@@ -122205,7 +122176,6 @@ var Campaign = /*#__PURE__*/function (_Component) {
           classes = _this$props.classes,
           error = _this$props.error,
           loading = _this$props.loading;
-      var dry_run = this.state.dry_run;
 
       if (loading === 'pending') {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_7__["default"], null);
@@ -122220,7 +122190,7 @@ var Campaign = /*#__PURE__*/function (_Component) {
           title: campaign.title
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_CampaignForm__WEBPACK_IMPORTED_MODULE_8__["default"], {
           campaign: campaign,
-          saveFn: dry_run === true ? null : this.props.saveCampaignAnswers,
+          saveFn: this.props.saveCampaignAnswers,
           initialValues: responses.reduce(function (obj, item) {
             return Object.assign(obj, _defineProperty({}, item.question.code, item.answer));
           }, {}),
@@ -122262,6 +122232,128 @@ var styles = function styles(theme) {
 
 /***/ }),
 
+/***/ "./resources/js/containers/CampaignPreview.js":
+/*!****************************************************!*\
+  !*** ./resources/js/containers/CampaignPreview.js ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../slices/campaignsSlice */ "./resources/js/slices/campaignsSlice.js");
+/* harmony import */ var _material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/CircularProgress */ "./node_modules/@material-ui/core/esm/CircularProgress/index.js");
+/* harmony import */ var _components_CampaignForm__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/CampaignForm */ "./resources/js/components/CampaignForm.js");
+/* harmony import */ var _components_CampaignHeader__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/CampaignHeader */ "./resources/js/components/CampaignHeader.js");
+/* harmony import */ var _errors_ErrorMessage__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../errors/ErrorMessage */ "./resources/js/errors/ErrorMessage.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+
+
+
+
+
+
+var CampaignPreview = /*#__PURE__*/function (_Component) {
+  _inherits(CampaignPreview, _Component);
+
+  var _super = _createSuper(CampaignPreview);
+
+  function CampaignPreview() {
+    _classCallCheck(this, CampaignPreview);
+
+    return _super.apply(this, arguments);
+  }
+
+  _createClass(CampaignPreview, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchCampaignBySlug(this.props.match.params.slug);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          campaign = _this$props.campaign,
+          classes = _this$props.classes,
+          error = _this$props.error,
+          loading = _this$props.loading;
+
+      if (loading === 'pending') {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_5__["default"], null);
+      } else if (error) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_errors_ErrorMessage__WEBPACK_IMPORTED_MODULE_8__["default"], {
+          message: error.message
+        });
+      } else {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: classes.root
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_CampaignHeader__WEBPACK_IMPORTED_MODULE_7__["default"], {
+          title: campaign.title
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_CampaignForm__WEBPACK_IMPORTED_MODULE_6__["default"], {
+          campaign: campaign,
+          saveFn: null,
+          page: 1
+        }));
+      }
+    }
+  }]);
+
+  return CampaignPreview;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    loading: state.campaign.loading,
+    campaign: state.campaign.data
+  };
+};
+
+var styles = function styles(theme) {
+  return {
+    root: {
+      margin: theme.spacing(3)
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_3__["compose"])(Object(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["withStyles"])(styles, {
+  withTheme: true
+}), Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, {
+  fetchCampaignBySlug: _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_4__["fetchCampaignBySlug"]
+}))(CampaignPreview));
+
+/***/ }),
+
 /***/ "./resources/js/containers/Question.js":
 /*!*********************************************!*\
   !*** ./resources/js/containers/Question.js ***!
@@ -122281,19 +122373,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var redux_form__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! redux-form */ "./node_modules/redux-form/es/index.js");
 /* harmony import */ var _material_ui_core_Card__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/Card */ "./node_modules/@material-ui/core/esm/Card/index.js");
-/* harmony import */ var _material_ui_core_LinearProgress__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/LinearProgress */ "./node_modules/@material-ui/core/esm/LinearProgress/index.js");
-/* harmony import */ var _material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/CardActions */ "./node_modules/@material-ui/core/esm/CardActions/index.js");
-/* harmony import */ var _components_TextQuestion__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../components/TextQuestion */ "./resources/js/components/TextQuestion.js");
-/* harmony import */ var _components_RadioQuestion__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../components/RadioQuestion */ "./resources/js/components/RadioQuestion.js");
-/* harmony import */ var _components_CheckboxQuestion__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../components/CheckboxQuestion */ "./resources/js/components/CheckboxQuestion.js");
-/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @material-ui/core/Button */ "./node_modules/@material-ui/core/esm/Button/index.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../slices/campaignsSlice */ "./resources/js/slices/campaignsSlice.js");
-/* harmony import */ var _components_LikertQuestion__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../components/LikertQuestion */ "./resources/js/components/LikertQuestion.js");
-/* harmony import */ var _components_ProgressWithLabel__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../components/ProgressWithLabel */ "./resources/js/components/ProgressWithLabel.js");
-
-
+/* harmony import */ var _material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/CardActions */ "./node_modules/@material-ui/core/esm/CardActions/index.js");
+/* harmony import */ var _components_TextQuestion__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/TextQuestion */ "./resources/js/components/TextQuestion.js");
+/* harmony import */ var _components_RadioQuestion__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../components/RadioQuestion */ "./resources/js/components/RadioQuestion.js");
+/* harmony import */ var _components_CheckboxQuestion__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../components/CheckboxQuestion */ "./resources/js/components/CheckboxQuestion.js");
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/core/Button */ "./node_modules/@material-ui/core/esm/Button/index.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _components_LikertQuestion__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../components/LikertQuestion */ "./resources/js/components/LikertQuestion.js");
+/* harmony import */ var _components_ProgressWithLabel__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../components/ProgressWithLabel */ "./resources/js/components/ProgressWithLabel.js");
 
 
 
@@ -122332,7 +122420,7 @@ var Question = function Question(_ref) {
       case 1:
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(redux_form__WEBPACK_IMPORTED_MODULE_6__["Field"], {
           key: question.id,
-          component: _components_TextQuestion__WEBPACK_IMPORTED_MODULE_10__["default"],
+          component: _components_TextQuestion__WEBPACK_IMPORTED_MODULE_9__["default"],
           name: question.code,
           text: question.text,
           questionType: question.type //onBlur={handleSave}
@@ -122342,7 +122430,7 @@ var Question = function Question(_ref) {
       case 2:
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(redux_form__WEBPACK_IMPORTED_MODULE_6__["Field"], {
           key: question.id,
-          component: _components_RadioQuestion__WEBPACK_IMPORTED_MODULE_11__["default"],
+          component: _components_RadioQuestion__WEBPACK_IMPORTED_MODULE_10__["default"],
           name: question.code,
           text: question.text,
           options: question.optiongroup.options //onBlur={handleSave}
@@ -122352,7 +122440,7 @@ var Question = function Question(_ref) {
       case 3:
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(redux_form__WEBPACK_IMPORTED_MODULE_6__["Field"], {
           key: question.id,
-          component: _components_CheckboxQuestion__WEBPACK_IMPORTED_MODULE_12__["default"],
+          component: _components_CheckboxQuestion__WEBPACK_IMPORTED_MODULE_11__["default"],
           name: question.code,
           text: question.text,
           options: question.optiongroup.options //saveFn={handleSave}
@@ -122371,14 +122459,15 @@ var Question = function Question(_ref) {
               options={question.optiongroup.options}
               questions={question.children}
           />*/
-          react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_LikertQuestion__WEBPACK_IMPORTED_MODULE_16__["default"], {
+          react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_LikertQuestion__WEBPACK_IMPORTED_MODULE_14__["default"], {
             key: question.id,
             name: question.code,
             text: question.text,
             options: question.optiongroup.options,
             questions: question.children,
             invite: invite,
-            currentStep: currentStep
+            currentStep: currentStep,
+            saveFn: saveFn
           })
         );
 
@@ -122392,7 +122481,7 @@ var Question = function Question(_ref) {
 
   var handleSave = function handleSave() {
     // Ne piši ništa ako pitanje ima children pitanja (Likert)
-    question.type !== 4 && saveFn({
+    question.type !== 4 && !!saveFn && saveFn({
       invite_id: invite.id,
       question_id: question.id,
       answer: value,
@@ -122401,18 +122490,18 @@ var Question = function Question(_ref) {
     });
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_ProgressWithLabel__WEBPACK_IMPORTED_MODULE_17__["default"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_ProgressWithLabel__WEBPACK_IMPORTED_MODULE_15__["default"], {
     value: (currentStep - 1) / (totalSteps - 1) * 100
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_7__["default"], {
     className: classes.root
-  }, renderQuestion(question), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  }, renderQuestion(question), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_8__["default"], {
     className: classes.actions,
     disableSpacing: true
-  }, currentStep < totalSteps - 1 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_13__["default"], {
+  }, currentStep < totalSteps - 1 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_12__["default"], {
     variant: "contained",
     color: "primary",
     onClick: function onClick() {
-      if (Object(lodash__WEBPACK_IMPORTED_MODULE_14__["isEmpty"])(question.conditions)) {
+      if (Object(lodash__WEBPACK_IMPORTED_MODULE_13__["isEmpty"])(question.conditions)) {
         nextStep();
       } else if (question.conditions[0].answer === value) {
         goToStep(conditionalJump);
@@ -122422,14 +122511,14 @@ var Question = function Question(_ref) {
 
       handleSave();
     }
-  }, "Next"), currentStep === totalSteps - 1 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_13__["default"], {
+  }, "Next"), currentStep === totalSteps - 1 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_12__["default"], {
     variant: "contained",
     color: "primary",
     onClick: function onClick() {
       handleSave();
       nextStep();
     }
-  }, "Finish"), currentStep !== 1 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_13__["default"], {
+  }, "Finish"), currentStep !== 1 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_12__["default"], {
     variant: "contained",
     color: "primary",
     onClick: function onClick() {
@@ -122466,9 +122555,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_5__["compose"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, {
-  saveResponse: _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_15__["saveResponse"]
-}), Object(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["withStyles"])(styles, {
+/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_5__["compose"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps), Object(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["withStyles"])(styles, {
   withTheme: true
 }), react_router_dom__WEBPACK_IMPORTED_MODULE_4__["withRouter"])(Question));
 
@@ -122610,15 +122697,13 @@ var styles = function styles(theme) {
 /*!***********************************************!*\
   !*** ./resources/js/slices/campaignsSlice.js ***!
   \***********************************************/
-/*! exports provided: fetchCampaignById, fetchCampaignBySlug, fetchCampaignByToken, saveResponse, saveCampaignAnswers, campaignsSlice, default */
+/*! exports provided: fetchCampaignBySlug, fetchCampaignByToken, saveCampaignAnswers, campaignsSlice, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchCampaignById", function() { return fetchCampaignById; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchCampaignBySlug", function() { return fetchCampaignBySlug; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchCampaignByToken", function() { return fetchCampaignByToken; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "saveResponse", function() { return saveResponse; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "saveCampaignAnswers", function() { return saveCampaignAnswers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "campaignsSlice", function() { return campaignsSlice; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
@@ -122637,15 +122722,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
-var fetchCampaignById = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__["createAsyncThunk"])('campaigns/fetchByIdStatus', /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(id, thunkAPI) {
+var fetchCampaignBySlug = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__["createAsyncThunk"])('campaigns/fetchBySlugStatus', /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(slug, thunkAPI) {
     var response;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             _context.next = 2;
-            return _app_api__WEBPACK_IMPORTED_MODULE_2__["default"].get("/campaign/".concat(id));
+            return _app_api__WEBPACK_IMPORTED_MODULE_2__["default"].get("/campaign/slug/".concat(slug));
 
           case 2:
             response = _context.sent;
@@ -122663,15 +122748,15 @@ var fetchCampaignById = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__["cr
     return _ref.apply(this, arguments);
   };
 }());
-var fetchCampaignBySlug = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__["createAsyncThunk"])('campaigns/fetchBySlugStatus', /*#__PURE__*/function () {
-  var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(slug, thunkAPI) {
+var fetchCampaignByToken = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__["createAsyncThunk"])('campaigns/fetchByTokenStatus', /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(token, thunkAPI) {
     var response;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
             _context2.next = 2;
-            return _app_api__WEBPACK_IMPORTED_MODULE_2__["default"].get("/campaign/slug/".concat(slug));
+            return _app_api__WEBPACK_IMPORTED_MODULE_2__["default"].get("/campaign/token/".concat(token));
 
           case 2:
             response = _context2.sent;
@@ -122689,15 +122774,15 @@ var fetchCampaignBySlug = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__["
     return _ref2.apply(this, arguments);
   };
 }());
-var fetchCampaignByToken = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__["createAsyncThunk"])('campaigns/fetchByTokenStatus', /*#__PURE__*/function () {
-  var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(token, thunkAPI) {
+var saveCampaignAnswers = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__["createAsyncThunk"])('campaigns/saveAnswersStatus', /*#__PURE__*/function () {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(formValues, thunkAPI) {
     var response;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
             _context3.next = 2;
-            return _app_api__WEBPACK_IMPORTED_MODULE_2__["default"].get("/campaign/token/".concat(token));
+            return _app_api__WEBPACK_IMPORTED_MODULE_2__["default"].post('/campaign', formValues);
 
           case 2:
             response = _context3.sent;
@@ -122713,58 +122798,6 @@ var fetchCampaignByToken = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__[
 
   return function (_x5, _x6) {
     return _ref3.apply(this, arguments);
-  };
-}());
-var saveResponse = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__["createAsyncThunk"])('campaigns/saveResponseStatus', /*#__PURE__*/function () {
-  var _ref4 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(formValues) {
-    var response;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
-      while (1) {
-        switch (_context4.prev = _context4.next) {
-          case 0:
-            _context4.next = 2;
-            return _app_api__WEBPACK_IMPORTED_MODULE_2__["default"].post('/campaign', formValues);
-
-          case 2:
-            response = _context4.sent;
-            return _context4.abrupt("return", response.data);
-
-          case 4:
-          case "end":
-            return _context4.stop();
-        }
-      }
-    }, _callee4);
-  }));
-
-  return function (_x7) {
-    return _ref4.apply(this, arguments);
-  };
-}());
-var saveCampaignAnswers = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__["createAsyncThunk"])('campaigns/saveAnswersStatus', /*#__PURE__*/function () {
-  var _ref5 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(formValues, thunkAPI) {
-    var response;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
-      while (1) {
-        switch (_context5.prev = _context5.next) {
-          case 0:
-            _context5.next = 2;
-            return _app_api__WEBPACK_IMPORTED_MODULE_2__["default"].post('/campaign', formValues);
-
-          case 2:
-            response = _context5.sent;
-            return _context5.abrupt("return", response.data);
-
-          case 4:
-          case "end":
-            return _context5.stop();
-        }
-      }
-    }, _callee5);
-  }));
-
-  return function (_x8, _x9) {
-    return _ref5.apply(this, arguments);
   };
 }());
 var campaignsSlice = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__["createSlice"])({

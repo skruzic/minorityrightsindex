@@ -4,13 +4,8 @@ import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core';
 import { compose } from 'redux';
 import TableCell from '@material-ui/core/TableCell';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
-import FormControl from '@material-ui/core/FormControl';
 import { TableRow } from '@material-ui/core';
-import { saveResponse } from '../slices/campaignsSlice';
-import LikertQuestion from './LikertQuestion';
 
 const LikertQuestionRow = ({
     classes,
@@ -19,7 +14,7 @@ const LikertQuestionRow = ({
     options,
     currentStep,
     invite,
-    saveResponse,
+    saveFn,
     ...rest
 }) => {
     const [selectedValue, setSelectedValue] = useState(-1);
@@ -37,7 +32,7 @@ const LikertQuestionRow = ({
                             setSelectedValue(parseInt(e.target.value));
                         }}
                         onBlur={() => {
-                            saveResponse({
+                            saveFn({
                                 invite_id: invite.id,
                                 question_id: question.id,
                                 answer: selectedValue,
@@ -68,7 +63,4 @@ const styles = {
     }
 };
 
-export default compose(
-    withStyles(styles),
-    connect(null, { saveResponse })
-)(LikertQuestionRow);
+export default withStyles(styles)(LikertQuestionRow);

@@ -34,7 +34,7 @@ class CampaignCrudController extends CrudController
         CRUD::addButtonFromView('line', 'campaign_invites', 'campaign_invites');
         CRUD::addButtonFromView('line', 'campaign_lock', 'campaign_lock');
         CRUD::addButtonFromView('line', 'download_answers', 'export_csv',);
-        CRUD::addButtonFromView('line', 'campaign_view', 'campaign_view');
+        CRUD::addButtonFromView('line', 'campaign_preview', 'campaign_preview');
     }
 
     protected function setupListOperation()

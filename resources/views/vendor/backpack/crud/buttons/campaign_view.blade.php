@@ -1,1 +1,0 @@
-<a href="{{ url('campaign/'.$entry->slug) }}?dry_run=true" class="btn btn-sm btn-link" target="_blank"><i class="la la-desktop"></i> View</a>

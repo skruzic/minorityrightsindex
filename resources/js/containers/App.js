@@ -5,6 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Campaign from './Campaign';
 import CampaignMessage from '../components/CampaignMessage';
+import CampaignPreview from './CampaignPreview';
 
 const App = ({ classes }) => (
     <div className={classes.root}>
@@ -16,6 +17,10 @@ const App = ({ classes }) => (
                     path="/campaign/finished"
                     exact
                     component={CampaignMessage}
+                />
+                <Route
+                    path="/campaign/preview/:slug"
+                    component={CampaignPreview}
                 />
                 <Route path="/campaign/:slug" component={Campaign} />
             </Switch>
