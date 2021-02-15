@@ -121398,7 +121398,7 @@ var CampaignForm = function CampaignForm(_ref) {
       }),
       conditionalJump: !Object(lodash__WEBPACK_IMPORTED_MODULE_5__["isEmpty"])(q.conditions) && questions.indexOf(questions.find(function (item) {
         return item.id === parseInt(q.conditions[0].question_id);
-      })) + 1,
+      })) + 2,
       hashKey: q.code,
       saveFn: saveFn
     });

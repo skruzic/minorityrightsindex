@@ -39,7 +39,7 @@ const CampaignForm = ({
                                         parseInt(q.conditions[0].question_id)
                                     );
                                 })
-                            ) + 1
+                            ) + 2
                         }
                         hashKey={q.code}
                         saveFn={saveFn}

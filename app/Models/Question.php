@@ -28,63 +28,57 @@ class Question extends Model
 
     protected $touches = ['campaign'];
 
-    public function save($options = [])
+    public static function booted()
     {
-        $maxRgt = Question::where('campaign_id', $this->campaign_id)->max('rgt');
+        static::creating(function ($question) {
+            $maxRgt = Question::where('campaign_id', $question->campaign_id)->max('rgt');
 
-        if (!isset($this->attributes['lft'])) {
-            $this->attributes['lft'] = $maxRgt + 1;
-        }
+            if ( ! isset($question->attributes['lft'])) {
+                $question->attributes['lft'] = $maxRgt + 1;
+            }
 
-        if (!isset($this->attributes['rgt'])) {
-            $this->attributes['rgt'] = $maxRgt + 2;
-        }
+            if ( ! isset($question->attributes['rgt'])) {
+                $question->attributes['rgt'] = $maxRgt + 2;
+            }
 
-        parent::save();
+        });
     }
 
     /*
      * Relationships
      */
 
-    public
-    function optiongroup()
+    public function optiongroup()
     {
         return $this->belongsTo(OptionGroup::class, 'option_group_id');
     }
 
-    public
-    function campaign()
+    public function campaign()
     {
         return $this->belongsTo(Campaign::class);
     }
 
-    public
-    function children()
+    public function children()
     {
         return $this->hasMany(self::class, 'parent_id');
     }
 
-    public
-    function parent()
+    public function parent()
     {
         return $this->belongsTo(self::class, 'parent_id');
     }
 
-    public
-    function hasChildren()
+    public function hasChildren()
     {
         return count($this->children) > 0;
     }
 
-    public
-    function hasParent()
+    public function hasParent()
     {
         return count($this->parent) > 0;
     }
 
-    public
-    function withChildren()
+    public function withChildren()
     {
         return $this->children()->union($this);
     }
@@ -93,10 +87,8 @@ class Question extends Model
      * Scopes
      */
 
-    public
-    function scopeWithoutChildren(
-        $query
-    ) {
+    public function scopeWithoutChildren($query)
+    {
         return $query->where('parent_id', null);
     }
 
