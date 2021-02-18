@@ -121169,18 +121169,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(redux_logger__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../slices/campaignsSlice */ "./resources/js/slices/campaignsSlice.js");
 /* harmony import */ var _slices_inviteSlice__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../slices/inviteSlice */ "./resources/js/slices/inviteSlice.js");
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 
 
 
@@ -121192,7 +121180,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     campaign: _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_3__["default"],
     invite: _slices_inviteSlice__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
-  middleware: [redux_logger__WEBPACK_IMPORTED_MODULE_2___default.a].concat(_toConsumableArray(Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__["getDefaultMiddleware"])()))
+  //middleware: [logger, ...getDefaultMiddleware()]
+  middleware: Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__["getDefaultMiddleware"])()
 }));
 
 /***/ }),
@@ -121382,6 +121371,14 @@ var CampaignForm = function CampaignForm(_ref) {
     });
   };
 
+  var handleConditionals = function handleConditionals() {
+    return q.conditions.map(function (c) {
+      return questions.indexOf(questions.find(function (item) {
+        return item.id === parseInt(c.question_id);
+      }));
+    });
+  };
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
     onSubmit: handleSubmit(onSubmit)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_step_wizard__WEBPACK_IMPORTED_MODULE_6___default.a, {
@@ -121396,9 +121393,11 @@ var CampaignForm = function CampaignForm(_ref) {
       question: _objectSpread(_objectSpread({}, q), {}, {
         step: idx + 1
       }),
-      conditionalJump: !Object(lodash__WEBPACK_IMPORTED_MODULE_5__["isEmpty"])(q.conditions) && questions.indexOf(questions.find(function (item) {
-        return item.id === parseInt(q.conditions[0].question_id);
-      })) + 2,
+      conditionalJumps: !Object(lodash__WEBPACK_IMPORTED_MODULE_5__["isEmpty"])(q.conditions) && q.conditions.map(function (c) {
+        return questions.findIndex(function (item) {
+          return item.id === parseInt(c.question_id);
+        });
+      }),
       hashKey: q.code,
       saveFn: saveFn
     });
@@ -122407,7 +122406,7 @@ var Question = function Question(_ref) {
       goToStep = _ref.goToStep,
       currentStep = _ref.currentStep,
       totalSteps = _ref.totalSteps,
-      conditionalJump = _ref.conditionalJump,
+      conditionalJumps = _ref.conditionalJumps,
       value = _ref.value,
       invite = _ref.invite,
       saveResponse = _ref.saveResponse,
@@ -122490,6 +122489,13 @@ var Question = function Question(_ref) {
     });
   };
 
+  var computeJump = function computeJump() {
+    var matchIdx = question.conditions.findIndex(function (item) {
+      return parseInt(item.answer) === parseInt(value);
+    });
+    return conditionalJumps[matchIdx];
+  };
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_ProgressWithLabel__WEBPACK_IMPORTED_MODULE_15__["default"], {
     value: (currentStep - 1) / (totalSteps - 1) * 100
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_7__["default"], {
@@ -122501,10 +122507,13 @@ var Question = function Question(_ref) {
     variant: "contained",
     color: "primary",
     onClick: function onClick() {
+      var jump = computeJump();
+
       if (Object(lodash__WEBPACK_IMPORTED_MODULE_13__["isEmpty"])(question.conditions)) {
         nextStep();
-      } else if (question.conditions[0].answer === value) {
-        goToStep(conditionalJump);
+      } else if (jump > -1) {
+        // +2 zbog uvodne stranice i zero-indexiranja
+        goToStep(jump + 2);
       } else {
         nextStep();
       }

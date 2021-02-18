@@ -22,6 +22,16 @@ const CampaignForm = ({
             });
     };
 
+    const handleConditionals = () => {
+        return q.conditions.map(c =>
+            questions.indexOf(
+                questions.find(item => {
+                    return item.id === parseInt(c.question_id);
+                })
+            )
+        );
+    };
+
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <StepWizard initialStep={page} isHashEnabled={true}>
@@ -30,16 +40,13 @@ const CampaignForm = ({
                     <Question
                         key={q.id}
                         question={{ ...q, step: idx + 1 }}
-                        conditionalJump={
+                        conditionalJumps={
                             !isEmpty(q.conditions) &&
-                            questions.indexOf(
-                                questions.find(item => {
-                                    return (
-                                        item.id ===
-                                        parseInt(q.conditions[0].question_id)
-                                    );
-                                })
-                            ) + 2
+                            q.conditions.map(c => {
+                                return questions.findIndex(
+                                    item => item.id === parseInt(c.question_id)
+                                );
+                            })
                         }
                         hashKey={q.code}
                         saveFn={saveFn}

@@ -23,7 +23,7 @@ const Question = ({
     goToStep,
     currentStep,
     totalSteps,
-    conditionalJump,
+    conditionalJumps,
     value,
     invite,
     saveResponse,
@@ -107,6 +107,14 @@ const Question = ({
             });
     };
 
+    const computeJump = () => {
+        const matchIdx = question.conditions.findIndex(
+            item => parseInt(item.answer) === parseInt(value)
+        );
+
+        return conditionalJumps[matchIdx];
+    };
+
     return (
         <>
             <ProgressWithLabel
@@ -120,12 +128,13 @@ const Question = ({
                             variant="contained"
                             color="primary"
                             onClick={() => {
+                                const jump = computeJump();
+
                                 if (isEmpty(question.conditions)) {
                                     nextStep();
-                                } else if (
-                                    question.conditions[0].answer === value
-                                ) {
-                                    goToStep(conditionalJump);
+                                } else if (jump > -1) {
+                                    // +2 zbog uvodne stranice i zero-indexiranja
+                                    goToStep(jump + 2);
                                 } else {
                                     nextStep();
                                 }

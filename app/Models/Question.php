@@ -68,12 +68,12 @@ class Question extends Model
         return $this->belongsTo(self::class, 'parent_id');
     }
 
-    public function hasChildren()
+    public function hasChildren(): bool
     {
         return count($this->children) > 0;
     }
 
-    public function hasParent()
+    public function hasParent(): bool
     {
         return count($this->parent) > 0;
     }
@@ -91,23 +91,4 @@ class Question extends Model
     {
         return $query->where('parent_id', null);
     }
-
-    /*public function getQuestionAttribute($value)
-    {
-        if ($this->attributes['type'] == 4) {
-            return unserialize(base64_decode($value));
-        }
-
-        return $value;
-    }
-
-    public function setQuestionAttribute($value)
-    {
-        if ($this->attributes['type'] == 4) {
-            $this->attributes['question'] = base64_encode(serialize($value));
-        } else {
-            $this->attributes['question'] = $value;
-        }
-    }*/
-
 }

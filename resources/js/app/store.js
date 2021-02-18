@@ -10,5 +10,6 @@ export default configureStore({
         campaign: campaignReducer,
         invite: inviteReducer
     },
-    middleware: [logger, ...getDefaultMiddleware()]
+    //middleware: [logger, ...getDefaultMiddleware()]
+    middleware: getDefaultMiddleware()
 });
