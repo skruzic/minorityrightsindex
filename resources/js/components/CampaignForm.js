@@ -34,7 +34,11 @@ const CampaignForm = ({
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <StepWizard initialStep={page} isHashEnabled={true}>
+            <StepWizard
+                initialStep={page}
+                isHashEnabled={true}
+                isLazyMount={true}
+            >
                 <CampaignMessage message={messages.intro} type="intro" />
                 {questions.map((q, idx) => (
                     <Question
