@@ -6,6 +6,7 @@ import Container from '@material-ui/core/Container';
 import Campaign from './Campaign';
 import CampaignMessage from '../components/CampaignMessage';
 import CampaignPreview from './CampaignPreview';
+import Page from './Page';
 
 const App = ({ classes }) => (
     <div className={classes.root}>
@@ -23,6 +24,7 @@ const App = ({ classes }) => (
                     component={CampaignPreview}
                 />
                 <Route path="/campaign/:slug" component={Campaign} />
+                <Route path="/:slug" component={Page} />
             </Switch>
         </Container>
     </div>

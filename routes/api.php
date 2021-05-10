@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\CampaignCrudController;
 use App\Http\Controllers\Api\AnswersController;
 use App\Http\Controllers\Api\CampaignsController;
 use App\Http\Controllers\Api\MenuController;
+use App\Http\Controllers\Api\PagesController;
 use App\Http\Controllers\Api\ResponseController;
 use Illuminate\Http\Request;
 
@@ -36,3 +37,4 @@ Route::get('campaign/token/{token}', [CampaignsController::class, 'findByToken']
 Route::get('campaign/slug/{slug}', [CampaignsController::class, 'findBySlug']);
 
 Route::get('menu', MenuController::class);
+Route::get('page/{slug}', PagesController::class);
