@@ -52,6 +52,8 @@ class CsvExporter
         $csv->insertOne($this->headers);
         $csv->insertAll($this->data);
 
+        $csv->setOutputBOM(Writer::BOM_UTF8);
+
         $csv->output('campaign.csv');
     }
 }
