@@ -16,11 +16,12 @@ class InviteResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'        => $this->id,
-            'token'     => $this->token,
-            'campaign'  => new CampaignResource($this->campaign),
-            'responses' => ResponseResource::collection($this->responses),
-            'page'      => $this->page,
+            'id'           => $this->id,
+            'token'        => $this->token,
+            'campaign'     => new CampaignResource($this->campaign),
+            'responses'    => ResponseResource::collection($this->responses),
+            'page'         => $this->page,
+            'visitedPages' => $this->visited_pages,
         ];
     }
 }

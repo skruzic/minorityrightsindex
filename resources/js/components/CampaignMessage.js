@@ -32,7 +32,7 @@ const CampaignMessage = ({
                             !!saveFn &&
                                 saveFn({
                                     invite_id: invite.id,
-                                    page: currentStep + 1
+                                    page: currentStep,
                                 });
                         }}
                     >
@@ -46,7 +46,8 @@ const CampaignMessage = ({
 
 CampaignMessage.propTypes = {
     message: PropTypes.string.isRequired,
-    type: PropTypes.oneOf(['intro', 'final']).isRequired
+    type: PropTypes.oneOf(['intro', 'final']).isRequired,
+    saveFn: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => {

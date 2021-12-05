@@ -121324,7 +121324,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
 /* harmony default export */ __webpack_exports__["default"] = (axios__WEBPACK_IMPORTED_MODULE_0___default.a.create({
-  baseURL: "".concat("http://kosta.local", "/api")
+  baseURL: "".concat("http://minorityrightsindex.local", "/api")
 }));
 
 /***/ }),
@@ -121350,7 +121350,7 @@ function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread n
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
@@ -121548,7 +121548,8 @@ var CampaignForm = function CampaignForm(_ref) {
       _ref$campaign = _ref.campaign,
       questions = _ref$campaign.questions,
       messages = _ref$campaign.messages,
-      page = _ref.page;
+      page = _ref.page,
+      visitedPages = _ref.visitedPages;
 
   var onSubmit = function onSubmit(formValues) {
     !!saveFn && saveFn({
@@ -121556,24 +121557,27 @@ var CampaignForm = function CampaignForm(_ref) {
       data: formValues
     });
   };
+  /*const handleConditionals = () => {
+      return q.conditions.map(c =>
+          questions.indexOf(
+              questions.find(item => {
+                  return item.id === parseInt(c.question_id);
+              })
+          )
+      );
+  };*/
 
-  var handleConditionals = function handleConditionals() {
-    return q.conditions.map(function (c) {
-      return questions.indexOf(questions.find(function (item) {
-        return item.id === parseInt(c.question_id);
-      }));
-    });
-  };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
     onSubmit: handleSubmit(onSubmit)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_step_wizard__WEBPACK_IMPORTED_MODULE_6___default.a, {
-    initialStep: page,
-    isHashEnabled: true,
+    initialStep: page //isHashEnabled={true}
+    ,
     isLazyMount: true
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CampaignMessage__WEBPACK_IMPORTED_MODULE_8__["default"], {
     message: messages.intro,
-    type: "intro"
+    type: "intro",
+    saveFn: saveFn
   }), questions.map(function (q, idx) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_Question__WEBPACK_IMPORTED_MODULE_7__["default"], {
       key: q.id,
@@ -121586,7 +121590,8 @@ var CampaignForm = function CampaignForm(_ref) {
         });
       }),
       hashKey: q.code,
-      saveFn: saveFn
+      saveFn: saveFn,
+      visitedPages: visitedPages
     });
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CampaignMessage__WEBPACK_IMPORTED_MODULE_8__["default"], {
     message: messages["final"],
@@ -121706,7 +121711,7 @@ var CampaignMessage = function CampaignMessage(_ref) {
       nextStep();
       !!saveFn && saveFn({
         invite_id: invite.id,
-        page: currentStep + 1
+        page: currentStep
       });
     }
   }, "Next"))));
@@ -121714,7 +121719,8 @@ var CampaignMessage = function CampaignMessage(_ref) {
 
 CampaignMessage.propTypes = {
   message: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired,
-  type: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.oneOf(['intro', 'final']).isRequired
+  type: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.oneOf(['intro', 'final']).isRequired,
+  saveFn: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
 };
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -121754,7 +121760,7 @@ function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread n
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
@@ -121946,7 +121952,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
@@ -122098,7 +122104,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
@@ -122314,7 +122320,7 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -122359,6 +122365,7 @@ var Campaign = /*#__PURE__*/function (_Component) {
           campaign = _this$props.campaign,
           responses = _this$props.responses,
           page = _this$props.page,
+          visitedPages = _this$props.visitedPages,
           classes = _this$props.classes,
           error = _this$props.error,
           loading = _this$props.loading;
@@ -122380,7 +122387,8 @@ var Campaign = /*#__PURE__*/function (_Component) {
           initialValues: responses.reduce(function (obj, item) {
             return Object.assign(obj, _defineProperty({}, item.question.code, item.answer));
           }, {}),
-          page: page
+          page: page,
+          visitedPages: visitedPages
         }));
       }
     }
@@ -122395,7 +122403,8 @@ var mapStateToProps = function mapStateToProps(state) {
     error: state.invite.error,
     campaign: state.invite.data.campaign,
     responses: state.invite.data.responses,
-    page: state.invite.data.page
+    page: state.invite.data.page,
+    visitedPages: state.invite.data.visitedPages
   };
 };
 
@@ -122455,7 +122464,7 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -122598,7 +122607,8 @@ var Question = function Question(_ref) {
       invite = _ref.invite,
       saveResponse = _ref.saveResponse,
       history = _ref.history,
-      saveFn = _ref.saveFn;
+      saveFn = _ref.saveFn,
+      visitedPages = _ref.visitedPages;
 
   var renderQuestion = function renderQuestion(question) {
     switch (question.type) {
@@ -122671,8 +122681,8 @@ var Question = function Question(_ref) {
       invite_id: invite.id,
       question_id: question.id,
       answer: value,
-      page: currentStep + 1 //page: currentStep
-
+      //page: currentStep + 1
+      page: currentStep
     });
   };
 
@@ -122718,7 +122728,14 @@ var Question = function Question(_ref) {
     variant: "contained",
     color: "primary",
     onClick: function onClick() {
-      history.goBack();
+      console.log(visitedPages, currentStep);
+      var currentIndex = visitedPages.indexOf(currentStep);
+
+      if (currentIndex < 0) {
+        goToStep(visitedPages[visitedPages.length - 1]);
+      } else {
+        goToStep(visitedPages[currentIndex - 1]);
+      }
     }
   }, "Back"))));
 };
@@ -122786,7 +122803,7 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -122906,11 +122923,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
 /* harmony import */ var _app_api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../app/api */ "./resources/js/app/api.js");
-
-
 var _extraReducers;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -123048,11 +123065,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
 /* harmony import */ var _app_api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../app/api */ "./resources/js/app/api.js");
-
-
 var _extraReducers;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -123163,7 +123180,7 @@ var inviteSlice = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__["createSl
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/stanko/web/kosta/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/stanko/web/minorityrightsindex/resources/js/app.js */"./resources/js/app.js");
 
 
 /***/ })

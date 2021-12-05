@@ -32,6 +32,7 @@ class Campaign extends Component {
             campaign,
             responses,
             page,
+            visitedPages,
             classes,
             error,
             loading
@@ -54,6 +55,7 @@ class Campaign extends Component {
                             });
                         }, {})}
                         page={page}
+                        visitedPages={visitedPages}
                     />
                 </div>
             );
@@ -67,7 +69,8 @@ const mapStateToProps = state => {
         error: state.invite.error,
         campaign: state.invite.data.campaign,
         responses: state.invite.data.responses,
-        page: state.invite.data.page
+        page: state.invite.data.page,
+        visitedPages: state.invite.data.visitedPages
     };
 };
 

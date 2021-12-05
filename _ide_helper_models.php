@@ -16,7 +16,7 @@ namespace App\Models{
  *
  * @property int $id
  * @property string $title
- * @property string $slug
+ * @property string|null $slug
  * @property string|null $description
  * @property int $locked
  * @property array|null $messages
@@ -30,7 +30,8 @@ namespace App\Models{
  * @property-read int|null $questions_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Response[] $responses
  * @property-read int|null $responses_count
- * @method static \Illuminate\Database\Eloquent\Builder|Campaign findSimilarSlugs($attribute, $config, $slug)
+ * @method static \Database\Factories\CampaignFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Campaign findSimilarSlugs(string $attribute, array $config, string $slug)
  * @method static \Illuminate\Database\Eloquent\Builder|Campaign newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Campaign newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Campaign query()
@@ -42,6 +43,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Campaign whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Campaign whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Campaign whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Campaign withUniqueSlugConstraints(\Illuminate\Database\Eloquent\Model $model, string $attribute, array $config, string $slug)
  */
 	class Campaign extends \Eloquent {}
 }
@@ -55,6 +57,7 @@ namespace App\Models{
  * @property string $email
  * @property string $token
  * @property int $page
+ * @property string $visited_pages
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string|null $deleted_at
@@ -72,6 +75,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Invite wherePage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Invite whereToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Invite whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Invite whereVisitedPages($value)
  */
 	class Invite extends \Eloquent {}
 }
@@ -107,7 +111,7 @@ namespace App\Models{
  *
  * @property int $id
  * @property int $campaign_id
- * @property int|null $parent_id
+ * @property int $parent_id
  * @property int $lft
  * @property int $rgt
  * @property int $depth
@@ -123,7 +127,8 @@ namespace App\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection|Question[] $children
  * @property-read int|null $children_count
  * @property-read \App\Models\OptionGroup|null $optiongroup
- * @property-read Question|null $parent
+ * @property-read Question $parent
+ * @method static \Database\Factories\QuestionFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Question newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Question newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Question query()

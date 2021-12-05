@@ -12,7 +12,8 @@ const CampaignForm = ({
     handleSubmit,
     saveFn,
     campaign: { questions, messages },
-    page
+    page,
+    visitedPages
 }) => {
     const onSubmit = formValues => {
         !!saveFn &&
@@ -22,7 +23,7 @@ const CampaignForm = ({
             });
     };
 
-    const handleConditionals = () => {
+    /*const handleConditionals = () => {
         return q.conditions.map(c =>
             questions.indexOf(
                 questions.find(item => {
@@ -30,16 +31,16 @@ const CampaignForm = ({
                 })
             )
         );
-    };
+    };*/
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <StepWizard
                 initialStep={page}
-                isHashEnabled={true}
+                //isHashEnabled={true}
                 isLazyMount={true}
             >
-                <CampaignMessage message={messages.intro} type="intro" />
+                <CampaignMessage message={messages.intro} type="intro" saveFn={saveFn} />
                 {questions.map((q, idx) => (
                     <Question
                         key={q.id}
@@ -54,6 +55,7 @@ const CampaignForm = ({
                         }
                         hashKey={q.code}
                         saveFn={saveFn}
+                        visitedPages={visitedPages}
                     />
                 ))}
                 <CampaignMessage

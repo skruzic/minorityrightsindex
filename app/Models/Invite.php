@@ -14,6 +14,10 @@ class Invite extends Model
 
     protected $fillable = ['campaign_id', 'email', 'token'];
 
+    protected $casts = [
+        'visited_pages' => 'array'
+    ];
+
     public function campaign()
     {
         return $this->belongsTo(Campaign::class);

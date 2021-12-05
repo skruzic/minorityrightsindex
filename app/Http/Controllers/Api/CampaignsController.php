@@ -42,8 +42,9 @@ class CampaignsController extends Controller
             ]);
         }
 
-        $inv       = Invite::findOrFail($request->invite_id);
-        $inv->page = $request->page;
+        $inv                = Invite::findOrFail($request->invite_id);
+        $inv->page          = $request->page + 1; // uvecavam za 1, da spremi sljedecu stranicu kao pocetnu kod refresha
+        $inv->visited_pages = array_merge($inv->visited_pages, [$request->page]);
         $inv->save();
 
         return response()->json([], 204);
@@ -70,7 +71,7 @@ class CampaignsController extends Controller
     {
         $campaign = Campaign::findBySlugOrFail($slug);
 
-        if (!$campaign->locked) {
+        if ( ! $campaign->locked) {
             return new CampaignResource($campaign);
         } else {
             abort(403, 'The campaign is currently open. To test it, please lock it.');

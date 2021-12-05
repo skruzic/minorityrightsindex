@@ -28,7 +28,8 @@ const Question = ({
     invite,
     saveResponse,
     history,
-    saveFn
+    saveFn,
+    visitedPages
 }) => {
     const renderQuestion = question => {
         switch (question.type) {
@@ -102,10 +103,10 @@ const Question = ({
                 invite_id: invite.id,
                 question_id: question.id,
                 answer: value,
-                page: currentStep + 1
-                //page: currentStep
+                //page: currentStep + 1
+                page: currentStep
             });
-    };
+    }
 
     const computeJump = () => {
         const matchIdx = question.conditions.findIndex(
@@ -162,7 +163,14 @@ const Question = ({
                             variant="contained"
                             color="primary"
                             onClick={() => {
-                                history.goBack();
+                                console.log(visitedPages, currentStep);
+                                const currentIndex = visitedPages.indexOf(currentStep);
+
+                                if (currentIndex<0) {
+                                    goToStep(visitedPages[visitedPages.length-1])
+                                } else {
+                                    goToStep(visitedPages[currentIndex-1])
+                                }
                             }}
                         >
                             Back
