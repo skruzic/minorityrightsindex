@@ -121324,7 +121324,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
 /* harmony default export */ __webpack_exports__["default"] = (axios__WEBPACK_IMPORTED_MODULE_0___default.a.create({
-  baseURL: "".concat("http://minorityrightsindex.local", "/api")
+  baseURL: "".concat("http://mri.local", "/api")
 }));
 
 /***/ }),
@@ -121344,22 +121344,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(redux_logger__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../slices/campaignsSlice */ "./resources/js/slices/campaignsSlice.js");
 /* harmony import */ var _slices_inviteSlice__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../slices/inviteSlice */ "./resources/js/slices/inviteSlice.js");
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 
 
 
 
+var middlewares = [];
+
+if (true) {
+  middlewares.push(redux_logger__WEBPACK_IMPORTED_MODULE_2___default.a);
+}
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__["configureStore"])({
   reducer: {
@@ -121367,7 +121361,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     campaign: _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_3__["default"],
     invite: _slices_inviteSlice__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
-  middleware: [redux_logger__WEBPACK_IMPORTED_MODULE_2___default.a].concat(_toConsumableArray(Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__["getDefaultMiddleware"])()))
+  //middleware: [logger, ...getDefaultMiddleware()]
+  middleware: function middleware(getDefaultMiddleware) {
+    return getDefaultMiddleware().concat(middlewares);
+  }
 }));
 
 /***/ }),
@@ -121549,7 +121546,8 @@ var CampaignForm = function CampaignForm(_ref) {
       questions = _ref$campaign.questions,
       messages = _ref$campaign.messages,
       page = _ref.page,
-      visitedPages = _ref.visitedPages;
+      visitedPages = _ref.visitedPages,
+      updateStatus = _ref.updateStatus;
 
   var onSubmit = function onSubmit(formValues) {
     !!saveFn && saveFn({
@@ -121577,7 +121575,8 @@ var CampaignForm = function CampaignForm(_ref) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CampaignMessage__WEBPACK_IMPORTED_MODULE_8__["default"], {
     message: messages.intro,
     type: "intro",
-    saveFn: saveFn
+    saveFn: saveFn,
+    updateStatus: updateStatus
   }), questions.map(function (q, idx) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_Question__WEBPACK_IMPORTED_MODULE_7__["default"], {
       key: q.id,
@@ -121591,12 +121590,14 @@ var CampaignForm = function CampaignForm(_ref) {
       }),
       hashKey: q.code,
       saveFn: saveFn,
-      visitedPages: visitedPages
+      visitedPages: visitedPages,
+      updateStatus: updateStatus
     });
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CampaignMessage__WEBPACK_IMPORTED_MODULE_8__["default"], {
     message: messages["final"],
     type: "final",
-    saveFn: saveFn
+    saveFn: saveFn,
+    updateStatus: updateStatus
   })));
 };
 
@@ -121695,7 +121696,8 @@ var CampaignMessage = function CampaignMessage(_ref) {
       currentStep = _ref.currentStep,
       totalSteps = _ref.totalSteps,
       invite = _ref.invite,
-      saveFn = _ref.saveFn;
+      saveFn = _ref.saveFn,
+      updateStatus = _ref.updateStatus;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ProgressWithLabel__WEBPACK_IMPORTED_MODULE_7__["default"], {
     value: (currentStep - 1) / (totalSteps - 1) * 100
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_3__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -121712,6 +121714,11 @@ var CampaignMessage = function CampaignMessage(_ref) {
       !!saveFn && saveFn({
         invite_id: invite.id,
         page: currentStep
+      });
+      updateStatus({
+        invite_id: invite.id,
+        page: currentStep,
+        direction: 1
       });
     }
   }, "Next"))));
@@ -122368,7 +122375,9 @@ var Campaign = /*#__PURE__*/function (_Component) {
           visitedPages = _this$props.visitedPages,
           classes = _this$props.classes,
           error = _this$props.error,
-          loading = _this$props.loading;
+          loading = _this$props.loading,
+          saveCampaignAnswers = _this$props.saveCampaignAnswers,
+          updateInvite = _this$props.updateInvite;
 
       if (loading === 'pending') {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_7__["default"], null);
@@ -122383,12 +122392,13 @@ var Campaign = /*#__PURE__*/function (_Component) {
           title: campaign.title
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_CampaignForm__WEBPACK_IMPORTED_MODULE_8__["default"], {
           campaign: campaign,
-          saveFn: this.props.saveCampaignAnswers,
+          saveFn: saveCampaignAnswers,
           initialValues: responses.reduce(function (obj, item) {
             return Object.assign(obj, _defineProperty({}, item.question.code, item.answer));
           }, {}),
           page: page,
-          visitedPages: visitedPages
+          visitedPages: visitedPages,
+          updateStatus: updateInvite
         }));
       }
     }
@@ -122422,7 +122432,8 @@ var styles = function styles(theme) {
   fetchCampaignBySlug: _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_4__["fetchCampaignBySlug"],
   fetchInviteByToken: _slices_inviteSlice__WEBPACK_IMPORTED_MODULE_5__["fetchInviteByToken"],
   fetchInviteWithoutToken: _slices_inviteSlice__WEBPACK_IMPORTED_MODULE_5__["fetchInviteWithoutToken"],
-  saveCampaignAnswers: _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_4__["saveCampaignAnswers"]
+  saveCampaignAnswers: _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_4__["saveCampaignAnswers"],
+  updateInvite: _slices_inviteSlice__WEBPACK_IMPORTED_MODULE_5__["updateInvite"]
 }))(Campaign));
 
 /***/ }),
@@ -122608,7 +122619,8 @@ var Question = function Question(_ref) {
       saveResponse = _ref.saveResponse,
       history = _ref.history,
       saveFn = _ref.saveFn,
-      visitedPages = _ref.visitedPages;
+      visitedPages = _ref.visitedPages,
+      updateStatus = _ref.updateStatus;
 
   var renderQuestion = function renderQuestion(question) {
     switch (question.type) {
@@ -122686,6 +122698,25 @@ var Question = function Question(_ref) {
     });
   };
 
+  var handleNext = function handleNext() {
+    var jump = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+    updateStatus({
+      invite_id: invite.id,
+      page: currentStep,
+      jump: jump,
+      direction: 1
+    }); //console.log('JUMP', jump);
+  };
+
+  var handlePrev = function handlePrev() {
+    updateStatus({
+      invite_id: invite.id,
+      page: currentStep,
+      jump: 1,
+      direction: -1
+    });
+  };
+
   var computeJump = function computeJump() {
     var matchIdx = question.conditions.findIndex(function (item) {
       return parseInt(item.answer) === parseInt(value);
@@ -122705,12 +122736,15 @@ var Question = function Question(_ref) {
     color: "primary",
     onClick: function onClick() {
       var jump = computeJump();
+      console.log('JUMP', jump);
 
       if (Object(lodash__WEBPACK_IMPORTED_MODULE_13__["isEmpty"])(question.conditions)) {
         nextStep();
+        handleNext();
       } else if (jump > -1) {
         // +2 zbog uvodne stranice i zero-indexiranja
         goToStep(jump + 2);
+        handleNext(jump + 2);
       } else {
         nextStep();
       }
@@ -122736,6 +122770,8 @@ var Question = function Question(_ref) {
       } else {
         goToStep(visitedPages[currentIndex - 1]);
       }
+
+      handlePrev();
     }
   }, "Back"))));
 };
@@ -123053,13 +123089,14 @@ var campaignsSlice = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__["creat
 /*!********************************************!*\
   !*** ./resources/js/slices/inviteSlice.js ***!
   \********************************************/
-/*! exports provided: fetchInviteByToken, fetchInviteWithoutToken, inviteSlice, default */
+/*! exports provided: fetchInviteByToken, fetchInviteWithoutToken, updateInvite, inviteSlice, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchInviteByToken", function() { return fetchInviteByToken; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchInviteWithoutToken", function() { return fetchInviteWithoutToken; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateInvite", function() { return updateInvite; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "inviteSlice", function() { return inviteSlice; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
@@ -123143,6 +123180,39 @@ var fetchInviteWithoutToken = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1
     return _ref4.apply(this, arguments);
   };
 }());
+var updateInvite = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__["createAsyncThunk"])('invite/updateStatus', /*#__PURE__*/function () {
+  var _ref6 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(args, _ref5) {
+    var rejectWithValue, response;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            rejectWithValue = _ref5.rejectWithValue;
+            _context3.prev = 1;
+            _context3.next = 4;
+            return _app_api__WEBPACK_IMPORTED_MODULE_2__["default"].post('campaign/invite/update', args);
+
+          case 4:
+            response = _context3.sent;
+            return _context3.abrupt("return", response.data);
+
+          case 8:
+            _context3.prev = 8;
+            _context3.t0 = _context3["catch"](1);
+            return _context3.abrupt("return", rejectWithValue(_context3.t0.response.data));
+
+          case 11:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3, null, [[1, 8]]);
+  }));
+
+  return function (_x5, _x6) {
+    return _ref6.apply(this, arguments);
+  };
+}());
 var inviteSlice = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__["createSlice"])({
   name: 'invite',
   initialState: {
@@ -123167,6 +123237,9 @@ var inviteSlice = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__["createSl
     state.loading = 'idle';
     state.error = action.payload;
     state.data = {};
+  }), _defineProperty(_extraReducers, updateInvite.fulfilled, function (state, action) {
+    state.data.page = action.payload.page;
+    state.data.visitedPages = action.payload.visitedPages;
   }), _extraReducers)
 });
 /* harmony default export */ __webpack_exports__["default"] = (inviteSlice.reducer);
@@ -123180,7 +123253,7 @@ var inviteSlice = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__["createSl
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/stanko/web/minorityrightsindex/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/skruzic/web/minorityrightsindex/resources/js/app.js */"./resources/js/app.js");
 
 
 /***/ })

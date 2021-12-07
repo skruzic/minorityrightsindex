@@ -27,6 +27,19 @@ export const fetchInviteWithoutToken = createAsyncThunk(
     }
 );
 
+export const updateInvite = createAsyncThunk(
+    'invite/updateStatus',
+    async (args, { rejectWithValue }) => {
+        try {
+            const response = await api.post('campaign/invite/update', args);
+
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.response.data);
+        }
+    }
+);
+
 export const inviteSlice = createSlice({
     name: 'invite',
     initialState: { data: {}, loading: 'pending', error: null },
@@ -52,6 +65,10 @@ export const inviteSlice = createSlice({
             state.loading = 'idle';
             state.error = action.payload;
             state.data = {};
+        },
+        [updateInvite.fulfilled]: (state, action) => {
+            state.data.page = action.payload.page;
+            state.data.visitedPages = action.payload.visitedPages;
         }
     }
 });

@@ -8,7 +8,8 @@ import {
 } from '../slices/campaignsSlice';
 import {
     fetchInviteByToken,
-    fetchInviteWithoutToken
+    fetchInviteWithoutToken,
+    updateInvite
 } from '../slices/inviteSlice';
 import queryString from 'query-string';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -35,7 +36,9 @@ class Campaign extends Component {
             visitedPages,
             classes,
             error,
-            loading
+            loading,
+            saveCampaignAnswers,
+            updateInvite
         } = this.props;
 
         if (loading === 'pending') {
@@ -48,7 +51,7 @@ class Campaign extends Component {
                     <CampaignHeader title={campaign.title} />
                     <CampaignForm
                         campaign={campaign}
-                        saveFn={this.props.saveCampaignAnswers}
+                        saveFn={saveCampaignAnswers}
                         initialValues={responses.reduce((obj, item) => {
                             return Object.assign(obj, {
                                 [item.question.code]: item.answer
@@ -56,6 +59,7 @@ class Campaign extends Component {
                         }, {})}
                         page={page}
                         visitedPages={visitedPages}
+                        updateStatus={updateInvite}
                     />
                 </div>
             );
@@ -86,6 +90,7 @@ export default compose(
         fetchCampaignBySlug,
         fetchInviteByToken,
         fetchInviteWithoutToken,
-        saveCampaignAnswers
+        saveCampaignAnswers,
+        updateInvite
     })
 )(Campaign);

@@ -29,7 +29,8 @@ const Question = ({
     saveResponse,
     history,
     saveFn,
-    visitedPages
+    visitedPages,
+    updateStatus
 }) => {
     const renderQuestion = question => {
         switch (question.type) {
@@ -106,7 +107,26 @@ const Question = ({
                 //page: currentStep + 1
                 page: currentStep
             });
-    }
+    };
+
+    const handleNext = (jump = 1) => {
+        updateStatus({
+            invite_id: invite.id,
+            page: currentStep,
+            jump,
+            direction: 1
+        });
+        //console.log('JUMP', jump);
+    };
+
+    const handlePrev = () => {
+        updateStatus({
+            invite_id: invite.id,
+            page: currentStep,
+            jump: 1,
+            direction: -1
+        });
+    };
 
     const computeJump = () => {
         const matchIdx = question.conditions.findIndex(
@@ -130,12 +150,15 @@ const Question = ({
                             color="primary"
                             onClick={() => {
                                 const jump = computeJump();
+                                console.log('JUMP', jump);
 
                                 if (isEmpty(question.conditions)) {
                                     nextStep();
+                                    handleNext();
                                 } else if (jump > -1) {
                                     // +2 zbog uvodne stranice i zero-indexiranja
                                     goToStep(jump + 2);
+                                    handleNext(jump + 2);
                                 } else {
                                     nextStep();
                                 }
@@ -164,13 +187,18 @@ const Question = ({
                             color="primary"
                             onClick={() => {
                                 console.log(visitedPages, currentStep);
-                                const currentIndex = visitedPages.indexOf(currentStep);
+                                const currentIndex = visitedPages.indexOf(
+                                    currentStep
+                                );
 
-                                if (currentIndex<0) {
-                                    goToStep(visitedPages[visitedPages.length-1])
+                                if (currentIndex < 0) {
+                                    goToStep(
+                                        visitedPages[visitedPages.length - 1]
+                                    );
                                 } else {
-                                    goToStep(visitedPages[currentIndex-1])
+                                    goToStep(visitedPages[currentIndex - 1]);
                                 }
+                                handlePrev();
                             }}
                         >
                             Back

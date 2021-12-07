@@ -42,10 +42,10 @@ class CampaignsController extends Controller
             ]);
         }
 
-        $inv                = Invite::findOrFail($request->invite_id);
+        /*$inv                = Invite::findOrFail($request->invite_id);
         $inv->page          = $request->page + 1; // uvecavam za 1, da spremi sljedecu stranicu kao pocetnu kod refresha
         $inv->visited_pages = array_merge($inv->visited_pages, [$request->page]);
-        $inv->save();
+        $inv->save();*/
 
         return response()->json([], 204);
     }
@@ -96,5 +96,28 @@ class CampaignsController extends Controller
 
             return null;
         }
+    }
+
+    public function updateStatus(Request $request)
+    {
+        $inv = Invite::findOrFail($request->invite_id);
+
+        if ($request->direction > 0) {
+            // Sljedeća stranica
+            $inv->page          = $request->jump != 1 ? $request->jump : $request->page + 1; // uvecavam za step, da spremi sljedecu stranicu kao pocetnu kod refresha
+            $inv->visited_pages = array_merge($inv->visited_pages, [$request->page]);
+        } else {
+            $visited_pages = $inv->visited_pages;
+            $current_page = array_pop($visited_pages);
+            $inv->page     = $current_page; // smanjujem za step, da spremi prethodnu stranicu kao pocetnu kod refresha
+            $inv->visited_pages = $visited_pages;
+        }
+
+        $inv->save();
+
+        return response()->json([
+            'page'         => $inv->page,
+            'visitedPages' => $inv->visited_pages,
+        ]);
     }
 }

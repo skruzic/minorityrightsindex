@@ -14,7 +14,8 @@ const CampaignMessage = ({
     currentStep,
     totalSteps,
     invite,
-    saveFn
+    saveFn,
+    updateStatus
 }) => (
     <>
         <ProgressWithLabel
@@ -32,8 +33,13 @@ const CampaignMessage = ({
                             !!saveFn &&
                                 saveFn({
                                     invite_id: invite.id,
-                                    page: currentStep,
+                                    page: currentStep
                                 });
+                            updateStatus({
+                                invite_id: invite.id,
+                                page: currentStep,
+                                direction: 1
+                            });
                         }}
                     >
                         Next

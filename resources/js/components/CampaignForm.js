@@ -13,7 +13,8 @@ const CampaignForm = ({
     saveFn,
     campaign: { questions, messages },
     page,
-    visitedPages
+    visitedPages,
+    updateStatus
 }) => {
     const onSubmit = formValues => {
         !!saveFn &&
@@ -40,7 +41,12 @@ const CampaignForm = ({
                 //isHashEnabled={true}
                 isLazyMount={true}
             >
-                <CampaignMessage message={messages.intro} type="intro" saveFn={saveFn} />
+                <CampaignMessage
+                    message={messages.intro}
+                    type="intro"
+                    saveFn={saveFn}
+                    updateStatus={updateStatus}
+                />
                 {questions.map((q, idx) => (
                     <Question
                         key={q.id}
@@ -56,12 +62,14 @@ const CampaignForm = ({
                         hashKey={q.code}
                         saveFn={saveFn}
                         visitedPages={visitedPages}
+                        updateStatus={updateStatus}
                     />
                 ))}
                 <CampaignMessage
                     message={messages.final}
                     type="final"
                     saveFn={saveFn}
+                    updateStatus={updateStatus}
                 />
             </StepWizard>
         </form>
