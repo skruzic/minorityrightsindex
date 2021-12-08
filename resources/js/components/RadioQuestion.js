@@ -9,7 +9,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import Typography from '@material-ui/core/Typography';
 
 const RadioQuestion = ({ name, text, input, options, ...rest }) => {
-    const [value, setValue] = useState('');
+    const [value, setValue] = useState(input.value.toString());
 
     const handleChange = event => {
         setValue(event.target.value);
@@ -19,7 +19,12 @@ const RadioQuestion = ({ name, text, input, options, ...rest }) => {
         <div>
             <Typography>{text}</Typography>
             <FormControl component="fieldset">
-                <RadioGroup {...input} {...rest}>
+                <RadioGroup
+                    {...input}
+                    {...rest}
+                    value={value}
+                    onChange={handleChange}
+                >
                     {options.map((option, idx) => (
                         <FormControlLabel
                             key={idx}

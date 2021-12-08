@@ -105,11 +105,11 @@ class CampaignsController extends Controller
         if ($request->direction > 0) {
             // Sljedeća stranica
             $inv->page          = $request->jump != 1 ? $request->jump : $request->page + 1; // uvecavam za step, da spremi sljedecu stranicu kao pocetnu kod refresha
-            $inv->visited_pages = array_merge($inv->visited_pages, [$request->page]);
+            $inv->visited_pages = array_merge($inv->visited_pages ?? [], [$request->page]);
         } else {
-            $visited_pages = $inv->visited_pages;
-            $current_page = array_pop($visited_pages);
-            $inv->page     = $current_page; // smanjujem za step, da spremi prethodnu stranicu kao pocetnu kod refresha
+            $visited_pages      = $inv->visited_pages ?? [];
+            $current_page       = array_pop($visited_pages);
+            $inv->page          = $current_page; // smanjujem za step, da spremi prethodnu stranicu kao pocetnu kod refresha
             $inv->visited_pages = $visited_pages;
         }
 
