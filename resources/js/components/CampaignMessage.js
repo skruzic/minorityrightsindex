@@ -38,6 +38,7 @@ const CampaignMessage = ({
                             updateStatus({
                                 invite_id: invite.id,
                                 page: currentStep,
+                                jump: 1,
                                 direction: 1
                             });
                         }}

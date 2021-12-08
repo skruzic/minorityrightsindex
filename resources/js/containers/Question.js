@@ -116,7 +116,6 @@ const Question = ({
             jump,
             direction: 1
         });
-        //console.log('JUMP', jump);
     };
 
     const handlePrev = () => {

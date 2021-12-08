@@ -14,7 +14,7 @@ class AddVisitedPagesToInvites extends Migration
     public function up()
     {
         Schema::table('invites', function (Blueprint $table) {
-            $table->json('visited_pages')->after('page')->default('[]');
+            $table->longText('visited_pages')->after('page')->default('[]');
         });
     }
 
