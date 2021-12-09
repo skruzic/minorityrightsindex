@@ -90,7 +90,7 @@ class QuestionCrudController extends CrudController
                 'name'      => 'optiongroup',
                 'label'     => 'Options',
                 'type'      => 'select',
-                'entity'    => 'options',
+                'entity'    => 'optiongroup',
                 'attribute' => 'name',
                 'model'     => 'App\Models\OptionGroup',
             ],
