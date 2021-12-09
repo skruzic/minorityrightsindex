@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Enums\QuestionType;
+use App\Exports\ResponsesExport;
 use App\Helpers\CsvExporter;
 use App\Http\Requests\QuestionRequest;
 use App\Models\Campaign;
@@ -15,6 +16,7 @@ use Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\ReorderOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use Maatwebsite\Excel\Facades\Excel;
 
 /**
  * Class QuestionCrudController
@@ -208,8 +210,8 @@ class QuestionCrudController extends CrudController
 
     public function download()
     {
-        //(new AnswerExporter($this->campaign_id))->export();
-        (new CsvExporter($this->campaign_id))->export();
+        //(new CsvExporter($this->campaign_id))->export();
+        return Excel::download(new ResponsesExport($this->campaign_id), 'data.xlsx');
     }
 
     /*public function reorder()
