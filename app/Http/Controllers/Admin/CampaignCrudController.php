@@ -148,25 +148,17 @@ class CampaignCrudController extends CrudController
         $clone->title = $model->title.' (clone)';
         $clone->push();
 
+        foreach ($model->questions as $question) {
+            $question_clone = $question->replicate();
+            $clone->questions()->save($question_clone);
 
-        foreach ($model->sections as $section) {
-            $section_clone = $section->replicate();
-            $clone->sections()->save($section_clone);
-
-            foreach ($section->questions as $question) {
-                //if ( ! isset($question->parent_id)) {
-                $question_clone = $question->replicate();
-                $section_clone->questions()->save($question_clone);
-
-                foreach ($question->children as $child) {
-                    $child_clone             = $child->replicate();
-                    $child_clone->parent_id  = $question_clone->id;
-                    $child_clone->section_id = $section_clone->id;
-                    $question_clone->children()->save($child_clone);
-                }
-                //}
+            foreach ($question->children as $child) {
+                $child_clone             = $child->replicate();
+                $child_clone->parent_id  = $question_clone->id;
+                $question_clone->children()->save($child_clone);
             }
         }
+
     }
 
     /**
