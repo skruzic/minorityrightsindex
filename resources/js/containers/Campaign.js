@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import {
     fetchCampaignBySlug,
-    saveCampaignAnswers
+    saveCampaignAnswers,
+    setPreview
 } from '../slices/campaignsSlice';
 import {
     fetchInviteByToken,
@@ -26,6 +27,8 @@ class Campaign extends Component {
         } else {
             this.props.fetchInviteWithoutToken(this.props.match.params.slug);
         }
+
+        this.props.setPreview(false);
     }
 
     render() {
@@ -51,15 +54,15 @@ class Campaign extends Component {
                     <CampaignHeader title={campaign.title} />
                     <CampaignForm
                         campaign={campaign}
-                        saveFn={saveCampaignAnswers}
+                        //saveFn={saveCampaignAnswers}
                         initialValues={responses.reduce((obj, item) => {
                             return Object.assign(obj, {
                                 [item.question.code]: item.answer
                             });
                         }, {})}
                         page={page}
-                        visitedPages={visitedPages}
-                        updateStatus={updateInvite}
+                        //visitedPages={visitedPages}
+                        //updateStatus={updateInvite}
                     />
                 </div>
             );
@@ -91,6 +94,7 @@ export default compose(
         fetchInviteByToken,
         fetchInviteWithoutToken,
         saveCampaignAnswers,
-        updateInvite
+        updateInvite,
+        setPreview
     })
 )(Campaign);

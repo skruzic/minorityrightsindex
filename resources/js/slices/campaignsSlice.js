@@ -30,8 +30,23 @@ export const saveCampaignAnswers = createAsyncThunk(
 
 export const campaignsSlice = createSlice({
     name: 'campaigns',
-    initialState: { data: {}, loading: 'pending', error: null },
-    reducers: {},
+    initialState: {
+        data: {},
+        loading: 'pending',
+        error: null,
+        preview: false,
+        visitedPages: []
+    },
+    reducers: {
+        setPreview(state, action) {
+            state.preview = action.payload;
+        },
+        updateVisitedPages(state, { payload: { direction, value } }) {
+            direction > 0
+                ? state.visitedPages.push(value)
+                : state.visitedPages.splice(-1, 1);
+        }
+    },
     extraReducers: {
         [fetchCampaignBySlug.pending]: (state, action) => {
             state.loading = 'pending';
@@ -62,7 +77,4 @@ export const campaignsSlice = createSlice({
 
 export default campaignsSlice.reducer;
 
-/*export const {
-    selectById: selectCampaignById,
-    selectAll: selectAllCampaigns
-} = campaignsAdapter.getSelectors(state => state.campaign);*/
+export const { setPreview, updateVisitedPages } = campaignsSlice.actions;

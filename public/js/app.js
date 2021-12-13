@@ -121680,6 +121680,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/CardActions */ "./node_modules/@material-ui/core/esm/CardActions/index.js");
 /* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/Button */ "./node_modules/@material-ui/core/esm/Button/index.js");
 /* harmony import */ var _ProgressWithLabel__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./ProgressWithLabel */ "./resources/js/components/ProgressWithLabel.js");
+/* harmony import */ var _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../slices/campaignsSlice */ "./resources/js/slices/campaignsSlice.js");
+/* harmony import */ var _slices_inviteSlice__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../slices/inviteSlice */ "./resources/js/slices/inviteSlice.js");
+
+
 
 
 
@@ -121696,8 +121700,30 @@ var CampaignMessage = function CampaignMessage(_ref) {
       currentStep = _ref.currentStep,
       totalSteps = _ref.totalSteps,
       invite = _ref.invite,
-      saveFn = _ref.saveFn,
-      updateStatus = _ref.updateStatus;
+      updateInvite = _ref.updateInvite,
+      preview = _ref.preview,
+      updateVisitedPages = _ref.updateVisitedPages;
+
+  var handleNext = function handleNext() {
+    if (!preview) {
+      Object(_slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_8__["saveCampaignAnswers"])({
+        invite_id: invite.id,
+        page: currentStep
+      });
+      updateInvite({
+        invite_id: invite.id,
+        page: currentStep,
+        jump: 1,
+        direction: 1
+      });
+    } else {
+      updateVisitedPages({
+        direction: 1,
+        value: currentStep
+      });
+    }
+  };
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ProgressWithLabel__WEBPACK_IMPORTED_MODULE_7__["default"], {
     value: (currentStep - 1) / (totalSteps - 1) * 100
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_3__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -121711,33 +121737,28 @@ var CampaignMessage = function CampaignMessage(_ref) {
     color: "primary",
     onClick: function onClick() {
       nextStep();
-      !!saveFn && saveFn({
-        invite_id: invite.id,
-        page: currentStep
-      });
-      updateStatus({
-        invite_id: invite.id,
-        page: currentStep,
-        jump: 1,
-        direction: 1
-      });
+      handleNext();
     }
   }, "Next"))));
 };
 
 CampaignMessage.propTypes = {
-  message: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired,
-  type: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.oneOf(['intro', 'final']).isRequired,
-  saveFn: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
+  message: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+  type: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.oneOf(['intro', 'final']).isRequired
 };
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    invite: state.invite.data
+    invite: state.invite.data,
+    preview: state.campaign.preview
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps)(CampaignMessage));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, {
+  saveCampaignAnswers: _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_8__["saveCampaignAnswers"],
+  updateVisitedPages: _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_8__["updateVisitedPages"],
+  updateInvite: _slices_inviteSlice__WEBPACK_IMPORTED_MODULE_9__["updateInvite"]
+})(CampaignMessage));
 
 /***/ }),
 
@@ -122368,6 +122389,8 @@ var Campaign = /*#__PURE__*/function (_Component) {
       } else {
         this.props.fetchInviteWithoutToken(this.props.match.params.slug);
       }
+
+      this.props.setPreview(false);
     }
   }, {
     key: "render",
@@ -122395,14 +122418,14 @@ var Campaign = /*#__PURE__*/function (_Component) {
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_CampaignHeader__WEBPACK_IMPORTED_MODULE_9__["default"], {
           title: campaign.title
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_CampaignForm__WEBPACK_IMPORTED_MODULE_8__["default"], {
-          campaign: campaign,
-          saveFn: saveCampaignAnswers,
+          campaign: campaign //saveFn={saveCampaignAnswers}
+          ,
           initialValues: responses.reduce(function (obj, item) {
             return Object.assign(obj, _defineProperty({}, item.question.code, item.answer));
           }, {}),
-          page: page,
-          visitedPages: visitedPages,
-          updateStatus: updateInvite
+          page: page //visitedPages={visitedPages}
+          //updateStatus={updateInvite}
+
         }));
       }
     }
@@ -122437,7 +122460,8 @@ var styles = function styles(theme) {
   fetchInviteByToken: _slices_inviteSlice__WEBPACK_IMPORTED_MODULE_5__["fetchInviteByToken"],
   fetchInviteWithoutToken: _slices_inviteSlice__WEBPACK_IMPORTED_MODULE_5__["fetchInviteWithoutToken"],
   saveCampaignAnswers: _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_4__["saveCampaignAnswers"],
-  updateInvite: _slices_inviteSlice__WEBPACK_IMPORTED_MODULE_5__["updateInvite"]
+  updateInvite: _slices_inviteSlice__WEBPACK_IMPORTED_MODULE_5__["updateInvite"],
+  setPreview: _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_4__["setPreview"]
 }))(Campaign));
 
 /***/ }),
@@ -122508,6 +122532,7 @@ var CampaignPreview = /*#__PURE__*/function (_Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.fetchCampaignBySlug(this.props.match.params.slug);
+      this.props.setPreview(true);
     }
   }, {
     key: "render",
@@ -122559,7 +122584,8 @@ var styles = function styles(theme) {
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_3__["compose"])(Object(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["withStyles"])(styles, {
   withTheme: true
 }), Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, {
-  fetchCampaignBySlug: _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_4__["fetchCampaignBySlug"]
+  fetchCampaignBySlug: _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_4__["fetchCampaignBySlug"],
+  setPreview: _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_4__["setPreview"]
 }))(CampaignPreview));
 
 /***/ }),
@@ -122592,6 +122618,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_13__);
 /* harmony import */ var _components_LikertQuestion__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../components/LikertQuestion */ "./resources/js/components/LikertQuestion.js");
 /* harmony import */ var _components_ProgressWithLabel__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../components/ProgressWithLabel */ "./resources/js/components/ProgressWithLabel.js");
+/* harmony import */ var _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../slices/campaignsSlice */ "./resources/js/slices/campaignsSlice.js");
+/* harmony import */ var _slices_inviteSlice__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../slices/inviteSlice */ "./resources/js/slices/inviteSlice.js");
+
+
 
 
 
@@ -122624,7 +122654,12 @@ var Question = function Question(_ref) {
       history = _ref.history,
       saveFn = _ref.saveFn,
       visitedPages = _ref.visitedPages,
-      updateStatus = _ref.updateStatus;
+      visitedPagesPreview = _ref.visitedPagesPreview,
+      updateStatus = _ref.updateStatus,
+      preview = _ref.preview,
+      updateVisitedPages = _ref.updateVisitedPages,
+      updateInvite = _ref.updateInvite,
+      saveCampaignAnswers = _ref.saveCampaignAnswers;
 
   var renderQuestion = function renderQuestion(question) {
     switch (question.type) {
@@ -122635,8 +122670,7 @@ var Question = function Question(_ref) {
           component: _components_TextQuestion__WEBPACK_IMPORTED_MODULE_9__["default"],
           name: question.code,
           text: question.text,
-          questionType: question.type //onBlur={handleSave}
-
+          questionType: question.type
         });
 
       case 2:
@@ -122645,8 +122679,7 @@ var Question = function Question(_ref) {
           component: _components_RadioQuestion__WEBPACK_IMPORTED_MODULE_10__["default"],
           name: question.code,
           text: question.text,
-          options: question.optiongroup.options //onBlur={handleSave}
-
+          options: question.optiongroup.options
         });
 
       case 3:
@@ -122655,33 +122688,20 @@ var Question = function Question(_ref) {
           component: _components_CheckboxQuestion__WEBPACK_IMPORTED_MODULE_11__["default"],
           name: question.code,
           text: question.text,
-          options: question.optiongroup.options //saveFn={handleSave}
-
+          options: question.optiongroup.options
         });
 
       case 4:
-        return (
-          /*#__PURE__*/
-
-          /*<Field
-              key={question.id}
-              component={LikertQuestion}
-              name={question.code}
-              text={question.text}
-              options={question.optiongroup.options}
-              questions={question.children}
-          />*/
-          react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_LikertQuestion__WEBPACK_IMPORTED_MODULE_14__["default"], {
-            key: question.id,
-            name: question.code,
-            text: question.text,
-            options: question.optiongroup.options,
-            questions: question.children,
-            invite: invite,
-            currentStep: currentStep,
-            saveFn: saveFn
-          })
-        );
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_LikertQuestion__WEBPACK_IMPORTED_MODULE_14__["default"], {
+          key: question.id,
+          name: question.code,
+          text: question.text,
+          options: question.optiongroup.options,
+          questions: question.children,
+          invite: invite,
+          currentStep: currentStep,
+          saveFn: saveFn
+        });
 
       case 5:
         return null;
@@ -122693,7 +122713,17 @@ var Question = function Question(_ref) {
 
   var handleSave = function handleSave() {
     // Ne piši ništa ako pitanje ima children pitanja (Likert)
-    question.type !== 4 && !!saveFn && saveFn({
+
+    /*question.type !== 4 &&
+        !!saveFn &&
+        saveFn({
+            invite_id: invite.id,
+            question_id: question.id,
+            answer: value,
+            //page: currentStep + 1
+            page: currentStep
+        });*/
+    !preview && question.type !== 4 && saveCampaignAnswers({
       invite_id: invite.id,
       question_id: question.id,
       answer: value,
@@ -122704,20 +122734,28 @@ var Question = function Question(_ref) {
 
   var handleNext = function handleNext() {
     var jump = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-    updateStatus({
+    !preview && updateInvite({
       invite_id: invite.id,
       page: currentStep,
       jump: jump,
       direction: 1
     });
+    preview && updateVisitedPages({
+      direction: 1,
+      value: currentStep
+    });
   };
 
   var handlePrev = function handlePrev() {
-    updateStatus({
+    !preview && updateInvite({
       invite_id: invite.id,
       page: currentStep,
       jump: 1,
       direction: -1
+    });
+    preview && updateVisitedPages({
+      direction: -1,
+      value: currentStep
     });
   };
 
@@ -122740,7 +122778,6 @@ var Question = function Question(_ref) {
     color: "primary",
     onClick: function onClick() {
       var jump = computeJump();
-      console.log('JUMP', jump);
 
       if (Object(lodash__WEBPACK_IMPORTED_MODULE_13__["isEmpty"])(question.conditions)) {
         nextStep();
@@ -122751,6 +122788,7 @@ var Question = function Question(_ref) {
         handleNext(jump + 2);
       } else {
         nextStep();
+        handleNext();
       }
 
       handleSave();
@@ -122766,13 +122804,22 @@ var Question = function Question(_ref) {
     variant: "contained",
     color: "primary",
     onClick: function onClick() {
-      console.log(visitedPages, currentStep);
-      var currentIndex = visitedPages.indexOf(currentStep);
+      if (!preview) {
+        var currentIndex = visitedPages.indexOf(currentStep);
 
-      if (currentIndex < 0) {
-        goToStep(visitedPages[visitedPages.length - 1]);
+        if (currentIndex < 0) {
+          goToStep(visitedPages[visitedPages.length - 1]);
+        } else {
+          goToStep(visitedPages[currentIndex - 1]);
+        }
       } else {
-        goToStep(visitedPages[currentIndex - 1]);
+        var _currentIndex = visitedPagesPreview.indexOf(currentStep);
+
+        if (_currentIndex < 0) {
+          goToStep(visitedPagesPreview[visitedPagesPreview.length - 1]);
+        } else {
+          goToStep(visitedPagesPreview[_currentIndex - 1]);
+        }
       }
 
       handlePrev();
@@ -122804,11 +122851,18 @@ var selector = Object(redux_form__WEBPACK_IMPORTED_MODULE_6__["formValueSelector
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
     value: selector(state, ownProps.question.code),
-    invite: state.invite.data
+    invite: state.invite.data,
+    preview: state.campaign.preview,
+    visitedPages: state.invite.data.visitedPages,
+    visitedPagesPreview: state.campaign.visitedPages
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_5__["compose"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps), Object(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["withStyles"])(styles, {
+/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_5__["compose"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, {
+  saveCampaignAnswers: _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_16__["saveCampaignAnswers"],
+  updateInvite: _slices_inviteSlice__WEBPACK_IMPORTED_MODULE_17__["updateInvite"],
+  updateVisitedPages: _slices_campaignsSlice__WEBPACK_IMPORTED_MODULE_16__["updateVisitedPages"]
+}), Object(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["withStyles"])(styles, {
   withTheme: true
 }), react_router_dom__WEBPACK_IMPORTED_MODULE_4__["withRouter"])(Question));
 
@@ -122950,7 +123004,7 @@ var styles = function styles(theme) {
 /*!***********************************************!*\
   !*** ./resources/js/slices/campaignsSlice.js ***!
   \***********************************************/
-/*! exports provided: fetchCampaignBySlug, fetchCampaignByToken, saveCampaignAnswers, campaignsSlice, default */
+/*! exports provided: fetchCampaignBySlug, fetchCampaignByToken, saveCampaignAnswers, campaignsSlice, default, setPreview, updateVisitedPages */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -122959,6 +123013,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchCampaignByToken", function() { return fetchCampaignByToken; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "saveCampaignAnswers", function() { return saveCampaignAnswers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "campaignsSlice", function() { return campaignsSlice; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setPreview", function() { return setPreview; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateVisitedPages", function() { return updateVisitedPages; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
@@ -123058,9 +123114,21 @@ var campaignsSlice = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__["creat
   initialState: {
     data: {},
     loading: 'pending',
-    error: null
+    error: null,
+    preview: false,
+    visitedPages: []
   },
-  reducers: {},
+  reducers: {
+    setPreview: function setPreview(state, action) {
+      state.preview = action.payload;
+    },
+    updateVisitedPages: function updateVisitedPages(state, _ref4) {
+      var _ref4$payload = _ref4.payload,
+          direction = _ref4$payload.direction,
+          value = _ref4$payload.value;
+      direction > 0 ? state.visitedPages.push(value) : state.visitedPages.splice(-1, 1);
+    }
+  },
   extraReducers: (_extraReducers = {}, _defineProperty(_extraReducers, fetchCampaignBySlug.pending, function (state, action) {
     state.loading = 'pending';
   }), _defineProperty(_extraReducers, fetchCampaignBySlug.fulfilled, function (state, action) {
@@ -123082,10 +123150,10 @@ var campaignsSlice = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__["creat
   }), _extraReducers)
 });
 /* harmony default export */ __webpack_exports__["default"] = (campaignsSlice.reducer);
-/*export const {
-    selectById: selectCampaignById,
-    selectAll: selectAllCampaigns
-} = campaignsAdapter.getSelectors(state => state.campaign);*/
+var _campaignsSlice$actio = campaignsSlice.actions,
+    setPreview = _campaignsSlice$actio.setPreview,
+    updateVisitedPages = _campaignsSlice$actio.updateVisitedPages;
+
 
 /***/ }),
 

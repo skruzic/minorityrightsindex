@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { fetchCampaignBySlug } from '../slices/campaignsSlice';
+import { fetchCampaignBySlug, setPreview } from '../slices/campaignsSlice';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import CampaignForm from '../components/CampaignForm';
 import CampaignHeader from '../components/CampaignHeader';
@@ -11,6 +11,7 @@ import ErrorMessage from '../errors/ErrorMessage';
 class CampaignPreview extends Component {
     componentDidMount() {
         this.props.fetchCampaignBySlug(this.props.match.params.slug);
+        this.props.setPreview(true);
     }
 
     render() {
@@ -47,6 +48,7 @@ const styles = theme => ({
 export default compose(
     withStyles(styles, { withTheme: true }),
     connect(mapStateToProps, {
-        fetchCampaignBySlug
+        fetchCampaignBySlug,
+        setPreview
     })
 )(CampaignPreview);

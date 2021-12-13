@@ -14,6 +14,11 @@ import Button from '@material-ui/core/Button';
 import { isEmpty } from 'lodash';
 import LikertQuestion from '../components/LikertQuestion';
 import ProgressWithLabel from '../components/ProgressWithLabel';
+import {
+    saveCampaignAnswers,
+    updateVisitedPages
+} from '../slices/campaignsSlice';
+import { updateInvite } from '../slices/inviteSlice';
 
 const Question = ({
     question,
@@ -30,7 +35,12 @@ const Question = ({
     history,
     saveFn,
     visitedPages,
-    updateStatus
+    visitedPagesPreview,
+    updateStatus,
+    preview,
+    updateVisitedPages,
+    updateInvite,
+    saveCampaignAnswers
 }) => {
     const renderQuestion = question => {
         switch (question.type) {
@@ -43,7 +53,6 @@ const Question = ({
                         name={question.code}
                         text={question.text}
                         questionType={question.type}
-                        //onBlur={handleSave}
                     />
                 );
             case 2:
@@ -54,7 +63,6 @@ const Question = ({
                         name={question.code}
                         text={question.text}
                         options={question.optiongroup.options}
-                        //onBlur={handleSave}
                     />
                 );
             case 3:
@@ -65,19 +73,10 @@ const Question = ({
                         name={question.code}
                         text={question.text}
                         options={question.optiongroup.options}
-                        //saveFn={handleSave}
                     />
                 );
             case 4:
                 return (
-                    /*<Field
-                        key={question.id}
-                        component={LikertQuestion}
-                        name={question.code}
-                        text={question.text}
-                        options={question.optiongroup.options}
-                        questions={question.children}
-                    />*/
                     <LikertQuestion
                         key={question.id}
                         name={question.code}
@@ -98,9 +97,19 @@ const Question = ({
 
     const handleSave = () => {
         // Ne piši ništa ako pitanje ima children pitanja (Likert)
-        question.type !== 4 &&
+        /*question.type !== 4 &&
             !!saveFn &&
             saveFn({
+                invite_id: invite.id,
+                question_id: question.id,
+                answer: value,
+                //page: currentStep + 1
+                page: currentStep
+            });*/
+
+        !preview &&
+            question.type !== 4 &&
+            saveCampaignAnswers({
                 invite_id: invite.id,
                 question_id: question.id,
                 answer: value,
@@ -110,21 +119,35 @@ const Question = ({
     };
 
     const handleNext = (jump = 1) => {
-        updateStatus({
-            invite_id: invite.id,
-            page: currentStep,
-            jump,
-            direction: 1
-        });
+        !preview &&
+            updateInvite({
+                invite_id: invite.id,
+                page: currentStep,
+                jump,
+                direction: 1
+            });
+
+        preview &&
+            updateVisitedPages({
+                direction: 1,
+                value: currentStep
+            });
     };
 
     const handlePrev = () => {
-        updateStatus({
-            invite_id: invite.id,
-            page: currentStep,
-            jump: 1,
-            direction: -1
-        });
+        !preview &&
+            updateInvite({
+                invite_id: invite.id,
+                page: currentStep,
+                jump: 1,
+                direction: -1
+            });
+
+        preview &&
+            updateVisitedPages({
+                direction: -1,
+                value: currentStep
+            });
     };
 
     const computeJump = () => {
@@ -149,7 +172,6 @@ const Question = ({
                             color="primary"
                             onClick={() => {
                                 const jump = computeJump();
-                                console.log('JUMP', jump);
 
                                 if (isEmpty(question.conditions)) {
                                     nextStep();
@@ -160,6 +182,7 @@ const Question = ({
                                     handleNext(jump + 2);
                                 } else {
                                     nextStep();
+                                    handleNext();
                                 }
 
                                 handleSave();
@@ -185,17 +208,40 @@ const Question = ({
                             variant="contained"
                             color="primary"
                             onClick={() => {
-                                console.log(visitedPages, currentStep);
-                                const currentIndex = visitedPages.indexOf(
-                                    currentStep
-                                );
-
-                                if (currentIndex < 0) {
-                                    goToStep(
-                                        visitedPages[visitedPages.length - 1]
+                                if (!preview) {
+                                    const currentIndex = visitedPages.indexOf(
+                                        currentStep
                                     );
+
+                                    if (currentIndex < 0) {
+                                        goToStep(
+                                            visitedPages[
+                                                visitedPages.length - 1
+                                            ]
+                                        );
+                                    } else {
+                                        goToStep(
+                                            visitedPages[currentIndex - 1]
+                                        );
+                                    }
                                 } else {
-                                    goToStep(visitedPages[currentIndex - 1]);
+                                    const currentIndex = visitedPagesPreview.indexOf(
+                                        currentStep
+                                    );
+
+                                    if (currentIndex < 0) {
+                                        goToStep(
+                                            visitedPagesPreview[
+                                                visitedPagesPreview.length - 1
+                                            ]
+                                        );
+                                    } else {
+                                        goToStep(
+                                            visitedPagesPreview[
+                                                currentIndex - 1
+                                            ]
+                                        );
+                                    }
                                 }
                                 handlePrev();
                             }}
@@ -231,12 +277,19 @@ const selector = formValueSelector('campaignForm');
 const mapStateToProps = (state, ownProps) => {
     return {
         value: selector(state, ownProps.question.code),
-        invite: state.invite.data
+        invite: state.invite.data,
+        preview: state.campaign.preview,
+        visitedPages: state.invite.data.visitedPages,
+        visitedPagesPreview: state.campaign.visitedPages
     };
 };
 
 export default compose(
-    connect(mapStateToProps),
+    connect(mapStateToProps, {
+        saveCampaignAnswers,
+        updateInvite,
+        updateVisitedPages
+    }),
     withStyles(styles, { withTheme: true }),
     withRouter
 )(Question);
