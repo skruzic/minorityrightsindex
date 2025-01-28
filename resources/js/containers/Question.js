@@ -19,6 +19,7 @@ import {
     updateVisitedPages
 } from '../slices/campaignsSlice';
 import { updateInvite } from '../slices/inviteSlice';
+import Typography from '@material-ui/core/Typography';
 
 const Question = ({
     question,
@@ -89,7 +90,9 @@ const Question = ({
                     />
                 );
             case 5:
-                return null;
+                return (
+                    <Typography>{question.text}</Typography>
+                );
             default:
                 return null;
         }
