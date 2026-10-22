@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Enums\AccessType;
-use App\Helpers\AnswerExporter;
 use App\Http\Requests\CampaignRequest;
 use App\Models\Campaign;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
-use Backpack\CRUD\app\Http\Controllers\Operations\CloneOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
@@ -22,7 +19,7 @@ use Illuminate\Http\RedirectResponse;
  */
 class CampaignCrudController extends CrudController
 {
-    use ListOperation, CreateOperation, UpdateOperation, DeleteOperation, CloneOperation;
+    use ListOperation, CreateOperation, UpdateOperation, DeleteOperation;
 
     public function setup()
     {
@@ -31,6 +28,7 @@ class CampaignCrudController extends CrudController
         CRUD::setEntityNameStrings('campaign', 'campaigns');
 
         //CRUD::addButtonFromView('line', 'campaign_sections', 'campaign_sections', 'beginning');
+        CRUD::addButtonFromView('line', 'campaign_clone', 'campaign_clone');
         CRUD::addButtonFromView('line', 'campaign_invites', 'campaign_invites');
         CRUD::addButtonFromView('line', 'campaign_lock', 'campaign_lock');
         CRUD::addButtonFromView('line', 'download_answers', 'export_csv',);
@@ -137,14 +135,13 @@ class CampaignCrudController extends CrudController
         $this->setupCreateOperation();
     }
 
-    public function clone($id)
+    public function clone($id): RedirectResponse
     {
-        $model = Campaign::find($id);
+        CRUD::hasAccessOrFail('create');
 
-        CRUD::hasAccessOrFail('clone');
-        CRUD::setOperation('clone');
+        $model = Campaign::findOrFail($id);
 
-        $clone        = $model->replicate();
+        $clone = $model->replicate();
         $clone->title = $model->title.' (clone)';
         $clone->push();
 
@@ -159,6 +156,7 @@ class CampaignCrudController extends CrudController
             }
         }
 
+        return redirect()->back();
     }
 
     /**

@@ -2,25 +2,46 @@
 
 namespace App\Enums;
 
-use BenSampo\Enum\Enum;
-
-final class QuestionType extends Enum
+enum QuestionType: int
 {
-    const Text = 0;
-    const TextArea = 1;
-    const Choice = 2;
-    const MultipleChoice = 3;
-    const ChoiceArray = 4;
-    const StaticText = 5;
+    case Text = 0;
+    case TextArea = 1;
+    case Choice = 2;
+    case MultipleChoice = 3;
+    case ChoiceArray = 4;
+    case StaticText = 5;
 
-    /*public static function asArray(): array
+    public function label(): string
     {
-        $arr = array_flip(parent::asArray());
+        return match ($this) {
+            self::Text => 'Text',
+            self::TextArea => 'Text area',
+            self::Choice => 'Choice',
+            self::MultipleChoice => 'Multiple choice',
+            self::ChoiceArray => 'Choice array',
+            self::StaticText => 'Static text',
+        };
+    }
 
-        foreach ($arr as $key => $value) {
-            $arr[$key] = self::getDescription($key);
+    /**
+     * @return array<int, string>
+     */
+    public static function asSelectArray(): array
+    {
+        $options = [];
+
+        foreach (self::cases() as $case) {
+            $options[$case->value] = $case->label();
         }
 
-        return $arr;
-    }*/
+        return $options;
+    }
+
+    /**
+     * @return array<int, int>
+     */
+    public static function getValues(): array
+    {
+        return array_map(fn (self $case) => $case->value, self::cases());
+    }
 }

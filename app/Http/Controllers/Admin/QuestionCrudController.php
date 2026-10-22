@@ -11,7 +11,6 @@ use App\Models\OptionGroup;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
-use Backpack\CRUD\app\Http\Controllers\Operations\FetchOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\ReorderOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
@@ -25,7 +24,7 @@ use Maatwebsite\Excel\Facades\Excel;
  */
 class QuestionCrudController extends CrudController
 {
-    use ListOperation, CreateOperation, UpdateOperation, DeleteOperation, ReorderOperation, FetchOperation;
+    use ListOperation, CreateOperation, UpdateOperation, DeleteOperation, ReorderOperation;
 
     protected $campaign_id;
 
@@ -58,11 +57,6 @@ class QuestionCrudController extends CrudController
             'Questions'                   => backpack_url('campaign/'.$this->campaign_id.'/question'),
             trans('backpack::crud.list')  => true,
         ];
-    }
-
-    protected function fetchOptionGroup()
-    {
-        return $this->fetch(OptionGroup::class);
     }
 
     protected function setupListOperation()

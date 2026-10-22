@@ -10,7 +10,6 @@ use App\Http\Requests\OptionGroupRequest as StoreRequest;
 use App\Http\Requests\OptionGroupRequest as UpdateRequest;
 use Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
-use Backpack\CRUD\app\Http\Controllers\Operations\InlineCreateOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
@@ -22,7 +21,7 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
  */
 class OptionGroupCrudController extends CrudController
 {
-    use ListOperation, CreateOperation, UpdateOperation, DeleteOperation, InlineCreateOperation;
+    use ListOperation, CreateOperation, UpdateOperation, DeleteOperation;
 
     public function setup()
     {

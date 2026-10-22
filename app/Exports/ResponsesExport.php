@@ -9,6 +9,8 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 
 class ResponsesExport implements WithHeadings, FromCollection
 {
+    protected Campaign $campaign;
+
     public function __construct(int $id)
     {
         $this->campaign = Campaign::findOrFail($id);

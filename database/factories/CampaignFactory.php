@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Enums\AccessType;
 use App\Models\Campaign;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
