@@ -2,57 +2,25 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class QuestionRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
+    public function authorize(): bool
     {
-        // only allow updates if the user is logged in
-        return backpack_auth()->check();
+        return Auth::check();
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
+     * @return array<string, string>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            'code' => 'required|alpha_dash',
-            'type' => 'required',
+            'code' => 'required',
             'text' => 'required',
-        ];
-    }
-
-    /**
-     * Get the validation attributes that apply to the request.
-     *
-     * @return array
-     */
-    public function attributes()
-    {
-        return [
-            //
-        ];
-    }
-
-    /**
-     * Get the validation messages that apply to the request.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            //
+            'type' => 'required',
         ];
     }
 }

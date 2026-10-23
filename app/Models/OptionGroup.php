@@ -2,18 +2,18 @@
 
 namespace App\Models;
 
-use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class OptionGroup extends Model
 {
-    use CrudTrait;
-
     protected $fillable = ['name', 'description', 'options'];
 
-    protected $casts = ['options' => 'array'];
+    protected $casts = [
+        'options' => 'array',
+    ];
 
-    public function questions()
+    public function questions(): HasMany
     {
         return $this->hasMany(Question::class);
     }

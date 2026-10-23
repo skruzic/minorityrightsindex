@@ -3,18 +3,12 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The skeleton application for the Laravel framework.",
-    "keywords": [
-        "laravel",
-        "framework"
-    ],
+    "keywords": ["laravel", "framework"],
     "license": "MIT",
     "require": {
         "php": "^8.3",
-        "backpack/crud": "^7.0",
-        "backpack/menucrud": "^4.1",
-        "backpack/pagemanager": "^3.4",
-        "backpack/theme-coreuiv2": "^2.0",
         "cviebrock/eloquent-sluggable": "^13.0",
+        "filament/filament": "^5.0",
         "laravel/framework": "^13.17",
         "laravel/tinker": "^3.0",
         "league/csv": "^9.28",
@@ -64,11 +58,11 @@
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
+            "@php artisan package:discover --ansi",
+            "@php artisan filament:upgrade"
         ],
         "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
-            "@php artisan basset:cache"
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
@@ -80,9 +74,6 @@
         ],
         "pre-package-uninstall": [
             "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
-        ],
-        "post-install-cmd": [
-            "@php artisan basset:cache"
         ]
     },
     "extra": {
